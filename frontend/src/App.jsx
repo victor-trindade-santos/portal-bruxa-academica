@@ -1,0 +1,17 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Articles from './pages/Articles';
+import NavBar from './components/NavBar'
+
+const App = () => (
+  <Router>
+    <NavBar />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/create-articles-d42f4c" element={<Articles />} />
+    </Routes>
+  </Router>
+);
+
+export default App;
