@@ -20,7 +20,7 @@ li{
 .navbar{
   background-color: #5B079B;
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
   top: 0;
 }
@@ -150,7 +150,20 @@ li{
   padding: 20px;
 }
 
-.footer-dest{
-  background-color: #5B079B;
-  padding: 10px;
+.footer-dest {
+  background-image:
+    url(/Imagens/Group\ 1000001794.png),
+    linear-gradient(#5B079B, #5B079B);
+  background-repeat: no-repeat, no-repeat;
+  background-size: 100% 100%, cover;
+  background-position: center, center;
+  padding: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 988px) {
+  .ajuste {
+    padding-left: 50px;
+  }
 }
