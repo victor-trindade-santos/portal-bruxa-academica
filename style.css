@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    font-family: 'Montserrat', 'sans-serif';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+  height: 100vh;
+}
+
+li{
+  font-style: unset;
+  list-style: none;
+}
+
+.navbar{
+  background-color: #5B079B;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  top: 0;
+}
+
+.navbar-toggler{
+  background-color: #FFFF00;
+  border: 0px;
+  
+}
+
+.nav-link{
+  font-weight: 500;
+  color: #FFFF00;
+}
+
+.navbar-collapse{
+  justify-content: flex-end;
+}
+
+.carousel-container {
+  max-width: 800px;
+  height: fit-content;
+  margin: 40px auto;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.carousel-item img {
+  object-fit: contain;
+  height: 450px;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .carousel-container {
+    margin: 10px;
+  }
+
+  .carousel-item{
+    width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-item img {
+    height: 200px;
+  }
+}
+
+.card-custom {
+  max-width: 400px;
+  margin: 40px auto;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.card-img-overlay-custom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  color: white;
+}
+
+.card-img-overlay-custom h5 {
+   margin-bottom: 0.5rem;
+}
+
+.card-img-overlay-custom .btn {
+  background-color: #ffffffaa;
+  color: #000;
+  font-weight: 500;
+  border: none;
+}
+
+.card-img-overlay-custom .btn:hover {
+  background-color: white;
+  color: #000;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.card{
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.card:hover{
+  transform: scale(1.04); /* Aumento mais sutil */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+.btn-card{ 
+  all: unset;
+  cursor: pointer;
+  padding: 5px;
+  background-color: #000000a8;
+  border: 1px solid #FFFF00;
+  border-radius: 5px;
+}
+
+.btn-card:hover{
+  background-color: #000;
+}
+
+.btn-link{
+  all: unset;
+  text-decoration: none;
+  color: #FFFF00;
+}
+
+.btn-link:hover{
+  color: #FFFF00;
+}
+
+.footer-img {
+  background-image: url(/Imagens/jake-weirick-Q_RBVFFXR_g-unsplash.jpg);
+  background-size: cover;     /* Faz a imagem cobrir todo o espaço */
+  background-position: center;/* Centraliza a imagem */
+  background-repeat: no-repeat;
+  padding: 20px;
+}
+
+.footer-dest{
+  background-color: #5B079B;
+  padding: 10px;
+}
