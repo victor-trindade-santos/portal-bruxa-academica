@@ -1,0 +1,42 @@
+.footerImg {
+    background-image: url('../img/jake-weirick-Q_RBVFFXR_g-unsplash.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    padding: 20px;
+  }
+  
+  .footerDest {
+    background-image: 
+      url('../img/moldura.png'), 
+      linear-gradient(#5B079B, #5B079B);
+    background-repeat: no-repeat, no-repeat;
+    background-size: 100% 100%, cover;
+    background-position: center, center;
+    padding: 30px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .ajuste {
+    padding-left: 50px;
+  }
+  
+  .textLight {
+    color: #fff;
+  }
+  
+  .listUnstyled {
+    list-style: none;
+  }
+  
+  .textDecorationNone {
+    text-decoration: none;
+  }
+  
+  @media (min-width: 988px) {
+    .ajuste {
+      padding-left: 50px;
+    }
+  }
+  

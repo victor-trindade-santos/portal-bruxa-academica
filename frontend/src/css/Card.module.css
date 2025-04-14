@@ -1,0 +1,69 @@
+.cardCustom {
+    max-width: 400px;
+    margin: 40px auto;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+  }
+  
+  .cardCustom:hover {
+    transform: scale(1.04); /* Subtle scaling */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  .cardImgOverlayCustom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    color: white;
+  }
+  
+  .cardImgOverlayCustom h5 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .cardImgOverlayCustom .btn {
+    background-color: #ffffffaa;
+    color: #000;
+    font-weight: 500;
+    border: none;
+  }
+  
+  .cardImgOverlayCustom .btn:hover {
+    background-color: white;
+    color: #000;
+  }
+  
+  .cardImg {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+  
+  .btnCard {
+    all: unset;
+    cursor: pointer;
+    padding: 5px;
+    background-color: #000000a8;
+    border: 1px solid #FFFF00;
+    border-radius: 5px;
+  }
+  
+  .btnCard:hover {
+    background-color: #000;
+  }
+  
+  .btnLink {
+    all: unset;
+    text-decoration: none;
+    color: #FFFF00;
+  }
+  
+  .btnLink:hover {
+    color: #FFFF00;
+  }
+  
