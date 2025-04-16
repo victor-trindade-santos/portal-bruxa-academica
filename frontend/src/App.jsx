@@ -5,6 +5,7 @@ import Articles from './pages/Articles';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Carousel from './components/Carousel';
+import Magia from './pages/Magia';
 
 const App = () => (
   <Router>
@@ -12,6 +13,7 @@ const App = () => (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/create-articles-d42f4c" element={<Articles />} />
+      <Route path="/magia" element={<Magia />} />
     </Routes>
     <Carousel />
     <Footer />

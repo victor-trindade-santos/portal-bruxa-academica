@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from '../css/Navbar.module.css';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
@@ -23,7 +24,7 @@ function Navbar() {
               <a className={`nav-link ${styles.navLink}`} href="#">HOME</a>
             </li>
             <li className="nav-item">
-              <a className={`nav-link ${styles.navLink}`} href="#">MAGIA</a>
+              <Link to = "/magia" className={`nav-link ${styles.navLink}`}>MAGIA</Link>'  
             </li>
             <li className="nav-item">
               <a className={`nav-link ${styles.navLink}`} href="#">NUMEROLOGIA</a>

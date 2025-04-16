@@ -3,7 +3,10 @@ import Card from '../components/Card'
 function Home() {
 
     return(
-        <Card />
+        <>
+          <h1> Teste </h1>
+            <Card />
+        </>
     )
 }
 
