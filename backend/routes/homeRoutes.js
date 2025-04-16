@@ -1,10 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const Home = require('../../frontend/src/pages/Home');
+// const express = require('express');
+// const router = express.Router();
+// const Home = require('../../frontend/src/pages/Home');
 
-// Rota para a página Home
-router.get('/', (req, res) => {
-    res.send('<Home />');
-});
+// // Rota para a página Home
+// router.get('/', (req, res) => {
+//     res.send('<Home />');
+// });
 
-module.exports = router;
+// module.exports = router;

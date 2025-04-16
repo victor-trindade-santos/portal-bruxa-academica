@@ -1,10 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const Magia = require('../../frontend/src/pages/Magia');
+// const express = require('express');
+// const router = express.Router();
+// const Magia = require('../../frontend/src/pages/Magia');
 
-// Rota para a página Magia
-router.get('/', (req, res) => {
-    res.send('<Magia />');
-});
+// // Rota para a página Magia
+// router.get('/', (req, res) => {
+//     res.send('<Magia />');
+// });
 
-module.exports = router;
+// module.exports = router;

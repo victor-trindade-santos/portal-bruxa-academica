@@ -17,12 +17,12 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/articles', articleRoutes);
-app.use('/magia', magiaRoutes);
-app.use('/home', homeRoutes);
-app.use('/tarot', tarotRoutes);
-app.use('/numerologia', numerologiaRoutes);
-app.use('/cursos', cursosRoutes);
-app.use('/astrologia', astrologiaRoutes);
+// app.use('/magia', magiaRoutes);
+// app.use('/home', homeRoutes);
+// app.use('/tarot', tarotRoutes);
+// app.use('/numerologia', numerologiaRoutes);
+// app.use('/cursos', cursosRoutes);
+// app.use('/astrologia', astrologiaRoutes);
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
