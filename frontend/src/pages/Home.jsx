@@ -4,7 +4,7 @@ function Home() {
 
     return(
         <>
-          <h1> Teste </h1>
+          <h1> home </h1>
             <Card />
         </>
     )

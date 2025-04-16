@@ -21,22 +21,22 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className={`nav-link ${styles.navLink}`} href="#">HOME</a>
+              <Link to = "/" className={`nav-link ${styles.navLink}`}>Home</Link> 
             </li>
             <li className="nav-item">
-              <Link to = "/magia" className={`nav-link ${styles.navLink}`}>MAGIA</Link>'  
+              <Link to = "/magia" className={`nav-link ${styles.navLink}`}>MAGIA</Link> 
             </li>
             <li className="nav-item">
-              <a className={`nav-link ${styles.navLink}`} href="#">NUMEROLOGIA</a>
+              <Link to = "/numerologia" className={`nav-link ${styles.navLink}`}>NUMEROLOGIA</Link> 
             </li>
             <li className="nav-item">
-              <a className={`nav-link ${styles.navLink}`} href="#">TARÔ</a>
+              <Link to = "/tarot" className={`nav-link ${styles.navLink}`}>TARÔ</Link> 
             </li>
             <li className="nav-item">
-              <a className={`nav-link ${styles.navLink}`} href="#">ASTROLOGIA</a>
+              <Link to = "/astrologia" className={`nav-link ${styles.navLink}`}>ASTROLOGIA</Link> 
             </li>
             <li className="nav-item">
-              <a className={`nav-link ${styles.navLink}`} href="#">CURSOS</a>
+              <Link to = "/cursos" className={`nav-link ${styles.navLink}`}>CURSOS</Link> 
             </li>
           </ul>
         </div>

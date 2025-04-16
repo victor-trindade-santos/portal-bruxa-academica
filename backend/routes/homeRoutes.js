@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Home = require('../pages/Home');
+const Home = require('../../frontend/src/pages/Home');
 
 // Rota para a página Home
 router.get('/', (req, res) => {

@@ -6,6 +6,10 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Carousel from './components/Carousel';
 import Magia from './pages/Magia';
+import Tarot from './pages/Tarot';
+import Numerologia from './pages/Numerologia';
+import Astrologia from './pages/Astrologia';
+import Cursos from './pages/Cursos';
 
 const App = () => (
   <Router>
@@ -14,6 +18,10 @@ const App = () => (
       <Route path="/" element={<Home />} />
       <Route path="/create-articles-d42f4c" element={<Articles />} />
       <Route path="/magia" element={<Magia />} />
+      <Route path="/tarot" element={<Tarot />} />
+      <Route path="/numerologia" element={<Numerologia />} />
+      <Route path="/astrologia" element={<Astrologia />} />
+      <Route path="/cursos" element={<Cursos />} />
     </Routes>
     <Carousel />
     <Footer />
