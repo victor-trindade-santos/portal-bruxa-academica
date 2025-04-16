@@ -1,7 +1,7 @@
-import globo from '../img/globo.jpg'
-import galaxia from '../img/galaxia.jpg'
-import carta from '../img/carta.jpg'
-import styles from '../css/Carousel.module.css'
+import globo from '../img/globo.jpg';
+import galaxia from '../img/galaxia.jpg';
+import carta from '../img/carta.jpg';
+import styles from '../css/Carousel.module.css';
 
 function Carousel() {
 

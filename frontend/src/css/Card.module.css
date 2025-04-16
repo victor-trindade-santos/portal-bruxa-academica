@@ -1,50 +1,60 @@
 .cardCustom {
-    max-width: 400px;
-    margin: 40px auto;
+    max-width: 100%;
+    margin: 20px auto;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     position: relative;
     transition: transform 0.5s ease, box-shadow 0.5s ease;
   }
-  
-  .cardCustom:hover {
-    transform: scale(1.04); /* Subtle scaling */
+
+.cardCustom:hover {
+    transform: scale(1.04); 
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   }
   
-  .cardImgOverlayCustom {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: 1rem;
-    color: white;
-  }
+.cardImgOverlayCustom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 1rem;
+      color: white;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      box-sizing: border-box;
+      max-height: 100%;
+      overflow: hidden;
+    }
   
-  .cardImgOverlayCustom h5 {
+.cardImgOverlayCustom h5 {
     margin-bottom: 0.5rem;
+    font-size: 1.2rem;
   }
   
-  .cardImgOverlayCustom .btn {
+.cardImgOverlayCustom .btn {
     background-color: #ffffffaa;
     color: #000;
     font-weight: 500;
     border: none;
   }
   
-  .cardImgOverlayCustom .btn:hover {
+.cardImgOverlayCustom .btn:hover {
     background-color: white;
     color: #000;
   }
+
+.cardImgOverlayCustom p {
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+}
   
-  .cardImg {
+.cardImg {
     width: 100%;
-    height: auto;
-    object-fit: contain;
+    height: 300px;
+    object-fit: cover;
     display: block;
   }
   
-  .btnCard {
+.btnCard {
     all: unset;
     cursor: pointer;
     padding: 5px;
@@ -53,17 +63,27 @@
     border-radius: 5px;
   }
   
-  .btnCard:hover {
+.btnCard:hover {
     background-color: #000;
   }
   
-  .btnLink {
+.btnLink {
     all: unset;
     text-decoration: none;
     color: #FFFF00;
   }
   
-  .btnLink:hover {
+.btnLink:hover {
     color: #FFFF00;
+  }
+
+@media (max-width: 576px) {
+    .cardImgOverlayCustom h5 {
+      font-size: 1rem;
+    }
+  
+    .cardImgOverlayCustom p {
+      font-size: 0.875rem;
+    }
   }
   

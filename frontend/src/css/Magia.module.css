@@ -1,0 +1,48 @@
+
+  .articlesSection {
+    padding: 40px 60px; /* espaçamento do lado inteiro */
+  }
+  
+  .articlesTitle {
+    font-size: 4rem;
+    color: #500f69;
+    margin-bottom: 50px;
+    text-align: left;
+  }
+  
+  .articlesCards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  
+  .sectionDivider {
+    width: 80px;
+    height: 4px;
+    background-color: #500f69;
+    margin: 60px auto;
+    border-radius: 2px;
+  }
+
+  .coursesSection {
+    padding-top: 10px;
+    padding-bottom: 60px;
+  }
+  
+  .coursesTitle {
+    font-size: 4rem;
+    color: #500f69;
+    margin-bottom: 15px;
+  }
+  
+  .coursesQuote {
+    font-style: italic;
+    color: #500f69;
+    font-size: 2rem;
+    text-decoration: underline;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  

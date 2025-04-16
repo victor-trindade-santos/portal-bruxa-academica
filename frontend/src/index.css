@@ -8,12 +8,19 @@
 }
 
 body{
-margin: 0;
-height: 100vh;
+  padding-top: 70px;
+  margin: 0;
+  min-height: 100vh;
 }
 
 li{
-font-style: unset;
-list-style: none;
+  font-style: unset;
+  list-style: none;
 }
 
+h2 {
+  margin-top: 40px; 
+  font-size: 2rem; 
+  color: #333; 
+  text-align: center;
+}

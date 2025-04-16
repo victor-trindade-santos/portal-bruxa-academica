@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from '../services/api'; // Configuração centralizada do Axios
+import axios from '../services/api'; 
 
 function Articles() {
   const [articles, setArticles] = useState([]);
@@ -7,7 +7,7 @@ function Articles() {
     title: '',
     content: '',
     imageUrl: '',
-    category: '', // Novo campo para definir a categoria do artigo
+    category: '', 
   });
 
   // Função para buscar artigos (caso necessário)

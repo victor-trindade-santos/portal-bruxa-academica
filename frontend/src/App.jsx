@@ -4,7 +4,6 @@ import Home from './pages/Home';
 import Articles from './pages/Articles';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
-import Carousel from './components/Carousel';
 import Magia from './pages/Magia';
 import Tarot from './pages/Tarot';
 import Numerologia from './pages/Numerologia';
@@ -23,7 +22,6 @@ const App = () => (
       <Route path="/astrologia" element={<Astrologia />} />
       <Route path="/cursos" element={<Cursos />} />
     </Routes>
-    <Carousel />
     <Footer />
   </Router>
 );

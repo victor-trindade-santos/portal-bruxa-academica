@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from '../css/Navbar.module.css';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
+  const navbarCollapseRef = useRef(null);
+
+  const closeNavbar = () => {
+    if (navbarCollapseRef.current.classList.contains('show')) {
+      navbarCollapseRef.current.classList.remove('show');
+    }
+  };
+
   return (
     <nav className={`navbar navbar-expand-lg ${styles.navbar}`}>
       <div className={`container-fluid ${styles.containerFluid}`}>
@@ -18,25 +26,29 @@ function Navbar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div 
+          className="collapse navbar-collapse" 
+          id="navbarSupportedContent"
+          ref={navbarCollapseRef}
+        >
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link to = "/" className={`nav-link ${styles.navLink}`}>Home</Link> 
+              <Link to="/" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>Home</Link>
             </li>
             <li className="nav-item">
-              <Link to = "/magia" className={`nav-link ${styles.navLink}`}>MAGIA</Link> 
+              <Link to="/magia" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>MAGIA</Link>
             </li>
             <li className="nav-item">
-              <Link to = "/numerologia" className={`nav-link ${styles.navLink}`}>NUMEROLOGIA</Link> 
+              <Link to="/numerologia" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>NUMEROLOGIA</Link>
             </li>
             <li className="nav-item">
-              <Link to = "/tarot" className={`nav-link ${styles.navLink}`}>TARÔ</Link> 
+              <Link to="/tarot" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>TARÔ</Link>
             </li>
             <li className="nav-item">
-              <Link to = "/astrologia" className={`nav-link ${styles.navLink}`}>ASTROLOGIA</Link> 
+              <Link to="/astrologia" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>ASTROLOGIA</Link>
             </li>
             <li className="nav-item">
-              <Link to = "/cursos" className={`nav-link ${styles.navLink}`}>CURSOS</Link> 
+              <Link to="/cursos" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>CURSOS</Link>
             </li>
           </ul>
         </div>

@@ -1,4 +1,5 @@
-import Card from '../components/Card'
+import Card from '../components/Card';
+import Carousel from '../components/Carousel';
 
 function Home() {
 
@@ -6,6 +7,7 @@ function Home() {
         <>
           <h1> home </h1>
             <Card />
+            <Carousel />
         </>
     )
 }
