@@ -50,6 +50,9 @@ function Navbar() {
             <li className="nav-item">
               <Link to="/cursos" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>CURSOS</Link>
             </li>
+            <li className="nav-item">
+              <Link to="/create-articles-d42f4c" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>ARTIGOS</Link>
+            </li>
           </ul>
         </div>
       </div>

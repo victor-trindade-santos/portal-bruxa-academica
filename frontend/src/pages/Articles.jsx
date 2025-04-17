@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from '../services/api'; 
 
 function Articles() {
@@ -9,6 +9,10 @@ function Articles() {
     imageUrl: '',
     category: '', 
   });
+
+  useEffect(() => {
+    fetchArticles();
+  }, []);
 
   // Função para buscar artigos (caso necessário)
   const fetchArticles = async () => {
@@ -68,6 +72,24 @@ function Articles() {
         </select>
         <button type="submit">Criar Artigo</button>
       </form>
+
+      <h2>Lista de Artigos</h2>
+      {articles.length === 0 ? (
+        <p>Nenhum artigo disponível.</p>
+      ) : (
+        <ul>
+          {articles.map((article) => (
+            <li key={article._id}>
+              <h3>{article.title}</h3>
+              <p><strong>Categoria:</strong> {article.category}</p>
+              {article.imageUrl && (
+                <img src={article.imageUrl} alt={article.title} style={{ maxWidth: '200px' }} />
+              )}
+              <p>{article.content}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
