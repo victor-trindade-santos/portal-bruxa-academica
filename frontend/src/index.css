@@ -24,3 +24,22 @@ h2 {
   color: #333; 
   text-align: center;
 }
+
+.emptyMessageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%; 
+  text-align: center;
+}
+
+.emptyMessage {
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #888;
+  font-style: italic;
+  margin: 0; 
+}
+
+

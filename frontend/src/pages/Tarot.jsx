@@ -1,47 +1,32 @@
+import React, { useState, useEffect } from 'react';
+import axios from '../services/api'
+
+import Header from '../components/Header';
 import Card from '../components/Card';
+
+import MagiaIMG from '../img/magia.png';
 import courseImage1 from '../img/card_tipo1.jpg';
 import courseImage2 from '../img/Card-tipo2(fundo).jpg';
-import React from 'react';
-import Header from '../components/Header';
-import MagiaIMG from '../img/magia.png';
 import articleImage from '../img/artigofoto.jpg';
+
 import styles from '../css/Magia.module.css';
 
 function Tarot() {
 
- 
-    const articles = [
-        {
-            image: articleImage,
-            title: "Introdução à Magia", 
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quae laboriosam temporibus consectetur consequatur similique totam autem alias. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia mollitia nisi dolores sequi accusamus dolor totam aliquid voluptate nobis. Sapiente nemo ullam modi facere nisi quisquam voluptatum illum neque non."
-        },
-        {
-            image: articleImage,
-            title: "Como lançar feitiços", 
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quae "
-        },
-        {
-            image: articleImage,
-            title: "A história da magia", 
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quae laboriosam temporibus"
-        },
-        {
-            image: articleImage,
-            title: "A história da magia", 
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quae laboriosam temporibus"
-        },
-        {
-            image: articleImage,
-            title: "A história da magia", 
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quae laboriosam temporibus"
-        },
-        {
-            image: articleImage,
-            title: "A história da magia", 
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quae laboriosam temporibus"
+    const [articles, setArticles] = useState([]);
+
+    useEffect(() => {
+      const fetchArticles = async () => {
+        try {
+          const response = await axios.get('/articles?category=tarot');
+          setArticles(response.data);
+        } catch (error) {
+          console.error('Erro ao buscar artigos:', error);
         }
-    ];
+      };
+  
+      fetchArticles();
+    }, []);
 
     const courses = [
         { 
@@ -81,15 +66,23 @@ function Tarot() {
             <section className = {styles.articlesSection}>
                 <h2 className = {styles.articlesTitle} >Artigos recentes</h2>
                     <div className = {styles.articlesCards}>
-                        {articles.map((article, index) => (
-                            <Card 
-                                key={index}
-                                image={article.image}
-                                title={article.title}
-                                description={article.description}
-                                link={article.link}
+                    {articles.length === 0 ? (
+                        <div className= "emptyMessageContainer">
+                            <p className="emptyMessage">
+                                Nenhum artigo encontrado. Volte mais tarde para mais conteúdos místicos! 🔮
+                            </p>
+                        </div>
+                    ) : (
+                        articles.map((article) => (
+                            <Card
+                            key={article._id}
+                            image={article.imageUrl || articleImage}
+                            title={article.title}
+                            description={article.content} 
+                            link={`/artigos/${article._id}`} 
                             />
-                        ))}
+                        ))
+                    )}
                     </div>
             </section>
 

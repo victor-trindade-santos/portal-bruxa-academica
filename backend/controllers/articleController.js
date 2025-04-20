@@ -15,9 +15,10 @@ exports.createArticle = async (req, res) => {
 // Obter todos os artigos (ou filtrar por categoria)
 exports.getArticles = async (req, res) => {
   try {
-    const { category } = req.query; // Filtra por categoria, se passado na query
+    const { category } = req.query;
+
     const articles = category
-      ? await Article.find({ category })
+      ? await Article.find({ category: { $regex: new RegExp(category, 'i') } })
       : await Article.find();
     res.status(200).json(articles);
   } catch (error) {

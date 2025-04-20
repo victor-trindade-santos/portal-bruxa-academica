@@ -19,7 +19,7 @@
       width: 100%;
       padding: 1rem;
       color: white;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      background: rgba(0, 0, 0, 0.5); 
       box-sizing: border-box;
       max-height: 100%;
       overflow: hidden;
@@ -86,4 +86,5 @@
       font-size: 0.875rem;
     }
   }
+
   
