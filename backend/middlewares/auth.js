@@ -5,11 +5,17 @@ const authMiddleware = (roleRequired) => {
   return (req, res, next) => {
     // Verificando se o token está presente no cabeçalho
     const token = req.header('Authorization')?.replace('Bearer ', '');
-    
+
+    // Se não for uma rota que exige autenticação, permite o acesso
+    if (!roleRequired && !token) {
+      return next();  // Libera para quem não precisa de autenticação
+    }
+
+    // Se um token for necessário e não for fornecido
     if (!token) {
       return res.status(401).json({ message: 'Acesso negado. Nenhum token fornecido.' });
     }
-    
+
     try {
       // Verificando o token e extraindo as informações
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
