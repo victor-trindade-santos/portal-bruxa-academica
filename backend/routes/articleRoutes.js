@@ -1,11 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const authMiddleware = require('../middlewares/auth');
 const { createArticle, getArticles } = require('../controllers/articleController');
 
-// Criar artigo
-router.post('/', createArticle);
-
-// Obter artigos (com ou sem filtro de categoria)
-router.get('/', getArticles);
+router.post('/', authMiddleware('admin'), createArticle);
+router.get('/', authMiddleware('admin'), getArticles);
 
 module.exports = router;

@@ -14,7 +14,7 @@ function Articles() {
     fetchArticles();
   }, []);
 
-  // Função para buscar artigos (caso necessário)
+  // Função para buscar artigos 
   const fetchArticles = async () => {
     try {
       const response = await axios.get('/articles'); // Busca todos os artigos
@@ -69,6 +69,7 @@ function Articles() {
           <option value="numerologia">Numerologia</option>
           <option value="magia">Magia</option>
           <option value="astrologia">Astrologia</option>
+          <option value="tarot">Tarot</option>
         </select>
         <button type="submit">Criar Artigo</button>
       </form>
