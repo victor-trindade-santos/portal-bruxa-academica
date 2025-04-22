@@ -1,90 +1,88 @@
 .cardCustom {
-    max-width: 100%;
-    margin: 20px auto;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    position: relative;
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
-  }
+  max-width: 100%;
+  margin: 20px auto;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: relative;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
 
 .cardCustom:hover {
-    transform: scale(1.04); 
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  }
-  
+  transform: scale(1.04);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
 .cardImgOverlayCustom {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 1rem;
-      color: white;
-      background: rgba(0, 0, 0, 0.5); 
-      box-sizing: border-box;
-      max-height: 100%;
-      overflow: hidden;
-    }
-  
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  max-height: 100%;
+  overflow: hidden;
+}
+
 .cardImgOverlayCustom h5 {
-    margin-bottom: 0.5rem;
-    font-size: 1.2rem;
-  }
-  
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
 .cardImgOverlayCustom .btn {
-    background-color: #ffffffaa;
-    color: #000;
-    font-weight: 500;
-    border: none;
-  }
-  
+  background-color: #ffffffaa;
+  color: #000;
+  font-weight: 500;
+  border: none;
+}
+
 .cardImgOverlayCustom .btn:hover {
-    background-color: white;
-    color: #000;
-  }
+  background-color: white;
+  color: #000;
+}
 
 .cardImgOverlayCustom p {
   font-size: 0.95rem;
   margin-bottom: 0.8rem;
 }
-  
+
 .cardImg {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    display: block;
-  }
-  
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
 .btnCard {
-    all: unset;
-    cursor: pointer;
-    padding: 5px;
-    background-color: #000000a8;
-    border: 1px solid #FFFF00;
-    border-radius: 5px;
-  }
-  
+  all: unset;
+  cursor: pointer;
+  padding: 5px;
+  background-color: #000000a8;
+  border: 1px solid #FFFF00;
+  border-radius: 5px;
+}
+
 .btnCard:hover {
-    background-color: #000;
-  }
-  
+  background-color: #000;
+}
+
 .btnLink {
-    all: unset;
-    text-decoration: none;
-    color: #FFFF00;
-  }
-  
+  all: unset;
+  text-decoration: none;
+  color: #FFFF00;
+}
+
 .btnLink:hover {
-    color: #FFFF00;
-  }
+  color: #FFFF00;
+}
 
 @media (max-width: 576px) {
-    .cardImgOverlayCustom h5 {
-      font-size: 1rem;
-    }
-  
-    .cardImgOverlayCustom p {
-      font-size: 0.875rem;
-    }
+  .cardImgOverlayCustom h5 {
+    font-size: 1rem;
   }
 
-  
+  .cardImgOverlayCustom p {
+    font-size: 0.875rem;
+  }
+}
