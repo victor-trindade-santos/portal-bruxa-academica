@@ -1,32 +1,34 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom'; // substitui useHistory
+import { useNavigate, Link } from 'react-router-dom'; 
 import { AuthContext } from '../context/AuthContext';
-import styles from '../css/Login.module.css'; // importando os estilos
+import styles from '../css/Login.module.css'; 
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
-  const navigate = useNavigate(); // substitui useHistory
+  const navigate = useNavigate(); 
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await fetch('http://localhost:5000/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),
-      });      
-
+      });
+  
       const data = await response.json();
+      console.log('Resposta do login:', data); // Verifique o que está retornando
+  
       if (response.status === 200) {
         login({
           username: data.username,
           role: data.role,
           token: data.token,
         });
-
+  
         // Redireciona usando navigate
         navigate('/');
       } else {
@@ -36,6 +38,7 @@ function Login() {
       console.error('Erro ao conectar com o servidor:', error);
     }
   };
+  
 
   return (
     <div className={styles.loginContainer}>
@@ -61,6 +64,9 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button type="submit" className={styles.button}>Login</button>
+          <p style={{ marginTop: '1rem', textAlign: 'center' }}>
+            Não tem conta? <Link to="/register" style={{ color: '#e0b3ff' }}>Cadastre-se</Link>
+          </p>
         </form>
       </div>
     </div>

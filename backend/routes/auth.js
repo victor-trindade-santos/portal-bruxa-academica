@@ -20,8 +20,14 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Usuário não encontrado' });
     }
 
+    // Logando o hash da senha armazenada
+    console.log('Senha armazenada no banco:', user.password);
+
     // Comparando as senhas
+    console.log('Senha digitada:', password); // Texto puro
+    console.log('Hash armazenado no banco:', user.password); // Hash no banco
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log('Resultado da comparação:', isMatch); // true ou false    
     if (!isMatch) return res.status(400).json({ message: 'Senha incorreta' });
 
     // Criando o payload do JWT (incluir a role)
@@ -46,5 +52,33 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Rota de registro
+router.post('/register', async (req, res) => {
+  const { username, email, password } = req.body;
+
+  try {
+    // Verifica se já existe usuário com esse username
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Username já cadastrado' });
+    }
+
+    // Cria um novo usuário com role padrão 'user'
+    const newUser = new User({ username, email: email || '', password, role: 'user' });
+
+    // Encriptando a senha
+    const salt = await bcrypt.genSalt(10);
+    newUser.password = await bcrypt.hash(password, salt);
+
+    // Logando a senha criptografada
+    console.log('Senha criptografada:', newUser.password);
+
+    await newUser.save();
+    res.status(201).json({ message: 'Usuário registrado com sucesso!' });
+  } catch (error) {
+    console.error('Erro no registro:', error);
+    res.status(500).json({ message: 'Erro ao registrar usuário', error: error.message });
+  }
+});
 
 module.exports = router;
