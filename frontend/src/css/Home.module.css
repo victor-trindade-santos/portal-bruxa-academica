@@ -1,0 +1,25 @@
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
+    color: #67006C;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    text-decoration: underline;
+    text-align: center;
+  }
+
+    
+.sectionDivider {
+    width: 80px;
+    height: 4px;
+    background-color: #500f69;
+    margin: 60px auto;
+    border-radius: 2px;
+  }
+
+  
