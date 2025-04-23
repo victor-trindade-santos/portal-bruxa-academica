@@ -9,6 +9,7 @@ import VideoTarot from '../video/video2.jsx';
 import VideoNumerologia from '../video/video3.jsx';
 import styles from '../css/Home.module.css'
 
+import Header from '../components/Header';
 
 function Home() {
     const card_video1 = [
@@ -66,8 +67,11 @@ function Home() {
         }
     ]
 
+
+
     return (
         <>
+            <Header />
             <Carousel_Home />
             <div className={styles.sectionDivider}></div>
             <h1 className={styles.h1}>Astrologia: descubra como funciona </h1>
@@ -89,11 +93,14 @@ function Home() {
                 <div className="row g-4">
                     {courses.map((course, index) => (
                         <div key={index} className="col-12 col-sm-6 col-md-4">
+                        
                             <Card
                                 image={course.image}
                                 title={course.title}
                                 description={course.description}
                                 link={course.link}
+
+                                
                             />
                         </div>
                     ))}

@@ -28,7 +28,7 @@ function Navbar() {
     <nav className={`navbar navbar-expand-lg ${styles.navbar}`}>
       <div className={`container-fluid ${styles.containerFluid}`}>
         <Link to="/" className={`navbar-brand ${styles.navbarBrand}`}>
-          <img src="../../Logo_Portal-Bruxa.svg" alt="Logo" style={{ height: '40px' }} />
+          <img src="../../Logo_Portal-Bruxa.svg" alt="Logo" className={`navbar-brand ${styles.navbarBrand}`} />
         </Link>
         <button 
           className={`navbar-toggler ${styles.navbarToggler}`} 
