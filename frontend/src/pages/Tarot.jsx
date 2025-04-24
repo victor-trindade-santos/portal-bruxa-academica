@@ -64,7 +64,7 @@ function Tarot() {
                 description= "Explore o mundo do tarot"
             />
             <section className = {styles.articlesSection}>
-                <h2 className = {styles.articlesTitle} >Artigos recentes</h2>
+                <h2 className = {`fs-1 ${styles.articlesTitle}`} >Artigos recentes</h2>
                     <div className = {styles.articlesCards}>
                     {articles.length === 0 ? (
                         <div className= "emptyMessageContainer">
@@ -89,8 +89,8 @@ function Tarot() {
             <div className={styles.sectionDivider}></div>
 
             <section className = {styles.coursesSection}>
-                <h2 className = {styles.coursesTitle}>Confira meus Cursos</h2>
-                <p className = {styles.coursesQuote}>
+                <h2 className = {`fs-1 ${styles.coursesTitle}`}>Confira meus Cursos</h2>
+                <p className = {`fs-4 ${styles.coursesQuote}`}>
                     <span>"Conhecimentos místicos que transcendem o comum."</span>
                 </p>
                 <div className = "container">

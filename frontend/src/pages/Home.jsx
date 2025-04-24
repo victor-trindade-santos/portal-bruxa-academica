@@ -8,6 +8,7 @@ import VideoAstrologia from '../video/video1.jsx';
 import VideoTarot from '../video/video2.jsx';
 import VideoNumerologia from '../video/video3.jsx';
 import styles from '../css/Home.module.css'
+import HeaderIMG from '../img/Header.png';
 
 import Header from '../components/Header';
 
@@ -71,7 +72,11 @@ function Home() {
 
     return (
         <>
-            <Header />
+            <Header
+                title={"Bem Vindo ao Portal Cósmico"}
+                description={"Explore os mistérios do universo, conecte-se com a energia dos astros e descubra a magia que habita dentro de você. Astrologia, espiritualidade e bruxaria para quem busca autoconhecimento e transformação."}
+                backgroundImage={HeaderIMG}
+            />
             <Carousel_Home />
             <div className={styles.sectionDivider}></div>
             <h1 className={styles.h1}>Astrologia: descubra como funciona </h1>
