@@ -3,6 +3,7 @@ import Carousel from '../components/Carousel';
 import courseImage1 from '../img/card_tipo1.jpg';
 import courseImage2 from '../img/Card-tipo2(fundo).jpg';
 import Header from '../components/Header';
+import headerIMG from '../img/Header.png';
 
 function Home() {
 
@@ -31,7 +32,11 @@ function Home() {
 
     return (
         <>
-            <Header />
+            <Header 
+                title={"Bem Vindo ao Portal Cósmico"}
+                description={"Explore os mistérios do universo, conecte-se com a energia dos astros e descubra a magia que habita dentro de você. Astrologia, espiritualidade e bruxaria para quem busca autoconhecimento e transformação."}
+                backgroundImage={headerIMG}
+            />
             <div className="container">
                 <div className="row g-4">
                     {courses.map((course, index) => (
