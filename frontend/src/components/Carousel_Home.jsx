@@ -23,12 +23,17 @@ function Carousel_Home() {
         <div className={`carousel-item active ${styles.carouselItemCustom}`}>
           <img src={astrologia} className={`d-block w-100 ${styles.carouselImage}`} alt="Slide 1" />
           <div className={styles.overlayAstrologia}>
+          <img src="../../Logo_Portal-Bruxa.svg" alt="Logo" className={`height: '150px' ${styles.logoImage}`} />
             <div className={`carousel-caption d-none d-md-block ${styles.carouselCaption}`}>
+              
               <h5 className={styles.carouselTitle}>Portal Bruxa Acadêmica</h5>
               <p className={styles.carouselDescription}>
                 "Explore os mistérios do universo, conecte-se com a energia dos astros<br />
                 e descubra a magia que habita dentro de você..."
               </p>
+              <button className={styles.btnCustom}>
+                Conheça meus cursos
+              </button>
             </div>
           </div>
         </div>
@@ -59,8 +64,8 @@ function Carousel_Home() {
           </div>
         </div>
 
-          {/* Quarto slide */}
-          <div className={`carousel-item ${styles.carouselItemCustom}`}>
+        {/* Quarto slide */}
+        <div className={`carousel-item ${styles.carouselItemCustom}`}>
           <img src={tarot} className={`d-block w-100 ${styles.carouselImage}`} alt="Slide 4" />
           <div className={styles.overlayTarot}>
             <div className={`carousel-caption d-none d-md-block ${styles.carouselCaption}`}>
@@ -71,8 +76,8 @@ function Carousel_Home() {
             </div>
           </div>
         </div>
-</div>
-      
+      </div>
+
 
 
       <button

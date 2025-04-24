@@ -101,9 +101,8 @@
 .carouselCaption {
   position: absolute;
   z-index: 2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
+  transform: translate(-15%, -30%);
   text-align: center;
   width: 100%;
 }
@@ -161,4 +160,44 @@
 .carouselIndicators button:hover {
   background-color: #ffcc00; /* Tom de amarelo mais suave quando o mouse passa */
   border-color: #ffcc00; /* Mesmo tom de amarelo mais suave */
+}
+
+.btnCustom {
+  top: 10%;
+  font-family: 'Poppins', sans-serif; /* Fonte Poppins */
+  color: #FFFF00; /* Cor da fonte amarela */
+  background-color: #67006C; /* Cor de fundo roxa */
+  padding: 8px 16px; /* Espaçamento interno */
+  font-size: 14px; /* Tamanho da fonte */
+  cursor: pointer; /* Indicador de que é um botão clicável */
+  width: 100%;
+  max-width: 200px; /* Largura máxima de 136px */
+  min-width: 100px; /* Largura mínima de 100px */
+  border: none; /* Sem borda */
+  border-radius: 0; /* Sem borda arredondada */
+  text-align: center; /* Alinhamento do texto */
+  margin: 0 auto; /* Centraliza o botão na tela */
+  transition: transform 0.3s ease; /* Suaviza o efeito de hover */
+  box-shadow: 0 0 0 5px #67006C,
+  inset 0 0 0 1px #ffff00;
+  position: relative; /* Define o posicionamento para usar o z-index */
+  z-index: 10; /* Coloca o botão "para frente" */
+}
+
+.btnCustom:hover {
+  background-color: #67006C !important; /* Corrige o clareamento no hover */
+  box-shadow: 
+  0 0 0 5px #67006C,     /* Moldura externa roxa */
+  inset 0 0 0 1px #ffff00, /* Borda interna amarela */
+  0 0 20px rgba(255, 255, 0, 0.4); /* Sombra amarela sutil no hover */
+  
+}
+
+.logoImage {
+  position: absolute;
+  top: 10%; /* ou onde quiser */
+  left: 50%;
+  transform: translateX(-50%);
+  height: 150px;
+  z-index: 3;
 }

@@ -12,6 +12,7 @@ import Astrologia from './pages/Astrologia';
 import Cursos from './pages/Cursos';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Article_Pages from './pages/Articles_Pages'; // Importando o novo componente
 
 const App = () => (
   <AuthProvider> 
@@ -27,6 +28,8 @@ const App = () => (
         <Route path="/cursos" element={<Cursos />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        {/* Adicionando a rota para a página do artigo */}
+        <Route path="/artigos/:id" element={<Article_Pages />} />
       </Routes>
       <Footer />
     </Router>

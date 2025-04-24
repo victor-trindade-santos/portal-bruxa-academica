@@ -71,7 +71,8 @@ function Home() {
 
     return (
         <>
-            <Header />
+            {/* <Header /> */}
+            <div className={styles.background}>
             <Carousel_Home />
             <div className={styles.sectionDivider}></div>
             <h1 className={styles.h1}>Astrologia: descubra como funciona </h1>
@@ -121,7 +122,7 @@ function Home() {
                     />
                 </div>
             ))}
-            <Carousel />
+            {/* <Carousel /> */}
             <div className={styles.sectionDivider}></div>
             <h1 className={styles.h1}>Numerologia: veja o que os números tem a te dizer</h1>
             <p className={styles.p}>Aprenda a calcular sua sorte</p>
@@ -137,6 +138,7 @@ function Home() {
                     />
                 </div>
             ))}
+            </div>
         </>
     )
 }
