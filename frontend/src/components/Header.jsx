@@ -2,7 +2,7 @@ import React from "react";
 import styles from '../css/Header.module.css';
 import headerIMG from '../img/Header.png';
 
-function Header({ title, description,backgroundImage }) {
+function Header({ title, description, backgroundImage }) {
 
     return (
         <header
@@ -10,13 +10,13 @@ function Header({ title, description,backgroundImage }) {
             style={{ backgroundImage: `url(${backgroundImage})` }}
         >
 
-            
+
             <img src="../../Logo_Portal-Bruxa.svg" alt="Logo" style={{ height: '150px' }} />
-            
+
 
             <h3 className={`fs-2 ${styles.title}`}>{title}</h3>
             {description &&
-                <p className={`text-center fs-6 ${styles.description}`}>
+                < p className={`text-center fs-6 ${styles.description}`}>
                     {description}
                 </p>
             }

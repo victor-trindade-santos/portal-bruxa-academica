@@ -35,9 +35,12 @@
   opacity: 0.5;
 }
 
+
+
 .carouselIndicators :global(.active) {
   background-color: #ffff00;
   opacity: 1;
+  z-index: 1;
 }
 
 /* Slide com GIF */
@@ -100,9 +103,10 @@
 /* Texto centralizado */
 .carouselCaption {
   position: absolute;
-  z-index: 2;
-
-  transform: translate(-15%, -30%);
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
   width: 100%;
 }
@@ -125,11 +129,16 @@
 .carouselBtn {
   background: transparent !important;
   border: none;
-  z-index: 3 !important;
+  z-index: 2 !important;
+  background-color: #ffffff;
 }
 
 .carouselBtn:hover {
   background: transparent;
+}
+
+.carousel-control-next-icon{
+  background-color: #ffffff;
 }
 
 .carouselBtn .carousel-control-prev-icon,

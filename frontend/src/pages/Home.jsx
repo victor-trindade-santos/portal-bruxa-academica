@@ -8,6 +8,7 @@ import VideoAstrologia from '../video/video1.jsx';
 import VideoTarot from '../video/video2.jsx';
 import VideoNumerologia from '../video/video3.jsx';
 import styles from '../css/Home.module.css'
+import HeaderIMG from '../img/Header.png';
 
 import Header from '../components/Header';
 

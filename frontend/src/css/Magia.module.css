@@ -4,7 +4,6 @@
   }
   
   .articlesTitle {
-    font-size: 4rem;
     color: #500f69;
     margin-bottom: 50px;
     text-align: center;
@@ -31,7 +30,6 @@
   }
   
   .coursesTitle {
-    font-size: 4rem;
     color: #500f69;
     margin-bottom: 15px;
   }
@@ -39,7 +37,6 @@
   .coursesQuote {
     font-style: italic;
     color: #500f69;
-    font-size: 2rem;
     text-decoration: underline;
     margin-bottom: 40px;
     text-align: center;
