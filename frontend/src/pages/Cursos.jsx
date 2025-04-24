@@ -41,6 +41,9 @@ function Cursos() {
                 />
                 <div className={styles.sectionDivider}></div>
                 <div className="container">
+                    <section className={styles.coursesSection}>
+                        <h2 className={`fs-1 ${styles.coursesTitle}`}>Confira meus Cursos Disponíveis</h2>
+                    </section>
                     <div className="row g-4">
                         {courses.map((course, index) => (
                             <div key={index} className="col-12 col-sm-6 col-md-4">
@@ -55,6 +58,8 @@ function Cursos() {
                     </div>
                 </div>
             </div>
+
+
 
         </>
     )
