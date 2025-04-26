@@ -1,33 +1,47 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import styles from '../css/Login.module.css';
+import RegisterInput from '../components/RegisterInput'
 
 function Register() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState(''); // Novo estado para o e-mail
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [values, setValues] =  useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [success, setSuccess] = useState('');
+
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value })
+  }
 
   const handleRegister = async (e) => {
     e.preventDefault();
-
-    if (password !== confirmPassword) {
-      return setError('As senhas não coincidem.');
-    }
 
     try {
       const response = await fetch('http://localhost:5000/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, email, password }), // Incluindo o e-mail aqui
+        body: JSON.stringify({ 
+          username: values.username,
+          email: values.email, 
+          password: values.password }),
       });
 
       const data = await response.json();
       if (response.status === 201) {
-        navigate('/login');
-      } else {
+        setSuccess('Cadastro realizado com sucesso! Redirecionando...');
+        setError(''); 
+      
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000); 
+      }
+       else {
         setError(data.message || 'Erro no cadastro.');
       }
     } catch (err) {
@@ -36,54 +50,64 @@ function Register() {
     }
   };
 
+  const inputs = [
+    {
+      id: 1,
+      name: "username",
+      type: "text",
+      placeholder: "Username",
+      errorMessage: "Username deve ter entre 3 e 16 caracteres e não deve haver nenhum caracter especial!",
+      label: "Username",
+      pattern: "^[A-Za-z0-9]{3,16}$",
+      required: true,
+    },
+    {
+      id: 2,
+      name: "email",
+      type: "email",
+      placeholder: "Email",
+      errorMessage: "Deve ser um email válido!",
+      label: "Email",
+      required: true,
+    },
+    {
+      id: 3,
+      name: "password",
+      type: "password",
+      placeholder: "Senha",
+      errorMessage: "A senha deve ter de 8 a 20 caracteres e deve incluir pelo menos 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial(ex: @)!",
+      pattern: `^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+      label: "Senha",
+      required: true,
+    },
+    {
+      id: 4,
+      name: "confirmPassword",
+      type: "password",
+      placeholder: "Confirmar Senha",
+      errorMessage: "Senhas não conferem!",
+      pattern: values.password,
+      label: "Confirmar Senha",
+      required: true,
+    }
+  ];
+
   return (
     <div className={styles.loginContainer}>
       <div className={styles.formBox}>
         <div className={styles.title}>Cadastro</div>
         <form onSubmit={handleRegister}>
-          <label htmlFor="username" className={styles.label}>Username</label>
-          <input
-            type="text"
-            id="username"
-            className={styles.input}
-            placeholder="Escolha um username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+          {inputs.map((input) => (
+            <RegisterInput key={input.id} {...input} value={values[input.name]} onChange={onChange} />
+          ))}
 
-          <label htmlFor="email" className={styles.label}>E-mail</label>
-          <input
-            type="email"
-            id="email"
-            className={styles.input}
-            placeholder="Digite seu e-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-
-          <label htmlFor="password" className={styles.label}>Senha</label>
-          <input
-            type="password"
-            id="password"
-            className={styles.input}
-            placeholder="Digite sua senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          <label htmlFor="confirmPassword" className={styles.label}>Confirmar Senha</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            className={styles.input}
-            placeholder="Confirme sua senha"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-
-          {error && <p style={{ color: 'salmon', marginTop: '0.5rem' }}>{error}</p>}
+          {error && <p style={{ color: 'red', marginTop: '0.5rem' }}>{error}</p>}
+          {success && <p style={{ color: 'rgba(250, 226, 10, 0.801)', marginTop: '0.5rem' }}>{success}</p>}
 
           <button type="submit" className={styles.button}>Cadastrar</button>
+          <p style={{ marginTop: '1rem', textAlign: 'center' }}>
+            Já possui uma conta? <Link to="/login" style={{ color: '#e0b3ff' }}>Entre</Link>
+          </p>
         </form>
       </div>
     </div>
