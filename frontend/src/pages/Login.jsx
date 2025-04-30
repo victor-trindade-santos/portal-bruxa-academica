@@ -8,6 +8,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
   const navigate = useNavigate(); 
+  const [error, setError] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -33,8 +34,10 @@ function Login() {
         navigate('/');
       } else {
         console.error('Erro no login:', data.message);
+        setError(data.message || 'Erro no login.');
       }
     } catch (error) {
+      setError('Erro ao conectar com o servidor.');
       console.error('Erro ao conectar com o servidor:', error);
     }
   };
@@ -63,6 +66,9 @@ function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+
+          {error && <p style={{ color: 'red', marginTop: '0.5rem' }}>{error}</p>}
+
           <button type="submit" className={styles.button}>Login</button>
           <p style={{ marginTop: '1rem', textAlign: 'center' }}>
             Não tem conta? <Link to="/register" style={{ color: '#e0b3ff' }}>Cadastre-se</Link>
