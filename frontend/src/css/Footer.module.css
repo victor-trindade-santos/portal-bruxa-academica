@@ -1,49 +1,55 @@
-.footerImg {
-  background-image: url('../img/jake-weirick-Q_RBVFFXR_g-unsplash.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 20px;
+.footer {
+  background-color: #5B079B; /* Cor de fundo igual à do navbar */
+  padding: 10px 0;  /* Linha fina de padding */
+  width: 100%; /* Garante que ocupe toda a largura da tela */
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  flex-direction: row; /* Organiza os itens na horizontal */
+  gap: 30px; /* Espaço entre os itens */
 }
 
-.footerDest {
-  background-image:
-    url('../img/moldura.png'),
-    linear-gradient(#5B079B, #5B079B);
-  background-repeat: no-repeat, no-repeat;
-  background-size: 100% 100%, cover;
-  background-position: center, center;
-  padding: 30px;
-  position: relative;
-  z-index: 1;
+.footerLogo {
+  max-width: 50px; /* Logo pequena */
 }
 
-.ajuste {
-  padding-left: 50px;
+.socialIcons {
+  display: flex;
+  gap: 20px; /* Espaçamento entre os ícones */
 }
 
-.textLight {
+.socialIcon {
   color: #fff;
-}
-
-.listUnstyled {
-  list-style: none;
-}
-
-.textDecorationNone {
-  text-decoration: none;
-}
-
-@media (min-width: 988px) {
-  .ajuste {
-    padding-left: 50px;
-  }
-}
-
-.efeito{
+  font-size: 1.5rem; /* Tamanho dos ícones */
   transition: transform 0.3s ease;
 }
 
-.efeito:hover{
-  transform: scale(1.04);
+.socialIcon:hover {
+  transform: scale(1.1); /* Efeito de hover */
+}
+
+.copyright {
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: normal;
+  margin-top: 30px;
+}
+
+/* Responsividade */
+@media (max-width: 767px) {
+  .footerLogo {
+    max-width: 40px; /* Logo menor em telas pequenas */
+  }
+
+  .socialIcons {
+    gap: 15px; /* Menor espaço entre os ícones em telas pequenas */
+  }
+
+  .socialIcon {
+    font-size: 1rem; /* Ícones menores em telas pequenas */
+  }
+
+  .copyright {
+    font-size: 0.7rem; /* Tamanho menor para o copyright em telas pequenas */
+  }
 }

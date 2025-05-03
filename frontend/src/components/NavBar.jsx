@@ -102,10 +102,11 @@ function Navbar() {
           </ul>
 
           <div className="navbar-user-info">
+          <img src={PerfilImg} alt="Perfil" className="navbar-user-avatar" />
             <span className="navbar-welcome-message">
               Bem-vindo, João
             </span>
-            <img src={PerfilImg} alt="Perfil" className="navbar-user-avatar" />
+
           </div>
 
         </div>
