@@ -1,25 +1,93 @@
+/* Estilos para o título h1 */
 h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 30px;
-    color: #67006C;
-    font-weight: bold;
-    text-align: center;
-  }
-  
-  p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    text-decoration: underline;
-    text-align: center;
-  }
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem; /* Ajustado para um tamanho mais flexível */
+  color: #67006C;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px; /* Adicionado espaçamento superior */
+}
 
-    
+/* Estilos para o parágrafo p */
+p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem; 
+  text-decoration: none; 
+  text-align: center;
+  margin-bottom: 20px; 
+}
+
+/* Seção de Divisor */
 .sectionDivider {
-    width: 80px;
-    height: 4px;
-    background-color: #500f69;
-    margin: 60px auto;
-    border-radius: 2px;
-  }
+  width: 80px;
+  height: 4px;
+  background-color: #500f69;
+  margin: 60px auto;
+  border-radius: 2px;
+}
 
-  
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.courseSection {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.h2{
+  color: #67006C;
+  font-size: 3em;
+  font-weight: bold;
+}
+
+/* Estilo do botão "Ver Mais" */
+.viewMoreButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.viewMoreLink {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #2B089C; 
+  color: white;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  color: #FFFF00;
+}
+
+.viewMoreLink::before {
+  content: "";
+  position: absolute;
+  top: 3px; 
+  left: 3px; 
+  right: 3px;
+  bottom: 3px; 
+  border: 2px solid #FFCC00; 
+  border-radius: 5px;
+  pointer-events: none; 
+}
+
+.viewMoreLink:hover {
+  background-color: #4C1C8C; 
+}
+
+.viewMoreLink:hover::before {
+  border-color: #FF9900; 
+}
+
+.sectionDescription {
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 20px;
+}

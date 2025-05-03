@@ -1,7 +1,7 @@
 .navbar-custom {
   background-color: #5B079B;
   position: fixed;
-  z-index: 3;
+  z-index: 99999;
   width: 100%;
   height: 10vh;
   top: 0;
@@ -130,9 +130,9 @@
   .navbar-collapse.show {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centraliza horizontalmente */
-    justify-content: center; /* Centraliza verticalmente */
-    min-height: 250px; /* Aumente conforme necessário */
+    align-items: center; 
+    justify-content: center; 
+    min-height: 250px; 
   }
 
   .navbar-nav {
@@ -188,4 +188,39 @@
     text-align: center;
   }
 
+  .navbar-custom {
+    padding: 8px 16px;
+    background-color: #5B079B;
+    position: fixed;
+    z-index: 1000;
+  }
+  
+  .container-fluid-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+  }
+  
+  .navbar-brand-img {
+    height: 40px;
+    margin: 0;
+  }
+  
+  .navbar-toggler-custom {
+    padding: 0;
+    margin: 0;
+    background: none;
+    border-radius: 6px;
+  }
+  
+  .navbar-toggler-icon {
+    width: 28px;
+    height: 28px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: block;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='none' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'><path stroke='%23FFD700' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+  }
+  
 }

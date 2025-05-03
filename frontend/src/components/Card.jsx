@@ -1,22 +1,50 @@
 import React from 'react';
-import styles from '../css/Card.module.css'; 
+import styles from '../css/Card.module.css';
 import { truncateDescription } from '../utils/descriptionUtils';
 
-function Card( { image, title, description, link } ) {
+function Card({ image, title, description, link, category, duration, type }) {
   const truncatedDescription = truncateDescription(description, 100);
 
-  return (
+  const isArtigo = type === 'artigo';
+  const isCurso = type === 'curso';
 
-            <div className={`card ${styles.cardCustom}`}>
-              <img src={image} className={`card-img ${styles.cardImg}`} alt="Imagem do Card" />
-              <div className={styles.cardImgOverlayCustom}>
-                <h5 className="card-title">{title}</h5>
-                <p className="card-text">{truncatedDescription}</p>
-                <button className={styles.btnCard}>
-                  <a href = {link} className={styles.btnLink}>Saiba Mais</a>
-                </button>
-              </div>
-            </div>
+  return (
+    <div className={`${isArtigo ? styles.cardArtigo : styles.cardCustom}`}>
+      {/* Container da imagem */}
+      <div className={isArtigo ? styles.articleImageWrapper : styles.courseImageWrapper}>
+        <img
+          src={image}
+          alt="Imagem do Card"
+          className={styles.cardImg}
+        />
+        
+        {/* Exibindo a categoria sobre a imagem, apenas para artigos */}
+        {isArtigo && (
+          <div className={styles.articleCategory}>{category}</div>
+        )}
+      </div>
+
+      <div className={styles.cardContent}>
+        <h5 className={isArtigo ? styles.artigoTitle : styles.cardTitle}>{title}</h5>
+
+        {isCurso && (
+          <div className={styles.cardInfoRow}>
+            <div className={styles.categoryTag}>{category}</div>
+            <div className={styles.duration}>{duration}</div>
+          </div>
+        )}
+
+        <p className={isArtigo ? styles.artigoText : styles.cardText}>
+          {truncatedDescription}
+        </p>
+
+        {isArtigo && link && (
+          <div className={styles.btnCard}>
+            <a href={link} className={styles.artigoBtn}>Saiba Mais</a>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
