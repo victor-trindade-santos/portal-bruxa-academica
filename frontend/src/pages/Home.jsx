@@ -72,11 +72,6 @@ function Home() {
 
     return (
         <>
-            <Header
-                title={"Bem Vindo ao Portal Cósmico"}
-                description={"Explore os mistérios do universo, conecte-se com a energia dos astros e descubra a magia que habita dentro de você. Astrologia, espiritualidade e bruxaria para quem busca autoconhecimento e transformação."}
-                backgroundImage={HeaderIMG}
-            />
             <Carousel_Home />
             <div className={styles.sectionDivider}></div>
             <h1 className={styles.h1}>Astrologia: descubra como funciona </h1>
@@ -93,24 +88,6 @@ function Home() {
                     />
                 </div>
             ))}
-            <div className={styles.sectionDivider}></div>
-            <div className="container">
-                <div className="row g-4">
-                    {courses.map((course, index) => (
-                        <div key={index} className="col-12 col-sm-6 col-md-4">
-                        
-                            <Card
-                                image={course.image}
-                                title={course.title}
-                                description={course.description}
-                                link={course.link}
-
-                                
-                            />
-                        </div>
-                    ))}
-                </div>
-            </div>
             <div className={styles.sectionDivider}></div>
             <h1 className={styles.h1}>Tarot: descubra os segredos de uma boa tiragem </h1>
             <p className={styles.p}>Aprenda a fazer uma tiragem precisa</p>

@@ -1,0 +1,191 @@
+.navbar-custom {
+  background-color: #5B079B;
+  position: fixed;
+  z-index: 3;
+  width: 100%;
+  height: 10vh;
+  top: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.container-fluid-custom {
+  padding: 10px;
+  display: flex; 
+  justify-content: flex-start; 
+  align-items: center; 
+}
+
+.navbar-brand-custom {
+  color: #FFFF00;
+  font-weight: bold;
+  text-decoration: none;
+  height: 70px;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center; 
+}
+
+.navbar-brand-img {
+  height: 80px; 
+  max-width: 100%; 
+}
+
+.navbar-toggler-custom {
+  background-color: #FFFF00;
+  border: none;
+  width: 60px;
+  height: 40px; /* Define uma altura fixa para o botão */
+  display: flex;
+  align-items: center; /* Centraliza o ícone verticalmente */
+  justify-content: center; /* Centraliza o ícone horizontalmente */
+}
+
+.nav-link-custom {
+  font-weight: 500;
+  color: #FFFF00;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 8px 16px;      /* Aumenta o "espaço interno" dos botões */
+  margin: 0 10px;         /* Aumenta o "espaço entre" os botões */
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  font-size: 1.2rem; /* Aumenta o tamanho da fonte da marca */
+  font-weight: 700;
+}
+
+.nav-link-custom:hover {
+  color: #FFFFFF;
+}
+
+.active-link {
+  background-color: #FFD700;
+  color: #5B079B !important;
+  border-radius: 8px;
+}
+
+.btn-logout {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-nav .nav-item {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* Adicionando estilo para o usuário */
+.navbar-user-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; 
+  padding-left: 20px; 
+  margin-left: auto;
+}
+
+.navbar-user-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.navbar-welcome-message {
+  color: #FFFF00;
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-align: left;
+  margin-left: 15px;
+  padding: 5px;
+  display: inline-block;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .navbar-collapse {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 10px;
+    background-color: #5B079B;
+    border: 2px solid #FFD700;
+    border-radius: 8px;
+    padding: 10px 0;
+    min-width: 200px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+  }
+
+  .navbar-collapse.show {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: center; /* Centraliza verticalmente */
+    min-height: 250px; /* Aumente conforme necessário */
+  }
+
+  .navbar-nav {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza os itens dentro do menu */
+  }
+
+  .navbar-nav .nav-item {
+    width: auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link-custom {
+    padding: 8px 16px;
+    margin: 0;
+    text-align: center; /* Centraliza o texto dentro dos links */
+    box-sizing: border-box;
+  }
+
+  .btn-logout {
+    padding: 8px 16px;
+    text-align: center;
+    box-sizing: border-box;
+    width: auto;
+  }
+
+  .navbar-user-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza a foto e a mensagem */
+    padding: 8px 16px;
+    border-top: 1px solid #FFD700;
+    margin-top: 8px;
+  }
+
+  .navbar-user-avatar {
+    width: 40px;  /* Define o tamanho da bolinha */
+    height: 40px; /* Define o tamanho da bolinha */
+    border-radius: 50%;
+    margin-right: 10px;  /* Espaço entre a imagem e o texto */
+  }
+
+  .navbar-welcome-message {
+    color: #FFFF00;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+}
