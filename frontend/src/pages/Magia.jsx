@@ -1,114 +1,112 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../services/api'
+import axios from '../services/api'; 
 
-import Header from '../components/Header';
 import Card from '../components/Card';
+import HeroSection from '../components/HeroSection';
+import styles from '../css/Home.module.css';
 
-import MagiaIMG from '../img/magia.png';
+import magia from '../img/carousel_home_slide_magia.png'; 
 import courseImage1 from '../img/card_tipo1.jpg';
 import courseImage2 from '../img/Card-tipo2(fundo).jpg';
-import articleImage from '../img/artigofoto.jpg';
-
-import styles from '../css/Magia.module.css';
 
 function Magia() {
-    const [articles, setArticles] = useState([]);
+    const [articles, setArticles] = useState([]); // Estado para armazenar os artigos
+    const [loading, setLoading] = useState(true); // Estado de carregamento
 
+    // Fetch dos artigos
     useEffect(() => {
-      const fetchArticles = async () => {
-        try {
-          const response = await axios.get('/articles?category=magia');
-          setArticles(response.data);
-        } catch (error) {
-          console.error('Erro ao buscar artigos:', error);
-        }
-      };
-  
-      fetchArticles();
-    }, []);
+        const fetchArticles = async () => {
+            try {
+                const response = await axios.get('/articles?category=magia'); // A URL da API
+                setArticles(response.data); // Armazenar os artigos no estado
+                setLoading(false); // Desmarcar o carregamento
+            } catch (error) {
+                console.error('Erro ao buscar artigos:', error);
+                setLoading(false); // Desmarcar o carregamento mesmo em erro
+            }
+        };
+
+        fetchArticles();
+    }, []); // O efeito será executado apenas uma vez ao montar o componente
 
     const courses = [
-        { 
-            image: courseImage1, 
-            title: "Curso 1", 
-            description: "Descrição do curso 1" 
+        {
+            image: courseImage1,
+            title: "Magia Natural",
+            description: "Curso completo sobre a utilização de elementos naturais em rituais mágicos.",
+            category: "#Magia",
+            duration: "🕒4h"
         },
-        { 
-            image: courseImage2, 
-            title: "Curso 2", 
-            description: "Descrição do curso 2" 
+        {
+            image: courseImage2,
+            title: "Rituais da Lua",
+            description: "Aprenda a sincronizar suas práticas com as fases da Lua para potencializar resultados.",
+            category: "#Magia",
+            duration: "🕒3h"
         },
-        { 
-            image: courseImage1, 
-            title: "Curso 3", 
-            description: "Descrição do curso 3" 
-        },
-        { 
-            image: courseImage2, 
-            title: "Curso 4", 
-            description: "Descrição do curso 4" 
-        },
-        { 
-            image: courseImage1, 
-            title: "Curso 4", 
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quae laboriosam temporibus" 
+        {
+            image: courseImage1,
+            title: "Simbolismo Mágico",
+            description: "Entenda os significados dos principais símbolos mágicos e como aplicá-los em feitiços.",
+            category: "#Magia",
+            duration: "🕒2h"
         }
     ];
 
-    return(
-        <div>
-            <Header 
-                title = "Magia"
-                backgroundImage= {MagiaIMG}
-                description= "Explore o mundo da magia"
+    return (
+        <>
+            <HeroSection
+                image={magia}
+                title="✨ Magia & Encantamentos"
+                description="Adentre o universo mágico e desperte a bruxa que existe em você. Aprenda, transforme e manifeste!"
             />
-            <section className = {styles.articlesSection}>
-                <h2 className = {`fs-1 ${styles.articlesTitle}`} >Artigos recentes</h2>
-                    <div className = {styles.articlesCards}>
-                    {articles.length === 0 ? (
-                        <div className= "emptyMessageContainer">
-                            <p className="emptyMessage">
-                                Nenhum artigo encontrado. Volte mais tarde para mais conteúdos místicos! 🔮
-                            </p>
-                        </div>
+
+            {/* Seção de Cursos */}
+            <div className={styles.courseSection}>
+                <h2 className={styles.h2}>Cursos de Magia</h2>
+                <p className={styles.sectionDescription}>&#9733; Potencialize sua prática com ensinamentos mágicos &#9733;</p>
+                <div className={styles.cardContainer}>
+                    {courses.map((course, index) => (
+                        <Card
+                            key={index}
+                            image={course.image}
+                            title={course.title}
+                            description={course.description}
+                            category={course.category}
+                            duration={course.duration}
+                            type="curso"
+                        />
+                    ))}
+                </div>
+            </div>
+
+            {/* Seção de Artigos */}
+            <div className={styles.articleSection}>
+                <h2 className={styles.h2}>Artigos de Magia</h2>
+                <p className={styles.sectionDescription}>&#9733; Descubra técnicas, símbolos e rituais ancestrais &#9733;</p>
+                <div className={styles.cardContainer}>
+                    {loading ? ( 
+                        <p>Carregando artigos...</p>
+                    ) : articles.length === 0 ? (
+                        <p>Nenhum artigo encontrado. Volte mais tarde para mais conteúdos mágicos!</p>
                     ) : (
-                        articles.map((article) => (
+                        articles.map((article, index) => (
                             <Card
-                            key={article._id}
-                            image={article.imageUrl || articleImage}
-                            title={article.title}
-                            description={article.content} 
-                            link={`/artigos/${article._id}`} 
+                                key={index}
+                                image={article.imageUrl || courseImage1} 
+                                title={article.title}
+                                description={article.content}
+                                link={`/artigos/${article._id}`}
+                                category={article.category || "#Magia"}
+                                type="artigo"
                             />
                         ))
                     )}
-                    </div>
-            </section>
-
-            <div className={styles.sectionDivider}></div>
-
-            <section className = {styles.coursesSection}>
-                <h2 className = {`fs-1 ${styles.coursesTitle}`}>Confira meus Cursos</h2>
-                <p className = {`fs-4 ${styles.coursesQuote}`}>
-                    <span>"Conhecimentos místicos que transcendem o comum."</span>
-                </p>
-                <div className = "container">
-                    <div className = "row g-4">
-                        {courses.map((course, index) => (
-                            <div key = {index} className = "col-12 col-sm-6 col-md-4">
-                                <Card
-                                    image = {course.image}
-                                    title = {course.title}
-                                    description= {course.description}
-                                    link = {course.link}
-                                />
-                            </div>
-                        ))}
-                    </div>
                 </div>
-            </section>
-        </div>
-    )
+            </div>
+            <br />
+        </>
+    );
 }
- 
-export default Magia
+
+export default Magia;

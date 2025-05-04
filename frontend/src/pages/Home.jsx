@@ -9,7 +9,7 @@ import VideoNumerologia from '../video/video3.jsx';
 import styles from '../css/Home.module.css';
 
 import HeroSection from '../components/HeroSection.jsx';
-import astrologia from '../img/carousel_home_slide_astrologia.png';
+import home from '../img/heroSection_home.png';
 
 function Home() {
 
@@ -117,7 +117,7 @@ function Home() {
     return (
         <>
             <HeroSection
-                image={astrologia}
+                image={home}
                 title="🧙‍♀️ Portal Bruxa Acadêmica"
                 description="Explore os mistérios do universo, conecte-se com a energia dos astros e descubra a magia que habita dentro de você..."
             />

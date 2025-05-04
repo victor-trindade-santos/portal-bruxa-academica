@@ -63,7 +63,6 @@ p {
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
-  color: #FFFF00;
 }
 
 .viewMoreLink::before {
@@ -73,17 +72,13 @@ p {
   left: 3px; 
   right: 3px;
   bottom: 3px; 
-  border: 2px solid #FFCC00; 
+  border: 2px solid #FFEB3B; 
   border-radius: 5px;
   pointer-events: none; 
 }
 
 .viewMoreLink:hover {
   background-color: #4C1C8C; 
-}
-
-.viewMoreLink:hover::before {
-  border-color: #FF9900; 
 }
 
 .sectionDescription {
