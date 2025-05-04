@@ -11,7 +11,7 @@
   font-weight: bold;
   text-decoration: none;
   align-items: right;
-  height: 70px;
+  height: 24%;
 }
 
 @media (max-width: 990px){
@@ -35,7 +35,12 @@
   color: #FFFF00;
   text-transform: uppercase;
   text-decoration: none;
+  margin: 0 !important; 
 
+}
+
+.button{
+  margin: 0;
 }
 
 .navLink:hover {
@@ -49,3 +54,4 @@
 .navbar-collapse{
   justify-content: right;
 }
+

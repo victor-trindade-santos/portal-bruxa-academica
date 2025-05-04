@@ -11,6 +11,8 @@ import articleImage from '../img/artigofoto.jpg';
 
 import styles from '../css/Magia.module.css';
 
+
+
 function Numerologia() {
 
     const [articles, setArticles] = useState([]);
@@ -76,9 +78,9 @@ function Numerologia() {
                         articles.map((article) => (
                             <Card
                             key={article._id}
-                            image={article.imageUrl || articleImage}
+                            image={article.imageThumb || articleImage}
                             title={article.title}
-                            description={article.content} 
+                            description={article.firstContent} 
                             link={`/artigos/${article._id}`} 
                             />
                         ))

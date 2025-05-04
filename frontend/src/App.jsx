@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext'; // 👈 importa o provider
 import Home from './pages/Home';
-import Articles from './pages/Articles';
+import ArticleCreator from './pages/ArticleCreator';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Magia from './pages/Magia';
@@ -20,7 +20,7 @@ const App = () => (
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/create-articles-d42f4c" element={<Articles />} />
+        <Route path="/create-articles-d42f4c" element={<ArticleCreator />} />
         <Route path="/magia" element={<Magia />} />
         <Route path="/tarot" element={<Tarot />} />
         <Route path="/numerologia" element={<Numerologia />} />

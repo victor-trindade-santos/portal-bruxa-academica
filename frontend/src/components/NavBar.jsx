@@ -48,7 +48,7 @@ function Navbar() {
             <li className="nav-item"><Link to="/numerologia" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>NUMEROLOGIA</Link></li>
             <li className="nav-item"><Link to="/tarot" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>TAROT</Link></li>
             <li className="nav-item"><Link to="/astrologia" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>ASTROLOGIA</Link></li>
-
+            
             {isAdmin && (
               <>
                 <li className="nav-item"><Link to="/cursos" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>CURSOS</Link></li>
@@ -62,6 +62,7 @@ function Navbar() {
               <>
                 <li className="nav-item"><Link to="/profile" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>Perfil</Link></li>
                 <li className="nav-item">
+                  
                   <button onClick={handleLogout} className={`nav-link ${styles.navLink}`}>
                     Logout
                   </button>

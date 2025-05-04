@@ -13,7 +13,8 @@
   "type": "commonjs",
   "dependencies": {
     "concurrently": "^9.1.2",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "react-quill": "^2.0.0"
   },
   "devDependencies": {
     "vite": "^6.2.6"

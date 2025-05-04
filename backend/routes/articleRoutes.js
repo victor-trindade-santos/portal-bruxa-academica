@@ -1,18 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('../middlewares/auth');  // Middleware de autenticação
+const authMiddleware = require('../middlewares/auth');
+const { upload, uploadToCloudinary } = require('../middlewares/upload');
 const { createArticle, getArticles } = require('../controllers/articleController');
 
-// Rota para obter os artigos - Acessível para todos os usuários, logados ou não
+router.post(
+  '/',
+  authMiddleware('admin'),
+  upload.fields([
+    { name: 'imageThumb', maxCount: 1 },
+    { name: 'imageArticle', maxCount: 1 },
+  ]),
+  uploadToCloudinary,
+  createArticle
+);
+
 router.get('/', getArticles);
-
-// Rota para criar artigo - Somente para administradores
-router.post('/', authMiddleware('admin'), createArticle);
-
-// Rota para atualizar artigo - Somente para administradores (se necessário)
-// router.put('/:id', authMiddleware('admin'), updateArticle);
-
-// Rota para excluir artigo - Somente para administradores (se necessário)
-// router.delete('/:id', authMiddleware('admin'), deleteArticle);
 
 module.exports = router;

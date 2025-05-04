@@ -1,0 +1,56 @@
+.searchContainer {
+  background-color: white;
+  box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
+  padding: 16px;
+  width: 100%;
+}
+
+/* Wrapper flexível para o input + ícone */
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #5B079B;
+  border-radius: 20px;
+  padding: 8px 12px;
+}
+
+/* Ícone da lupa */
+.searchIcon {
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+}
+
+/* Estilo do input */
+.searchInput {
+  flex: 1;
+  border: none !important;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  color: #8C089C;
+  margin: 0;
+  padding:0;
+}
+
+.searchInput::placeholder {
+  color: #8C089C;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  border:none;
+  outline:none !important;
+  box-shadow:none;
+}
+
+.searchButton {
+  background: none;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 0px;
+}
