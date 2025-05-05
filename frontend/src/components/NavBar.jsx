@@ -48,6 +48,7 @@ function Navbar() {
             <li className="nav-item"><Link to="/numerologia" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>NUMEROLOGIA</Link></li>
             <li className="nav-item"><Link to="/tarot" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>TAROT</Link></li>
             <li className="nav-item"><Link to="/astrologia" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>ASTROLOGIA</Link></li>
+            <li className="nav-item"><Link to="/perfil" className={`nav-link ${styles.navLink}`} onClick={closeNavbar}>PERFIL</Link></li>
 
             {isAdmin && (
               <>
