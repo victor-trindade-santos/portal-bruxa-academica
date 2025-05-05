@@ -22,7 +22,7 @@ export function AuthProvider({ children }) {
   // Função de logout
   const logout = () => {
     setUser(null);  // Limpa o estado de usuário
-    localStorage.removeItem('user');  // Remove do localStorage
+    sessionStorage.removeItem("user");  // Remove do localStorage
   };
 
   return (

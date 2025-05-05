@@ -1,115 +1,102 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../services/api'
+import axios from '../services/api';
 
-import Header from '../components/Header';
 import Card from '../components/Card';
+import HeroSection from '../components/HeroSection';
+import styles from '../css/Home.module.css';
 
-import MagiaIMG from '../img/magia.png';
+import tarot from '../img/carousel_home_slide_tarot.png';
 import courseImage1 from '../img/card_tipo1.jpg';
 import courseImage2 from '../img/Card-tipo2(fundo).jpg';
-import articleImage from '../img/artigofoto.jpg';
-
-import styles from '../css/Magia.module.css';
 
 function Tarot() {
-
     const [articles, setArticles] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-      const fetchArticles = async () => {
-        try {
-          const response = await axios.get('/articles?category=tarot');
-          setArticles(response.data);
-        } catch (error) {
-          console.error('Erro ao buscar artigos:', error);
-        }
-      };
-  
-      fetchArticles();
+        const fetchArticles = async () => {
+            try {
+                const response = await axios.get('/articles?category=tarot');
+                setArticles(response.data);
+                setLoading(false);
+            } catch (error) {
+                console.error('Erro ao buscar artigos:', error);
+                setLoading(false);
+            }
+        };
+
+        fetchArticles();
     }, []);
 
     const courses = [
-        { 
-            image: courseImage1, 
-            title: "Curso 1", 
-            description: "Descrição do curso 1" 
+        {
+            image: courseImage1,
+            title: "Introdução ao Tarô",
+            description: "Conheça os arcanos e comece sua jornada com as cartas.",
+            category: "#Tarô",
+            duration: "🕒2h"
         },
-        { 
-            image: courseImage2, 
-            title: "Curso 2", 
-            description: "Descrição do curso 2" 
-        },
-        { 
-            image: courseImage1, 
-            title: "Curso 3", 
-            description: "Descrição do curso 3" 
-        },
-        { 
-            image: courseImage2, 
-            title: "Curso 4", 
-            description: "Descrição do curso 4" 
-        },
-        { 
-            image: courseImage1, 
-            title: "Curso 4", 
-            description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum quae laboriosam temporibus" 
+        {
+            image: courseImage2,
+            title: "Leitura Intuitiva",
+            description: "Aprenda a interpretar o Tarô com sensibilidade e conexão espiritual.",
+            category: "#Tarô",
+            duration: "🕒3h"
         }
     ];
 
-    return(
-        <div>
-            <Header 
-                title = "Tarot"
-                backgroundImage= {MagiaIMG}
-                description= "Explore o mundo do tarot"
+    return (
+        <>
+            <HeroSection
+                image={tarot}
+                title="🃏 O Universo do Tarô"
+                description="Desvende os mistérios das cartas e conecte-se com a sabedoria ancestral."
             />
-            <section className = {styles.articlesSection}>
-                <h2 className = {`fs-1 ${styles.articlesTitle}`} >Artigos recentes</h2>
-                    <div className = {styles.articlesCards}>
-                    {articles.length === 0 ? (
-                        <div className= "emptyMessageContainer">
-                            <p className="emptyMessage">
-                                Nenhum artigo encontrado. Volte mais tarde para mais conteúdos místicos! 🔮
-                            </p>
-                        </div>
+
+            <div className={styles.courseSection}>
+                <h2 className={styles.h2}>Cursos de Tarô</h2>
+                <p className={styles.sectionDescription}>&#9733;Aprenda a interpretar os arcanos e orientar com consciência.&#9733;</p>
+                <div className={styles.cardContainer}>
+                    {courses.map((course, index) => (
+                        <Card
+                            key={index}
+                            image={course.image}
+                            title={course.title}
+                            description={course.description}
+                            category={course.category}
+                            duration={course.duration}
+                            type="curso"
+                        />
+                    ))}
+                </div>
+            </div>
+
+            <div className={styles.articleSection}>
+                <h2 className={styles.h2}>Artigos de Tarô</h2>
+                <p className={styles.sectionDescription}>&#9733;Interprete cartas, spreads e simbolismos profundos.&#9733;</p>
+                <div className={styles.cardContainer}>
+                    {loading ? (
+                        <p>Carregando artigos...</p>
+                    ) : articles.length === 0 ? (
+                        <p>Nenhum artigo encontrado.</p>
                     ) : (
-                        articles.map((article) => (
+                        articles.map((article, index) => (
                             <Card
-                            key={article._id}
-                            image={article.imageUrl || articleImage}
-                            title={article.title}
-                            description={article.content} 
-                            link={`/artigos/${article._id}`} 
+                                key={index}
+                                image={article.imageUrl || courseImage1}
+                                title={article.title}
+                                description={article.content}
+                                link={`/artigos/${article._id}`}
+                                category={article.category || "#Tarô"}
+                                type="artigo"
                             />
                         ))
                     )}
-                    </div>
-            </section>
-
-            <div className={styles.sectionDivider}></div>
-
-            <section className = {styles.coursesSection}>
-                <h2 className = {`fs-1 ${styles.coursesTitle}`}>Confira meus Cursos</h2>
-                <p className = {`fs-4 ${styles.coursesQuote}`}>
-                    <span>"Conhecimentos místicos que transcendem o comum."</span>
-                </p>
-                <div className = "container">
-                    <div className = "row g-4">
-                        {courses.map((course, index) => (
-                            <div key = {index} className = "col-12 col-sm-6 col-md-4">
-                                <Card
-                                    image = {course.image}
-                                    title = {course.title}
-                                    description= {course.description}
-                                    link = {course.link}
-                                />
-                            </div>
-                        ))}
-                    </div>
                 </div>
-            </section>
-        </div>
-    )
+            </div>
+            <br />
+        </>
+    );
 }
 
 export default Tarot;

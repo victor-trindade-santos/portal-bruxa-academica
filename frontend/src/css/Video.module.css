@@ -56,13 +56,36 @@
 
 /* Responsividade para telas pequenas */
 @media (max-width: 767px) {
-
     .colLeft,
     .colRight {
-        max-width: 100%;
-        /* Ajusta para ocupar a largura total em telas menores */
+      max-width: 100%;
+      aspect-ratio: unset;     /* Remove a proporção fixa */
+      max-height: none;        /* Permite que a altura cresça */
     }
-}
+  
+    .title {
+      font-size: clamp(18px, 5vw, 24px); /* Fontes menores no mobile */
+    }
+  
+    .description {
+      font-size: clamp(10px, 3vw, 14px); /* Ajusta também os textos menores */
+    }
+  
+    .btnCustom {
+      margin-top: 1rem; /* Espaço entre texto e botão */
+    }
+
+    .subtitle {
+        all: unset;
+        font-size: clamp(14px, 3vw, 20px);
+        font-weight: 300;
+        font-family: 'Poppins', sans-serif;
+        color: #ffffff;
+        display: block;
+      }          
+
+  }
+  
 
 /* Zera margem e padding adicionais nas colunas */
 .colCustom {

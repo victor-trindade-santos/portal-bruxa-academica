@@ -1,0 +1,77 @@
+.hero {
+    height: 93vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .overlay {
+    flex: 1;
+    background: linear-gradient(to bottom, rgba(42, 0, 83, 0.6), rgba(41, 0, 83, 0.63));
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+  } 
+  
+  .content {
+    text-align: center;
+    color: #fff;
+    max-width: 800px;
+    z-index: 2;
+  }
+  
+  .title {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: #FFFF00;
+  }
+  
+  .description {
+    font-size: 1.3rem;
+    line-height: 1.6;
+  }
+  
+  .footer {
+    height: 60px;
+    background-color: #2b089c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    /* background-image: url('https://previews.123rf.com/images/chatchaithep/chatchaithep2101/chatchaithep210100238/162819627-estrelas-isoladas-no-fundo-branco-estrelas-em-queda-brilha-explos%C3%A3o-brilhante-ilustra%C3%A7%C3%A3o.jpg');
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply; 
+    opacity: 0.7;  */
+  }
+  
+  .footerText {
+    color: #FFFF00; 
+    font-size: 1.3rem;
+    font-style: italic;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); 
+    z-index: 15;
+    padding: 0 1rem; 
+  }
+  
+  @media (max-width: 767px) {
+    .footer{
+      height: 80px;
+    }
+
+    .footerText{
+      padding: 0;
+      text-align: center;
+    }
+  }
+  
+  
+  
