@@ -24,6 +24,12 @@
     margin-left: 8px;
     /* pequeno espaçamento à esquerda */
     text-align: left;
+    text-decoration: none;
+}
+
+.option:hover{
+    color: #8C089C !important;
+
 }
 
 .navLink {

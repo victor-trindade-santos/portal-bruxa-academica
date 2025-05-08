@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from '../services/api';
 import Card from '../components/Card';
@@ -11,12 +11,32 @@ import Sobre_Mim_Lateral from '../components/Sobre_MIm_Lateral';
 function Article_Pages() {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
+    const location = useLocation(); // 🔹 Pega a URL
+    const queryParams = new URLSearchParams(location.search); // 🔍 Extrai a query string
+    const categoria = queryParams.get('categoria'); // ✅ Pega o valor de "categoria"
 
     useEffect(() => {
         const fetchArticles = async () => {
             try {
                 const response = await axios.get('/articles');
-                setArticles(response.data);
+                const todosArtigos = response.data;
+
+                // 🔍 Se houver filtro de categoria, aplica
+                const filtrados = categoria
+                ? todosArtigos.filter(article => article.category?.toLowerCase() === categoria.toLowerCase())
+                : todosArtigos;
+            
+
+                filtrados.sort((a, b) => {
+                    if (!a.publicationDate || !b.publicationDate) return 0;
+                    const [diaA, mesA, anoA] = a.publicationDate.split('/');
+                    const [diaB, mesB, anoB] = b.publicationDate.split('/');
+                    const dataA = new Date(`${anoA}-${mesA}-${diaA}`);
+                    const dataB = new Date(`${anoB}-${mesB}-${diaB}`);
+                    return dataB - dataA;
+                });
+                
+                setArticles(filtrados);
                 setLoading(false);
             } catch (error) {
                 console.error('Erro ao buscar artigos:', error);
@@ -25,7 +45,7 @@ function Article_Pages() {
         };
 
         fetchArticles();
-    }, []);
+    }, [categoria]);
 
     
 

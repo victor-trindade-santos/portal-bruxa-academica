@@ -7,11 +7,15 @@ function Barra_Categoria() {
         <div className={styles.container}>
             <h1 className={styles.title}>Categorias</h1>
             <h1 className={styles.option}>
-                <Link to="/" className={styles.navLink}>✦ Astrologia</Link>
+            <Link to="/artigos?categoria=Astrologia" className={styles.option}>✦ Astrologia</Link>
             </h1>           
-            <h1 className={styles.option}><Link to="/" className={styles.navLink} >✦ Numerologia</Link></h1>
-            <h1 className={styles.option}><Link to="/" className={styles.navLink}>✦ Tarologia</Link></h1>
-            <h1 className={styles.option}><Link to="/" className={styles.navLink} >✦ Magia</Link></h1>
+            <h1 className={styles.option}> <Link to="/artigos?categoria=Numerologia" className={styles.option}>✦ Numerologia</Link></h1>
+            <h1 className={styles.option}><Link to="/artigos?categoria=Tarot" className={styles.option}>✦ Tarologia</Link></h1>
+            <h1 className={styles.option}><Link to="/artigos?categoria=Magia" className={styles.option}>✦ Magia</Link></h1>
+            
+           
+            
+            
         </div>
     )
 }
