@@ -56,7 +56,7 @@ function Astrologia() {
             <div className={styles.courseSection}>
                 <h2 className={styles.h2}>Cursos de Astrologia</h2>
                 <p className={styles.sectionDescription}>&#9733;Do mapa natal às previsões, domine os segredos do céu.&#9733;</p>
-                <div className={styles.cardContainer}>
+                <div className={styles.cardContainerCourse}>
                     {courses.map((course, index) => (
                         <Card
                             key={index}
@@ -83,6 +83,7 @@ function Astrologia() {
                         articles.map((article, index) => (
                             <Card
                                 key={index}
+                                id={article._id} // <-- adiciona essa linha
                                 image={article.imageUrl || courseImage1}
                                 title={article.title}
                                 description={article.content}

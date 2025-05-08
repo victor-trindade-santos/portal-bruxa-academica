@@ -52,7 +52,7 @@ function Navbar() {
 
         <div className={`navbar-collapse ${isMenuOpen ? 'show' : ''}`} id="navbarSupportedContent">
           <ul className="navbar-nav mb-2 mb-lg-0">
-            {[{ to: '/', label: 'Home' }, { to: '/magia', label: 'MAGIA' }, { to: '/numerologia', label: 'NUMEROLOGIA' }, { to: '/tarot', label: 'TAROT' }, { to: '/astrologia', label: 'ASTROLOGIA' }].map((item) => (
+            {[{ to: '/', label: 'Home' }, { to: '/magia', label: 'MAGIA' }, { to: '/numerologia', label: 'NUMEROLOGIA' }, { to: '/tarot', label: 'TAROT' }, { to: '/astrologia', label: 'ASTROLOGIA' }, { to: '/artigos', label: 'ARTIGOS' }].map((item) => (
               <li className="nav-item" key={item.to}>
                 <Link
                   to={item.to}
@@ -73,7 +73,7 @@ function Navbar() {
                 </li>
                 <li className="nav-item">
                   <Link to="/create-articles-d42f4c" className={`nav-link nav-link-custom ${isActive('/create-articles-d42f4c') ? 'active-link' : ''}`} onClick={closeNavbar}>
-                    ARTIGOS
+                    EDITAR
                   </Link>
                 </li>
               </>

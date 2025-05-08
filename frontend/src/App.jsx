@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import Magia from './pages/Magia';
 import Tarot from './pages/Tarot';
 import Numerologia from './pages/Numerologia';
+import Artigos from './pages/Artigos';
 import Astrologia from './pages/Astrologia';
 import Cursos from './pages/Cursos';
 import Login from './pages/Login';
@@ -25,11 +26,13 @@ const App = () => (
         <Route path="/tarot" element={<Tarot />} />
         <Route path="/numerologia" element={<Numerologia />} />
         <Route path="/astrologia" element={<Astrologia />} />
+        <Route path="/artigos" element={<Artigos />} />
         <Route path="/cursos" element={<Cursos />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         {/* Adicionando a rota para a página do artigo */}
         <Route path="/artigos/:id" element={<Article_Pages />} />
+        <Route path="/article-preview" element={<Article_Pages />} />
       </Routes>
       <Footer />
     </Router>

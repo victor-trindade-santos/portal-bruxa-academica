@@ -58,7 +58,7 @@ function Numerologia() {
             <div className={styles.courseSection}>
                 <h2 className={styles.h2}>Cursos de Numerologia</h2>
                 <p className={styles.sectionDescription}>&#9733;Explore o poder dos números na sua jornada espiritual.&#9733;</p>
-                <div className={styles.cardContainer}>
+                <div className={styles.cardContainerCourse}>
                     {courses.map((course, index) => (
                         <Card
                             key={index}
@@ -85,20 +85,24 @@ function Numerologia() {
                         articles.map((article, index) => (
                             <Card
                                 key={index}
-                                image={article.imageUrl || courseImage1}
+                                image={article.imageThumb || courseImage1}
                                 title={article.title}
-                                description={article.content}
-                                link={`/artigos/${article._id}`}
+                                description={article.firstContent}
+                                id={article._id} // <-- adiciona essa linha
+                                link={`/articles/${article._id}`}
                                 category={article.category || "#Numerologia"}
                                 type="artigo"
                             />
                         ))
                     )}
+                    
                 </div>
             </div>
             <br />
         </>
     );
+    
 }
+
 
 export default Numerologia;

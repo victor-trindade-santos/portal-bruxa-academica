@@ -15,8 +15,12 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/articles', articleRoutes);
+
 app.use('/auth', authRoutes);
 app.use('/courses', courseRoutes);
+
+
+
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));

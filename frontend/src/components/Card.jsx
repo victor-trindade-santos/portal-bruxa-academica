@@ -3,14 +3,22 @@ import { Link } from 'react-router-dom';
 import styles from '../css/Card.module.css';
 import { truncateDescription } from '../utils/descriptionUtils';
 
-function Card({ image, title, description, link, category, duration, type }) {
-  const truncatedDescription = truncateDescription(description, 100);
+function Card({ image, title, description, link, category, duration, type, className, id }) {
+
+  let truncatedDescription;
+
+  if (description !== null && description !== undefined) {
+    truncatedDescription = truncateDescription(description, 100);
+  } else {
+    truncatedDescription = truncateDescription("");
+  }
+
 
   const isArtigo = type === 'artigo';
   const isCurso = type === 'curso';
 
   return (
-    <div className={`${isArtigo ? styles.cardArtigo : styles.cardCustom}`}>
+    <div className={`${isArtigo ? styles.cardArtigo : styles.cardCustom} ${className || ''}`}>
       {/* Container da imagem */}
       <div className={isArtigo ? styles.articleImageWrapper : styles.courseImageWrapper}>
         <img
@@ -18,7 +26,7 @@ function Card({ image, title, description, link, category, duration, type }) {
           alt="Imagem do Card"
           className={styles.cardImg}
         />
-        
+
         {/* Exibindo a categoria sobre a imagem, apenas para artigos */}
         {isArtigo && (
           <div className={styles.articleCategory}>{category}</div>
@@ -35,9 +43,8 @@ function Card({ image, title, description, link, category, duration, type }) {
           </div>
         )}
 
-        <p className={isArtigo ? styles.artigoText : styles.cardText}>
-          {truncatedDescription}
-        </p>
+          <p className={isArtigo ? styles.artigoText : styles.cardText} dangerouslySetInnerHTML={{__html: truncatedDescription}} />
+
 
         {isArtigo && link && (
           <div className={styles.btnCard}>

@@ -126,7 +126,8 @@ function Home() {
             <div className={styles.courseSection}>
                 <h2 className={styles.h2}>Confira meus Cursos</h2>
                 <p className={styles.sectionDescription}>&#9733; Aprofunde seus conhecimentos em magia e espiritualidade &#9733;</p>
-                <div className={styles.cardContainer}>
+                
+                <div className={styles.cardContainerCourse}>
                     {courses.slice(0, 3).map((course, index) => (
                     <Card
                         key={index}

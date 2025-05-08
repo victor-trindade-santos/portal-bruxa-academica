@@ -94,3 +94,44 @@
     padding: 5px;  /* Adicionando um pequeno padding para deixar a borda mais visível */
     border-radius: 1px;  /* Borda arredondada, caso queira */
   }
+
+  .updateButton {
+    position: relative; /* Necessário para posicionar o ::before */
+    background-color: #4F0B82;
+    color: #fff000;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    width: 100%;
+    padding: 8px 12px;
+    cursor: pointer;
+    border: none;
+    border-radius: 0%;
+    box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
+    overflow: hidden; /* Garante que ::before fique dentro */
+  }
+  
+  .updateButton::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+    border: 1px solid #FFEB3B;
+    border-radius: 0%; /* igual ao botão */
+    box-sizing: border-box;
+    pointer-events: none;
+  }
+  
+  
+  .updateButton:hover {
+    background-color: #FFEB3B;
+    color: #4F0B82;
+  }
+  
+  .updateButton:hover::before {
+    border-color: #4F0B82; /* Muda a borda para roxo no hover */
+  }
+  

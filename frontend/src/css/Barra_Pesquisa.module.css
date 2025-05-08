@@ -3,9 +3,9 @@
   box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
   padding: 16px;
   width: 100%;
+  position: relative; /* Fundamental para o posicionamento absoluto do dropdown */
 }
 
-/* Wrapper flexível para o input + ícone */
 .inputWrapper {
   display: flex;
   align-items: center;
@@ -53,4 +53,37 @@
   align-items: center;
   justify-content: center;
   width: 0px;
+}
+/* DROPDOWN */
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+
+  border-top: none;
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.suggestionItem {
+  padding: 8px 12px;
+  cursor: pointer;
+  color: #8C089C;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  border:none;
+
+  box-shadow:none;
+}
+
+.suggestionItem:hover {
+  background-color: #f2f2f2;
 }

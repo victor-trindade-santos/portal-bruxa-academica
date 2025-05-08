@@ -1,6 +1,8 @@
 
   .articlesSection {
     padding: 40px 60px; /* espaçamento do lado inteiro */
+    width: 80%;
+    background-color: #500f69;
   }
   
   .articlesTitle {
