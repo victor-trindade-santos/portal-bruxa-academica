@@ -12,6 +12,7 @@ import Astrologia from './pages/Astrologia';
 import Cursos from './pages/Cursos';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Perfil from './pages/Perfil'
 
 const App = () => (
   <AuthProvider> 
@@ -24,6 +25,7 @@ const App = () => (
         <Route path="/tarot" element={<Tarot />} />
         <Route path="/numerologia" element={<Numerologia />} />
         <Route path="/astrologia" element={<Astrologia />} />
+        <Route path="/perfil" element={<Perfil />} />
         <Route path="/cursos" element={<Cursos />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
