@@ -102,12 +102,14 @@ function Navbar() {
             )}
           </ul>
 
-          <div className="navbar-user-info">
-            <span className="navbar-welcome-message">
-              Bem-vindo, João
-            </span>
-            <img src={PerfilImg} alt="Perfil" className="navbar-user-avatar" />
-          </div>
+          {user && (
+            <div className="navbar-user-info">
+              <img src={PerfilImg} alt="Perfil" className="navbar-user-avatar" />
+              <span className="navbar-welcome-message">
+                Bem-vindo(a), {user.username}
+              </span>
+            </div>
+          )}
 
         </div>
       </div>

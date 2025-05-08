@@ -1,88 +1,329 @@
+
+/* Estilos cursos */
 .cardCustom {
-  max-width: 80%;
-  margin: 20px auto;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   position: relative;
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
-}
-
-.cardCustom:hover {
-  transform: scale(1.04);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-}
-
-.cardImgOverlayCustom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 1rem;
-  color: white;
-  background: rgba(0, 0, 0, 0.5);
-  box-sizing: border-box;
-  max-height: 100%;
+  border-radius: 10px;
   overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 5px;
+  width: 20%;  /* Largura do card (20%) para desktop */
+  height: 65vh; /* Altura do card (65% da tela) */
+  display: flex;
+  flex-direction: column;
 }
 
-.cardImgOverlayCustom h5 {
+.courseImage {
+  height: 40%;  /* Altura da imagem do curso */
+}
+
+.articleImage {
+  height: 30%;  /* Ajuste para o tamanho de imagem dos artigos */
+}
+
+.cardContent {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 60%;  /* O restante da altura do card */
+}
+
+/* Título */
+.cardTitle {
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: left;
+}
+
+/* Sessão com categoria e duração */
+.cardInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.categoryTag {
+  background-color: #2B089C;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 1rem; 
+  text-align: center; 
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+.categoryTag::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  border: 2px solid #FFEB3B;
+  border-radius: 20px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.duration {
+  font-size: 1rem;
+  color: #555;
+  font-style: italic;
+  margin-right: 15px;
+}
+
+/* Descrição do curso */
+.cardDescription {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 15px;
+  flex-grow: 1;
+}
+
+/* Estilo do botão "Saiba Mais" para artigos */
+.btnCard {
+  margin-top: 10px;
+}
+
+.btnLink {
+  color: white;
+  text-decoration: none;
+  background-color: #2B089C;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.btnLink:hover {
+  background-color: #4C1C8C;
+}
+
+.cardInfoRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #555;
   margin-bottom: 0.5rem;
-  font-size: 1.2rem;
 }
 
-.cardImgOverlayCustom .btn {
-  background-color: #ffffffaa;
-  color: #000;
+.cardCategory {
+  background-color: #e3d2f1;
+  color: #6a1b9a;
+  padding: 4px 8px;
+  border-radius: 8px;
   font-weight: 500;
-  border: none;
 }
 
-.cardImgOverlayCustom .btn:hover {
+.cardDuration {
+  font-style: italic;
+  color: #333;
+}
+
+/* Mudanças para Mobile */
+@media (max-width: 767px) {
+  .cardCustom {
+    width: 80%; /* O card ocupa toda a largura no mobile */
+    height: auto; /* Altura ajustável para mobile */
+  }
+
+  .courseImage {
+    height: 35%; /* Ajuste a imagem do curso para ser um pouco menor */
+  }
+
+  .articleImage {
+    height: 25%; /* Ajuste a imagem dos artigos para um tamanho adequado */
+  }
+
+  .cardContent {
+    padding: 0.8rem; /* Menos padding para economizar espaço */
+    height: auto;  /* Altura flexível */
+  }
+
+  .cardTitle {
+    font-size: 1.4rem; /* Tamanho de fonte reduzido para mobile */
+  }
+
+  .categoryTag {
+    font-size: 0.8rem; /* Tamanho da fonte da categoria ajustado */
+    padding: 4px 8px; /* Ajuste do padding */
+  }
+
+  .duration {
+    font-size: 0.9rem; /* Ajuste no tamanho da duração */
+  }
+
+  .cardDescription {
+    font-size: 0.9rem; /* Tamanho da fonte reduzido para mobile */
+  }
+
+  .btnLink {
+    font-size: 0.9rem; /* Fonte do botão ajustada */
+    padding: 8px 16px; /* Ajuste do padding do botão */
+  }
+}
+
+/* Card Artigo */
+.cardArtigo {
+  width: 20%; /* Ajustando a largura para 4 artigos por linha */
+  height: auto;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid #ccc; /* Borda para o contorno do card */
+  border-radius: 10px; /* Bordas arredondadas */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para o card */
   background-color: white;
-  color: #000;
+  overflow: hidden; /* Para garantir que a imagem não ultrapasse o limite do card */
 }
 
-.cardImgOverlayCustom p {
-  font-size: 0.95rem;
-  margin-bottom: 0.8rem;
+.articleImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 200px; /* altura fixa para todas as imagens */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5; /* cor de fundo opcional para áreas vazias */
 }
 
 .cardImg {
   width: 100%;
-  height: 240px;
-  object-fit: cover;
-  display: block;
+  height: 100%;
+  object-fit: cover; /* Para cobrir a área do container */
+  /* border: 5px solid #000000; */
 }
 
-.btnCard {
-  all: unset;
-  cursor: pointer;
-  padding: 5px;
-  background-color: #000000a8;
-  border: 1px solid #FFFF00;
+.articleCategory {
+  position: absolute;
+  bottom: -5%; /* Ajuste a distância da base da imagem */
+  left: 0;
+  background-color: #2B089C; /* Fundo roxo */
+  color: white;
+  padding: 5px 15px;
+  border-radius: 50px; /* Bordas arredondadas */
+  font-size: 1rem;
+  text-align: center;
+  z-index: 1; /* Para garantir que fique visível sobre a imagem */
+}
+
+.articleCategory:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 8px); /* Faz a borda ficar mais interna */
+  height: calc(100% - 8px); /* Faz a borda ficar mais interna */
+  border: 2px solid #FFEB3B; /* Borda amarela */
+  border-radius: 50px; /* Bordas arredondadas */
+  box-sizing: border-box;
+  pointer-events: none; /* Impede que a borda interfira com interações */
+}
+
+
+.artigoTitle {
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.artigoText {
+  font-size: 1rem;
+  color: #333;
+  margin-top: 10px;
+  text-align: left;
+}
+
+/* Estilos para o botão "Saiba Mais" */
+.artigoBtn {
+  position: relative; /* necessário para o ::before funcionar corretamente */
+  display: inline-block;
+  background-color: #2B089C;
+  color: white;
+  padding: 8px 16px;
   border-radius: 5px;
-}
-
-.btnCard:hover {
-  background-color: #000;
-}
-
-.btnLink {
-  all: unset;
   text-decoration: none;
-  color: #FFFF00;
+  margin-top: 10px;
+  width: auto;
+  text-align: left;
 }
 
-.btnLink:hover {
-  color: #FFFF00;
+.artigoBtn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  border: 2px solid #FFEB3B;
+  border-radius: 5px;
+  box-sizing: border-box;
+  pointer-events: none;
 }
 
-@media (max-width: 576px) {
-  .cardImgOverlayCustom h5 {
-    font-size: 1rem;
+
+.artigoBtn:hover {
+  background-color: #4C1C8C;
+}
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cards lado a lado */
+  gap: 20px; /* Espaço entre os cards */
+  padding: 20px;
+  max-width: 100%; /* Garantir que a largura não ultrapasse a tela */
+}
+
+@media (max-width: 767px) {
+  .cardArtigo {
+    width: 80%; /* Ocupa toda a largura disponível */
+    margin: 10px 0;
   }
 
-  .cardImgOverlayCustom p {
-    font-size: 0.875rem;
+  .articleImageWrapper {
+    height: 200px; /* Altura fixa mais adequada para mobile */
+  }
+
+  .cardImg {
+    height: 100%;
+  }
+
+  .articleCategory {
+    font-size: 0.9rem;
+    padding: 4px 12px;
+    bottom: -6%; /* Levemente mais abaixo para sobrepor mais o conteúdo */
+  }
+
+  .articleCategory::before {
+    width: calc(100% - 6px);
+    height: calc(100% - 6px);
+  }
+
+  .artigoTitle {
+    font-size: 1.1rem;
+    margin-top: 8px;
+  }
+
+  .artigoText {
+    font-size: 0.95rem;
+    margin-top: 8px;
+  }
+
+  .artigoBtn {
+    font-size: 0.9rem;
+    padding: 6px 14px;
+    margin-top: 8px;
+  }
+
+  .cardContainer {
+    grid-template-columns: 1fr; /* Um card por linha */
+    padding: 10px;
   }
 }
