@@ -112,7 +112,7 @@
 }
 
 /* Mobile */
-@media (max-width: 768px) {
+@media (max-width: 990px){
   .navbar-collapse {
     display: none;
     position: absolute;
@@ -223,4 +223,70 @@
     background-image: url("data:image/svg+xml;utf8,<svg fill='none' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'><path stroke='%23FFD700' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
   }
   
+}
+
+/* telas menores */
+@media (min-width: 990px) and (max-width: 1870px) {
+  .navbar-custom {
+    background-color: #5B079B;
+    position: fixed;
+    z-index: 99999;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column; /* importante para empilhar linhas */
+    justify-content: flex-start;
+    align-items: stretch;
+    max-height: 100px; /* opcional, dependendo do design */
+  }  
+
+  .navbar-brand-img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .nav-link-custom {
+    font-size: 1rem;
+    padding: 4px 10px;
+    margin: 0 4px;
+    white-space: nowrap;
+  }
+
+  .navbar-user-info {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 8px;
+  }  
+
+  .navbar-welcome-message {
+    font-size: 0.95rem;
+    padding: 0;
+    margin: 0 6px;
+  }  
+
+  .navbar-user-avatar {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+  }  
+
+  .container-fluid-custom {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box; /* previne quebra de layout por padding */
+    overflow: hidden;
+  }  
+
+  .navbar-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
