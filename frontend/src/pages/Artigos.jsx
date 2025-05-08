@@ -8,7 +8,7 @@ import Barra_Pesquisa from '../components/Barra_Pesquisa';
 import Barra_Categoria from '../components/Barra_Categoria';
 import Sobre_Mim_Lateral from '../components/Sobre_MIm_Lateral';
 
-function Article_Pages() {
+function Artigos() {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const location = useLocation(); // 🔹 Pega a URL
@@ -24,7 +24,7 @@ function Article_Pages() {
                 const todosArtigos = response.data;
 
                 // 🔍 Se houver filtro de categoria, aplica
-                const filtrados = categoria
+                let filtrados = categoria
                     ? todosArtigos.filter(article => article.category?.toLowerCase() === categoria.toLowerCase())
                     : todosArtigos;
 
@@ -57,13 +57,13 @@ function Article_Pages() {
         fetchArticles();
     }, [categoria, termoBusca]);
 
-        // Função que será chamada ao clicar na lupa
-        const handleSearch = (termoBusca) => {
-            if (termoBusca && termoBusca.trim() !== '') {
-                navigate(`/artigos?busca=${encodeURIComponent(termoBusca.trim())}`);
-            }
-        };
-    
+    // Função que será chamada ao clicar na lupa
+    const handleSearch = (termoBusca) => {
+        if (termoBusca && termoBusca.trim() !== '') {
+            navigate(`/artigos?busca=${encodeURIComponent(termoBusca.trim())}`);
+        }
+    };
+
 
 
     return (
@@ -95,8 +95,8 @@ function Article_Pages() {
                     </div>
                 </div>
                 <div className={styles.colInsideRight}>
-                <Barra_Pesquisa onSearch={handleSearch} />
-                <Barra_Categoria />
+                    <Barra_Pesquisa onSearch={handleSearch} />
+                    <Barra_Categoria />
                     <Sobre_Mim_Lateral />
                 </div>
             </div>
@@ -105,4 +105,4 @@ function Article_Pages() {
     );
 }
 
-export default Article_Pages;
+export default Artigos;

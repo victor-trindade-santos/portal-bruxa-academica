@@ -1,0 +1,19 @@
+.breadcrumbContainer {
+    font-size: 14px;
+    color: #333;
+    margin: 10px 0;
+  }
+  
+  .breadcrumbContainer a {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .breadcrumbContainer a:hover {
+    text-decoration: underline;
+  }
+  
+  .breadcrumbContainer span {
+    color: #666;
+  }
+  

@@ -74,26 +74,29 @@ function Tarot() {
             <div className={styles.articleSection}>
                 <h2 className={styles.h2}>Artigos de Tarô</h2>
                 <p className={styles.sectionDescription}>&#9733;Interprete cartas, spreads e simbolismos profundos.&#9733;</p>
-                <div className={styles.cardContainer}>
-                    {loading ? (
-                        <p>Carregando artigos...</p>
-                    ) : articles.length === 0 ? (
-                        <p>Nenhum artigo encontrado.</p>
-                    ) : (
-                        articles.map((article, index) => (
+                {loading ? (
+                    <p>Carregando artigos...</p>
+                ) : articles.length === 0 ? (
+                    <div className={styles.emptyWrapper}>
+                        <p>Nenhum artigo encontrado. Volte mais tarde para mais conteúdos</p>
+                    </div>
+                ) : (
+                    <div className={styles.cardContainer}>
+                        {articles.map((article, index) => (
                             <Card
                                 key={index}
-                                image={article.imageUrl || courseImage1}
+                                image={article.imageThumb || courseImage1}
                                 title={article.title}
-                                id={article._id} // <-- adiciona essa linha
-                                description={article.content}
-                                link={`/artigos/${article._id}`}
+                                description={article.firstContent}
+                                id={article._id}
+                                link={`/articles/${article._id}`}
                                 category={article.category || "#Tarô"}
                                 type="artigo"
                             />
-                        ))
-                    )}
-                </div>
+                        ))}
+                    </div>
+                )}
+
             </div>
             <br />
         </>

@@ -1,18 +1,15 @@
 import { useState, useEffect } from 'react';
 import styles from '../css/Barra_Pesquisa.module.css';
-import lupa from '../../public/magnifying-glass.svg';
+import lupa from '../assets/magnifying-glass.svg';
 import axios from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
-
-function Barra_Pesquisa({ onSelectArticle }) {
+function Barra_Pesquisa({ onSelectArticle }) {  // Aceita a prop onSelectArticle
     const [query, setQuery] = useState('');
-    const [filteredArticles, setFilteredArticles] = useState([]);
     const [allArticles, setAllArticles] = useState([]);
+    const [filteredArticles, setFilteredArticles] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
-    const [selectedArticle, setSelectedArticle] = useState(null); // <--- novo estado
     const navigate = useNavigate();
-
 
     useEffect(() => {
         const fetchArticles = async () => {
@@ -27,16 +24,40 @@ function Barra_Pesquisa({ onSelectArticle }) {
         fetchArticles();
     }, []);
 
+    const handleSuggestionClick = (article) => {
+        if (onSelectArticle) {
+            onSelectArticle(article); // Preenche os campos na edição
+        }
+        setQuery(article.title); // Preenche o campo de pesquisa com o título do artigo
+        setShowDropdown(false); // Fecha a lista de sugestões
+    };    
+
+    // Atualiza as sugestões conforme o usuário digita
     useEffect(() => {
         if (query.trim() === '') {
-            setFilteredArticles(allArticles.slice(-5).reverse());
+            setFilteredArticles([]);
         } else {
             const filtered = allArticles.filter(article =>
                 article.title.toLowerCase().includes(query.toLowerCase())
             );
-            setFilteredArticles(filtered.slice(0, 5));
+            setFilteredArticles(filtered.slice(0, 3)); // Exibe no máximo 3 sugestões
         }
     }, [query, allArticles]);
+
+    const handleSearch = () => {
+        if (query.trim() !== '') {
+            if (onSelectArticle) {
+                // Se onSelectArticle for passado, significa que estamos na página de edição
+                const selectedArticle = filteredArticles[0]; // Seleciona o primeiro artigo
+                if (selectedArticle) {
+                    onSelectArticle(selectedArticle); // Preenche os campos automaticamente
+                }
+            } else {
+                // Se não estiver na página de edição, vai para a página de resultados
+                navigate(`/artigos?busca=${encodeURIComponent(query.trim())}`);
+            }
+        }
+    };
 
     return (
         <div className={styles.searchContainer}>
@@ -46,39 +67,28 @@ function Barra_Pesquisa({ onSelectArticle }) {
                     placeholder="Digite o nome do artigo"
                     className={styles.searchInput}
                     value={query}
-                    onChange={(e) => {
-                        setQuery(e.target.value);
-                        setSelectedArticle(null); // reseta seleção se digitado manualmente
-                    }}
+                    onChange={(e) => setQuery(e.target.value)}
                     onFocus={() => setShowDropdown(true)}
                     onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
                 />
                 <button
                     className={styles.searchButton}
                     type="button"
-                    onClick={() => {
-                        if (selectedArticle) {
-                            // Se estiver em modo formulário
-                            onSelectArticle && onSelectArticle(selectedArticle);
-                        } else if (query.trim() !== '') {
-                            // Se não houver artigo selecionado mas há texto digitado, vai para artigos filtrados
-                            navigate(`/artigos?busca=${encodeURIComponent(query.trim())}`);
-                        }
-                    }}
+                    onClick={handleSearch}
                 >
                     <img src={lupa} alt="Ícone de busca" className={styles.searchIcon} />
                 </button>
             </div>
 
-            {/* Sugestões fora do inputWrapper, mas dentro do searchContainer */}
+            {/* Exibe sugestões enquanto o usuário digita */}
             {showDropdown && filteredArticles.length > 0 && (
                 <ul className={styles.suggestions}>
                     {filteredArticles.map((article) => (
                         <li
                             key={article._id}
-                            onMouseDown={() => {
-                                setQuery(article.title); // atualiza o campo
-                                setSelectedArticle(article); // define o artigo selecionado
+                            onClick={() => {
+                                setQuery(article.title); // Preenche o campo de pesquisa com o título do artigo
+                                setShowDropdown(false); // Fecha o dropdown de sugestões
                             }}
                             className={styles.suggestionItem}
                         >
@@ -86,6 +96,13 @@ function Barra_Pesquisa({ onSelectArticle }) {
                         </li>
                     ))}
                 </ul>
+            )}
+
+            {/* Se não houver sugestões, exibe a opção de ir para a página de resultados */}
+            {query.trim() && !filteredArticles.length && (
+                <div className={styles.noSuggestions}>
+                    <p>Nenhum artigo encontrado. <span onClick={handleSearch} className={styles.viewMore}>Ver mais resultados</span></p>
+                </div>
             )}
         </div>
     );

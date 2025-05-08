@@ -3,12 +3,10 @@ import axios from '../services/api';
 import styles from '../css/ArticleCreator.module.css'
 import 'react-quill/dist/quill.snow.css'; // isso vai no topo do arquivo
 import ReactQuill from 'react-quill';     // importação do componente
-import BarraPesquisa from '../components/Barra_Pesquisa'
+import Barra_Pesquisa from '../components/Barra_Pesquisa'
 import DeleteModal from '../components/Modal/DeleteModal.jsx';
 
-
 function ArticleCreator() {
-
 
   useEffect(() => {
     const observer = new MutationObserver((mutations) => {
@@ -22,7 +20,6 @@ function ArticleCreator() {
       subtree: true,
     });
 
-    // Cleanup function to disconnect the observer when the component unmounts
     return () => {
       observer.disconnect();
     };
@@ -100,7 +97,6 @@ function ArticleCreator() {
   };
   console.log("🔹 Enviando dados para a pré-visualização:", articleTemporaryData);
 
-
   //Excluir o artigo
   /** - O DeleteModal retorna (via onConfirm) um valor booleano:
  *    -> true: senha verificada corretamente, prossegue com a exclusão.
@@ -146,9 +142,6 @@ function ArticleCreator() {
     console.log("Fechando o modal...");
     setIsModalDeleteOpen(false);
 };
-
-
-
 
   //atualizar o artigo
   const updateArticle = async () => {
@@ -225,8 +218,6 @@ function ArticleCreator() {
     }
   }
 
-
-
   //criar o artigo
   const createArticle = async (e) => {
     e.preventDefault();
@@ -302,9 +293,6 @@ console.log('secondContent:', secondContent);
       console.error('Erro ao criar artigo:', error.response.data);
     }
   };
-
-
-
 
   return (
     <>
@@ -411,10 +399,10 @@ console.log('secondContent:', secondContent);
                 required
               >
                 <option value="">Escolha uma categoria</option>
-                <option value="numerologia">Numerologia</option>
-                <option value="magia">Magia</option>
-                <option value="astrologia">Astrologia</option>
-                <option value="tarot">Tarot</option>
+                <option value="Numerologia">Numerologia</option>
+                <option value="Magia">Magia</option>
+                <option value="Astrologia">Astrologia</option>
+                <option value="Tarot">Tarot</option>
               </select>
             </form>
 
@@ -422,19 +410,25 @@ console.log('secondContent:', secondContent);
         </div>
 
         <div className={styles.colInsideRight}>
-          <BarraPesquisa
-            onSelectArticle={(article) => setNewArticle({
-              id: article._id, // <-- aqui!
-              title: article.title,
-              author: article.author,
-              publicationDate: article.publicationDate,
-              imageArticle: article.imageArticle || null,
-              firstContent: article.setFirstContent,
-              subtitle: article.subtitle,
-              secondContent: article.setSecondContent,
-              category: article.category,
-              imageThumb: article.imageThumb || null,
-            })}
+          <Barra_Pesquisa
+            onSelectArticle={(article) => {
+              console.log('Artigo selecionado:', article);  // Verifique os dados do artigo
+
+              setNewArticle({
+                id: article._id,
+                title: article.title || '',
+                subtitle: article.subtitle || '',  // Se não tiver, deixe em branco
+                author: article.author || '',      // Se não tiver, deixe em branco
+                publicationDate: article.publicationDate || '',  // Se não tiver, deixe em branco
+                imageArticle: article.imageUrl || '',  // Aqui está a imagem
+                category: article.category || '',  // Categoria
+                imageThumb: article.imageThumb || '',  // Imagem de capa (thumbnail)
+              });
+
+              // Preenche o conteúdo com o campo 'content' retornado
+              setFirstContent(article.content || '');  // Preenchendo o conteúdo
+              setSecondContent(article.content || ''); // Preenchendo o segundo conteúdo com o mesmo conteúdo
+            }}
           />
 
           {!newArticle.id && (

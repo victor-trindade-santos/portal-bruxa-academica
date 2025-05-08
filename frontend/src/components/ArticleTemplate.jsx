@@ -13,49 +13,48 @@ const ArticleTemplate = ({ articleId, articleData }) => {
 
   useEffect(() => {
     console.log('articleData:', articleData, 'articleId:', effectiveId);
-
-    if (!articleData && effectiveId){
-    // 🔹 Se não houver dados diretos, busca no banco pelo ID
-    const fetchArticle = async () => {
-      try {
-        const response = await axios.get(`/articles/${effectiveId}`);
-        setArticle(response.data);
-        console.log('Dados recebidos do backend:', response.data);
-        console.log('Conteúdo atual no estado:', article.firstContent);
-        setLoading(false);
-      } catch (error) {
-        console.error('Erro ao buscar artigo:', error);
-        setLoading(false);
-      }
-    };
-    
-
-    fetchArticle();
-  }
+  
+    if (!articleData && effectiveId) {
+      const fetchArticle = async () => {
+        try {
+          const response = await axios.get(`/articles/${effectiveId}`);
+          setArticle(response.data);
+          console.log('Dados recebidos do backend:', response.data);
+          setLoading(false);
+        } catch (error) {
+          console.error('Erro ao buscar artigo:', error);
+          setLoading(false);
+        }
+      };
+  
+      fetchArticle();
+    }
   }, [articleId, articleData]);
-
-  if (loading) {
-    return <div>Carregando...</div>;
-  }
-
-  if (!article) {
-    return <div>Artigo não encontrado</div>;
-  }
-
+  
+  useEffect(() => {
+    if (article) {
+      console.log('Conteúdo atual no estado:', article.firstContent);
+    }
+  }, [article]); 
 
   return (
     <div className={styles.sectionArticle}>
-      <h1 className={styles.titleArticle}>
-        {article.title}
-      </h1>
-      <p className={styles.textAuthor}>Por: {article.author}</p>
-      <p className={styles.textPublicationDate}>Data de Publicação: {article.publicationDate}</p>
-      <img src={article.imageArticle} className={styles.imageArticle} alt={article.title} />
-      <p className={styles.textArticle} dangerouslySetInnerHTML={{__html: article.firstContent}} />
-      <h2 className={styles.subtitleArticle}> {article.subtitle} </h2>
-      <p className={styles.textArticle} dangerouslySetInnerHTML={{__html: article.secondContent}} />
+      {article ? (
+        <>
+          <h1 className={styles.titleArticle}>{article.title}</h1>
+          <p className={styles.textAuthor}>Por: {article.author}</p>
+          <p className={styles.textPublicationDate}>Data de Publicação: {article.publicationDate}</p>
+          <img src={article.imageArticle} className={styles.imageArticle} alt={article.title} />
+          <p className={styles.textArticle} dangerouslySetInnerHTML={{ __html: article.firstContent }} />
+          <h2 className={styles.subtitleArticle}>{article.subtitle}</h2>
+          <p className={styles.textArticle} dangerouslySetInnerHTML={{ __html: article.secondContent }} />
+        </>
+      ) : (
+        <div>Artigo não encontrado</div>
+      )}
     </div>
   );
+  
 };
 
 export default ArticleTemplate;
