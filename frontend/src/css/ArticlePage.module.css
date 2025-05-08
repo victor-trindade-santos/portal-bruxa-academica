@@ -1,0 +1,21 @@
+.rowPrincipal {
+    display: flex;
+    padding: 0;
+    padding-top: 2%;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  
+  .colInsideLeft{
+    width:66.7%;
+    margin-left: 3.5%;
+    /* background-color: green; */
+}
+
+.colInsideRight{
+    width: 26%;
+    margin-right: 0.5%;
+    margin-left: 0.5%;
+    /* background-color: blue; */
+}

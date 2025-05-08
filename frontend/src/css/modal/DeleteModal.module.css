@@ -1,0 +1,68 @@
+/* A camada de overlay do modal, que bloqueia a interação com o fundo da página */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo preto semi-transparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Conteúdo principal do modal */
+  .modalContent {
+    background-color: #FFFFFF; /* Fundo branco */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 350px; /* Tamanho do modal */
+    max-width: 90%; /* Garante que o modal não fique muito grande em telas menores */
+    text-align: center;
+  }
+  
+  /* Campo de entrada da senha, controlado pelo estado "password" */
+  .inputPassword {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #CCCCCC; /* Cinza claro */
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  /* Exibe a mensagem de erro caso exista */
+  .errorMessage {
+    color: #CC4444; /* Vermelho suave, não muito gritante */
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  
+  /* Grupo de botões para confirmar ou cancelar */
+  .buttonGroup {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .buttonGroup button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Botão de confirmação */
+  .buttonGroup button:first-child {
+    background-color: #000000; /* Preto */
+    color: #FFFFFF; /* Branco */
+  }
+  
+  /* Botão de cancelamento */
+  .buttonGroup button:last-child {
+    background-color: #CCCCCC; /* Cinza claro */
+    color: #000000; /* Preto */
+  }
+  

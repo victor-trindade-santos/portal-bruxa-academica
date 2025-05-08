@@ -1,18 +1,27 @@
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('../middlewares/auth');  // Middleware de autenticação
-const { createArticle, getArticles } = require('../controllers/articleController');
+const { upload, uploadToCloudinary } = require('../middlewares/upload');
+const authMiddleware = require('../middlewares/auth'); // Adicionando a importação do authMiddleware
+const { createArticle, getArticles, getArticleById, updateArticle, deleteArticle, deleteArticle2, rotaDelete2 } = require('../controllers/articleController');
 
-// Rota para obter os artigos - Acessível para todos os usuários, logados ou não
+
+router.post('/', upload, uploadToCloudinary, createArticle);
+
+// Atualizar artigo existente (PUT /articles/:id)
+router.put(
+  '/:id', upload,
+  uploadToCloudinary,  // Manter apenas o uploadToCloudinary
+  updateArticle  // A função updateArticle já vai receber as imagens processadas
+);
+
+// Buscar todos os artigos (GET /articles)
 router.get('/', getArticles);
 
-// Rota para criar artigo - Somente para administradores
-router.post('/', authMiddleware('admin'), createArticle);
+// Buscar artigo por ID (GET /articles/:id)
+router.get('/:id', getArticleById);
 
-// Rota para atualizar artigo - Somente para administradores (se necessário)
-// router.put('/:id', authMiddleware('admin'), updateArticle);
+router.get("/del/:id", rotaDelete2);
 
-// Rota para excluir artigo - Somente para administradores (se necessário)
-// router.delete('/:id', authMiddleware('admin'), deleteArticle);
+//router.delete("/articles1/", deleteArticle2);
 
 module.exports = router;

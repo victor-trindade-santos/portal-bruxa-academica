@@ -56,7 +56,7 @@ function Tarot() {
             <div className={styles.courseSection}>
                 <h2 className={styles.h2}>Cursos de Tarô</h2>
                 <p className={styles.sectionDescription}>&#9733;Aprenda a interpretar os arcanos e orientar com consciência.&#9733;</p>
-                <div className={styles.cardContainer}>
+                <div className={styles.cardContainerCourse}>
                     {courses.map((course, index) => (
                         <Card
                             key={index}
@@ -85,6 +85,7 @@ function Tarot() {
                                 key={index}
                                 image={article.imageUrl || courseImage1}
                                 title={article.title}
+                                id={article._id} // <-- adiciona essa linha
                                 description={article.content}
                                 link={`/artigos/${article._id}`}
                                 category={article.category || "#Tarô"}

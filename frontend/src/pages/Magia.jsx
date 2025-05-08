@@ -65,7 +65,7 @@ function Magia() {
             <div className={styles.courseSection}>
                 <h2 className={styles.h2}>Cursos de Magia</h2>
                 <p className={styles.sectionDescription}>&#9733; Potencialize sua prática com ensinamentos mágicos &#9733;</p>
-                <div className={styles.cardContainer}>
+                <div className={styles.cardContainerCourse}>
                     {courses.map((course, index) => (
                         <Card
                             key={index}
@@ -93,7 +93,8 @@ function Magia() {
                         articles.map((article, index) => (
                             <Card
                                 key={index}
-                                image={article.imageUrl || courseImage1} 
+                                image={article.imageUrl || courseImage1}
+                                id={article._id} // <-- adiciona essa linha 
                                 title={article.title}
                                 description={article.content}
                                 link={`/artigos/${article._id}`}

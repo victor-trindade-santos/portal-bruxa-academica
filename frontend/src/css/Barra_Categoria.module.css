@@ -1,0 +1,44 @@
+.container {
+    background-color: white;
+    box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
+    padding: 16px;
+    margin-top: 5%;
+    width: 100%;
+}
+
+.title {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    /* This means "extra-bold" */
+    font-size: 20px;
+    color: #8C089C;
+    text-align: left;
+}
+
+.option {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    /* regular */
+    font-size: 19px;
+    color: #4F0B82;
+    margin-left: 8px;
+    /* pequeno espaçamento à esquerda */
+    text-align: left;
+    text-decoration: none;
+}
+
+.option:hover{
+    color: #8C089C !important;
+
+}
+
+.navLink {
+    text-decoration: none;
+    /* remove o sublinhado padrão dos links, opcional */
+    color: inherit;
+    /* mantém a cor definida no .option */
+}
+
+.navLink:hover {
+    color: #8C089C !important;
+}

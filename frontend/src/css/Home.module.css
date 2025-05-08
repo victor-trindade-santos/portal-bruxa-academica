@@ -1,4 +1,5 @@
 /* Estilos para o título h1 */
+
 h1 {
   font-family: 'Poppins', sans-serif;
   font-size: 2rem; /* Ajustado para um tamanho mais flexível */
@@ -27,17 +28,32 @@ p {
 }
 
 .cardContainer {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.cardContainerCourse {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  flex-grow: 1; /* ocupa o resto da section */
 }
 
 .courseSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 40px 0;
   text-align: center;
 }
+
 
 .h2{
   color: #67006C;

@@ -6,8 +6,8 @@
   overflow: hidden;
   background-color: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  margin: 5px;
-  width: 20%;  /* Largura do card (20%) para desktop */
+  margin: 0;
+  width: 90%;  /* Largura do card (20%) para desktop */
   height: 65vh; /* Altura do card (65% da tela) */
   display: flex;
   flex-direction: column;
@@ -63,7 +63,7 @@
   left: 3px;
   right: 3px;
   bottom: 3px;
-  border: 2px solid #FFEB3B;
+  border: 1px solid #FFEB3B;
   border-radius: 20px;
   box-sizing: border-box;
   pointer-events: none;
@@ -168,9 +168,9 @@
 
 /* Card Artigo */
 .cardArtigo {
-  width: 20%; /* Ajustando a largura para 4 artigos por linha */
+  width: 100%; /* Ajustando a largura para 4 artigos por linha */
   height: auto;
-  margin: 15px;
+  margin: 0px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -181,21 +181,41 @@
   overflow: hidden; /* Para garantir que a imagem não ultrapasse o limite do card */
 }
 
-.articleImageWrapper {
+.courseImageWrapper {
   position: relative;
   width: 100%;
-  height: 200px; /* altura fixa para todas as imagens */
+  aspect-ratio: 16 / 9; /* ou 4 / 3, ou o que quiser */
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5f5f5; /* cor de fundo opcional para áreas vazias */
+  background-color: #f5f5f5;
 }
 
+.articleImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 200px; /* altura fixa para artigos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+}
+
+/* Regra geral da imagem */
 .cardImg {
   width: 100%;
+  object-fit: cover;
+}
+
+/* Quando a imagem estiver em artigo: força altura */
+.articleImageWrapper .cardImg {
   height: 100%;
-  object-fit: cover; /* Para cobrir a área do container */
-  /* border: 5px solid #000000; */
+}
+
+/* Quando a imagem estiver em curso: altura automática */
+.courseImageWrapper .cardImg {
+  height: 100%;
 }
 
 .articleCategory {
@@ -217,9 +237,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: calc(100% - 8px); /* Faz a borda ficar mais interna */
-  height: calc(100% - 8px); /* Faz a borda ficar mais interna */
-  border: 2px solid #FFEB3B; /* Borda amarela */
+  width: calc(100% - 6px); /* Faz a borda ficar mais interna */
+  height: calc(100% - 6px); /* Faz a borda ficar mais interna */
+  border: 1px solid #FFEB3B; /* Borda amarela */
   border-radius: 50px; /* Bordas arredondadas */
   box-sizing: border-box;
   pointer-events: none; /* Impede que a borda interfira com interações */
@@ -247,7 +267,7 @@
   background-color: #2B089C;
   color: white;
   padding: 8px 16px;
-  border-radius: 5px;
+  border-radius: 0px;
   text-decoration: none;
   margin-top: 10px;
   width: auto;
@@ -262,8 +282,8 @@
   transform: translate(-50%, -50%);
   width: calc(100% - 6px);
   height: calc(100% - 6px);
-  border: 2px solid #FFEB3B;
-  border-radius: 5px;
+  border: 1px solid #FFEB3B;
+  border-radius: 0px;
   box-sizing: border-box;
   pointer-events: none;
 }
@@ -273,17 +293,10 @@
   background-color: #4C1C8C;
 }
 
-.cardContainer {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 cards lado a lado */
-  gap: 20px; /* Espaço entre os cards */
-  padding: 20px;
-  max-width: 100%; /* Garantir que a largura não ultrapasse a tela */
-}
 
 @media (max-width: 767px) {
   .cardArtigo {
-    width: 80%; /* Ocupa toda a largura disponível */
+    width: 100%; /* Ocupa toda a largura disponível */
     margin: 10px 0;
   }
 

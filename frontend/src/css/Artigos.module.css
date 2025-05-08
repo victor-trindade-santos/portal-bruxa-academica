@@ -1,0 +1,65 @@
+.rowPrincipal {
+    display: flex;
+    padding: 0;
+    padding-top: 2%;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  
+  .colInsideLeft{
+    width:69.7%;
+    margin-left: 3.5%;
+    /* background-color: green; */
+}
+
+.colInsideRight{
+    width: 23%;
+    margin-right: 0.5%;
+    margin-left: 0.5%;
+    /* background-color: blue; */
+}
+
+
+ /* Padrão (desktop) */
+.cardContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cards por linha */
+    gap: 20px;
+    padding: 10px;
+  }
+  
+  .cardArtigo {
+    width: 100%; /* grid controla a largura */
+    margin: 0;
+  }
+  
+  /* Tablet - 2 por linha */
+  @media (max-width: 1200px) {
+    .cardContainer {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  /* Celular - 1 por linha */
+  @media (max-width: 765px) {
+    .cardContainer {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  
+/* Card Artigo */
+.cardArtigo {
+    width: 100%; /* Ajustando a largura para 4 artigos por linha */
+    height: auto;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border: 1px solid #ccc; /* Borda para o contorno do card */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para o card */
+    background-color: white;
+    overflow: hidden; /* Para garantir que a imagem não ultrapasse o limite do card */
+  }
