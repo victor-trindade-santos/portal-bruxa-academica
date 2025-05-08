@@ -13,24 +13,34 @@
   
   /* Conteúdo principal do modal */
   .modalContent {
-    background-color: #FFFFFF; /* Fundo branco */
+    background-color: #FFFFFF;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 350px; /* Tamanho do modal */
-    max-width: 90%; /* Garante que o modal não fique muito grande em telas menores */
+    width: 400px; /* Ajustando a largura para um tamanho maior */
+    max-width: 90%;
     text-align: center;
-  }
+  }  
   
   /* Campo de entrada da senha, controlado pelo estado "password" */
   .inputPassword {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-top: 10px;
-    border: 1px solid #CCCCCC; /* Cinza claro */
+    border: 1px solid #CCCCCC;
     border-radius: 4px;
     font-size: 16px;
+    color: #000000; /* Garantindo que o texto tenha cor preta */
+    background-color: #f9f9f9; /* Cor de fundo mais clara */
+    box-sizing: border-box; /* Garantir que o padding não afete o tamanho */
   }
+  
+  .inputPassword:focus {
+    border-color: #000; /* Alterando a borda para ficar mais visível ao focar */
+    background-color: #fff; /* Garantindo que o fundo não seja confuso */
+    color: #000; /* Garantir que o texto continue preto */
+    outline: none; /* Remover o contorno padrão de foco do navegador */
+  }  
   
   /* Exibe a mensagem de erro caso exista */
   .errorMessage {

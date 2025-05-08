@@ -123,68 +123,22 @@ exports.updateArticle = async (req, res) => {
   }
 };
 
+exports.deleteArticleById = async (req, res) => {
+  try {
+    const articleId = req.params.id;
+    console.log("Tentando excluir o artigo com ID:", articleId);
 
-/**
- * Controller para excluir um artigo e a imagem associada
- * - Recebe o ID do artigo via req.params.
- * - Busca o artigo no MongoDB.
- * - Se existir uma URL de imagem, extrai o publicId e chama o Cloudinary para removê-la.
- * - Exclui o artigo do MongoDB.
- *
- * @param {Object} req - Objeto de requisição, com req.params.id contendo o ID do artigo.
- * @param {Object} res - Objeto de resposta usado para retornar o status e mensagem.
- */
+    const article = await Article.findByIdAndDelete(articleId);
 
-exports.deleteArticle = async (req, res) => {
-  console.log("[deleteArticle] Requisição recebida com parâmetros:", req.params);
-
-    try {
-    //Captura o ID do artigo a ser excluído
-    const { id } = req.params;
-    console.log("[deleteArticle] Buscando artigo com ID:", id);
-
-    //Busca o artigo no MongoDB
-    const article = await Article.findById(id);
     if (!article) {
-      console.log("[deleteArticle] Artigo não encontrado!");
-      return res.status(404).json({ message: "Artigo não encontrado" });
+      console.log("Artigo não encontrado no banco.");
+      return res.status(404).json({ message: 'Artigo não encontrado' });
     }
 
-    //Se o artigo tiver uma URL de imagem, vamos removê-la do Cloudinary
-    if (article.imageUrl) {
-      console.log("[deleteArticle] Artigo possui imagem. URL:", article.imageUrl);
-
-      // Exemplo de extração do publicId:
-      // Supondo que a URL seja algo como "https://res.cloudinary.com/seu-cloud/image/upload/v12345678/public_id.jpg"
-      // Primeiro, separamos a URL por "/" e pegamos o último segmento
-      const segments = article.imageUrl.split("/");
-      const lastSegment = segments.pop(); //Ex: "public_id.jpg"
-      const publicId = lastSegment.split(".")[0]; // Remove a extensão para obter o publicId (ex: "public_id")
-      console.log("[deleteArticle] PublicId extraído:", publicId);
-
-      // Chama o método do Cloudinary para remover a imagem
-      const deleteResult = await cloudinary.uploader.destroy(publicId);
-      console.log("[deleteArticle] Resultado da deleção no Cloudinary:", deleteResult);
-    } else {
-      console.log("[deleteArticle] Artigo não possui imagem associada.");
-    }
-
-    // Exclui o artigo no MongoDB
-    console.log("[deleteArticle] Excluindo o artigo do MongoDB...");
-    await Article.findByIdAndDelete(id);
-    console.log("[deleteArticle] Artigo excluído com sucesso no MongoDB.");
-    // Retorna uma resposta de sucesso
-    return res.status(200).json({ message: "Artigo excluído com sucesso!" });
+    console.log("Artigo excluído com sucesso:", article);
+    res.status(200).json({ message: 'Artigo deletado com sucesso' });
   } catch (error) {
-    console.error("[deleteArticle] Erro ao excluir o artigo:", error);
-    return res.status(500).json({ message: "Erro ao excluir artigo", error });
+    console.error('Erro ao deletar artigo por ID:', error);
+    res.status(500).json({ message: 'Erro ao deletar artigo', error: error.message });
   }
 };
-
-exports.rotaDelete2 = async (req, res ) => { 
-
-  console.log(req)
-
-  console.log("Aqui porra");
-  res.json({ ok: true });
-}
