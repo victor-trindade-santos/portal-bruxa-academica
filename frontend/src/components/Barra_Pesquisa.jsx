@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import styles from '../css/Barra_Pesquisa.module.css';
 import lupa from '../../public/magnifying-glass.svg';
 import axios from '../services/api';
+import { useNavigate } from 'react-router-dom';
+
 
 function Barra_Pesquisa({ onSelectArticle }) {
     const [query, setQuery] = useState('');
@@ -9,6 +11,8 @@ function Barra_Pesquisa({ onSelectArticle }) {
     const [allArticles, setAllArticles] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
     const [selectedArticle, setSelectedArticle] = useState(null); // <--- novo estado
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         const fetchArticles = async () => {
@@ -53,9 +57,12 @@ function Barra_Pesquisa({ onSelectArticle }) {
                     className={styles.searchButton}
                     type="button"
                     onClick={() => {
-                        // Ao clicar na lupa, só atualiza se houver um artigo selecionado
                         if (selectedArticle) {
-                            onSelectArticle(selectedArticle);
+                            // Se estiver em modo formulário
+                            onSelectArticle && onSelectArticle(selectedArticle);
+                        } else if (query.trim() !== '') {
+                            // Se não houver artigo selecionado mas há texto digitado, vai para artigos filtrados
+                            navigate(`/artigos?busca=${encodeURIComponent(query.trim())}`);
                         }
                     }}
                 >

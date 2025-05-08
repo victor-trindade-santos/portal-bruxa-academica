@@ -14,6 +14,8 @@ function Article_Pages() {
     const location = useLocation(); // 🔹 Pega a URL
     const queryParams = new URLSearchParams(location.search); // 🔍 Extrai a query string
     const categoria = queryParams.get('categoria'); // ✅ Pega o valor de "categoria"
+    const termoBusca = queryParams.get('busca'); // 🔍 Novo
+
 
     useEffect(() => {
         const fetchArticles = async () => {
@@ -23,19 +25,27 @@ function Article_Pages() {
 
                 // 🔍 Se houver filtro de categoria, aplica
                 const filtrados = categoria
-                ? todosArtigos.filter(article => article.category?.toLowerCase() === categoria.toLowerCase())
-                : todosArtigos;
-            
+                    ? todosArtigos.filter(article => article.category?.toLowerCase() === categoria.toLowerCase())
+                    : todosArtigos;
 
+                // 🔎 Filtra por título se houver termo de busca
+                if (termoBusca) {
+                    const termo = termoBusca.toLowerCase();
+                    filtrados = filtrados.filter(article => article.title?.toLowerCase().includes(termo));
+                }
+
+
+                // 📅 Ordena por data                    
                 filtrados.sort((a, b) => {
-                    if (!a.publicationDate || !b.publicationDate) return 0;
-                    const [diaA, mesA, anoA] = a.publicationDate.split('/');
-                    const [diaB, mesB, anoB] = b.publicationDate.split('/');
-                    const dataA = new Date(`${anoA}-${mesA}-${diaA}`);
-                    const dataB = new Date(`${anoB}-${mesB}-${diaB}`);
-                    return dataB - dataA;
+                    const parseDate = (str) => {
+                        if (!str) return new Date(0); // fallback para datas inválidas
+                        const [dia, mes, ano] = str.split('/');
+                        return new Date(`${ano}-${mes}-${dia}`);
+                    };
+
+                    return parseDate(b.publicationDate) - parseDate(a.publicationDate);
                 });
-                
+
                 setArticles(filtrados);
                 setLoading(false);
             } catch (error) {
@@ -45,9 +55,16 @@ function Article_Pages() {
         };
 
         fetchArticles();
-    }, [categoria]);
+    }, [categoria, termoBusca]);
 
+        // Função que será chamada ao clicar na lupa
+        const handleSearch = (termoBusca) => {
+            if (termoBusca && termoBusca.trim() !== '') {
+                navigate(`/artigos?busca=${encodeURIComponent(termoBusca.trim())}`);
+            }
+        };
     
+
 
     return (
         <>
@@ -78,8 +95,8 @@ function Article_Pages() {
                     </div>
                 </div>
                 <div className={styles.colInsideRight}>
-                    <Barra_Pesquisa />
-                    <Barra_Categoria />
+                <Barra_Pesquisa onSearch={handleSearch} />
+                <Barra_Categoria />
                     <Sobre_Mim_Lateral />
                 </div>
             </div>
@@ -89,16 +106,3 @@ function Article_Pages() {
 }
 
 export default Article_Pages;
-
-
-
-
-
-
-
-
-
-
-
-
-
