@@ -63,7 +63,7 @@ function Magia() {
 
             {/* Seção de Cursos */}
             <div className={styles.courseSection}>
-                <h2 className={styles.h2}>Cursos de Magia</h2>
+                <h2 className={styles.sectionTitle}>Cursos de Magia</h2>
                 <p className={styles.sectionDescription}>&#9733; Potencialize sua prática com ensinamentos mágicos &#9733;</p>
                 <div className={styles.cardContainerCourse}>
                     {courses.map((course, index) => (
@@ -82,7 +82,7 @@ function Magia() {
 
             {/* Seção de Artigos */}
             <div className={styles.articleSection}>
-                <h2 className={styles.h2}>Artigos de Magia</h2>
+                <h2 className={styles.sectionTitle}>Artigos de Magia</h2>
                 <p className={styles.sectionDescription}>&#9733; Descubra técnicas, símbolos e rituais ancestrais &#9733;</p>
                 {loading ? (
                     <p>Carregando artigos...</p>

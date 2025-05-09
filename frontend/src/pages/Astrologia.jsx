@@ -54,7 +54,7 @@ function Astrologia() {
             />
 
             <div className={styles.courseSection}>
-                <h2 className={styles.h2}>Cursos de Astrologia</h2>
+                <h2 className={styles.sectionTitle}>Cursos de Astrologia</h2>
                 <p className={styles.sectionDescription}>&#9733;Do mapa natal às previsões, domine os segredos do céu.&#9733;</p>
                 <div className={styles.cardContainerCourse}>
                     {courses.map((course, index) => (
@@ -72,7 +72,7 @@ function Astrologia() {
             </div>
 
             <div className={styles.articleSection}>
-                <h2 className={styles.h2}>Artigos de Astrologia</h2>
+                <h2 className={styles.sectionTitle}>Artigos de Astrologia</h2>
                 <p className={styles.sectionDescription}>&#9733;Aprofunde-se na sabedoria dos astros e do zodíaco.&#9733;</p>
                 {loading ? (
                     <p>Carregando artigos...</p>
