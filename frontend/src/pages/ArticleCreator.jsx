@@ -1,32 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../services/api';
 import styles from '../css/ArticleCreator.module.css'
-import 'react-quill/dist/quill.snow.css'; // isso vai no topo do arquivo
-import ReactQuill from 'react-quill';     // importação do componente
-import BarraPesquisa from '../components/Barra_Pesquisa'
+import 'react-quill/dist/quill.snow.css'; 
+import ReactQuill from 'react-quill';   
+import Barra_Pesquisa from '../components/Barra_Pesquisa'
 import DeleteModal from '../components/Modal/DeleteModal.jsx';
 
-
 function ArticleCreator() {
-
-
-  useEffect(() => {
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        console.log(mutation);
-      });
-    });
-
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
-
-    // Cleanup function to disconnect the observer when the component unmounts
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
 
   const modules = {
     toolbar: [
@@ -35,8 +15,6 @@ function ArticleCreator() {
       ['link'],
     ],
   };
-
-  const [articles, setArticles] = useState([]);
 
   //limpar os formulários
   const today = new Date();
@@ -57,15 +35,19 @@ function ArticleCreator() {
   const [firstContent, setFirstContent] = useState('');
   const [secondContent, setSecondContent] = useState('');
 
-  // Função para buscar artigos 
+  const [articles, setArticles] = useState([]);
   const fetchArticles = async () => {
     try {
-      const response = await axios.get('/articles'); // Busca todos os artigos
-      setArticles(response.data);
+      const response = await axios.get('http://localhost:5000/articles');
+      setArticles(response.data);  // Certifique-se de que 'data' contém um array de artigos
     } catch (error) {
       console.error('Erro ao buscar artigos:', error);
     }
   };
+
+  useEffect(() => {
+    fetchArticles();
+  }, []);
 
   //Visualizar o artigo
   //Verificando se a imagem é um arquivo ou URL
@@ -100,55 +82,41 @@ function ArticleCreator() {
   };
   console.log("🔹 Enviando dados para a pré-visualização:", articleTemporaryData);
 
-
   //Excluir o artigo
-  /** - O DeleteModal retorna (via onConfirm) um valor booleano:
- *    -> true: senha verificada corretamente, prossegue com a exclusão.
- *    -> false: senha incorreta, não exclui o artigo.
- */
-  // Declaramos o estado para controlar visibilidade do modal de delete.
-  const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
-  //Função que irá executar a exclusão após receber uma resposta de DeleteModal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [articleToDelete, setArticleToDelete] = useState(null);
 
-  const handleDeleteModalConfirm = async (isConfirmed) => {
-    console.log('handleDeleteModalConfirm: Resultado do modal:', isConfirmed);
+  const openDeleteModal = (articleId) => {
+    setArticleToDelete(articleId);
+    setIsModalOpen(true);
+  };
 
-    if (!isConfirmed) {
-      console.log('Exclusão cancelada pelo usuário.');
-      alert('Exclusão cancelada.');
-      return; // Sai da função imediatamente
-    }
+  const closeDeleteModal = () => {
+    setIsModalOpen(false);
+    setArticleToDelete(null);
+  };
 
-    console.log("Tentando excluir artigo com ID:", newArticle?.id);
-
-    if (!newArticle.id) {
-      console.error("Nenhum artigo selecionado para atualização!");
-      return;
-    }
-
-    const token = localStorage.getItem('token');
-    if (!token) {
-      console.error("Nenhum token encontrado, a requisição pode falhar.");
-      alert("Erro de autenticação, faça login novamente.");
-      return;
-    }
-
+  const handleDeleteArticle = async (articleId) => {
     try {
-        console.log("Iniciando requisição DELETE...");
-        const response = await axios.delete(`http://localhost:5000/articles/${newArticle.id}`)
-        
-        console.log("Retorno do response", response);
+      const response = await fetch(`http://localhost:5000/articles/${articleId}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,  // Se você estiver usando token de autenticação
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        // Atualiza a lista de artigos, removendo o excluído
+        setArticles(articles.filter((article) => article._id !== articleId));
+      } else {
+        const errorData = await response.json();
+        console.error('Erro ao excluir artigo:', errorData);
+      }
     } catch (error) {
-        console.error("Erro inesperado ao excluir o artigo:", error);
-        alert("Erro inesperado ao excluir o artigo. Por favor, tente novamente.");
+      console.error('Erro ao excluir artigo:', error);
     }
-
-    console.log("Fechando o modal...");
-    setIsModalDeleteOpen(false);
-};
-
-
-
+  };  
 
   //atualizar o artigo
   const updateArticle = async () => {
@@ -225,8 +193,6 @@ function ArticleCreator() {
     }
   }
 
-
-
   //criar o artigo
   const createArticle = async (e) => {
     e.preventDefault();
@@ -302,9 +268,6 @@ console.log('secondContent:', secondContent);
       console.error('Erro ao criar artigo:', error.response.data);
     }
   };
-
-
-
 
   return (
     <>
@@ -411,10 +374,10 @@ console.log('secondContent:', secondContent);
                 required
               >
                 <option value="">Escolha uma categoria</option>
-                <option value="numerologia">Numerologia</option>
-                <option value="magia">Magia</option>
-                <option value="astrologia">Astrologia</option>
-                <option value="tarot">Tarot</option>
+                <option value="Numerologia">Numerologia</option>
+                <option value="Magia">Magia</option>
+                <option value="Astrologia">Astrologia</option>
+                <option value="Tarot">Tarot</option>
               </select>
             </form>
 
@@ -422,19 +385,25 @@ console.log('secondContent:', secondContent);
         </div>
 
         <div className={styles.colInsideRight}>
-          <BarraPesquisa
-            onSelectArticle={(article) => setNewArticle({
-              id: article._id, // <-- aqui!
-              title: article.title,
-              author: article.author,
-              publicationDate: article.publicationDate,
-              imageArticle: article.imageArticle || null,
-              firstContent: article.setFirstContent,
-              subtitle: article.subtitle,
-              secondContent: article.setSecondContent,
-              category: article.category,
-              imageThumb: article.imageThumb || null,
-            })}
+          <Barra_Pesquisa
+            onSelectArticle={(article) => {
+              console.log('Artigo selecionado:', article);  // Verifique os dados do artigo
+
+              setNewArticle({
+                id: article._id,
+                title: article.title || '',
+                subtitle: article.subtitle || '',  // Se não tiver, deixe em branco
+                author: article.author || '',      // Se não tiver, deixe em branco
+                publicationDate: article.publicationDate || '',  // Se não tiver, deixe em branco
+                imageArticle: article.imageUrl || '',  // Aqui está a imagem
+                category: article.category || '',  // Categoria
+                imageThumb: article.imageThumb || '',  // Imagem de capa (thumbnail)
+              });
+
+              // Preenche o conteúdo com o campo 'content' retornado
+              setFirstContent(article.content || '');  // Preenchendo o conteúdo
+              setSecondContent(article.content || ''); // Preenchendo o segundo conteúdo com o mesmo conteúdo
+            }}
           />
 
           {!newArticle.id && (
@@ -505,13 +474,6 @@ console.log('secondContent:', secondContent);
           )} */}
 
           {/* Passamos a prop onConfirm (e não isConfirm) conforme a interface do DeleteModal */}
-          <DeleteModal
-            isOpen={isModalDeleteOpen}
-            onClose={() => {
-              console.log('DeleteModal: onClose acionado');
-            }}
-            onConfirm={handleDeleteModalConfirm}
-          />
           <h2>Lista de Artigos</h2>
           {articles.length === 0 ? (
             <p>Nenhum artigo disponível.</p>
@@ -520,15 +482,20 @@ console.log('secondContent:', secondContent);
               {articles.map((article) => (
                 <li key={article._id}>
                   <h3>{article.title}</h3>
-                  <p><strong>Categoria:</strong> {article.category}</p>
-                  {article.imageUrl && (
-                    <img src={article.imageUrl} alt={article.title} style={{ maxWidth: '200px' }} />
-                  )}
-                  <p>{article.content}</p>
+                  <p>{article.summary}</p>
+                  <button onClick={() => openDeleteModal(article._id)}>Excluir</button>
                 </li>
               ))}
             </ul>
           )}
+
+          {/* Modal de confirmação de exclusão */}
+          <DeleteModal
+            isOpen={isModalOpen}
+            onClose={closeDeleteModal}
+            onConfirm={handleDeleteArticle}
+            articleId={articleToDelete} // Passa o ID do artigo para exclusão
+          />
         </div>
       </div>
     </>

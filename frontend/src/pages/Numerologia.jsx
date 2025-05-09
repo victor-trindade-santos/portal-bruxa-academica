@@ -76,27 +76,28 @@ function Numerologia() {
             <div className={styles.articleSection}>
                 <h2 className={styles.h2}>Artigos de Numerologia</h2>
                 <p className={styles.sectionDescription}>&#9733;Aprofunde seus conhecimentos com conteúdos exclusivos.&#9733;</p>
-                <div className={styles.cardContainer}>
-                    {loading ? (
-                        <p>Carregando artigos...</p>
-                    ) : articles.length === 0 ? (
+                {loading ? (
+                    <p>Carregando artigos...</p>
+                ) : articles.length === 0 ? (
+                    <div className={styles.emptyWrapper}>
                         <p>Nenhum artigo encontrado. Volte mais tarde para mais conteúdos</p>
-                    ) : (
-                        articles.map((article, index) => (
+                    </div>
+                ) : (
+                    <div className={styles.cardContainer}>
+                        {articles.map((article, index) => (
                             <Card
                                 key={index}
                                 image={article.imageThumb || courseImage1}
                                 title={article.title}
                                 description={article.firstContent}
-                                id={article._id} // <-- adiciona essa linha
+                                id={article._id}
                                 link={`/articles/${article._id}`}
                                 category={article.category || "#Numerologia"}
                                 type="artigo"
                             />
-                        ))
-                    )}
-                    
-                </div>
+                        ))}
+                    </div>
+                )}
             </div>
             <br />
         </>

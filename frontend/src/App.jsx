@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext'; // 👈 importa o provider
+import { AuthProvider } from './context/AuthContext';
 import Home from './pages/Home';
 import ArticleCreator from './pages/ArticleCreator';
 import NavBar from './components/NavBar';
@@ -13,7 +13,7 @@ import Astrologia from './pages/Astrologia';
 import Cursos from './pages/Cursos';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Article_Pages from './pages/Articles_Pages'; // Importando o novo componente
+import Article_Pages from './pages/Article_Pages';
 
 const App = () => (
   <AuthProvider> 

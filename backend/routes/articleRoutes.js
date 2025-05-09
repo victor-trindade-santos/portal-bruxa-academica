@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { upload, uploadToCloudinary } = require('../middlewares/upload');
-const authMiddleware = require('../middlewares/auth'); // Adicionando a importação do authMiddleware
-const { createArticle, getArticles, getArticleById, updateArticle, deleteArticle, deleteArticle2, rotaDelete2 } = require('../controllers/articleController');
+const { createArticle, getArticles, getArticleById, updateArticle, deleteArticle, deleteArticleById} = require('../controllers/articleController');
 
 
 router.post('/', upload, uploadToCloudinary, createArticle);
@@ -20,8 +19,7 @@ router.get('/', getArticles);
 // Buscar artigo por ID (GET /articles/:id)
 router.get('/:id', getArticleById);
 
-router.get("/del/:id", rotaDelete2);
-
-//router.delete("/articles1/", deleteArticle2);
+// Rota para excluir artigo (rota DELETE)
+router.delete('/:id', deleteArticleById);
 
 module.exports = router;
