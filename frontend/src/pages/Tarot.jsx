@@ -54,7 +54,7 @@ function Tarot() {
             />
 
             <div className={styles.courseSection}>
-                <h2 className={styles.h2}>Cursos de Tarô</h2>
+                <h2 className={styles.sectionTitle}>Cursos de Tarô</h2>
                 <p className={styles.sectionDescription}>&#9733;Aprenda a interpretar os arcanos e orientar com consciência.&#9733;</p>
                 <div className={styles.cardContainerCourse}>
                     {courses.map((course, index) => (
@@ -72,7 +72,7 @@ function Tarot() {
             </div>
 
             <div className={styles.articleSection}>
-                <h2 className={styles.h2}>Artigos de Tarô</h2>
+                <h2 className={styles.sectionTitle}>Artigos de Tarô</h2>
                 <p className={styles.sectionDescription}>&#9733;Interprete cartas, spreads e simbolismos profundos.&#9733;</p>
                 {loading ? (
                     <p>Carregando artigos...</p>

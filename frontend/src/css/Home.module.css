@@ -1,22 +1,3 @@
-/* Estilos para o título h1 */
-
-h1 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 2rem; /* Ajustado para um tamanho mais flexível */
-  color: #67006C;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 20px; /* Adicionado espaçamento superior */
-}
-
-/* Estilos para o parágrafo p */
-p {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1rem; 
-  text-decoration: none; 
-  text-align: center;
-  margin-bottom: 20px; 
-}
 
 /* Seção de Divisor */
 .sectionDivider {
@@ -39,23 +20,13 @@ p {
 .cardContainerCourse {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  max-width: 90%;
+  gap: 5%;
+  max-width: 1500px; /* largura fixa que você controla */
   margin: 0 auto;
   padding: 20px;
-  flex-grow: 1; /* ocupa o resto da section */
 }
 
-.courseSection {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 40px 0;
-  text-align: center;
-}
-
-
-.h2{
+.sectionTitle {
   color: #67006C;
   font-size: 3em;
   font-weight: bold;
@@ -79,6 +50,7 @@ p {
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .viewMoreLink::before {
@@ -103,6 +75,11 @@ p {
   margin-bottom: 20px;
 }
 
+.viewMoreLink:focus {
+  outline: 2px solid #FFEB3B;
+  outline-offset: 2px;
+}
+
 .emptyWrapper {
   display: flex !important;
   flex-direction: column;
@@ -114,3 +91,41 @@ p {
   background-color: transparent;
 }
 
+@media (max-width: 1440px) {
+  .cardContainer {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .cardContainerCourse {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+
+  .emptyWrapper,
+  .sectionDescription {
+    font-size: 0.9rem;
+  }
+
+  .viewMoreLink {
+    font-size: 0.6rem;
+    padding: 5px 10px;
+  }
+
+  .viewMoreButton {
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .cardContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .cardContainerCourse {
+    grid-template-columns: 1fr;
+  }
+}

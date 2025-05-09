@@ -56,7 +56,7 @@ function Numerologia() {
             />
 
             <div className={styles.courseSection}>
-                <h2 className={styles.h2}>Cursos de Numerologia</h2>
+                <h2 className={styles.sectionTitle}>Cursos de Numerologia</h2>
                 <p className={styles.sectionDescription}>&#9733;Explore o poder dos números na sua jornada espiritual.&#9733;</p>
                 <div className={styles.cardContainerCourse}>
                     {courses.map((course, index) => (
@@ -74,7 +74,7 @@ function Numerologia() {
             </div>
 
             <div className={styles.articleSection}>
-                <h2 className={styles.h2}>Artigos de Numerologia</h2>
+                <h2 className={styles.sectionTitle}>Artigos de Numerologia</h2>
                 <p className={styles.sectionDescription}>&#9733;Aprofunde seus conhecimentos com conteúdos exclusivos.&#9733;</p>
                 {loading ? (
                     <p>Carregando artigos...</p>

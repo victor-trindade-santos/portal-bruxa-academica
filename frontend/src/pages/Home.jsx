@@ -124,7 +124,7 @@ function Home() {
 
             {/* Seção de Cursos */}
             <div className={styles.courseSection}>
-                <h2 className={styles.h2}>Confira meus Cursos</h2>
+                <h2 className={styles.sectionTitle}>Confira meus Cursos</h2>
                 <p className={styles.sectionDescription}>&#9733; Aprofunde seus conhecimentos em magia e espiritualidade &#9733;</p>
                 
                 <div className={styles.cardContainerCourse}>
@@ -148,7 +148,7 @@ function Home() {
 
             {/* Seção de Artigos */}
             <div className={styles.articleSection}>
-                <h2 className={styles.h2}>Artigos e Ensinamentos</h2>
+                <h2 className={styles.sectionTitle}>Artigos e Ensinamentos</h2>
                 <p className={styles.sectionDescription}>&#9733; Aprofunde-se no seu autoconhecimento e descubra novos caminhos &#9733;</p>
                 <div className={styles.cardContainer}>
                     {articles.slice(0,4).map((article, index) => (
@@ -171,7 +171,7 @@ function Home() {
             </div>
 
 
-            <h2 className={styles.h2}>Círculo Místico: Vídeos e Ensinamentos</h2>
+            <h2 className={styles.sectionTitle}>Círculo Místico: Vídeos e Ensinamentos</h2>
             <p className={styles.sectionDescription}>&#9733; Aprenda, conecte-se e floresça no seu caminho mágico &#9733;</p>
             {card_video1.map((videoCard, index) => (
                 <div key={index}>
