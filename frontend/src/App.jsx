@@ -14,6 +14,7 @@ import Cursos from './pages/Cursos';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Article_Pages from './pages/Article_Pages';
+import Perfil from './pages/Perfil';
 
 const App = () => (
   <AuthProvider> 
@@ -33,6 +34,7 @@ const App = () => (
         {/* Adicionando a rota para a página do artigo */}
         <Route path="/artigos/:id" element={<Article_Pages />} />
         <Route path="/article-preview" element={<Article_Pages />} />
+        <Route path="/profile" element={<Perfil />} />
       </Routes>
       <Footer />
     </Router>
