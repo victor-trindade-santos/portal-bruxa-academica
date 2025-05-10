@@ -7,10 +7,18 @@
   background-color: #fff;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin: 0;
-  width: 90%;  /* Largura do card (20%) para desktop */
-  height: 65vh; /* Altura do card (65% da tela) */
+  width: 100%;
+  max-width: 400px; /* se quiser limitar */
+  height: auto;
   display: flex;
   flex-direction: column;
+}
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
 .courseImage {
@@ -89,19 +97,6 @@
   margin-top: 10px;
 }
 
-.btnLink {
-  color: white;
-  text-decoration: none;
-  background-color: #2B089C;
-  padding: 10px 20px;
-  border-radius: 5px;
-  display: inline-block;
-}
-
-.btnLink:hover {
-  background-color: #4C1C8C;
-}
-
 .cardInfoRow {
   display: flex;
   justify-content: space-between;
@@ -125,46 +120,70 @@
 
 /* Mudanças para Mobile */
 @media (max-width: 767px) {
-  .cardCustom {
-    width: 80%; /* O card ocupa toda a largura no mobile */
-    height: auto; /* Altura ajustável para mobile */
+  .cardArtigo {
+    width: 100%;
+    height: auto; /* Mantém o conteúdo fluido */
+    margin: 10px 0;
   }
 
-  .courseImage {
-    height: 35%; /* Ajuste a imagem do curso para ser um pouco menor */
+  .articleImageWrapper {
+    height: 120px; /* Reduzido para manter a proporção menor da tela */
   }
 
-  .articleImage {
-    height: 25%; /* Ajuste a imagem dos artigos para um tamanho adequado */
+  .articleImageWrapper .cardImg {
+    height: 100%;
   }
 
-  .cardContent {
-    padding: 0.8rem; /* Menos padding para economizar espaço */
-    height: auto;  /* Altura flexível */
+  .articleCategory {
+    font-size: 0.7rem; /* Igual ao 1440px */
+    padding: 3px 10px;
+    bottom: -8%;
   }
 
-  .cardTitle {
-    font-size: 1.4rem; /* Tamanho de fonte reduzido para mobile */
+  .articleCategory::before {
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
   }
 
-  .categoryTag {
-    font-size: 0.8rem; /* Tamanho da fonte da categoria ajustado */
-    padding: 4px 8px; /* Ajuste do padding */
+  .artigoTitle {
+    font-size: 0.9rem;
+    margin-top: 6px;
   }
 
-  .duration {
-    font-size: 0.9rem; /* Ajuste no tamanho da duração */
+  .artigoText {
+    font-size: 0.7rem;
+    margin-top: 6px;
+    overflow: hidden;
   }
 
-  .cardDescription {
-    font-size: 0.9rem; /* Tamanho da fonte reduzido para mobile */
+  .artigoBtn {
+    font-size: 0.6rem;
+    padding: 4px 10px;
+    margin-top: 6px;
+    justify-content: left;
+    align-items: left;
   }
 
-  .btnLink {
-    font-size: 0.9rem; /* Fonte do botão ajustada */
-    padding: 8px 16px; /* Ajuste do padding do botão */
+  .cardContainer {
+    grid-template-columns: 1fr; /* Um card por linha */
+    padding: 8px;
+    gap: 10px;
   }
 }
+
+@media (max-width: 599px) {
+  .cardContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cardArtigo {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
 
 /* Card Artigo */
 .cardArtigo {
@@ -293,50 +312,67 @@
   background-color: #4C1C8C;
 }
 
+@media (max-width: 1440px) {
 
-@media (max-width: 767px) {
-  .cardArtigo {
-    width: 100%; /* Ocupa toda a largura disponível */
-    margin: 10px 0;
+  /* Curso */
+  .cardCustom {
+    height: auto; /* Deixa o conteúdo crescer naturalmente */
   }
 
-  .articleImageWrapper {
-    height: 200px; /* Altura fixa mais adequada para mobile */
+  .courseImageWrapper {
+    height: 150px;
   }
 
-  .cardImg {
+  .courseImageWrapper .cardImg {
     height: 100%;
   }
 
+  .duration {
+    font-size: 0.8rem;
+  }
+
+  .cardTitle {
+    margin: 0;
+  }
+
+  /* Artigo */
+  .cardArtigo {
+    height: auto;
+  }
+
+  .articleImageWrapper {
+    height: 100px;
+  }
+
+  .articleImageWrapper .cardImg {
+    height: 100%;
+  }
+
+  .categoryTag,
   .articleCategory {
-    font-size: 0.9rem;
-    padding: 4px 12px;
-    bottom: -6%; /* Levemente mais abaixo para sobrepor mais o conteúdo */
+    font-size: 0.7rem;
   }
 
-  .articleCategory::before {
-    width: calc(100% - 6px);
-    height: calc(100% - 6px);
+  .cardContent {
+    height: 200px;
+    padding: 15px;
   }
 
-  .artigoTitle {
-    font-size: 1.1rem;
-    margin-top: 8px;
-  }
-
+  .cardText,
   .artigoText {
-    font-size: 0.95rem;
-    margin-top: 8px;
+    overflow: hidden;
+    font-size: 0.7rem;
+  }
+
+  .cardTitle,
+  .artigoTitle {
+    font-size: 0.9rem;
   }
 
   .artigoBtn {
-    font-size: 0.9rem;
-    padding: 6px 14px;
-    margin-top: 8px;
-  }
-
-  .cardContainer {
-    grid-template-columns: 1fr; /* Um card por linha */
-    padding: 10px;
+    align-items: left;
+    justify-content: left;
+    font-size: 0.6rem;
+    padding: 4px 10px;
   }
 }
