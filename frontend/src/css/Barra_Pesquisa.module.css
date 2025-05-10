@@ -4,6 +4,7 @@
   padding: 16px;
   width: 100%;
   position: relative; /* Fundamental para o posicionamento absoluto do dropdown */
+  margin-top: 10px;
 }
 
 .inputWrapper {
@@ -86,4 +87,22 @@
 
 .suggestionItem:hover {
   background-color: #f2f2f2;
+}
+
+@media (max-width: 768px){
+  .searchInput {
+    font-size: 1em;
+  }
+
+  .searchInput::placeholder {
+    font-size: 1em;
+  }
+
+  .inputWrapper {
+    border-radius: 35px;
+  }
+
+  .suggestionItem {
+    font-size: 1em;
+  }
 }

@@ -43,3 +43,17 @@
     display: block;
     margin: 0 auto;
 }
+
+@media (max-width: 768px) {
+    .imageProfile {
+        width: 70%;
+    }
+
+    .title {
+        font-size: 1.5em;
+    }
+
+    .nameTitle {
+        font-size: 1.3em;
+    }
+}

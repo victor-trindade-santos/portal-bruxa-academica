@@ -135,3 +135,26 @@
     border-color: #4F0B82; /* Muda a borda para roxo no hover */
   }
   
+    /* Celular - 1 por linha */
+  @media (max-width: 765px) {
+    .cardContainer {
+      grid-template-columns: 1fr;
+    }
+
+    .rowPrincipal {
+      flex-direction: column;
+      padding-top: 10%;
+      align-items: center; /* alinha verticalmente */
+    }
+
+    .colInsideLeft {
+      width: 95%;
+      margin:0%;
+    }
+
+    .colInsideRight {
+      width: 92%;
+      margin: 0%;
+    }
+
+  }

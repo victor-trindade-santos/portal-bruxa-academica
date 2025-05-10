@@ -42,3 +42,9 @@
 .navLink:hover {
     color: #8C089C !important;
 }
+
+@media (max-width: 768px){
+  .title {
+    font-size: 1.5em;
+  }
+}

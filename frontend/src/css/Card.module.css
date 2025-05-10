@@ -337,11 +337,11 @@
 
   /* Artigo */
   .cardArtigo {
-    height: auto;
+    height: 350px;
   }
 
   .articleImageWrapper {
-    height: 100px;
+    height: 150px;
   }
 
   .articleImageWrapper .cardImg {
@@ -350,7 +350,7 @@
 
   .categoryTag,
   .articleCategory {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 
   .cardContent {
@@ -361,18 +361,24 @@
   .cardText,
   .artigoText {
     overflow: hidden;
-    font-size: 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  .cardText {
+    padding-bottom: 20px;
   }
 
   .cardTitle,
   .artigoTitle {
-    font-size: 0.9rem;
+    font-size: 1.2rem;
   }
 
   .artigoBtn {
     align-items: left;
     justify-content: left;
-    font-size: 0.6rem;
-    padding: 4px 10px;
+    font-size: 0.75rem;
+    padding: 5px 10px;
+    margin-top: 2px;
+    margin-bottom: 3px;
   }
 }
