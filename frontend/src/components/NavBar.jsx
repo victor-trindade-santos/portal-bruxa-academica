@@ -1,37 +1,27 @@
-
 import React, { useContext, useRef, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import '../css/Navbar.css';
-import PerfilImg from '../img/perfil.png'
+import PerfilImg from '../img/perfil.png';
 
 function Navbar() {
-  const navbarCollapseRef = useRef(null);
   const { user, logout } = useContext(AuthContext);
-  const navigate = useNavigate();
   const location = useLocation();
-  const [isMenuOpen, setIsMenuOpen] = useState(false); 
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isEditMenuOpen, setIsEditMenuOpen] = useState(false);
 
   const isActive = (path) => location.pathname === path;
 
-  const closeNavbar = () => {
-    if (navbarCollapseRef.current.  List.contains('show')) {
-      navbarCollapseRef.current.classList.remove('show');
-    }
+  const toggleNavbar = () => setIsMenuOpen(!isMenuOpen);
+  const toggleEditMenu = (e) => {
+    e.stopPropagation(); // Isso vai impedir que o clique no botão "Editar" feche o menu hamburguer.
+    setIsEditMenuOpen(!isEditMenuOpen);
   };
+  const closeNavbar = () => setIsMenuOpen(false);
+
 
   const isAdmin = user?.role === 'admin';
 
-  const handleLogout = () => {
-    logout();
-    navigate('/login');
-  };
-
-  const toggleNavbar = () => {
-    setIsMenuOpen(!isMenuOpen); // Alterna o estado do menu
-  };
- 
   return (
     <nav className="navbar navbar-expand-lg navbar-custom">
       <div className="container-fluid container-fluid-custom">
@@ -41,18 +31,24 @@ function Navbar() {
         <button
           className="navbar-toggler navbar-toggler-custom"
           type="button"
-          onClick={toggleNavbar} 
+          onClick={toggleNavbar}
           aria-controls="navbarSupportedContent"
-          aria-expanded={isMenuOpen ? 'true' : 'false'} 
+          aria-expanded={isMenuOpen ? 'true' : 'false'}
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
 
-
         <div className={`navbar-collapse ${isMenuOpen ? 'show' : ''}`} id="navbarSupportedContent">
           <ul className="navbar-nav mb-2 mb-lg-0">
-            {[{ to: '/', label: 'Home' }, { to: '/magia', label: 'MAGIA' }, { to: '/numerologia', label: 'NUMEROLOGIA' }, { to: '/tarot', label: 'TAROT' }, { to: '/astrologia', label: 'ASTROLOGIA' }, { to: '/artigos', label: 'ARTIGOS' }].map((item) => (
+            {[
+              { to: '/', label: 'Home' },
+              { to: '/magia', label: 'MAGIA' },
+              { to: '/numerologia', label: 'NUMEROLOGIA' },
+              { to: '/tarot', label: 'TAROT' },
+              { to: '/astrologia', label: 'ASTROLOGIA' },
+              { to: '/artigos', label: 'ARTIGOS' },
+            ].map((item) => (
               <li className="nav-item" key={item.to}>
                 <Link
                   to={item.to}
@@ -71,45 +67,52 @@ function Navbar() {
                     CURSOS
                   </Link>
                 </li>
-                <li className="nav-item">
-                  <Link to="/create-articles-d42f4c" className={`nav-link nav-link-custom ${isActive('/create-articles-d42f4c') ? 'active-link' : ''}`} onClick={closeNavbar}>
+                <li className="nav-item position-relative">
+                  <button
+                    className={`nav-link nav-link-custom ${isActive('/create-articles-d42f4c') ? 'active-link' : ''}`}
+                    onClick={(e) => {
+                      toggleEditMenu(e);
+                    }}
+                  >
                     EDITAR
-                  </Link>
+                  </button>
+                  {isEditMenuOpen && (
+                    <ul className="dropdown-menu custom-dropdown-menu show">
+                      <li>
+                        <Link to="/create-articles-d42f4c" className="dropdown-item" onClick={closeNavbar}>
+                          Editar Artigos
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/edit-courses" className="dropdown-item" onClick={closeNavbar}>
+                          Editar Cursos
+                        </Link>
+                      </li>
+                    </ul>
+                  )}
                 </li>
               </>
             )}
 
-            {!user ? (
+            {!user && (
               <li className="nav-item">
                 <Link to="/login" className={`nav-link nav-link-custom ${isActive('/login') ? 'active-link' : ''}`} onClick={closeNavbar}>
                   Login
                 </Link>
               </li>
-            ) : (
-              <>
-                <li className="nav-item">
-                  <Link to="/profile" className={`nav-link nav-link-custom ${isActive('/profile') ? 'active-link' : ''}`} onClick={closeNavbar}>
-                    Perfil
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <button onClick={handleLogout} className="nav-link nav-link-custom btn-logout">
-                    Logout
-                  </button>
-                </li>
-              </>
             )}
           </ul>
 
           {user && (
-            <div className="navbar-user-info">
-              <img src={PerfilImg} alt="Perfil" className="navbar-user-avatar" />
-              <span className="navbar-welcome-message">
-                Bem-vindo(a), {user.username}
-              </span>
-            </div>
+            <li>
+              <Link to="/profile" className={`nav-link nav-link-custom ${isActive('/profile') ? 'active-link' : ''}`} onClick={closeNavbar}>
+                <div className="navbar-user-info">
+                  <img src={PerfilImg} alt="Perfil" className="navbar-user-avatar" />
+                  <span className="navbar-welcome-message">Bem-vindo(a), {user.username}</span>
+                </div>
+              </Link>
+            </li>
           )}
-
         </div>
       </div>
     </nav>
