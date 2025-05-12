@@ -4,25 +4,32 @@ import lupa from '../assets/magnifying-glass.svg';
 import axios from '../services/api';
 import { useNavigate } from 'react-router-dom';
 
-function Barra_Pesquisa({ onSelectArticle }) {  // Aceita a prop onSelectArticle
+function Barra_Pesquisa({ onSelectArticle, reloadTrigger }) {  // Aceita a prop onSelectArticle
     const [query, setQuery] = useState('');
     const [allArticles, setAllArticles] = useState([]);
     const [filteredArticles, setFilteredArticles] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchArticles = async () => {
-            try {
-                const response = await axios.get('/articles');
-                setAllArticles(response.data);
-            } catch (error) {
-                console.error('Erro ao buscar artigos:', error);
-            }
-        };
+    const fetchArticles = async () => {
+        try {
+            const response = await axios.get('/articles');
+            setAllArticles(response.data);
+        } catch (error) {
+            console.error('Erro ao buscar artigos:', error);
+        }
+    };
 
+    // ✅ Roda uma vez ao carregar
+    useEffect(() => {
         fetchArticles();
     }, []);
+
+    // ✅ Roda toda vez que reloadTrigger mudar
+    useEffect(() => {
+        fetchArticles(); // Atualiza os artigos após exclusão, criação, etc.
+    }, [reloadTrigger]);
+
 
     const handleSuggestionClick = (article) => {
         if (onSelectArticle) {
@@ -30,7 +37,7 @@ function Barra_Pesquisa({ onSelectArticle }) {  // Aceita a prop onSelectArticle
         }
         setQuery(article.title); // Preenche o campo de pesquisa com o título do artigo
         setShowDropdown(false); // Fecha a lista de sugestões
-    };    
+    };
 
     // Atualiza as sugestões conforme o usuário digita
     useEffect(() => {
@@ -45,17 +52,27 @@ function Barra_Pesquisa({ onSelectArticle }) {  // Aceita a prop onSelectArticle
     }, [query, allArticles]);
 
     const handleSearch = () => {
-        if (query.trim() !== '') {
-            if (onSelectArticle) {
-                // Se onSelectArticle for passado, significa que estamos na página de edição
-                const selectedArticle = filteredArticles[0]; // Seleciona o primeiro artigo
-                if (selectedArticle) {
-                    onSelectArticle(selectedArticle); // Preenche os campos automaticamente
-                }
-            } else {
-                // Se não estiver na página de edição, vai para a página de resultados
-                navigate(`/artigos?busca=${encodeURIComponent(query.trim())}`);
+        if (query.trim() === '') {
+            const recentArticles = [...allArticles]
+                .sort((a, b) => new Date(b.publicationDate) - new Date(a.publicationDate))
+                .slice(0, 5);
+
+            setFilteredArticles(recentArticles);
+        } else {
+            const filtered = allArticles.filter(article =>
+                article.title.toLowerCase().includes(query.toLowerCase())
+            );
+
+
+            const selectedArticle = filtered[0]; // Pega o primeiro resultado
+
+            if (selectedArticle && onSelectArticle) {
+                onSelectArticle(selectedArticle); // ✅ Preenche o formulário
+                setQuery(selectedArticle.title); // ✅ Atualiza o campo
+                setShowDropdown(false); // Fecha sugestões
             }
+
+            setFilteredArticles(filtered.slice(0, 5));
         }
     };
 
@@ -87,14 +104,18 @@ function Barra_Pesquisa({ onSelectArticle }) {  // Aceita a prop onSelectArticle
                         <li
                             key={article._id}
                             onClick={() => {
-                                setQuery(article.title); // Preenche o campo de pesquisa com o título do artigo
-                                setShowDropdown(false); // Fecha o dropdown de sugestões
+                                if (onSelectArticle) {
+                                    onSelectArticle(article); // 🔁 Preenche todos os campos, inclusive o ID
+                                }
+                                setQuery(article.title);
+                                setShowDropdown(false);
                             }}
                             className={styles.suggestionItem}
                         >
                             {article.title}
                         </li>
                     ))}
+
                 </ul>
             )}
 

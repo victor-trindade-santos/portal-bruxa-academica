@@ -4,13 +4,15 @@ import styles from '../css/ArticlePage.module.css';
 import Barra_Pesquisa from '../components/Barra_Pesquisa';
 import Barra_Categoria from '../components/Barra_Categoria';
 import Sobre_Mim_Lateral from '../components/Sobre_MIm_Lateral';
-import ArticleTemplate from '../components/ArticleTemplate'; 
+import ArticleTemplate from '../components/ArticleTemplate';
 import BreadCrumb from '../components/BreadCrumb';
 
 function Article_Pages() {
   const { id } = useParams(); // captura o ID do artigo
 
   const location = useLocation(); // Captura a localização atual da URL
+  const previewDataFromLocation = location.state?.articleData;
+
   const queryParams = new URLSearchParams(location.search);
   const rawCategory = queryParams.get('categoria'); // Obtém o valor da categoria da URL
 
@@ -22,10 +24,13 @@ function Article_Pages() {
 
   const category = formatCategory(rawCategory); // Aqui formatamos a categoria
 
+  //serve para buscar os dados do FormDataArticle através do ViewArticleComponent
   const previewMode = localStorage.getItem("previewMode") === "true";
-  const articleTemporaryData = previewMode
+  const previewDataFromLocalStorage = previewMode
     ? JSON.parse(localStorage.getItem("articlePreview"))
     : null;
+
+  const articleTemporaryData = previewDataFromLocation || previewDataFromLocalStorage;
 
   const [articleData, setArticleData] = useState(null);
 
@@ -34,11 +39,12 @@ function Article_Pages() {
   console.log("Categoria capturada da URL:", category); // Verifique se a categoria está sendo capturada corretamente
 
   useEffect(() => {
-    // Limpa o modo preview depois que o componente monta
     if (previewMode) {
       localStorage.removeItem("previewMode");
+      localStorage.removeItem("articlePreview");
     }
   }, []);
+
 
   useEffect(() => {
     if (!previewMode && id) {
@@ -54,7 +60,7 @@ function Article_Pages() {
         })
         .catch(err => console.error("Erro ao buscar artigo:", err));
     }
-  }, [id, previewMode]);  
+  }, [id, previewMode]);
 
   return (
     <>
