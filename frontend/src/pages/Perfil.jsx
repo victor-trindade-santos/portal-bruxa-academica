@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 import styles from '../css/Perfil.module.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import userImagem from '../img/usuario.png';
+import userImagem from '../img/profile.png';
 import aquarius from '../img/aquarius.png'
 
 const Perfil = () => {
     const [menuSelecionado, setMenuSelecionado] = useState('signo'); // já começa com "Seu Signo" selecionado
+
+    const { logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/login');
+    };
+
 
     const handleMenuClick = (item) => {
         setMenuSelecionado(item);
@@ -24,6 +36,9 @@ const Perfil = () => {
                         <p className={styles.info}>Data de nascimento: 00/00/0000</p>
                         <p className={styles.info}>emailusuario@gmail.com</p>
                         <button className={styles.editarBtn}>Editar perfil</button>
+                        <button className={styles.logoutBtn} onClick={handleLogout}>
+                            Logout
+                        </button>
                     </div>
 
 

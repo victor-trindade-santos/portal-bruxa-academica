@@ -24,13 +24,17 @@ function Login() {
       console.log('Resposta do login:', data); // Verifique o que está retornando
   
       if (response.status === 200) {
+        // Salva o token no localStorage
+        localStorage.setItem('token', data.token);  // Salva o token
+  
+        // Chama o login com as informações recebidas
         login({
           username: data.username,
           role: data.role,
           token: data.token,
         });
   
-        // Redireciona usando navigate
+        // Redireciona após o login bem-sucedido
         navigate('/');
       } else {
         console.error('Erro no login:', data.message);
@@ -41,7 +45,6 @@ function Login() {
       console.error('Erro ao conectar com o servidor:', error);
     }
   };
-  
 
   return (
     <div className={styles.loginContainer}>

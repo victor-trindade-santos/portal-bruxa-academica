@@ -1,0 +1,78 @@
+/* A camada de overlay do modal, que bloqueia a interação com o fundo da página */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo preto semi-transparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Conteúdo principal do modal */
+  .modalContent {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 400px; /* Ajustando a largura para um tamanho maior */
+    max-width: 90%;
+    text-align: center;
+  }  
+  
+  /* Campo de entrada da senha, controlado pelo estado "password" */
+  .inputPassword {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #000000; /* Garantindo que o texto tenha cor preta */
+    background-color: #f9f9f9; /* Cor de fundo mais clara */
+    box-sizing: border-box; /* Garantir que o padding não afete o tamanho */
+  }
+  
+  .inputPassword:focus {
+    border-color: #000; /* Alterando a borda para ficar mais visível ao focar */
+    background-color: #fff; /* Garantindo que o fundo não seja confuso */
+    color: #000; /* Garantir que o texto continue preto */
+    outline: none; /* Remover o contorno padrão de foco do navegador */
+  }  
+  
+  /* Exibe a mensagem de erro caso exista */
+  .errorMessage {
+    color: #CC4444; /* Vermelho suave, não muito gritante */
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  
+  /* Grupo de botões para confirmar ou cancelar */
+  .buttonGroup {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .buttonGroup button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Botão de confirmação */
+  .buttonGroup button:first-child {
+    background-color: #000000; /* Preto */
+    color: #FFFFFF; /* Branco */
+  }
+  
+  /* Botão de cancelamento */
+  .buttonGroup button:last-child {
+    background-color: #CCCCCC; /* Cinza claro */
+    color: #000000; /* Preto */
+  }
+  

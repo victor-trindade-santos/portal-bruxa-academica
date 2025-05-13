@@ -54,9 +54,9 @@ function Astrologia() {
             />
 
             <div className={styles.courseSection}>
-                <h2 className={styles.h2}>Cursos de Astrologia</h2>
+                <h2 className={styles.sectionTitle}>Cursos de Astrologia</h2>
                 <p className={styles.sectionDescription}>&#9733;Do mapa natal às previsões, domine os segredos do céu.&#9733;</p>
-                <div className={styles.cardContainer}>
+                <div className={styles.cardContainerCourse}>
                     {courses.map((course, index) => (
                         <Card
                             key={index}
@@ -72,27 +72,30 @@ function Astrologia() {
             </div>
 
             <div className={styles.articleSection}>
-                <h2 className={styles.h2}>Artigos de Astrologia</h2>
+                <h2 className={styles.sectionTitle}>Artigos de Astrologia</h2>
                 <p className={styles.sectionDescription}>&#9733;Aprofunde-se na sabedoria dos astros e do zodíaco.&#9733;</p>
-                <div className={styles.cardContainer}>
-                    {loading ? (
-                        <p>Carregando artigos...</p>
-                    ) : articles.length === 0 ? (
-                        <p>Nenhum artigo encontrado.</p>
-                    ) : (
-                        articles.map((article, index) => (
+                {loading ? (
+                    <p>Carregando artigos...</p>
+                ) : articles.length === 0 ? (
+                    <div className={styles.emptyWrapper}>
+                        <p>Nenhum artigo encontrado. Volte mais tarde para mais conteúdos</p>
+                    </div>
+                ) : (
+                    <div className={styles.cardContainer}>
+                        {articles.map((article, index) => (
                             <Card
                                 key={index}
-                                image={article.imageUrl || courseImage1}
+                                image={article.imageThumb || courseImage1}
                                 title={article.title}
-                                description={article.content}
-                                link={`/artigos/${article._id}`}
+                                description={article.firstContent}
+                                id={article._id}
+                                link={`/articles/${article._id}`}
                                 category={article.category || "#Astrologia"}
                                 type="artigo"
                             />
-                        ))
-                    )}
-                </div>
+                        ))}
+                    </div>
+                )}
             </div>
             <br />
         </>

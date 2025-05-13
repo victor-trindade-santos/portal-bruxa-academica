@@ -1,21 +1,3 @@
-/* Estilos para o título h1 */
-h1 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 2rem; /* Ajustado para um tamanho mais flexível */
-  color: #67006C;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 20px; /* Adicionado espaçamento superior */
-}
-
-/* Estilos para o parágrafo p */
-p {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1rem; 
-  text-decoration: none; 
-  text-align: center;
-  margin-bottom: 20px; 
-}
 
 /* Seção de Divisor */
 .sectionDivider {
@@ -27,19 +9,24 @@ p {
 }
 
 .cardContainer {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 40px;
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.courseSection {
-  padding: 40px 0;
-  text-align: center;
+.cardContainerCourse {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5%;
+  max-width: 1500px; /* largura fixa que você controla */
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.h2{
+.sectionTitle {
   color: #67006C;
   font-size: 3em;
   font-weight: bold;
@@ -59,10 +46,11 @@ p {
   color: white;
   font-size: 1rem;
   text-decoration: none;
-  border-radius: 5px;
+
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .viewMoreLink::before {
@@ -72,8 +60,8 @@ p {
   left: 3px; 
   right: 3px;
   bottom: 3px; 
-  border: 2px solid #FFEB3B; 
-  border-radius: 5px;
+  border: 1px solid #FFEB3B; 
+
   pointer-events: none; 
 }
 
@@ -85,4 +73,59 @@ p {
   font-size: 1.6rem;
   text-align: center;
   margin-bottom: 20px;
+}
+
+.viewMoreLink:focus {
+  outline: 2px solid #FFEB3B;
+  outline-offset: 2px;
+}
+
+.emptyWrapper {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 250px;
+  width: 100%;
+  text-align: center;
+  background-color: transparent;
+}
+
+@media (max-width: 1440px) {
+  .cardContainer {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .cardContainerCourse {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .sectionTitle {
+    font-size: 1.75rem;
+  }
+
+  .emptyWrapper,
+  .sectionDescription {
+    font-size: 1.25rem;
+  }
+
+  .viewMoreLink {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+
+  .viewMoreButton {
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .cardContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .cardContainerCourse {
+    grid-template-columns: 1fr;
+  }
 }

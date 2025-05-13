@@ -179,3 +179,18 @@ p {
     font-weight: 400;
     font-size: 18px;
 }
+
+.logoutBtn {
+  background-color: #6f00ff; /* vermelho Bootstrap */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin-top: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.logoutBtn:hover {
+  background-color: #420097;
+}

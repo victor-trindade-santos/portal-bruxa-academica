@@ -155,7 +155,7 @@
     box-shadow: 0 0 0 5px #67006C,
     inset 0 0 0 1px #ffff00;
     position: relative; /* Define o posicionamento para usar o z-index */
-    z-index: 10; /* Coloca o botão "para frente" */
+    z-index: 2; /* Coloca o botão "para frente" */
   }
 
   .btnCustom:hover {

@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/articles', articleRoutes);
+
 app.use('/auth', authRoutes);
 app.use('/courses', courseRoutes);
 

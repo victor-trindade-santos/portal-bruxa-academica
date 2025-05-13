@@ -1,0 +1,89 @@
+.rowPrincipal {
+    display: flex;
+    padding-top: 6%;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  
+  .colInsideLeft{
+    width:69.7%;
+    margin-left: 3.5%;
+    /* background-color: green; */
+    flex: 1;
+}
+
+.colInsideRight{
+    width: 23%;
+    margin-right: 0.5%;
+    margin-left: 0.5%;
+    /* background-color: blue; */
+    flex: 2;
+}
+
+
+ /* Padrão (desktop) */
+.cardContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cards por linha */
+    gap: 20px;
+    padding: 10px;
+  }
+  
+  .cardArtigo {
+    width: 100%; /* grid controla a largura */
+    margin: 0;
+  }
+  @media (max-width: 1400px) {
+    .rowPrincipal{
+      padding-top: 6%;
+    }
+  }
+  /* Tablet - 2 por linha */
+  @media (max-width: 1200px) {
+    .cardContainer {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  /* Celular - 1 por linha */
+  @media (max-width: 765px) {
+    .cardContainer {
+      grid-template-columns: 1fr;
+    }
+
+    .rowPrincipal {
+      flex-direction: column;
+      padding-top: 10%;
+      align-items: center; /* alinha verticalmente */
+    }
+
+    .colInsideLeft {
+      width: 95%;
+      margin:0%;
+    }
+
+    .colInsideRight {
+      width: 92%;
+      margin: 0%;
+    }
+
+  }
+  
+  
+/* Card Artigo */
+.cardArtigo {
+    width: 100%; /* Ajustando a largura para 4 artigos por linha */
+    height: auto;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border: 1px solid #ccc; /* Borda para o contorno do card */
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para o card */
+    background-color: white;
+    overflow: hidden; /* Para garantir que a imagem não ultrapasse o limite do card */
+  }
+
+  
