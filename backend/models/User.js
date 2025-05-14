@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: function() { return this.role === 'user'; }, // Email é requerido apenas para users
+    required: function () { return this.role === 'user'; }, // Email é requerido apenas para users
     unique: true, // Garante que o email será único
   },
   password: {
@@ -21,7 +21,19 @@ const UserSchema = new mongoose.Schema({
     enum: ['user', 'admin'],
     default: 'user', // Valor padrão para novos usuários
   },
-}, { collection: 'Users' }); 
+  fullName: {
+    type: String,
+    required: true,
+  },
+  birthDate: {
+    type: Date,
+    required: true,
+  },
+  birthTime: {
+    type: String, // Armazena no formato 'HH:mm'
+    required: true,
+  },
+}, { collection: 'Users' });
 
 // Encriptar a senha antes de salvar no banco
 UserSchema.pre('save', async function (next) {

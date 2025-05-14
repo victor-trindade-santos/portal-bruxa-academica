@@ -51,30 +51,30 @@ function Login() {
       <div className={styles.formBox}>
         <div className={styles.title}>Login</div>
         <form onSubmit={handleLogin}>
-          <label htmlFor="username" className={styles.label}>Username</label>
+          <label htmlFor="username" className={styles.label}>Nome de Usuário</label>
           <input
             type="text"
             id="username"
             className={styles.input}
-            placeholder="Username"
+            placeholder="Digite o nome de usuário..."
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <label htmlFor="password" className={styles.label}>Password</label>
+          <label htmlFor="password" className={styles.label}>Senha</label>
           <input
             type="password"
             id="password"
             className={styles.input}
-            placeholder="Password"
+            placeholder="Digite a sua senha..."
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
 
           {error && <p style={{ color: 'red', marginTop: '0.5rem' }}>{error}</p>}
 
-          <button type="submit" className={styles.button}>Login</button>
+          <button type="submit" className={styles.button}>Entrar</button>
           <p style={{ marginTop: '1rem', textAlign: 'center' }}>
-            Não tem conta? <Link to="/register" style={{ color: '#e0b3ff' }}>Cadastre-se</Link>
+            Não tem conta? <Link to="/register" style={{ color: '#5B079B' }}>Cadastre-se</Link>
           </p>
         </form>
       </div>

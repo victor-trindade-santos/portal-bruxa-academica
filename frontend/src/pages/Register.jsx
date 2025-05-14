@@ -4,7 +4,7 @@ import styles from '../css/Login.module.css';
 import RegisterInput from '../components/RegisterInput'
 
 function Register() {
-  const [values, setValues] =  useState({
+  const [values, setValues] = useState({
     username: "",
     email: "",
     password: "",
@@ -22,26 +22,54 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    // Verificação de idade
+    const today = new Date();
+    const birthDate = new Date(values.birthDate);
+
+    // Calcula a idade
+    const age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    const dayDiff = today.getDate() - birthDate.getDate();
+
+    const isBirthdayPassedThisYear = monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0);
+    const realAge = isBirthdayPassedThisYear ? age : age - 1;
+
+    if (birthDate > today) {
+      setError("A data de nascimento não pode ser no futuro.");
+      alert("Você precisa ter pelo menos 5 anos para se cadastrar.");
+      return;
+    }
+
+    if (realAge < 5) {
+      setError("Você precisa ter pelo menos 5 anos para se cadastrar.");
+      alert("Você precisa ter pelo menos 5 anos para se cadastrar.");
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:5000/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           username: values.username,
-          email: values.email, 
-          password: values.password }),
+          email: values.email,
+          password: values.password,
+          fullName: values.fullName,
+          birthDate: values.birthDate,
+          birthTime: values.birthTime,
+        }),
       });
 
       const data = await response.json();
       if (response.status === 201) {
         setSuccess('Cadastro realizado com sucesso! Redirecionando...');
-        setError(''); 
-      
+        setError('');
+
         setTimeout(() => {
           navigate('/login');
-        }, 2000); 
+        }, 2000);
       }
-       else {
+      else {
         setError(data.message || 'Erro no cadastro.');
       }
     } catch (err) {
@@ -51,6 +79,15 @@ function Register() {
   };
 
   const inputs = [
+    {
+      id: 0,
+      name: "fullName",
+      type: "text",
+      placeholder: "Nome Completo",
+      errorMessage: "Nome completo é obrigatório.",
+      label: "Nome Completo",
+      required: true,
+    },
     {
       id: 1,
       name: "username",
@@ -88,6 +125,24 @@ function Register() {
       errorMessage: "Senhas não conferem!",
       pattern: values.password,
       label: "Confirmar Senha",
+      required: true,
+    },
+    {
+      id: 5,
+      name: "birthDate",
+      type: "date",
+      placeholder: "Data de Nascimento",
+      errorMessage: "Data de nascimento é obrigatória.",
+      label: "Data de Nascimento",
+      required: true,
+    },
+    {
+      id: 6,
+      name: "birthTime",
+      type: "time",
+      placeholder: "Hora de Nascimento",
+      errorMessage: "Hora de nascimento é obrigatória.",
+      label: "Hora de Nascimento",
       required: true,
     }
   ];

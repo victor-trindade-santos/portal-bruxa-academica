@@ -54,7 +54,7 @@ router.post('/login', async (req, res) => {
 
 // Rota de registro
 router.post('/register', async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, fullName, birthDate, birthTime  } = req.body;
 
   try {
     // Verifica se já existe usuário com esse username
