@@ -1,49 +1,49 @@
 .navbar-custom {
   background-color: #5B079B;
   position: fixed;
-  z-index: 10;
+  z-index: 20;
   width: 100%;
   top: 0;
   padding-left: 10px;
   padding-right: 10px;
-  
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
 .container-fluid-custom {
-  
   padding: 2px;
-  display: flex; 
-  justify-content: flex-start; 
-  align-items: center; 
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .navbar-brand-custom {
   color: #FFFF00;
   font-weight: bold;
   text-decoration: none;
-  padding-bottom: 15px;
   height: 70px;
   font-size: 1rem;
   display: flex;
-  align-items: center; 
+  align-items: center;
 }
 
 .navbar-brand-img {
-  height: 70px; 
-  max-width: 100%; 
+  height: 70px;
+  max-width: 100%;
 }
 
 .navbar-toggler-custom {
   background-color: #FFFF00;
   border: none;
   width: 60px;
-  height: 40px; /* Define uma altura fixa para o botão */
+  height: 40px;
+  /* Define uma altura fixa para o botão */
   display: flex;
-  align-items: center; /* Centraliza o ícone verticalmente */
-  justify-content: center; /* Centraliza o ícone horizontalmente */
+  align-items: center;
+  /* Centraliza o ícone verticalmente */
+  justify-content: center;
+  /* Centraliza o ícone horizontalmente */
 }
 
 .nav-link-custom {
@@ -51,11 +51,14 @@
   color: #FFFF00;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 4px 10px;      /* Aumenta o "espaço interno" dos botões */
-  margin: 0 5px;         /* Aumenta o "espaço entre" os botões */
+  padding: 4px 10px;
+  /* Aumenta o "espaço interno" dos botões */
+  margin: 0 5px;
+  /* Aumenta o "espaço entre" os botões */
   display: inline-block;
   transition: all 0.3s ease-in-out;
-  font-size: 1.2rem; /* Aumenta o tamanho da fonte da marca */
+  font-size: 1.2rem;
+  /* Aumenta o tamanho da fonte da marca */
   font-weight: 700;
 }
 
@@ -93,10 +96,11 @@
 .navbar-user-info {
   display: flex;
   align-items: center;
-  justify-content: flex-end; 
-  padding-left: 8px; 
+  justify-content: flex-end;
+  padding-left: 8px;
+
   margin-left: auto;
-  
+
 }
 
 .navbar-user-avatar {
@@ -112,6 +116,7 @@
   font-size: 1.3rem;
   text-align: left;
   margin-left: 5px;
+  margin-bottom: 0;
   padding: 2px;
   display: inline-block;
 }
@@ -130,14 +135,14 @@
     align-items: center;
     height: 8vh;
   }
-  
+
   .container-fluid-custom {
     padding: 10px;
-    display: flex; 
-    justify-content: flex-start; 
-    align-items: center; 
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
-  
+
   .navbar-brand-custom {
     color: #FFFF00;
     font-weight: bold;
@@ -145,81 +150,81 @@
     height: 70px;
     font-size: 1rem;
     display: flex;
-    align-items: center; 
+    align-items: center;
   }
-  
+
   .navbar-brand-img {
-    height: 70px; 
-    max-width: 100%; 
+    height: 70px;
+    max-width: 100%;
   }
-  
+
   .navbar-toggler-custom {
     background-color: #FFFF00;
     border: none;
     width: 60px;
-    height: 40px; 
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
+
   .nav-link-custom {
     font-weight: 500;
     color: #FFFF00;
     text-transform: uppercase;
     text-decoration: none;
-    padding: 4px 10px;    
-    margin: 0 10px;        
+    padding: 4px 10px;
+    margin: 0 10px;
     display: inline-block;
     transition: all 0.3s ease-in-out;
-    font-size: 1rem; 
+    font-size: 1rem;
     font-weight: 700;
     white-space: nowrap;
   }
-  
+
   .nav-link-custom:hover {
     color: #FFFFFF;
   }
-  
+
   .active-link {
     background-color: #FFD700;
     color: #5B079B !important;
     border-radius: 8px;
   }
-  
+
   .btn-logout {
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
   }
-  
+
   .navbar-nav {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  
+
   .navbar-nav .nav-item {
     padding-left: 10px;
     padding-right: 10px;
   }
-  
+
   .navbar-user-info {
     display: flex;
     align-items: center;
-    justify-content: flex-end; 
-    padding-left: 20px; 
+    justify-content: flex-end;
+    padding-left: 20px;
     margin-left: auto;
   }
-  
+
   .navbar-user-avatar {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     margin-right: 10px;
   }
-  
+
   .navbar-welcome-message {
     color: #FFFF00;
     font-weight: 700;
@@ -231,78 +236,9 @@
   }
 }
 
-@media (max-width: 1800px) {
-  .navbar-custom {
-    background-color: #5B079B;
-    position: fixed;
-    z-index: 99999;
-    width: 100%;
-    top: 0;
-    left: 0;
-    padding-left: 10px;
-    padding-right: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    max-height: 100px;
-    height: 70px;
-  }
-
-  .navbar-brand-img {
-    height: 59px;
-    width: auto;
-    object-fit: contain;
-  }
-
-  .nav-link-custom {
-    font-size: 0.8rem;
-    padding: 2px 6px;
-    margin: 0;
-  }
-
-  .navbar-user-info {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-    gap: 8px;
-  }
-
-  .navbar-welcome-message {
-    font-size: 0.8rem;
-    padding: 0;
-    margin: 0 6px;
-    white-space: normal;
-    word-break: break-word;
-    color: #FFD700;
-  }
-
-  .navbar-user-avatar {
-    width: 45px;
-    height: 45px;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-
-  .container-fluid-custom {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-
-  .navbar-nav {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-}
-
 @media (max-width: 990px) {
   .navbar-custom {
-    padding: 8px 16px;
+    padding: 8px;
     background-color: #5B079B;
     position: fixed;
     z-index: 1000;
@@ -315,52 +251,45 @@
     display: none;
     position: absolute;
     top: 100%;
-    right: 10px;
+    left: 0;
     background-color: #5B079B;
-    border: 2px solid #FFD700;
-    border-radius: 8px;
+    border-right: 2px solid #FFD700;
+    height: 100vh;
     padding: 10px 0;
     min-width: 200px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    z-index: 10;
+    z-index: 20;
   }
 
   .navbar-collapse.show {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 250px;
+    align-items: left;
+    z-index: 20;
   }
 
   .navbar-nav {
-    padding: 0;
+    padding: 5px;
     margin: 0;
     list-style: none;
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+
   }
 
   .navbar-nav .nav-item {
     width: auto;
     margin: 0;
     padding: 0;
+    align-items: flex-start;
   }
 
   .nav-link-custom {
     padding: 8px 16px;
     margin: 0;
-    text-align: center;
+    align-items: flex-start;
     box-sizing: border-box;
-  }
-
-  .btn-logout {
-    padding: 8px 16px;
-    text-align: center;
-    box-sizing: border-box;
-    width: auto;
   }
 
   .navbar-user-info {
@@ -396,18 +325,18 @@
     position: fixed;
     z-index: 10;
   }
-  
+
   .container-fluid-custom {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+
     padding: 0;
     width: 100%;
     box-sizing: border-box;
   }
 
   .navbar-brand-img {
-    height: 40px;
+    height: 60px;
     margin: 0;
     width: auto;
     object-fit: contain;
@@ -428,7 +357,7 @@
     display: block;
     background-image: url("data:image/svg+xml;utf8,<svg fill='none' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'><path stroke='%23FFD700' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>");
   }
-  
+
 }
 
 /* telas menores */
@@ -436,18 +365,20 @@
   .navbar-custom {
     background-color: #5B079B;
     position: fixed;
-    z-index: 10;
+    z-index: 20;
     width: 100%;
     top: 0;
     left: 0;
     padding-left: 5px;
     padding-right: 10px;
     display: flex;
-    flex-direction: column; /* importante para empilhar linhas */
+    flex-direction: column;
+    /* importante para empilhar linhas */
     justify-content: flex-start;
     align-items: stretch;
-    max-height: 100px; /* opcional, dependendo do design */
-  }  
+    max-height: 100px;
+    /* opcional, dependendo do design */
+  }
 
   .navbar-brand-img {
     height: 50px;
@@ -466,19 +397,19 @@
     align-items: center;
     margin-left: auto;
     gap: 4px;
-  }  
+  }
 
   .navbar-welcome-message {
     font-size: 0.95rem;
     padding: 0;
     margin: 8px;
-  }  
+  }
 
   .navbar-user-avatar {
     width: 45px;
     height: 45px;
     object-fit: cover;
-  }  
+  }
 
   .container-fluid-custom {
     width: 100%;
@@ -486,9 +417,10 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    box-sizing: border-box; /* previne quebra de layout por padding */
+    box-sizing: border-box;
+    /* previne quebra de layout por padding */
     overflow: hidden;
-  }  
+  }
 
   .navbar-nav {
     flex-wrap: wrap;
@@ -496,7 +428,7 @@
   }
 }
 
-.nav-link-custom.active-link .navbar-welcome-message{
+.nav-link-custom.active-link .navbar-welcome-message {
   color: #5B079B !important;
 }
 
@@ -518,7 +450,6 @@
   left: 0;
   background-color: #5B079B;
   border: 2px solid #FFD700;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   z-index: 9999;
   padding: 0;
   border-radius: 4px;
@@ -529,6 +460,7 @@
 
 .custom-dropdown-menu.show {
   display: block;
+  z-index: 20;
 }
 
 .dropdown-item {
@@ -544,7 +476,35 @@
   color: #FFd700;
 }
 
+/* Força centralização dos itens da navbar no mobile */
+@media (max-width: 991px) {
+  .navbar-collapse {
+    text-align: left;
+    z-index: 20;
+  }
 
+  .navbar-nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Centraliza os itens */
+  }
 
+  .nav-link-custom {
+    width: auto;
+    text-align: left;
+  }
 
+  /* Centraliza o botão "EDITAR" e impede deslocamento */
+  .nav-item .nav-link-custom {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
+  /* Dropdown do botão "EDITAR" no mobile */
+  .custom-dropdown-menu {
+    width: auto;
+    text-align: center;
+  }
+}
