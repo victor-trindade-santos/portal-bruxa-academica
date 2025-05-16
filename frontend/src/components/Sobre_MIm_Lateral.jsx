@@ -10,10 +10,10 @@ function Sobre_Mim_Lateral() {
             </h1>
             <img src={perfil} className={styles.imageProfile} />
             <h1 className={styles.nameTitle}>
-                ✦ Márcia Sobrenome ✦
+                ✦ Márcia Silva ✦
             </h1>
             <h1 className={styles.description}>
-                Breve descrição Breve descrição Breve Descrição Breve Descrição Breve Descri
+                Professora de RH na FATEC da Zona Leste, e astróloga nas horas vagas 
             </h1>
         </div>
     )

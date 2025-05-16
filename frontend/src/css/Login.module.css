@@ -22,7 +22,7 @@
   width: 100%;
   max-width: 400px;
   backdrop-filter: blur(8px);
-  box-shadow: 0 0 15px rgba(44, 44, 44, 0.1);
+  box-shadow: 0 0 15px rgba(44, 44, 44, 0.527);
   color: #8C089C;
 }
 

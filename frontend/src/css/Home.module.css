@@ -123,9 +123,12 @@
 @media (max-width: 600px) {
   .cardContainer {
     grid-template-columns: 1fr;
+    width: 80%;
   }
 
   .cardContainerCourse {
     grid-template-columns: 1fr;
+      justify-items: center; /* centraliza horizontalmente */
+  align-items: center;   /* centraliza verticalmente (opcional) */
   }
 }

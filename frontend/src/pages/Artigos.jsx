@@ -95,7 +95,13 @@ function Artigos() {
                     </div>
                 </div>
                 <div className={styles.colInsideRight}>
-                    <Barra_Pesquisa onSearch={handleSearch} />
+                    <Barra_Pesquisa
+                        onSearch={(results) => {
+                            console.log("🟡 Artigos filtrados:", results);
+                            setArticles(results); // Ou qualquer outra lógica que quiser
+                        }}
+                    />
+
                     <Barra_Categoria />
                     <Sobre_Mim_Lateral />
                 </div>

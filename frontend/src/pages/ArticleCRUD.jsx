@@ -32,7 +32,7 @@ toolbar: [
   return (
     <>
       <div className={`row ${styles.rowPrincipal}`}>
-        <h1>Criar Artigos</h1>
+        <h1 className={styles.sectionTitle}>Criar Artigos</h1>
         <div className={styles.colInsideLeft}>
           <div className={styles.sectionArticle}>
             <div>

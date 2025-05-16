@@ -19,8 +19,14 @@ function Numerologia() {
         const fetchArticles = async () => {
             try {
                 const response = await axios.get('/articles?category=numerologia');
-                setArticles(response.data);
-                setLoading(false);
+                            // Ordena do mais recente para o mais antigo
+            const sorted = response.data.sort(
+                (a, b) => new Date(b.publicationDate) - new Date(a.publicationDate)
+            );
+
+            // Pega os 4 últimos
+            setArticles(sorted.slice(0, 4));
+            setLoading(false);
             } catch (error) {
                 console.error('Erro ao buscar artigos:', error);
                 setLoading(false);

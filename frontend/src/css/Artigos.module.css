@@ -43,6 +43,11 @@
   @media (max-width: 1200px) {
     .cardContainer {
       grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    .rowPrincipal {
+      padding-top: 10%;
     }
   }
   
@@ -54,7 +59,7 @@
 
     .rowPrincipal {
       flex-direction: column;
-      padding-top: 10%;
+      padding-top: 13%;
       align-items: center; /* alinha verticalmente */
     }
 
