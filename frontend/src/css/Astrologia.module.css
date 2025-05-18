@@ -1,4 +1,4 @@
-.magiaIntroSection {
+.astrologiaIntroSection {
   max-width: 900px;
   margin: 100px auto 40px;
   padding: 0 20px;
@@ -22,7 +22,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.magiaDescription {
+.astrologiaDescription {
   flex: 1;
   font-size: 1.3rem !important;
   line-height: 1.6;
@@ -30,7 +30,7 @@
   text-align: left;
 }
 
-.magiaSubtopics {
+.astrologiaSubtopics {
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
@@ -97,7 +97,6 @@
   background-color: transparent;
 }
 
-/* Responsividade */
 @media (max-width: 1440px) {
   .cardContainer {
     grid-template-columns: repeat(4, 1fr);

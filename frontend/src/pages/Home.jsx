@@ -1,7 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../components/Card';
-import courseImage1 from '../img/card_tipo1.jpg';
-import courseImage2 from '../img/Card-tipo2(fundo).jpg';
 import Video from '../components/Video';
 import VideoAstrologia from '../video/video1.jsx';
 import VideoTarot from '../video/video2.jsx';
@@ -10,47 +8,41 @@ import styles from '../css/Home.module.css';
 
 import HeroSection from '../components/HeroSection.jsx';
 import home from '../img/heroSection_home.png';
+import Container from '../components/Container.jsx';
+import { truncateDescription } from '../utils/descriptionUtils';
+import prof from '../img/professora.avif'
 
 function Home() {
+    // Estado para os artigos
+    const [articles, setArticles] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const articles = [
-        {
-            image: courseImage1,
-            title: "Artigo 1",
-            description: "Descubra como a astrologia pode impactar sua vida. Aprenda sobre os diferentes aspectos do mapa astral.",
-            category: "#Astrologia",
-            url: "/artigo1"
-        },
-        {
-            image: courseImage2,
-            title: "Artigo 2",
-            description: "Entenda os fundamentos do tarot e como ele pode ser uma ferramenta poderosa para autoconhecimento.",
-            category: "#Tarot",
-            url: "/artigo2"
-        },
-        {
-            image: courseImage1,
-            title: "Artigo 3",
-            description: "Explore a numerologia e como os números podem influenciar suas escolhas e seu destino.",
-            category: "#Numerologia",
-            url: "/artigo3"
-        },
-        {
-            image: courseImage2,
-            title: "Artigo 4",
-            description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-            category: "#Tarot",
-            url: "/artigo2"
-        },
-        {
-            image: courseImage2,
-            title: "Artigo 2",
-            description: "Entenda os fundamentos do tarot e como ele pode ser uma ferramenta poderosa para autoconhecimento.",
-            category: "#Tarot",
-            url: "/artigo2"
-        }
-    ];
+    // Busca os artigos da API ao carregar o componente
+    useEffect(() => {
+        fetch('http://localhost:5000/articles')  // sua rota real da API
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao buscar artigos');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const categorias = ['Astrologia', 'Tarot', 'Numerologia', 'Magia'];
+                // Para cada categoria, pega o primeiro artigo que bate com ela
+                const artigosFiltrados = categorias
+                    .map(cat => data.find(article => article.category === cat))
+                    .filter(Boolean); // remove undefined caso não encontre artigo da categoria
+                setArticles(artigosFiltrados);
+                setLoading(false);
+            })
+            .catch(err => {
+                setError(err.message);
+                setLoading(false);
+            });
+    }, []);
 
+    // Dados estáticos dos vídeos (mantidos iguais)
     const card_video1 = [
         {
             video: VideoAstrologia,
@@ -79,143 +71,121 @@ function Home() {
             description: "Descubra seu potencial e seja quem você nasceu para ser, viva sua melhor versão e transforme a sua vida! Você merece todo sucesso que o destino guardou para você! Invista na sua felicidade! Faça como as grandes celebridades e empresários de sucesso, faça o seu Mapa Numerológico!",
             subtitle: "Numerologia",
             url: "https://www.youtube.com/watch?v=fb8M1kflxCs",
-            color: "#8C089C"
-        }
-    ];
-
-    const courses = [
-        {
-            image: courseImage1,
-            title: "Curso 1",
-            description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-            category: "#Astrologia",
-            duration: "🕒2h"
-        },
-        {
-            image: courseImage2,
-            title: "Curso 2",
-            description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-            category: "#Taro",
-            duration: "🕒3h"
-        },
-        {
-            image: courseImage1,
-            title: "Curso 3",
-            description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-            category: "#Magia",
-            duration: "🕒5h"
-        },
-        {
-            image: courseImage2,
-            title: "Curso 4",
-            description: "Descrição do curso 4",
-            category: "#Numerologia",
-            duration: "🕒4h"
+            color: "#2B089C"
         }
     ];
 
     return (
         <>
-            <HeroSection
-                image={home}
-                title="🧙‍♀️ Portal Bruxa Acadêmica"
-                description="Explore os mistérios do universo, conecte-se com a energia dos astros e descubra a magia que habita dentro de você..."
-            />
-
-            {/* Seção de Cursos */}
-            <div className={styles.courseSection}>
-                <h2 className={styles.sectionTitle}>Confira meus Cursos</h2>
-                <p className={styles.sectionDescription}>&#9733; Aprofunde seus conhecimentos em magia e espiritualidade &#9733;</p>
-                
-                <div className={styles.cardContainerCourse}>
-                    {courses.slice(0, 3).map((course, index) => (
-                    <Card
-                        key={index}
-                        image={course.image}
-                        title={course.title}
-                        description={course.description}
-                        category={course.category}
-                        duration={course.duration}
-                        type="curso"
-                    />
-                    ))}
-                </div>
-
-                <div className={styles.viewMoreButton}>
-                    <a href="/cursos" className={styles.viewMoreLink}>Ver Mais Cursos</a>
-                </div>
-            </div>
+            <HeroSection image={home} />
 
             {/* Seção de Artigos */}
-            <div className={styles.articleSection}>
-                <h2 className={styles.sectionTitle}>Artigos e Ensinamentos</h2>
-                <p className={styles.sectionDescription}>&#9733; Aprofunde-se no seu autoconhecimento e descubra novos caminhos &#9733;</p>
-                <div className={styles.cardContainer}>
-                    {articles.slice(0,4).map((article, index) => (
-                    <Card 
-                        key={index} 
-                        image={article.image} 
-                        title={article.title} 
-                        description={article.description} 
-                        link={article.url} 
-                        category={article.category} 
-                        type="artigo" 
-                    />
-                    ))}
+            <Container>
+                <div className={styles.articleSection}>
+                    <h2 className={styles.sectionTitle}>Artigos e Ensinamentos</h2>
+                    <p className={styles.sectionDescription}>
+                        &#9733; Aprofunde-se no seu autoconhecimento e descubra novos caminhos &#9733;
+                    </p>
+
+                    {loading ? (
+                        <p>Carregando artigos...</p>
+                    ) : error ? (
+                        <p>Erro: {error}</p>
+                    ) : articles.length === 0 ? (
+                        <div className={styles.emptyWrapper}>
+                            <p>Nenhum artigo encontrado. Volte mais tarde para mais conteúdos</p>
+                        </div>
+                    ) : (
+                        <div className={styles.cardContainer}>
+                            {articles.map((article, index) => (
+                                <Card
+                                    key={index}
+                                    image={article.imageThumb}
+                                    title={truncateDescription(article.title, 30)}
+                                    description={article.firstContent}
+                                    link={`/artigos/${article._id}`}
+                                    category={`#${article.category}`}
+                                    type="artigo"
+                                />
+                            ))}
+                        </div>
+                    )}
+
+                    <div className={styles.viewMoreButton}>
+                        <a href="/artigos" className={styles.viewMoreLink}>Ver Mais Artigos</a>
+                    </div>
                 </div>
 
-                <div className={styles.viewMoreButton}>
-                    <a href="/artigos" className={styles.viewMoreLink}>Ver Mais Artigos</a>
+            </Container>
+
+            {/* Professora */}
+            <Container>
+                <div className={styles.aboutSection}>
+                    <div className={styles.aboutContent}>
+                        <img src={prof} alt="Márcia" className={styles.aboutPhoto} />
+                        <div className={styles.aboutText}>
+                            <p className={styles.aboutLabel}>Sobre mim</p>
+                            <h3 className={styles.aboutName}>Márcia Silva</h3>
+                            <p className={styles.aboutDescription}>
+                                Professora dedicada e apaixonada pelo ensino, ela encontra na astrologia um hobby inspirador. Sempre em busca de conhecimento, investe em cursos e pesquisa artigos para aprofundar sua conexão com os mistérios do cosmos, trazendo essa sabedoria para o seu dia a dia e compartilhando com seus alunos e leitores.
+                            </p>
+                        </div>
+                    </div>
                 </div>
+            </Container>
 
-            </div>
 
+            {/* Vídeos */}
+            <Container>
+                <h2 className={styles.sectionTitle}>Círculo Místico: Vídeos e Ensinamentos</h2>
+                <p className={styles.sectionDescription}>&#9733; Aprenda, conecte-se e floresça no seu caminho mágico &#9733;</p>
 
-            <h2 className={styles.sectionTitle}>Círculo Místico: Vídeos e Ensinamentos</h2>
-            <p className={styles.sectionDescription}>&#9733; Aprenda, conecte-se e floresça no seu caminho mágico &#9733;</p>
-            {card_video1.map((videoCard, index) => (
-                <div key={index}>
-                    <Video
-                        video={videoCard.video}
-                        title={videoCard.title}
-                        description={videoCard.description}
-                        subtitle={videoCard.subtitle}
-                        url={videoCard.url}
-                        color={videoCard.color}
-                    />
-                </div>
-            ))}
-            <div className={styles.sectionDivider}></div>
+                {card_video1.map((videoCard, index) => (
+                    <div key={index}>
+                        <Video
+                            video={videoCard.video}
+                            title={videoCard.title}
+                            description={videoCard.description}
+                            subtitle={videoCard.subtitle}
+                            url={videoCard.url}
+                            color={videoCard.color}
+                        />
+                    </div>
+                ))}
 
-            {card_video2.map((videoCard, index) => (
-                <div key={index}>
-                    <Video
-                        video={videoCard.video}
-                        title={videoCard.title}
-                        description={videoCard.description}
-                        subtitle={videoCard.subtitle}
-                        url={videoCard.url}
-                        color={videoCard.color}
-                    />
-                </div>
-            ))}
-            <div className={styles.sectionDivider}></div>
+                <div className={styles.sectionDivider}></div>
 
-            {card_video3.map((videoCard, index) => (
-                <div key={index}>
-                    <Video
-                        video={videoCard.video}
-                        title={videoCard.title}
-                        description={videoCard.description}
-                        subtitle={videoCard.subtitle}
-                        url={videoCard.url}
-                        color={videoCard.color}
-                    />
-                </div>
-            ))}
+                {card_video2.map((videoCard, index) => (
+                    <div key={index}>
+                        <Video
+                            video={videoCard.video}
+                            title={videoCard.title}
+                            description={videoCard.description}
+                            subtitle={videoCard.subtitle}
+                            url={videoCard.url}
+                            color={videoCard.color}
+                        />
+                    </div>
+                ))}
 
-            <br></br>
-            <br></br>
+                <div className={styles.sectionDivider}></div>
+
+                {card_video3.map((videoCard, index) => (
+                    <div key={index}>
+                        <Video
+                            video={videoCard.video}
+                            title={videoCard.title}
+                            description={videoCard.description}
+                            subtitle={videoCard.subtitle}
+                            url={videoCard.url}
+                            color={videoCard.color}
+                        />
+                    </div>
+                ))}
+            </Container>
+
+            <br />
+            <br />
         </>
     );
 }

@@ -6,6 +6,7 @@ import Barra_Categoria from '../components/Barra_Categoria';
 import Sobre_Mim_Lateral from '../components/Sobre_MIm_Lateral';
 import ArticleTemplate from '../components/ArticleTemplate';
 import BreadCrumb from '../components/BreadCrumb';
+import Container from '../components/Container';
 
 function Article_Pages() {
   const { id } = useParams(); // captura o ID do artigo
@@ -64,36 +65,38 @@ function Article_Pages() {
 
   return (
     <>
-      <div className={`row ${styles.rowPrincipal}`}>
-        <div className={styles.colInsideLeft}>
-          {/* Exibe o breadcrumb com base na categoria e no título do artigo */}
-          <BreadCrumb
-            articleTitle={
-              articleTemporaryData?.title ||
-              articleData?.title ||
-              "Carregando..."
-            }
-            categoryName={
-              articleTemporaryData?.category ||
-              articleData?.category ||
-              category || "Categoria"
-            }
-          />
-          {/* Envia articleTemporaryData se existir, senão envia o ID */}
-          <ArticleTemplate
-            {...(articleTemporaryData
-              ? { articleData: articleTemporaryData }
-              : articleData
-                ? { articleData }
-                : { articleId: id })}
-          />
+    <Container>
+        <div className={`row ${styles.rowPrincipal}`}>
+          <div className={styles.colInsideLeft}>
+            {/* Exibe o breadcrumb com base na categoria e no título do artigo */}
+            <BreadCrumb
+              articleTitle={
+                articleTemporaryData?.title ||
+                articleData?.title ||
+                "Carregando..."
+              }
+              categoryName={
+                articleTemporaryData?.category ||
+                articleData?.category ||
+                category || "Categoria"
+              }
+            />
+            {/* Envia articleTemporaryData se existir, senão envia o ID */}
+            <ArticleTemplate
+              {...(articleTemporaryData
+                ? { articleData: articleTemporaryData }
+                : articleData
+                  ? { articleData }
+                  : { articleId: id })}
+            />
+          </div>
+          <div className={styles.colInsideRight}>
+            <Barra_Pesquisa />
+            <Barra_Categoria />
+            <Sobre_Mim_Lateral />
+          </div>
         </div>
-        <div className={styles.colInsideRight}>
-          <Barra_Pesquisa />
-          <Barra_Categoria />
-          <Sobre_Mim_Lateral />
-        </div>
-      </div>
+        </Container>
       <br />
     </>
   );

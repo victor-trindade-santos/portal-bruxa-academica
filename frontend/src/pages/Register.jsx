@@ -148,22 +148,24 @@ function Register() {
   ];
 
   return (
-    <div className={styles.loginContainer}>
-      <div className={styles.formBox}>
-        <div className={styles.title}>Cadastro</div>
-        <form onSubmit={handleRegister}>
-          {inputs.map((input) => (
-            <RegisterInput key={input.id} {...input} value={values[input.name]} onChange={onChange} />
-          ))}
+    <div className="pageContentWithoutHero">
+      <div className={styles.loginContainer}>
+        <div className={styles.formBox}>
+          <div className={styles.title}>Cadastro</div>
+          <form onSubmit={handleRegister}>
+            {inputs.map((input) => (
+              <RegisterInput key={input.id} {...input} value={values[input.name]} onChange={onChange} />
+            ))}
 
-          {error && <p style={{ color: 'red', marginTop: '0.5rem' }}>{error}</p>}
-          {success && <p style={{ color: 'rgba(250, 226, 10, 0.801)', marginTop: '0.5rem' }}>{success}</p>}
+            {error && <p style={{ color: 'red', marginTop: '0.5rem' }}>{error}</p>}
+            {success && <p style={{ color: 'rgba(250, 226, 10, 0.801)', marginTop: '0.5rem' }}>{success}</p>}
 
-          <button type="submit" className={styles.button}>Cadastrar</button>
-          <p style={{ marginTop: '1rem', textAlign: 'center' }}>
-            Já possui uma conta? <Link to="/login" style={{ color: '#e0b3ff' }}>Entre</Link>
-          </p>
-        </form>
+            <button type="submit" className={styles.button}>Cadastrar</button>
+            <p style={{ marginTop: '1rem', textAlign: 'center' }}>
+              Já possui uma conta? <Link to="/login" style={{ color: '#e0b3ff' }}>Entre</Link>
+            </p>
+          </form>
+        </div>
       </div>
     </div>
   );

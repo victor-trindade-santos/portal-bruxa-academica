@@ -54,4 +54,6 @@ h2 {
   margin: 0; 
 }
 
-
+.pageContentWithoutHero {
+  margin-top: 90px;
+}

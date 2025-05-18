@@ -34,7 +34,7 @@
   color: e0b3ff;
 }
 
-label {
+.label {
   display: block;
   margin-top: 1rem;
   font-size: 0.9rem !important;
@@ -43,11 +43,11 @@ label {
   color: #8C089C;
 }
 
-p {
+.p {
   font-size: 0.9rem !important;
 }
 
-input {
+.input {
   width: 100%;
   padding: 0.6rem;
   border: none;
@@ -58,14 +58,14 @@ input {
   margin-bottom: 0.5rem;
 }
 
-input:focus {
+.input:focus {
   outline: none;
   /* border: 1px solid #c67efb; */
   background-color: #e4000015;
   box-shadow: inset 0 0 1px #c67efb;
 }
 
-button {
+.button {
   position: relative;
   /* Necessário para posicionar o ::before */
   font-family: 'Inter', sans-serif;
@@ -90,6 +90,6 @@ button {
 
 }
 
-button:hover {
+.button:hover {
   background-color: #934a9b;
 }
