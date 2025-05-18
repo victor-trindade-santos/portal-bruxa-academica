@@ -42,11 +42,9 @@ const ArticleTemplate = ({ articleId, articleData }) => {
       {article ? (
         <>
           <h1 className={styles.titleArticle}>{article.title}</h1>
+          <p className={styles.textAuthor}>{article.firstContent}</p>
           <p className={styles.textAuthor}>Por: {article.author}</p>
           <p className={styles.textPublicationDate}>Data de Publicação: {article.publicationDate}</p>
-          <img src={article.imageArticle} className={styles.imageArticle} alt={article.title} />
-          <p className={styles.textArticle} dangerouslySetInnerHTML={{ __html: article.firstContent }} />
-          <h2 className={styles.subtitleArticle}>{article.subtitle}</h2>
           <p className={styles.textArticle} dangerouslySetInnerHTML={{ __html: article.secondContent }} />
         </>
       ) : (

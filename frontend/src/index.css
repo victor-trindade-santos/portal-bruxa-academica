@@ -1,39 +1,104 @@
 @import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-*{
-  font-family: 'Inter', 'sans-serif'!important;
+* {
+  font-family: 'Inter', 'sans-serif' !important;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Sobrescrevendo o estilo do Quill */
-.custom-quill .ql-editor a {
-  text-decoration: none !important;
-  color: inherit !important;
+/* Estiliza a toolbar inteira */
+.ql-toolbar {
+  min-height: auto !important;
+  padding: 4px 8px !important;
+  display: flex;
+  flex-wrap: nowrap;
+  /* força tudo na mesma linha */
+  margin: 0px;
+  gap: 4px;
+  align-items: center;
+  height: auto;
+  width: calc(100% - 16px) !important;
+  /* 8px de cada lado */
+
 }
 
-p{
+/* Remove espaçamentos internos dos elementos */
+.ql-toolbar .ql-formats {
+  margin: 0 !important;
+}
+
+/* Botões e selects menores */
+.ql-toolbar button,
+.ql-toolbar select {
+  height: 28px;
+  line-height: 1;
+  padding: 2px 6px;
+  font-size: 14px;
+
+  margin-top: 8px;
+  box-shadow: none !important;
+  filter: none !important;
+  outline: none !important;
+}
+
+/**/
+
+.ql-picker-label {
+  margin: 0;
+
+}
+
+.ql-picker-label::before {
+  transform: translateY(-4px);
+  /* ou -3px, ajuste fino */
+}
+
+.ql-align {
+  transform: translateY(-1px);
+}
+
+
+
+.ql-blank,
+.ql-container,
+.ql-toolbar,
+.quill {
+  margin-left: 8px;
+  width: calc(100% - 8px);
+}
+.ql-container,
+.ql-blank,
+.quill{
+  height: 450px;
+}
+.ql-snow .ql-align svg {
+  width: 18px !important;
+  height: 18px !important;
+  /* opcional: ajustar viewBox se necessário */
+}
+
+p {
   text-decoration: none !important;
 }
 
-body{
+body {
   padding-top: 70px;
   margin: 0;
   min-height: 100vh;
   padding: 0;
 }
 
-li{
+li {
   font-style: unset;
   list-style: none;
 }
 
 h2 {
-  margin-top: 40px; 
-  font-size: 2rem; 
-  color: #333; 
+  margin-top: 40px;
+  font-size: 2rem;
+  color: #333;
   text-align: center;
 }
 
@@ -42,7 +107,7 @@ h2 {
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 100%; 
+  width: 100%;
   text-align: center;
 }
 
@@ -51,7 +116,5 @@ h2 {
   font-size: 1.2rem;
   color: #888;
   font-style: italic;
-  margin: 0; 
+  margin: 0;
 }
-
-

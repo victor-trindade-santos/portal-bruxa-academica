@@ -10,16 +10,13 @@ const UpdateArticleComponent = ({ formDataArticle, setFormDataArticle }) => {
 
   //Renomeando os campos do artigo para ficar mais fácil do usuário identificar quais campos não estão devidamente preenchidos
   const fieldLabels = {
-    _id: 'id',
-    title: 'Título',
-    author: 'Autor',
-    publicationDate: 'Data de Publicação',
-    firstContent: 'Primeiro Parágrafo',
-    subtitle: 'Subtítulo',
-    secondContent: 'Segundo Parágrafo',
-    category: 'Categoria',
-    imageArticle: 'Imagem do Artigo',
-    imageThumb: 'Imagem do Card/Thumbnail'
+        title: 'Título',
+        author: 'Autor',
+        publicationDate: 'Data de Publicação',
+        firstContent: 'Resumo',
+        secondContent: 'Conteúdo do Artigo',
+        category: 'Categoria',
+        imageThumb: 'Imagem do Card/Thumbnail'
   };
 
   const handleUpdate = async () => {
@@ -34,7 +31,6 @@ const UpdateArticleComponent = ({ formDataArticle, setFormDataArticle }) => {
       'author',
       'publicationDate',
       'firstContent',
-      'subtitle',
       'secondContent',
       'category'
     ];
@@ -42,14 +38,6 @@ const UpdateArticleComponent = ({ formDataArticle, setFormDataArticle }) => {
     const missingFields = requiredFields.filter(
       field => !formDataArticle[field]?.toString().trim()
     );
-
-    // Verificações específicas para imagens
-    if (
-      !formDataArticle.imageArticle ||
-      !(formDataArticle.imageArticle instanceof File || typeof formDataArticle.imageArticle === 'string')
-    ) {
-      missingFields.push('imageArticle');
-    }
 
     if (
       !formDataArticle.imageThumb ||
@@ -70,7 +58,7 @@ const UpdateArticleComponent = ({ formDataArticle, setFormDataArticle }) => {
     for (const key in updatedArticle) {
       const value = updatedArticle[key];
 
-      if (key === 'imageArticle' || key === 'imageThumb') {
+      if (key === 'imageThumb') {
         if (value instanceof File) {
           console.log(`📁 ${key} é um arquivo válido, anexando...`);
           formData.append(key, value);

@@ -26,9 +26,7 @@ const App = () => {
     title: '',
     author: '',
     publicationDate: new Date().toLocaleDateString("pt-BR"),
-    imageArticle: null,
     firstContent: '',
-    subtitle: '',
     secondContent: '',
     imageThumb: null,
     category: ''

@@ -1,14 +1,14 @@
 .rowPrincipal {
     display: flex;
     padding: 0;
-    padding-top: 6%;
+    padding-top: 7%;
     margin: 0;
     box-sizing: border-box;
     
   }
 .sectionTitle {
   color: #67006C;
-  font-size: 3em;
+  font-size: 1.5em;
   font-weight: bold;
   margin-left: 5%;
 }
@@ -32,7 +32,6 @@
 }
 
 .titleArticle {
-
     font-family: 'Inter', sans-serif;
     font-weight: 800;
     /* This means "extra-bold" */
@@ -44,8 +43,22 @@
     border-radius: 1px;  /* Borda arredondada, caso queira */
 }
 
+
+.fieldDescription {
+  font-family: 'Inter', sans-serif ;
+    font-weight: 400; /* regular */
+    font-size: 15px;
+    color: #000000;
+    margin-left: 8px; /* pequeno espaçamento à esquerda */
+    margin-bottom: auto;
+    margin-top:  2%;
+    text-align: left;
+    text-decoration: none;
+}
+
 .textAuthor, 
-.textPublicationDate {
+.textPublicationDate,
+.textResume {
     font-family: 'Inter', sans-serif ;
     font-weight: 400; /* regular */
     font-size: 15px;
@@ -58,16 +71,16 @@
     border-radius: 1px;  /* Borda arredondada, caso queira */
   }
 
-  .textPublicationDate{
+  /* .textPublicationDate{
     margin-bottom: 2%;
   }
   .textAuthor {
     margin-top: 3%;
     margin-bottom: 1%;
-  }
+  } */
 
   .imageArticle{
-    width: 80%;
+    width: 60%;
     display: block;
     margin: 0 auto;
     border: 1px solid #ccc;  /* Borda cor púrpura */
@@ -87,18 +100,82 @@
 
   }
 
-  .subtitleArticle{
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    /* This means "extra-bold" */
-    font-size: 24px;
-    color: #8C089C;
-    text-align: left;
-    margin-left: 8px;
-    border: 1px solid #ccc;  /* Borda cor púrpura */
-    padding: 5px;  /* Adicionando um pequeno padding para deixar a borda mais visível */
-    border-radius: 1px;  /* Borda arredondada, caso queira */
+  .titleArticle{
+    width: 65%;
   }
+  .textResume{
+    width: calc(100% - 16px); /* 8px de cada lado */
+  }
+  .textPublicationDate{
+    width: auto;
+  }
+  .textResume{
+    margin: 8px auto 8px 8px;
+  }
+  .textAuthor{
+    width: 50%;
+  }
+.selectCategory {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: #4F0B82;
+  margin-left: 8px;
+  text-align: left;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin: 8px;
+  background-color: #fff;
+  appearance: none;            /* Remove seta padrão em navegadores modernos */
+  position: relative;
+  cursor: pointer;
+}
+
+.fileInput {
+  display: none; /* Esconde o input padrão */
+}
+
+.fileInputLabel {
+  display: inline-block;
+  color: #4F0B82;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px !important;
+  padding: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: background-color 0.2s ease;
+  text-align: center;
+}
+
+.fileInputLabel:hover {
+  background-color: #4F0B82;
+  color: #fff;
+}
+
+.imageArticle {
+  margin-top: 12px;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.selectCategory:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
+}
+
+.selectCategory option {
+  background-color: #fff;
+  color: #333;
+  padding: 5px;
+}
+
+
 
   .updateButton {
     position: relative; /* Necessário para posicionar o ::before */
