@@ -37,36 +37,40 @@ const App = () => {
   return (
     <AuthProvider>
       <Router>
-        <NavBar />
-        <ToastContainer
-          closeButton={false}  // Desabilita o botão de fechar
-          autoClose={6000}     // Tempo para o toast desaparecer
-          position="top-right" // Posição do toast na tela
-        />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/create-articles-d42f4c" element={
-            <ArticleCRUD
-              formDataArticle = {formDataArticle}
-              setFormDataArticle = {setFormDataArticle}
-            />} 
+        <div className="layout">
+          <NavBar />
+          <main className="main-content">
+          <ToastContainer
+            closeButton={false}  // Desabilita o botão de fechar
+            autoClose={6000}     // Tempo para o toast desaparecer
+            position="top-right" // Posição do toast na tela
           />
-          <Route path="/magia" element={<Magia />} />
-          <Route path="/tarot" element={<Tarot />} />
-          <Route path="/numerologia" element={<Numerologia />} />
-          <Route path="/astrologia" element={<Astrologia />} />
-          <Route path="/artigos" element={<Artigos />} />
-          <Route path="/cursos" element={<Cursos />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          {/* Adicionando a rota para a página do artigo */}
-          <Route path="/artigos/:id" element={<Article_Pages />} />
-          <Route path="/preview-article" element={<Article_Pages />} />
-          <Route path="/profile" element={<Perfil />} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/create-articles-d42f4c" element={
+              <ArticleCRUD
+                formDataArticle={formDataArticle}
+                setFormDataArticle={setFormDataArticle}
+              />}
+            />
+            <Route path="/magia" element={<Magia />} />
+            <Route path="/tarot" element={<Tarot />} />
+            <Route path="/numerologia" element={<Numerologia />} />
+            <Route path="/astrologia" element={<Astrologia />} />
+            <Route path="/artigos" element={<Artigos />} />
+            <Route path="/cursos" element={<Cursos />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            {/* Adicionando a rota para a página do artigo */}
+            <Route path="/artigos/:id" element={<Article_Pages />} />
+            <Route path="/preview-article" element={<Article_Pages />} />
+            <Route path="/profile" element={<Perfil />} />
 
 
-        </Routes>
-        <Footer />
+          </Routes>
+          </main>
+          <Footer />
+        </div>
       </Router>
     </AuthProvider>
   );

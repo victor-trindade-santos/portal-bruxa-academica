@@ -19,10 +19,13 @@ p{
 }
 
 body{
-  padding-top: 70px;
+  padding-top: 20px;
   margin: 0;
   min-height: 100vh;
-  padding: 0;
+}
+
+html, body {
+  height: 100%;
 }
 
 li{
@@ -56,4 +59,14 @@ h2 {
 
 .pageContentWithoutHero {
   margin-top: 90px;
+}
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
 }
