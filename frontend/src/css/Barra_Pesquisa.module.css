@@ -5,33 +5,60 @@
   width: 100%;
   position: relative; /* Fundamental para o posicionamento absoluto do dropdown */
   margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .inputWrapper {
-  display: flex;
-  align-items: center;
+  flex: 1;
   border: 1px solid #5B079B;
   border-radius: 20px;
   padding: 8px 12px;
+  position: relative;
+  width: 100%;
 }
 
 /* Ícone da lupa */
 .searchIcon {
   width: 16px;
   height: 16px;
-  margin-right: 8px;
+  margin: 0;
+  background-color: transparent;
 }
 
 /* Estilo do input */
 .searchInput {
   flex: 1;
-  border: none !important;
+  border: none;
+  outline: none;
   font-family: 'Inter', sans-serif;
   font-weight: 300;
   font-size: 15px;
-  color: #8C089C;
   margin: 0;
-  padding:0;
+  padding-left: 0;
+  z-index: 1;
+  position: relative;
+  min-width: 0;
+}
+
+.searchButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  box-shadow: none;
+  z-index: 2;
 }
 
 .searchInput::placeholder {
@@ -44,17 +71,6 @@
   box-shadow:none;
 }
 
-.searchButton {
-  background: transparent !important;
-  border: none !important;
-  padding: 0 16px;
-  margin: 0 !important;
-  cursor: pointer;
-  display: flex ;
-  align-items: center;
-  justify-content: center;
-  width: 0px;
-}
 /* DROPDOWN */
 .suggestions {
   position: absolute;
@@ -88,6 +104,16 @@
 .suggestionItem:hover {
   background-color: #f2f2f2;
 }
+
+.searchInput:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.searchInput:focus::placeholder {
+  color: transparent;
+}
+
 
 @media (max-width: 768px){
   .searchInput {

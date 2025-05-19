@@ -27,8 +27,8 @@
 }
 
 .sectionTitle {
-  color: #67006C;
-  font-size: 3em;
+  color: #2B089C;
+  font-size: 2em;
   font-weight: bold;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .sectionDescription {
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -131,4 +131,63 @@
       justify-items: center; /* centraliza horizontalmente */
   align-items: center;   /* centraliza verticalmente (opcional) */
   }
+}
+
+.aboutSection {
+  width: 100%; /* ocupa toda largura possível */
+  background-color: #f0e6f6;
+  padding: 40px 0; /* só vertical, pra manter espaço */
+  margin-top: 40px;
+}
+
+.aboutContent {
+  max-width: 800px;
+  margin: 0 auto; /* centraliza horizontalmente */
+  padding: 0 20px; /* espaçamento lateral igual ao que tinha */
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-direction: row-reverse;
+}
+
+.aboutText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1; 
+  margin-left: 15px;
+}
+
+.aboutName {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2b089c;
+  margin-bottom: 15px;
+}
+
+.aboutDescription {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.5;
+  margin: 0;
+  text-align: left;
+}
+
+.aboutPhoto {
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #000000;
+  flex-shrink: 0; 
+  margin: 25px;
+}
+
+.aboutLabel {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #9c6de8;
+  margin-bottom: 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }

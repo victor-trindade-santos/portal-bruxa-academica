@@ -1,4 +1,4 @@
-input{
+.input{
     padding: 15px;
     margin: 8px;
     border: 1px solid e0b3ff;
@@ -11,13 +11,13 @@ input{
     width: 95%;
 }
 
-label{
+.label{
     font-size: 12px;
     color: e0b3ff;
     margin: 8px;
 }
 
-span{
+.span{
     font-size: 12px;
     padding: 3px;
     color: red;
@@ -26,10 +26,10 @@ span{
     margin: 8px;
 }
 
-input:invalid[focused = "true"]{
+.input:invalid[focused = "true"]{
     border: 1px solid red;
 }
 
-input:invalid[focused = "true"] ~ span {
+.input:invalid[focused = "true"] ~ span {
     display: block;
 }

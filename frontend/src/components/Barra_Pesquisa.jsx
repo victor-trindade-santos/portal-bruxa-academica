@@ -94,14 +94,14 @@ function Barra_Pesquisa({ onSelectArticle, reloadTrigger, onSearch }) {
                     onFocus={() => setShowDropdown(true)}
                     onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
                 />
-                <button
-                    className={styles.searchButton}
-                    type="button"
-                    onClick={handleSearch}
-                >
-                    <img src={lupa} alt="Ícone de busca" className={styles.searchIcon} />
-                </button>
             </div>
+            <button
+                className={styles.searchButton}
+                type="button"
+                onClick={handleSearch}
+            >
+                <img src={lupa} alt="Ícone de busca" className={styles.searchIcon} />
+            </button>
 
             {/* Sugestões enquanto digita */}
             {showDropdown && filteredArticles.length > 0 && (

@@ -9,7 +9,6 @@
 .title {
     font-family: 'Inter', sans-serif;
     font-weight: 800;
-    /* This means "extra-bold" */
     font-size: 20px;
     color: #8C089C;
     text-align: left;
@@ -19,7 +18,7 @@
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     /* regular */
-    font-size: 19px;
+    font-size: 1rem;
     color: #4F0B82;
     margin-left: 8px;
     /* pequeno espaçamento à esquerda */

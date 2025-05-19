@@ -219,6 +219,7 @@
   align-items: center;
   justify-content: center;
   background-color: #f5f5f5;
+  overflow: hidden;
 }
 
 /* Regra geral da imagem */
@@ -239,7 +240,7 @@
 
 .articleCategory {
   position: absolute;
-  bottom: -5%; /* Ajuste a distância da base da imagem */
+  bottom: 1%; /* Ajuste a distância da base da imagem */
   left: 0;
   background-color: #2B089C; /* Fundo roxo */
   color: white;
@@ -247,7 +248,7 @@
   border-radius: 50px; /* Bordas arredondadas */
   font-size: 1rem;
   text-align: center;
-  z-index: 1; /* Para garantir que fique visível sobre a imagem */
+  z-index: 2; /* Para garantir que fique visível sobre a imagem */
 }
 
 .articleCategory:before {

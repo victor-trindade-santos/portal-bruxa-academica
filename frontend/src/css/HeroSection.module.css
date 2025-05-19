@@ -1,71 +1,68 @@
 .hero {
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-  }
-  
-  .overlay {
-    flex: 1;
-    background: linear-gradient(to bottom, rgba(42, 0, 83, 0.6), rgba(41, 0, 83, 0.63));
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    position: relative;
-    z-index: 1;
-  } 
-  
-  .content {
-    text-align: center;
-    color: #fff;
-    max-width: 800px;
-    z-index: 2;
-  }
-  
+  background-size: cover; /* já tem */
+  background-position: center;
+  background-repeat: no-repeat;  /* para evitar repetição */
+  position: relative;
+  padding: 5rem 0;
+  min-height: 400px; /* define uma altura mínima pra garantir espaço */
+  display: flex;  /* pra garantir que o conteúdo se alinhe */
+  align-items: center; 
+  justify-content: center;
+}
+
+.overlay {
+  position: absolute;  /* cobre o pai */
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom, rgba(42, 0, 83, 0.7), rgba(41, 0, 83, 0.7));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  z-index: 1;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 1rem;
+  text-align: center;
+  color: #fff;
+}
+
+.title {
+  font-size: 2rem; /* menor que 2.8rem */
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.button {
+  background-color: #2B089C;
+  color: #ffffff;
+  padding: 0.8rem 2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #684edb; /* roxo mais escuro */
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
   .title {
-    font-size: 3.5rem;
-    margin-bottom: 1rem;
-    color: #FFFF00;
+    font-size: 2rem;
   }
-  
+
   .description {
-    font-size: 1.3rem;
-    line-height: 1.6;
+    font-size: 1rem;
   }
-  
-  .footer {
-    height: 60px;
-    background-color: #2b089c;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    position: relative;
-  }
-  
-  .footerText {
-    color: #FFFF00; 
-    font-size: 1.3rem;
-    font-style: italic;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); 
-    z-index: 5;
-    padding: 0 1rem; 
-  }
-  
-  @media (max-width: 767px) {
-    .footer{
-      height: 80px;
-    }
-
-    .footerText{
-      padding: 0;
-      text-align: center;
-    }
-  }
-
-  
-  
+}
