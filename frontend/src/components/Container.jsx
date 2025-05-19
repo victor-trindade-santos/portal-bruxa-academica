@@ -1,8 +1,16 @@
 import React from 'react';
-import '../css/Container.css'; // ou use um módulo css se preferir
+import '../css/Container.css'; // mantendo seu CSS atual
 
-const Container = ({ children }) => {
-  return <div className="container">{children}</div>;
+const Container = ({ children, paddingTop }) => {
+  return (
+    <div
+      className="container"
+      style={{ paddingTop: paddingTop || undefined }} 
+      // se não passar paddingTop, style não adiciona nada
+    >
+      {children}
+    </div>
+  );
 };
 
 export default Container;
