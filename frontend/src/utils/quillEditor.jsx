@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useEffect, useCallback } from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
 import '../utils/quillSetup'; // Importa o setup logo no topo
 import 'react-quill/dist/quill.snow.css';
@@ -41,71 +41,28 @@ const QuillEditor = ({ value, onChange, placeholder = "Digite algo...", readOnly
     const quillRef = useRef(null);
 
 
-    const imageHandler = useCallback(() => {
-        const input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'image/*');
-        input.click();
-
-        input.onchange = async () => {
-            const file = input.files[0];
-            if (file) {
-                try {
-                    const formData = new FormData();
-                    formData.append('image', file);
-
-                    const res = await fetch('http://localhost:3000/api/upload', {
-                        method: 'POST',
-                        body: formData,
-                    });
-
-                    const data = await res.json();
-
-                    if (data.url) {
-                        const quill = quillRef.current.getEditor();
-                        const range = quill.getSelection(true);
-
-                        if (range) {
-                            quill.insertEmbed(range.index, 'image', data.url);
-                            quill.setSelection(range.index + 1);
-                        } else {
-                            const length = quill.getLength();
-                            quill.insertEmbed(length - 1, 'image', data.url);
-                            quill.setSelection(length);
-                        }
-                    } else {
-                        console.error('Upload falhou:', data);
-                    }
-                } catch (error) {
-                    console.error('Erro ao fazer upload da imagem:', error);
-                }
-            }
-        };
-    }, []);
-
-
     // Configura módulos do Quill
 
     const modules = useMemo(() => ({
         toolbar: {
             container: '#toolbar',
-            handlers: { image: imageHandler },
         },
         imageResize: {
             parchment: Quill.import('parchment'),
             modules: ['Resize', 'DisplaySize'],
         },
-    }), [imageHandler]);
+    }), []);
 
 
     const formats = [
-        'header', // <- ADICIONE ESTE
-        'customVideo',
+        'header',            // títulos H1, H2, etc.
         'bold', 'italic', 'underline', 'strike',
         'list', 'bullet',
-        'link', 'image',
-        'align', 'size', 'width', 'height',
+        'link', 'image', 'customVideo', // precisa incluir 'video' se está usando botão de vídeo
+        'align',                  // ESSENCIAL para <select className="ql-align">
+        'clean'                   // botão ql-clean (remover estilos)
     ];
+
     // Função para escutar clique do botão e inserir vídeo
     useEffect(() => {
         const button = document.getElementById('insert-custom-video');
@@ -116,16 +73,40 @@ const QuillEditor = ({ value, onChange, placeholder = "Digite algo...", readOnly
                 let url = prompt('Cole a URL do vídeo (YouTube, etc)');
 
                 if (url) {
-                    // Se for um link do YouTube normal, transforma em embed
-                    const youtubeMatch = url.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([\w-]+)/);
-                    if (youtubeMatch) {
-                        const videoId = youtubeMatch[1];
-                        url = `https://www.youtube.com/embed/${videoId}`;
+                    // Função para extrair o link embed do YouTube
+                    function getYoutubeEmbedUrl(url) {
+                        let videoId = null;
+
+                        // youtube.com/watch?v=VIDEO_ID
+                        let match = url.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([\w-]+)/);
+                        if (match && match[1]) videoId = match[1];
+
+                        // youtu.be/VIDEO_ID
+                        if (!videoId) {
+                            match = url.match(/(?:https?:\/\/)?youtu\.be\/([\w-]+)/);
+                            if (match && match[1]) videoId = match[1];
+                        }
+
+                        // m.youtube.com/watch?v=VIDEO_ID (mobile)
+                        if (!videoId) {
+                            match = url.match(/(?:https?:\/\/)?m\.youtube\.com\/watch\?v=([\w-]+)/);
+                            if (match && match[1]) videoId = match[1];
+                        }
+
+                        if (videoId) {
+                            return `https://www.youtube.com/embed/${videoId}`;
+                        }
+
+                        // Se não for um YouTube válido, retorna a URL original (pode ser outra fonte de vídeo)
+                        return url;
                     }
+
+                    // **Chamada correta: transforma URL original em embed**
+                    const embedUrl = getYoutubeEmbedUrl(url);
 
                     const range = editor.getSelection(true);
                     editor.insertEmbed(range.index, 'customVideo', {
-                        url,
+                        url: embedUrl,   // <== usa o embedUrl aqui, não a url original
                         width: '640',
                         height: '360',
                     });
@@ -145,6 +126,13 @@ const QuillEditor = ({ value, onChange, placeholder = "Digite algo...", readOnly
         <>
             {/* Toolbar personalizada */}
             <div id="toolbar">
+                <select className="ql-align" defaultValue="">
+                    <option value=""></option>
+                    <option value="center"></option>
+                    <option value="right"></option>
+                    <option value="justify"></option>
+                </select>
+
                 <select className="ql-header" defaultValue="">
                     <option value="1">Título 1</option>
                     <option value="2">Título 2</option>
@@ -155,28 +143,18 @@ const QuillEditor = ({ value, onChange, placeholder = "Digite algo...", readOnly
                 <button className="ql-italic" />
                 <button className="ql-underline" />
                 <button className="ql-strike" />
-
                 <button className="ql-list" value="ordered" />
                 <button className="ql-list" value="bullet" />
-
                 <button className="ql-link" />
                 <button className="ql-image" />
-
                 <button id="insert-custom-video" className="ql-video" type="button" />
-
-                <select className="ql-align" defaultValue="">
-                    <option value="" />
-                    <option value="center" />
-                    <option value="right" />
-                    <option value="justify" />
-                </select>
-
                 <button className="ql-clean" />
             </div>
 
 
             {/* Editor Quill */}
             <ReactQuill
+                className="react-quill"
                 ref={quillRef}
                 theme="snow"
                 value={value}

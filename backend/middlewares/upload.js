@@ -15,24 +15,53 @@ const uploadToCloudinary = async (req, res, next) => {
   console.log('Arquivos recebidos:', req.files);
   console.log('Body recebido:', req.body);
 
-  if (!req.files || Object.keys(req.files).length === 0) {
-    console.error('⚠️ Nenhuma nova imagem enviada, mantendo URLs existentes.');
-    
-    req.imageUrls ={
-      imageThumb: req.body.imageThumb || "", // Mantém a URL do frontend, se disponível
-      imageArticle: req.body.imageArticle || "" // Mantém a URL do frontend, se disponível
-    };
-    return next();  // Pulamos o processo de upload e seguimos para a atualização do artigo
-  }
-
-  const imageThumbFile = req.files.find(file => file.fieldname === 'imageThumb');
-  const imageArticleFile = req.files.find(file => file.fieldname === 'imageArticle');
-
-  console.log('Iniciando upload para Cloudinary');
-  console.log('Thumb recebido:', imageThumbFile);
-  console.log('Article recebido:', imageArticleFile);
-
   try {
+    // 1. Processar as imagens base64 do secondContent
+    if (req.body.secondContent) {
+      let content = req.body.secondContent;
+
+      // Regex para pegar todas imagens base64 (src="data:image/…")
+      const base64Imgs = content.match(/<img[^>]+src="data:image\/[^">]+"[^>]*>/g) || [];
+
+      for (const imgTag of base64Imgs) {
+        const srcMatch = imgTag.match(/src="([^"]+)"/);
+        if (!srcMatch) continue;
+
+        const base64Data = srcMatch[1];
+
+        // Upload da imagem base64 para Cloudinary
+        const uploaded = await new Promise((resolve, reject) => {
+          cloudinaryUploader.uploader.upload_stream(
+            { folder: 'artigos' },
+            (error, result) => {
+              if (error) return reject(error);
+              resolve(result.secure_url);
+            }
+          ).end(Buffer.from(base64Data.split(",")[1], 'base64'));
+        });
+
+        // Substitui a imagem base64 pelo link do Cloudinary
+        content = content.replace(base64Data, uploaded);
+      }
+
+      // Atualiza o body com o conteúdo já substituído
+      req.body.secondContent = content;
+    }
+
+    if (!req.files || Object.keys(req.files).length === 0) {
+      console.error('⚠️ Nenhuma nova imagem enviada, mantendo URLs existentes.');
+
+      req.imageUrls = {
+        imageThumb: req.body.imageThumb || "", // Mantém a URL do frontend, se disponível
+      };
+      return next();  // Pulamos o processo de upload e seguimos para a atualização do artigo
+    }
+
+    const imageThumbFile = req.files.find(file => file.fieldname === 'imageThumb');
+
+    console.log('Iniciando upload para Cloudinary');
+    console.log('Thumb recebido:', imageThumbFile);
+
     console.log("🚀 Iniciando upload para Cloudinary...");
     const uploadSingle = (file) =>
       new Promise((resolve, reject) => {
@@ -51,10 +80,6 @@ const uploadToCloudinary = async (req, res, next) => {
     const imageThumbUrl = imageThumbFile
       ? await uploadSingle(imageThumbFile)
       : req.body.imageThumb;
-
-    const imageArticleUrl = imageArticleFile
-      ? await uploadSingle(imageArticleFile)
-      : req.body.imageArticle;
 
     req.imageUrls = {
       imageThumb: imageThumbUrl,

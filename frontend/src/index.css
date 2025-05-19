@@ -13,9 +13,7 @@
   min-height: auto !important;
   padding: 4px 8px !important;
   display: flex;
-  flex-wrap: nowrap;
-  /* força tudo na mesma linha */
-  margin: 0px;
+  margin-left: 8px;
   gap: 4px;
   align-items: center;
   height: auto;
@@ -24,6 +22,9 @@
 
 }
 
+.react-quill{
+  margin-left: 8px;
+}
 /* Remove espaçamentos internos dos elementos */
 .ql-toolbar .ql-formats {
   margin: 0 !important;
@@ -32,12 +33,9 @@
 /* Botões e selects menores */
 .ql-toolbar button,
 .ql-toolbar select {
-  height: 28px;
-  line-height: 1;
-  padding: 2px 6px;
-  font-size: 14px;
 
-  margin-top: 8px;
+
+  margin-top:0px ;
   box-shadow: none !important;
   filter: none !important;
   outline: none !important;
@@ -55,17 +53,11 @@
   /* ou -3px, ajuste fino */
 }
 
-.ql-align {
-  transform: translateY(-1px);
-}
-
-
 
 .ql-blank,
 .ql-container,
 .ql-toolbar,
 .quill {
-  margin-left: 8px;
   width: calc(100% - 8px);
 }
 .ql-container,
@@ -78,6 +70,37 @@
   height: 18px !important;
   /* opcional: ajustar viewBox se necessário */
 }
+
+.ql-align-left {
+  text-align: left;
+}
+
+.ql-align-center {
+  text-align: center;
+}
+
+.ql-align-right {
+  text-align: right;
+}
+
+.ql-align-justify {
+  text-align: justify;
+}
+
+.ql-editor ul {
+  padding-left: 1.5em;
+  list-style-type: disc;
+}
+
+.ql-editor ol {
+  padding-left: 1.5em;
+  list-style-type: decimal;
+}
+
+.ql-editor li {
+  margin-bottom: 0.4em;
+}
+
 
 p {
   text-decoration: none !important;
