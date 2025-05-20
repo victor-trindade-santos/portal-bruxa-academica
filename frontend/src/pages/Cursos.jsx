@@ -1,68 +1,84 @@
-import Card from '../components/Card';
-import MagiaIMG from '../img/magia.png';
-import Header from '../components/Header';
-import articleImage from '../img/artigofoto.jpg';
-import courseImage1 from '../img/card_tipo1.jpg';
-import courseImage2 from '../img/Card-tipo2(fundo).jpg';
-import styles from '../css/Magia.module.css';
+import Container from '../components/Container';
+import styles from '../css/Cursos.module.css';
 
 function Cursos() {
-
-    const courses = [
-        {
-            image: courseImage1,
-            title: "Curso 1",
-            description: "Descrição do curso 1"
-        },
-        {
-            image: courseImage2,
-            title: "Curso 2",
-            description: "Descrição do curso 2"
-        },
-        {
-            image: courseImage1,
-            title: "Curso 3",
-            description: "Descrição do curso 3"
-        },
-        {
-            image: courseImage2,
-            title: "Curso 4",
-            description: "Descrição do curso 4"
-        }
-    ]
+    const hasCourses = false; // Para futuro controle
 
     return (
         <>
-            <div>
-                <Header
-                    title="Cursos"
-                    backgroundImage={MagiaIMG}
-                    description="Conhecimentos místicos que transcendem o comum."
-                />
+            {!hasCourses && (
+                <div className={styles.noCoursesWrapper}>
+                    <div className={styles.noCoursesInner}>
+                        <h2 className={`fs-2 ${styles.noCoursesTitle}`}>Cursos em breve!</h2>
+                        <p className={styles.paragrafo}>
+                            Estamos preparando conteúdos especiais para você que quer mergulhar nos conhecimentos místicos.
+                            Fique de olho! Em breve teremos cursos incríveis para expandir seu saber.
+                        </p>
+                    </div>
+                </div>
+            )}
+
+            <Container paddingTop="40px">
                 <div className={styles.sectionDivider}></div>
                 <div className="container">
                     <section className={styles.coursesSection}>
-                        <h2 className={`fs-1 ${styles.coursesTitle}`}>Confira meus Cursos Disponíveis</h2>
+                        {hasCourses ? (
+                            <>
+                                <h2 className={`fs-1 ${styles.coursesTitle}`}>Confira meus Cursos Disponíveis</h2>
+                                {/* Aqui renderizaria os cards, mas no momento não há */}
+                            </>
+                        ) : (
+                            <>
+                                <section className={styles.comingSoonCourse}>
+                                    <h3>Curso: Introdução à Magia Ancestral</h3>
+                                    <p className={styles.paragrafo}>
+                                        Aprenda os fundamentos das práticas mágicas antigas, com exercícios simples e eficazes para o dia a dia.
+                                        Descubra como conectar-se com as energias da natureza e transformar sua realidade.
+                                    </p>
+                                    <p className={styles.note}>
+                                        (Em breve mais detalhes e inscrições abertas!)
+                                    </p>
+                                </section>
+
+                                <section className={styles.comingSoonCourse}>
+                                    <h3>Curso: Fundamentos da Numerologia</h3>
+                                    <p className={styles.paragrafo}>
+                                        Explore o significado dos números em sua vida e como aplicá-los para obter autoconhecimento e harmonia.
+                                        Técnicas práticas para interpretar números e suas influências diárias.
+                                    </p>
+                                    <p className={styles.note}>
+                                        (Em breve mais detalhes e inscrições abertas!)
+                                    </p>
+                                </section>
+
+                                <section className={styles.comingSoonCourse}>
+                                    <h3>Curso: Astrologia para Iniciantes</h3>
+                                    <p className={styles.paragrafo}>
+                                        Aprenda os princípios básicos da astrologia, mapas astrais e como interpretar os signos para guiar sua jornada pessoal.
+                                        Conheça os planetas, casas e aspectos que influenciam sua personalidade.
+                                    </p>
+                                    <p className={styles.note}>
+                                        (Em breve mais detalhes e inscrições abertas!)
+                                    </p>
+                                </section>
+
+                                <section className={styles.comingSoonCourse}>
+                                    <h3>Curso: Tarô e suas Cartas</h3>
+                                    <p className={styles.paragrafo}>
+                                        Descubra o poder simbólico do Tarô, como realizar leituras e conectar-se com sua intuição para decisões mais conscientes.
+                                        Passos práticos para interpretar as cartas com clareza e segurança.
+                                    </p>
+                                    <p className={styles.note}>
+                                        (Em breve mais detalhes e inscrições abertas!)
+                                    </p>
+                                </section>
+                            </>
+                        )}
                     </section>
-                    <div className="row g-4">
-                        {courses.map((course, index) => (
-                            <div key={index} className="col-12 col-sm-6 col-md-4">
-                                <Card
-                                    image={course.image}
-                                    title={course.title}
-                                    description={course.description}
-                                    link={course.link}
-                                />
-                            </div>
-                        ))}
-                    </div>
                 </div>
-            </div>
-
-
-
+            </Container>
         </>
-    )
+    );
 }
 
 export default Cursos;

@@ -1,71 +1,95 @@
 .loginContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #2e003e, #6a0572);
-    padding: 2rem;
-  }
-  
-  .formBox {
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid #ffffff20;
-    padding: 2rem;
-    border-radius: 1rem;
-    width: 100%;
-    max-width: 400px;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-    color: white;
-  }
-  
-  .title {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: e0b3ff;
-  }
-  
-  label {
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 0.3rem;
-    font-weight: bold;
-    color: #f3dfff;
-  }
-  
-  input {
-    width: 100%;
-    padding: 0.6rem;
-    border: none;
-    border-radius: 0.5rem;
-    background-color: #ffffff10;
-    color: white;
-    margin-bottom: 0.5rem;
-  }
-  
-  input:focus {
-    outline: none;
-    border: 1px solid #c67efb;
-    background-color: #ffffff15;
-  }
-  
-  button {
-    width: 100%;
-    padding: 0.7rem;
-    margin-top: 2rem;
-    background-color: #c67efb;
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: #b055e4;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffffff, #ffffff);
+  padding: 2rem;
+  margin: 0%;
+}
+
+@media (max-width: 1800px) {
+    .loginContainer{
+        margin: 5%;
+    }
+}
+
+.formBox {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid #ffffff20;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 15px rgba(44, 44, 44, 0.527);
+  color: #8C089C;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: e0b3ff;
+}
+
+.label {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.9rem !important;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+  color: #8C089C;
+}
+
+.p {
+  font-size: 0.9rem !important;
+}
+
+.input {
+  width: 100%;
+  padding: 0.6rem;
+  border: none;
+  font-size: 0.8rem !important;
+  /* border-radius: 0.5rem; */
+  background-color: #5c5c5c10;
+  color: #000000be;
+  margin-bottom: 0.5rem;
+}
+
+.input:focus {
+  outline: none;
+  /* border: 1px solid #c67efb; */
+  background-color: #e4000015;
+  box-shadow: inset 0 0 1px #c67efb;
+}
+
+.button {
+  position: relative;
+  /* Necessário para posicionar o ::before */
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  /* Garante que ::before fique dentro */
+  font-weight: 200;
+  display: block;
+  /* Garante que aceite margin auto */
+  margin: 2rem auto 0 auto;
+  /* top auto right bottom (top = 2rem) */
+  width: 80%;
+  padding: 0.7rem;
+  margin-top: 2rem;
+  background-color: #8C089C;
+  color: #fff000;
+  border: none;
+  /* border-radius: 0.5rem; */
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+}
+
+.button:hover {
+  background-color: #934a9b;
+}

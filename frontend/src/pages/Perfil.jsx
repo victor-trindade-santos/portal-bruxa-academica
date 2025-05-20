@@ -6,6 +6,8 @@ import styles from '../css/Perfil.module.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import userImagem from '../img/profile.png';
 import aquarius from '../img/aquarius.png'
+import MapaAstral from '../components/profilePages/MapaAstral';
+import ThemeToggleButton from '../components/ThemeToggleButton';
 
 const Perfil = () => {
     const [menuSelecionado, setMenuSelecionado] = useState('signo'); // já começa com "Seu Signo" selecionado
@@ -31,6 +33,9 @@ const Perfil = () => {
                         <div className={styles.avatarContainer}>
                             <img src={userImagem} alt="Avatar" className={styles.avatar} />
                             <img src={aquarius} alt="Signo" className={styles.signIcon} />
+                            <div className={styles.themeButtonWrapper}>
+                                <ThemeToggleButton />
+                            </div>
                         </div>
                         <h5 className={styles.nome}>Nome de usuário</h5>
                         <p className={styles.info}>Data de nascimento: 00/00/0000</p>
@@ -113,7 +118,10 @@ const Perfil = () => {
                             </div>
                         </div>
                     )}
-
+                    {menuSelecionado === 'mapa' && (
+                        <MapaAstral
+                        />
+                    )}
                 </div>
             </div>
         </div>

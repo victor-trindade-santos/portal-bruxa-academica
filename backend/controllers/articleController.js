@@ -6,7 +6,7 @@ const cloudinary = require('../config/cloudinary'); // Importando a configuraç�
 exports.createArticle = async (req, res) => {
   try {
     // Extraindo os dados do corpo da requisição
-    const { title, author, publicationDate, firstContent, subtitle, secondContent, category } = req.body;
+    const { title, author, publicationDate, firstContent, secondContent, category } = req.body;
     console.log('Valores armazenados:', req.imageUrls);
 
     // As URLs das imagens já foram processadas no middleware e estão em req.imageUrls
@@ -15,11 +15,9 @@ exports.createArticle = async (req, res) => {
       author,
       publicationDate,
       firstContent,
-      subtitle,
       secondContent,
       category,
       imageThumb: req.imageUrls.imageThumb || '',
-      imageArticle: req.imageUrls.imageArticle || '',
     });
 
     // Salvar o novo artigo no banco de dados
@@ -69,59 +67,38 @@ exports.updateArticle = async (req, res) => {
     const articleId = req.params.id;
     console.log("Requisição PUT recebida para atualizar o artigo ID:", articleId);
 
-    // 🔹 Buscar o artigo no banco antes de tentar acessar o título
     const existingArticle = await Article.findById(articleId);
-
     if (!existingArticle) {
       console.log("Artigo não encontrado!");
-    } else {
-      console.log("Artigo encontrado:", existingArticle.title);
-    }
-    const { title, author, publicationDate, firstContent, subtitle, secondContent, category } = req.body;
-    console.log('Valores armazenados:', req.imageUrls);
-
-    const updatedData = {
-      title: title || existingArticle.title, // ✅ Agora está correto!
-      author: author || existingArticle.author,
-      publicationDate: publicationDate || existingArticle.publicationDate,
-      firstContent: firstContent || existingArticle.firstContent,
-      subtitle: subtitle || existingArticle.subtitle,
-      secondContent: secondContent || existingArticle.secondContent,
-      category: category || existingArticle.category,
-      imageThumb: req.imageUrls?.imageThumb || existingArticle.imageThumb,  // ✅ Mantém imagem antiga se não houver nova
-      imageArticle: req.imageUrls?.imageArticle || existingArticle.imageArticle,  // ✅ Mantém imagem antiga se não houver nova
-    };
-
-
-    if (req.imageUrls) {
-      // 🔹 Primeiro, verificamos se `req.imageUrls` existe.
-      // Isso evita erros caso nenhuma imagem tenha sido enviada na requisição.
-
-      if (req.imageUrls.imageThumb)
-        updatedData.imageThumb = req.imageUrls.imageThumb;
-      // 🔹 Se uma imagem de thumbnail foi enviada (`imageThumb` existe),
-      // então atualizamos `updatedData.imageThumb` com essa nova imagem.
-
-      if (req.imageUrls.imageArticle)
-        updatedData.imageArticle = req.imageUrls.imageArticle;
-      // 🔹 Se uma imagem do artigo foi enviada (`imageArticle` existe),
-      // então atualizamos `updatedData.imageArticle` com essa nova imagem.
-
-    }
-
-    const updatedArticle = await Article.findByIdAndUpdate(req.params.id, updatedData, { new: true });
-    console.log("✅ Artigo atualizado com sucesso:", updatedArticle);
-
-    if (!updatedArticle) {
       return res.status(404).json({ message: 'Artigo não encontrado' });
     }
 
+    console.log("Artigo encontrado:", existingArticle.title);
+
+    const { title, author, publicationDate, firstContent, secondContent, category } = req.body;
+    console.log('Valores armazenados:', req.imageUrls);
+
+    const updatedData = {
+      title: title || existingArticle.title,
+      author: author || existingArticle.author,
+      publicationDate: publicationDate || existingArticle.publicationDate,
+      firstContent: firstContent || existingArticle.firstContent,
+      secondContent: secondContent || existingArticle.secondContent,
+      category: category || existingArticle.category,
+      imageThumb: req.imageUrls?.imageThumb || existingArticle.imageThumb,
+    };
+
+    const updatedArticle = await Article.findByIdAndUpdate(articleId, updatedData, { new: true });
+
+    console.log("✅ Artigo atualizado com sucesso:", updatedArticle);
     res.status(200).json({ message: 'Artigo atualizado com sucesso', article: updatedArticle });
+
   } catch (error) {
     console.error('Erro ao atualizar artigo:', error);
     res.status(500).json({ message: 'Erro ao atualizar artigo', error: error.message });
   }
 };
+
 
 exports.deleteArticleById = async (req, res) => {
   try {

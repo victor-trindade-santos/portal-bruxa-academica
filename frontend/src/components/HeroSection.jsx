@@ -1,20 +1,21 @@
 import styles from '../css/HeroSection.module.css';
+import { Link } from 'react-router-dom'; 
 
-function HeroSection({ image, title, description }) {
+function HeroSection({ image }) {
   return (
     <div className={styles.hero} style={{ backgroundImage: `url(${image})` }}>
       <div className={styles.overlay}>
-        <div className={styles.content}>
-          <h1 className={styles.title}>{title}</h1>
-          <p className={styles.description}>{description}</p>
+        <div className={styles.container}>
+          <h1 className={styles.title}>Faça seu mapa astral</h1>
+          <p className={styles.description}>
+            Descubra o que os astros revelam sobre você.<br />
+            Seu mapa astral completo pode transformar sua visão de si mesmo e do mundo.
+          </p>
+          <Link to="/register" className={styles.button}>
+            Cadastre-se agora
+          </Link>
         </div>
       </div>
-      <div className={styles.footer}>
-        <div className={styles.footerText}>
-          ↓ Role para acessar os conteúdos do portal ↓
-        </div>
-      </div>
-
     </div>
   );
 }

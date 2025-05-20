@@ -1,0 +1,120 @@
+.astrologiaIntroSection {
+  max-width: 900px;
+  margin: 100px auto 40px;
+  padding: 0 20px;
+}
+
+.introWithImage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.introImage {
+  width: 200px;
+  height: 200px;
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.astrologiaDescription {
+  flex: 1;
+  font-size: 1.3rem !important;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.astrologiaSubtopics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.subtopic {
+  flex: 1 1 280px;
+  background-color: var(--subtopic-bg);
+  box-shadow: 0 0 8px var(--subtopic-shadow);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.subtopic h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: var(--subtopic-title-color);
+}
+
+.subtopic p {
+  font-size: 1rem;
+  color: var(--subtopic-text-color);
+  line-height: 1.4;
+}
+
+.articleSection {
+  margin-top: 15px;
+  padding: 20px;
+  text-align: center;
+}
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.sectionTitle {
+  color: var(--section-title-color);
+  font-size: 2em !important;
+  font-weight: bold;
+  text-align: center !important;
+  margin-top: 10px;
+}
+
+.sectionDescription {
+  font-size: 1.2rem !important;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.emptyWrapper {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 250px;
+  width: 100%;
+  text-align: center;
+  background-color: transparent;
+}
+
+@media (max-width: 1440px) {
+  .cardContainer {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem !important;
+  }
+
+  .emptyWrapper,
+  .sectionDescription {
+    font-size: 1.25rem !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .cardContainer {
+    grid-template-columns: 1fr;
+    width: 80%;
+  }
+}

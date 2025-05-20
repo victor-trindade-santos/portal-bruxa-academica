@@ -1,6 +1,5 @@
 .rowPrincipal {
     display: flex;
-    padding-top: 6%;
     margin: 0;
     box-sizing: border-box;
   }
@@ -10,7 +9,7 @@
     width:69.7%;
     margin-left: 3.5%;
     /* background-color: green; */
-    flex: 1;
+    
 }
 
 .colInsideRight{
@@ -18,7 +17,7 @@
     margin-right: 0.5%;
     margin-left: 0.5%;
     /* background-color: blue; */
-    flex: 2;
+    
 }
 
 
@@ -43,6 +42,11 @@
   @media (max-width: 1200px) {
     .cardContainer {
       grid-template-columns: repeat(2, 1fr);
+
+    }
+
+    .rowPrincipal {
+      padding-top: 10%;
     }
   }
   
@@ -54,7 +58,7 @@
 
     .rowPrincipal {
       flex-direction: column;
-      padding-top: 10%;
+      padding-top: 13%;
       align-items: center; /* alinha verticalmente */
     }
 

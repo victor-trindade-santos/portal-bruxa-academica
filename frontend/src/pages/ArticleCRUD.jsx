@@ -1,24 +1,16 @@
 import styles from '../css/ArticleCRUD.module.css'
 import 'react-quill/dist/quill.snow.css';
-import ReactQuill from 'react-quill';
+import ReactQuill from '../utils/quillEditor';
 import SearchBar from '../components/Barra_Pesquisa.jsx'
 import DeleteArticleComponent from '../components/articleCRUDComponents/DeleteArticleComponent.jsx';
 import CreateArticleComponent from '../components/articleCRUDComponents/CreateArticleComponent.jsx';
 import UpdateArticleComponent from '../components/articleCRUDComponents/UpdateArticleComponent.jsx';
 import CleanArticleComponent from '../components/articleCRUDComponents/CleanArticleComponent.jsx';
 import ViewArticleComponent from '../components/articleCRUDComponents/ViewArticleComponent.jsx';
+import Container from '../components/Container.jsx'
 
 
 function ArticleCRUD({ formDataArticle, setFormDataArticle }) {
-  //São as funcionalidades do editor de texto do REACT QUILL como negrito, hiperlink etc
-  const modules = {
-toolbar: [
-  ['bold', 'italic', 'underline'],
-  [{ list: 'ordered' }, { list: 'bullet' }],
-  ['blockquote'],
-  ['link']
-]
-  };
 
   //Para atualizar os dados do FormDataArticle
   const handleChange = (field, value) => {
@@ -31,11 +23,14 @@ toolbar: [
 
   return (
     <>
+    <Container>
       <div className={`row ${styles.rowPrincipal}`}>
-        <h1>Criar Artigos</h1>
+        <h1 className={styles.sectionTitle}>Criar Artigos</h1>
         <div className={styles.colInsideLeft}>
           <div className={styles.sectionArticle}>
             <div>
+              {/* TÍTULO */}
+              <p className={styles.fieldDescription}><strong>Adicione um título *</strong> — Digite o título principal do artigo.</p>
               <input
                 type="text"
                 placeholder="Digite o título do Artigo"
@@ -44,6 +39,9 @@ toolbar: [
                 required
                 className={styles.titleArticle}
               />
+
+              {/* AUTOR */}
+              <p className={styles.fieldDescription}><strong>Nome do autor(a) *</strong> — Informe quem é o responsável pela autoria do artigo.</p>
               <input
                 type="text"
                 placeholder="Digite o nome do autor(a)"
@@ -52,6 +50,9 @@ toolbar: [
                 required
                 className={styles.textAuthor}
               />
+
+              {/* DATA DE PUBLICAÇÃO */}
+              <p className={styles.fieldDescription}><strong>Data de publicação</strong> — Data em que o artigo foi publicado (campo somente leitura).</p>
               <input
                 type="text"
                 placeholder="Data de publicação"
@@ -59,54 +60,44 @@ toolbar: [
                 readOnly
                 className={styles.textPublicationDate}
               />
-              <h1 className={styles.textArticle}>Selecione a imagem do Artigo</h1>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (file) {
-                    setFormDataArticle(prev => ({
-                      ...prev,
-                      imageArticle: file
-                    }));
-                  }
-                }}
-              />
-              {formDataArticle.imageArticle && (
-                <img
-                  src={formDataArticle.imageArticle instanceof File
-                    ? URL.createObjectURL(formDataArticle.imageArticle) // Exibe o arquivo carregado
-                    : formDataArticle.imageArticle // Exibe a URL se for do backend
-                  }
-                  alt="Prévia da imagem"
-                  className={styles.imageArticle}
-                />
-              )}
-              <ReactQuill
-                theme="snow"
-                value={formDataArticle.firstContent}
-                onChange={(value) => handleChange('firstContent', value)}
-                modules={modules}
-              />
+
+              {/* PRIMEIRO CONTEÚDO */}
+              <p className={styles.fieldDescription}><strong>Resumo ou introdução *</strong> — Digite um pequeno resumo ou introdução para o artigo.</p>
               <input
                 type="text"
-                placeholder="Digite o subtítulo do Artigo"
-                value={formDataArticle.subtitle}
-                onChange={(e) => handleChange('subtitle', e.target.value)}
+                placeholder="Digite o resumo ou introdução do Artigo"
+                value={formDataArticle.firstContent}
+                onChange={(e) => handleChange('firstContent', e.target.value)}
                 required
-                className={styles.subtitleArticle}
+                className={styles.textResume}
               />
-              <ReactQuill
-                theme="snow"
-                value={formDataArticle.secondContent}
-                onChange={(value) => handleChange('secondContent', value)}
-                modules={modules}
-              />
-              <h1 className={styles.textArticle}>Selecione a image da capa do artigo/thumbnail</h1>
+
+              {/* CATEGORIA */}
+              <p className={styles.fieldDescription}><strong>Categoria do artigo *</strong> — Escolha uma categoria que melhor descreva o tema do artigo.</p>
+              <select
+                value={formDataArticle.category}
+                onChange={(e) => handleChange('category', e.target.value)}
+                required
+                className={styles.selectCategory}
+              >
+                <option value="">Escolha uma categoria</option>
+                <option value="Numerologia">Numerologia</option>
+                <option value="Magia">Magia</option>
+                <option value="Astrologia">Astrologia</option>
+                <option value="Tarot">Tarot</option>
+              </select>
+
+              {/* IMAGEM DA CAPA */}
+              <p className={styles.fieldDescription}><strong>Imagem da capa / Thumbnail</strong> — Selecione uma imagem para ilustrar o artigo.</p>
+              <label htmlFor="imageUpload" className={styles.fileInputLabel}>
+                Selecionar imagem da capa
+              </label>
+
               <input
+                id="imageUpload"
                 type="file"
                 accept="image/*"
+                className={styles.fileInput}
                 onChange={(e) => {
                   const file = e.target.files[0];
                   if (file) {
@@ -117,28 +108,28 @@ toolbar: [
                   }
                 }}
               />
+
               {formDataArticle.imageThumb && (
                 <img
-                  src={formDataArticle.imageThumb instanceof File
-                    ? URL.createObjectURL(formDataArticle.imageThumb) // Exibe o arquivo carregado
-                    : formDataArticle.imageThumb // Exibe a URL se for do backend
+                  src={
+                    formDataArticle.imageThumb instanceof File
+                      ? URL.createObjectURL(formDataArticle.imageThumb)
+                      : formDataArticle.imageThumb
                   }
                   alt="Prévia da imagem"
                   className={styles.imageArticle}
                 />
               )}
-              <h1 className={styles.textArticle}>Selecione a categoria do artigo</h1>
-              <select
-                value={formDataArticle.category}
-                onChange={(e) => handleChange('category', e.target.value)}
-                required
-              >
-                <option value="">Escolha uma categoria</option>
-                <option value="Numerologia">Numerologia</option>
-                <option value="Magia">Magia</option>
-                <option value="Astrologia">Astrologia</option>
-                <option value="Tarot">Tarot</option>
-              </select>
+
+
+              {/* SEGUNDO CONTEÚDO RICH TEXT */}
+              <p className={styles.fieldDescription}><strong>Conteúdo principal</strong> — Digite o conteúdo principal do artigo usando o editor abaixo.</p>
+              <ReactQuill
+                theme="snow"
+                value={formDataArticle.secondContent}
+                onChange={(value) => handleChange('secondContent', value)}
+              />
+
             </div>
           </div>
         </div>
@@ -189,9 +180,10 @@ toolbar: [
               />
             </>
           )}
-          
+
         </div>
       </div>
+      </Container>
     </>
   );
 }

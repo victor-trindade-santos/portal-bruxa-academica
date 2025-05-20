@@ -13,11 +13,9 @@ const CreateArticleComponent = ({ formDataArticle, setFormDataArticle }) => {
         title: 'Título',
         author: 'Autor',
         publicationDate: 'Data de Publicação',
-        firstContent: 'Primeiro Parágrafo',
-        subtitle: 'Subtítulo',
-        secondContent: 'Segundo Parágrafo',
+        firstContent: 'Resumo',
+        secondContent: 'Conteúdo do Artigo',
         category: 'Categoria',
-        imageArticle: 'Imagem do Artigo',
         imageThumb: 'Imagem do Card/Thumbnail'
     };
 
@@ -29,7 +27,6 @@ const CreateArticleComponent = ({ formDataArticle, setFormDataArticle }) => {
             'author',
             'publicationDate',
             'firstContent',
-            'subtitle',
             'secondContent',
             'category'
         ];
@@ -37,14 +34,6 @@ const CreateArticleComponent = ({ formDataArticle, setFormDataArticle }) => {
         const missingFields = requiredFields.filter(
             field => !formDataArticle[field]?.toString().trim()
         );
-
-        // Verificações específicas para imagens
-        if (
-            !formDataArticle.imageArticle ||
-            !(formDataArticle.imageArticle instanceof File || typeof formDataArticle.imageArticle === 'string')
-        ) {
-            missingFields.push('imageArticle');
-        }
 
         if (
             !formDataArticle.imageThumb ||
@@ -64,7 +53,7 @@ const CreateArticleComponent = ({ formDataArticle, setFormDataArticle }) => {
         for (const key in formDataArticle) {
             const value = formDataArticle[key];
 
-            if (key === 'imageArticle' || key === 'imageThumb') {
+            if ( key === 'imageThumb') {
                 if (value instanceof File) {
                     console.log(`📁 ${key} é um arquivo válido, anexando...`);
                     formData.append(key, value);

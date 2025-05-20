@@ -1,33 +1,44 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useRef, useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import '../css/Navbar.css';
 import PerfilImg from '../img/perfil.png';
+import Container from './Container';
+import ThemeToggleButton from './ThemeToggleButton';
 
 function Navbar() {
-  const { user, logout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isEditMenuOpen, setIsEditMenuOpen] = useState(false);
 
   const isActive = (path) => location.pathname === path;
 
   const toggleNavbar = () => setIsMenuOpen(!isMenuOpen);
-  const toggleEditMenu = (e) => {
-    e.stopPropagation(); // Isso vai impedir que o clique no botão "Editar" feche o menu hamburguer.
-    setIsEditMenuOpen(!isEditMenuOpen);
-  };
   const closeNavbar = () => setIsMenuOpen(false);
-
 
   const isAdmin = user?.role === 'admin';
 
+  useEffect(() => {
+    // Fecha o menu ao navegar para outra rota
+    closeNavbar();
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 900 && isMenuOpen) {
+        closeNavbar();
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMenuOpen]);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-custom">
-      <div className="container-fluid container-fluid-custom">
-        <Link to="/" className="navbar-brand navbar-brand-custom">
-          <img src="../../Logo_Portal-Bruxa.svg" alt="Logo" className="navbar-brand-img" />
-        </Link>
+
+      <Container>
+
         <button
           className="navbar-toggler navbar-toggler-custom"
           type="button"
@@ -39,15 +50,18 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className={`navbar-collapse ${isMenuOpen ? 'show' : ''}`} id="navbarSupportedContent">
+        <Link to="/" className="navbar-brand navbar-brand-custom">
+          <img src="/Logo_Portal-Bruxa.svg" alt="Logo" className="navbar-brand-img" />
+        </Link>
+
+        <div className={`collapse navbar-collapse ${isMenuOpen ? 'show' : ''}`} id="navbarSupportedContent">
           <ul className="navbar-nav mb-2 mb-lg-0">
             {[
-              { to: '/', label: 'Home' },
+              { to: '/', label: 'HOME' },
               { to: '/magia', label: 'MAGIA' },
               { to: '/numerologia', label: 'NUMEROLOGIA' },
               { to: '/tarot', label: 'TAROT' },
               { to: '/astrologia', label: 'ASTROLOGIA' },
-              { to: '/artigos', label: 'ARTIGOS' },
             ].map((item) => (
               <li className="nav-item" key={item.to}>
                 <Link
@@ -60,65 +74,107 @@ function Navbar() {
               </li>
             ))}
 
-
-            {isAdmin && (
-              <>
-                <li className="nav-item">
-                  <Link to="/cursos" className={`nav-link nav-link-custom ${isActive('/cursos') ? 'active-link' : ''}`} onClick={closeNavbar}>
-                    CURSOS
-                  </Link>
-                </li>
-                <li className="nav-item position-relative">
-                  <button
-                    className={`nav-link nav-link-custom ${isActive('/create-articles-d42f4c') ? 'active-link' : ''}`}
-                    onClick={(e) => {
-                      toggleEditMenu(e);
-                    }}
+            {/* ARTIGOS */}
+            <li className={`nav-item ${isAdmin ? 'dropdown' : ''}`}>
+              {isAdmin ? (
+                <>
+                  <div
+                    className={`nav-link nav-link-custom dropdown-toggle ${isActive('/artigos') ? 'active-link' : ''}`}
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
                   >
-                    EDITAR
-                  </button>
-                  {isEditMenuOpen && (
-                    <ul className="dropdown-menu custom-dropdown-menu show">
-                      <li>
-                        <Link to="/create-articles-d42f4c" className="dropdown-item" onClick={closeNavbar}>
-                          Editar Artigos
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/edit-courses" className="dropdown-item" onClick={closeNavbar}>
-                          Editar Cursos
-                        </Link>
-                      </li>
-                    </ul>
-                  )}
-                </li>
-              </>
-            )}
+                    ARTIGOS
+                  </div>
+                  <ul className="dropdown-menu custom-dropdown-menu">
+                    <li>
+                      <Link to="/artigos" className="dropdown-item" onClick={closeNavbar}>
+                        Visualizar Artigos
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/create-articles-d42f4c" className="dropdown-item" onClick={closeNavbar}>
+                        Criar Artigo
+                      </Link>
+                    </li>
+                  </ul>
+                </>
+              ) : (
+                <Link
+                  to="/artigos"
+                  className={`nav-link nav-link-custom ${isActive('/artigos') ? 'active-link' : ''}`}
+                  onClick={closeNavbar}
+                >
+                  ARTIGOS
+                </Link>
+              )}
+            </li>
+
+            {/* CURSOS */}
+            <li className={`nav-item ${isAdmin ? 'dropdown' : ''}`}>
+              {isAdmin ? (
+                <>
+                  <div
+                    className={`nav-link nav-link-custom dropdown-toggle ${isActive('/cursos') ? 'active-link' : ''}`}
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    CURSOS
+                  </div>
+                  <ul className="dropdown-menu custom-dropdown-menu">
+                    <li>
+                      <Link to="/cursos" className="dropdown-item" onClick={closeNavbar}>
+                        Visualizar Cursos
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/create-courses" className="dropdown-item" onClick={closeNavbar}>
+                        Criar Curso
+                      </Link>
+                    </li>
+                  </ul>
+                </>
+              ) : (
+                <Link
+                  to="/cursos"
+                  className={`nav-link nav-link-custom ${isActive('/cursos') ? 'active-link' : ''}`}
+                  onClick={closeNavbar}
+                >
+                  CURSOS
+                </Link>
+              )}
+            </li>
 
             {!user && (
               <li className="nav-item">
-                <Link to="/login" className={`nav-link nav-link-custom ${isActive('/login') ? 'active-link' : ''}`} onClick={closeNavbar}>
-                  Login
+                <Link
+                  to="/login"
+                  className={`nav-link nav-link-custom ${isActive('/login') ? 'active-link' : ''}`}
+                  onClick={closeNavbar}
+                >
+                  LOGIN
                 </Link>
               </li>
             )}
           </ul>
 
-          {user && (
-            <li>
-              <Link to="/profile" className={`nav-link nav-link-custom ${isActive('/profile') ? 'active-link' : ''}`} onClick={closeNavbar}>
-                <div className="navbar-user-info">
-                  <img src={PerfilImg} alt="Perfil" className="navbar-user-avatar" />
-                  <span className="navbar-welcome-message">Bem-vindo(a), {user.username}</span>
-                </div>
+          <div className="push-right">
+            {user && (
+              <Link
+                to="/profile"
+                className={`nav-link-custom navbar-user-link ${isActive('/profile') ? 'active-link' : ''}`}
+                onClick={closeNavbar}
+              >
+                <div className="navbar-welcome-message">Bem-vindo(a), {user.username} !</div>
+                <img src={PerfilImg} alt="Perfil" className="navbar-user-avatar" />
               </Link>
-            </li>
-          )}
+            )}
+          </div>
         </div>
-      </div>
+      </Container>
     </nav>
   );
 }
 
 export default Navbar;
-

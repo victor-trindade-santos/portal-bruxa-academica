@@ -5,6 +5,8 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
+const authenticateToken = require('../middlewares/auth'); // ajuste o caminho se necessário
+
 
 // Rota de login
 router.post('/login', async (req, res) => {
@@ -34,6 +36,10 @@ router.post('/login', async (req, res) => {
     const payload = {
       userId: user._id,
       role: user.role,  // Incluindo a role aqui
+      username: user.username,
+      fullName: user.fullName,
+      birthDate: user.birthDate,
+      birthTime: user.birthTime,
     };
 
     // Gerando o token
@@ -54,7 +60,7 @@ router.post('/login', async (req, res) => {
 
 // Rota de registro
 router.post('/register', async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, fullName} = req.body;
 
   try {
     // Verifica se já existe usuário com esse username
@@ -64,7 +70,7 @@ router.post('/register', async (req, res) => {
     }
 
     // Cria um novo usuário com role padrão 'user'
-    const newUser = new User({ username, email: email || '', password, role: 'user' });
+    const newUser = new User({ username, email: email || '', password, role: 'user', fullName: fullName });
 
     // Encriptando a senha
     const salt = await bcrypt.genSalt(10);
@@ -78,6 +84,64 @@ router.post('/register', async (req, res) => {
   } catch (error) {
     console.error('Erro no registro:', error);
     res.status(500).json({ message: 'Erro ao registrar usuário', error: error.message });
+  }
+});
+
+router.put('/update', authenticateToken, async (req, res) => {
+  const userId = req.user.userId; // Seguro, vem do JWT
+
+  const {
+    username,
+    email,
+    password,
+    fullName,
+    birthDate,
+    birthTime,
+    birthCity,
+  } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado' });
+    }
+
+    // Verifica se o novo username já existe e não pertence ao próprio usuário
+    if (username && username !== user.username) {
+      const existingUsername = await User.findOne({ username });
+      if (existingUsername && existingUsername._id.toString() !== userId) {
+        return res.status(400).json({ message: 'Username já está em uso' });
+      }
+      user.username = username;
+    }
+
+    // Verifica se o novo email já existe e não pertence ao próprio usuário
+    if (email && email !== user.email) {
+      const existingEmail = await User.findOne({ email });
+      if (existingEmail && existingEmail._id.toString() !== userId) {
+        return res.status(400).json({ message: 'Email já está em uso' });
+      }
+      user.email = email;
+    }
+
+    if (fullName !== undefined) user.fullName = fullName;
+    if (birthDate !== undefined) user.birthDate = birthDate;
+    if (birthTime !== undefined) user.birthTime = birthTime;
+    if (birthCity !== undefined) user.birthCity = birthCity;
+
+    if (password && password.trim() !== '') {
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password, salt);
+    }
+
+    await user.save();
+
+    const { password: _, ...userWithoutPassword } = user.toObject();
+
+    res.json({ message: 'Dados atualizados com sucesso!', user: userWithoutPassword });
+  } catch (error) {
+    console.error('Erro ao atualizar usuário:', error);
+    res.status(500).json({ message: 'Erro interno ao atualizar dados', error: error.message });
   }
 });
 

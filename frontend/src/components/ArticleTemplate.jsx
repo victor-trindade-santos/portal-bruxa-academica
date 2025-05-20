@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // ✅ correto
 import axios from '../services/api'; // ✅ este é o axios configurado
 import styles from "../css/ArticleTemplate.module.css";
+import 'react-quill/dist/quill.snow.css';
 
 const ArticleTemplate = ({ articleId, articleData }) => {
   const { articleId: routeId } = useParams(); // renomeia o parâmetro da rota
@@ -42,12 +43,10 @@ const ArticleTemplate = ({ articleId, articleData }) => {
       {article ? (
         <>
           <h1 className={styles.titleArticle}>{article.title}</h1>
+          <p className={styles.textAuthor}>{article.firstContent}</p>
           <p className={styles.textAuthor}>Por: {article.author}</p>
           <p className={styles.textPublicationDate}>Data de Publicação: {article.publicationDate}</p>
-          <img src={article.imageArticle} className={styles.imageArticle} alt={article.title} />
-          <p className={styles.textArticle} dangerouslySetInnerHTML={{ __html: article.firstContent }} />
-          <h2 className={styles.subtitleArticle}>{article.subtitle}</h2>
-          <p className={styles.textArticle} dangerouslySetInnerHTML={{ __html: article.secondContent }} />
+<div className={`ql-editor ${styles.textArticle}`} dangerouslySetInnerHTML={{ __html: article.secondContent }} />
         </>
       ) : (
         <div>Artigo não encontrado</div>

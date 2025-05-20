@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from '../services/api';
 
 import Card from '../components/Card';
-import HeroSection from '../components/HeroSection';
-import styles from '../css/Home.module.css';
-
-import tarot from '../img/carousel_home_slide_tarot.png';
-import courseImage1 from '../img/card_tipo1.jpg';
-import courseImage2 from '../img/Card-tipo2(fundo).jpg';
+import styles from '../css/Tarot.module.css'; 
+import Container from '../components/Container';
+import tarot from '../img/tarot.png';
+import { truncateDescription } from '../utils/descriptionUtils';
 
 function Tarot() {
     const [articles, setArticles] = useState([]);
@@ -17,7 +15,10 @@ function Tarot() {
         const fetchArticles = async () => {
             try {
                 const response = await axios.get('/articles?category=tarot');
-                setArticles(response.data);
+                const sorted = response.data.sort(
+                    (a, b) => new Date(b.publicationDate) - new Date(a.publicationDate)
+                );
+                setArticles(sorted.slice(0, 4));
                 setLoading(false);
             } catch (error) {
                 console.error('Erro ao buscar artigos:', error);
@@ -28,76 +29,76 @@ function Tarot() {
         fetchArticles();
     }, []);
 
-    const courses = [
-        {
-            image: courseImage1,
-            title: "Introdução ao Tarô",
-            description: "Conheça os arcanos e comece sua jornada com as cartas.",
-            category: "#Tarô",
-            duration: "🕒2h"
-        },
-        {
-            image: courseImage2,
-            title: "Leitura Intuitiva",
-            description: "Aprenda a interpretar o Tarô com sensibilidade e conexão espiritual.",
-            category: "#Tarô",
-            duration: "🕒3h"
-        }
-    ];
-
     return (
         <>
-            <HeroSection
-                image={tarot}
-                title="🃏 O Universo do Tarô"
-                description="Desvende os mistérios das cartas e conecte-se com a sabedoria ancestral."
-            />
+            <Container>
+                <div className="pageContentWithoutHero">
+                    <div className={styles.tarotIntroSection}>
+                        <h2 className={styles.sectionTitle}>Tarot</h2>
 
-            <div className={styles.courseSection}>
-                <h2 className={styles.sectionTitle}>Cursos de Tarô</h2>
-                <p className={styles.sectionDescription}>&#9733;Aprenda a interpretar os arcanos e orientar com consciência.&#9733;</p>
-                <div className={styles.cardContainerCourse}>
-                    {courses.map((course, index) => (
-                        <Card
-                            key={index}
-                            image={course.image}
-                            title={course.title}
-                            description={course.description}
-                            category={course.category}
-                            duration={course.duration}
-                            type="curso"
-                        />
-                    ))}
-                </div>
-            </div>
-
-            <div className={styles.articleSection}>
-                <h2 className={styles.sectionTitle}>Artigos de Tarô</h2>
-                <p className={styles.sectionDescription}>&#9733;Interprete cartas, spreads e simbolismos profundos.&#9733;</p>
-                {loading ? (
-                    <p>Carregando artigos...</p>
-                ) : articles.length === 0 ? (
-                    <div className={styles.emptyWrapper}>
-                        <p>Nenhum artigo encontrado. Volte mais tarde para mais conteúdos</p>
-                    </div>
-                ) : (
-                    <div className={styles.cardContainer}>
-                        {articles.map((article, index) => (
-                            <Card
-                                key={index}
-                                image={article.imageThumb || courseImage1}
-                                title={article.title}
-                                description={article.firstContent}
-                                id={article._id}
-                                link={`/articles/${article._id}`}
-                                category={article.category || "#Tarô"}
-                                type="artigo"
+                        <div className={styles.introWithImage}>
+                            <img
+                                src={tarot}
+                                alt="Cartas de Tarô"
+                                className={styles.introImage}
                             />
-                        ))}
-                    </div>
-                )}
+                            <p className={styles.tarotDescription}>
+                                O Tarô é um sistema simbólico composto por cartas que auxiliam na reflexão, autoconhecimento e orientação espiritual, revelando aspectos ocultos da vida.
+                            </p>
+                        </div>
 
-            </div>
+                        <div className={styles.tarotSubtopics}>
+                            <div className={styles.subtopic}>
+                                <h3>O que é o Tarô?</h3>
+                                <p>
+                                    O Tarô é um oráculo composto por 78 cartas que representam arquétipos e etapas da jornada humana, usado para interpretação simbólica e aconselhamento.
+                                </p>
+                            </div>
+
+                            <div className={styles.subtopic}>
+                                <h3>Arcanos Maiores e Menores</h3>
+                                <p>
+                                    Os Arcanos Maiores tratam de grandes lições espirituais, enquanto os Menores abordam situações cotidianas, organizados em quatro naipes.
+                                </p>
+                            </div>
+
+                            <div className={styles.subtopic}>
+                                <h3>Uso do Tarô</h3>
+                                <p>
+                                    Utilizado para orientação, meditação e insights, o Tarô não prevê o futuro de forma fixa, mas auxilia na tomada de decisões e clareza emocional.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={styles.articleSection}>
+                        <h2 className={styles.sectionTitle}>Artigos de Tarô</h2>
+                        <p className={styles.sectionDescription}>&#9733;Explore o universo simbólico do Tarô com nossos artigos.&#9733;</p>
+                        {loading ? (
+                            <p>Carregando artigos...</p>
+                        ) : articles.length === 0 ? (
+                            <div className={styles.emptyWrapper}>
+                                <p>Nenhum artigo encontrado. Volte mais tarde para mais conteúdos</p>
+                            </div>
+                        ) : (
+                            <div className={styles.cardContainer}>
+                                {articles.map((article, index) => (
+                                    <Card
+                                        key={index}
+                                        image={article.imageThumb}
+                                        title={truncateDescription(article.title, 30)}
+                                        description={article.firstContent}
+                                        id={article._id}
+                                        link={`/articles/${article._id}`}
+                                        category={article.category || "#Tarot"}
+                                        type="artigo"
+                                    />
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </Container>
             <br />
         </>
     );

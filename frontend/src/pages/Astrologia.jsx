@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from '../services/api';
 
 import Card from '../components/Card';
-import HeroSection from '../components/HeroSection';
-import styles from '../css/Home.module.css';
-
-import astrologia from '../img/carousel_home_slide_astrologia.png';
-import courseImage1 from '../img/card_tipo1.jpg';
-import courseImage2 from '../img/Card-tipo2(fundo).jpg';
+import styles from '../css/Astrologia.module.css';
+import Container from '../components/Container';
+import astrologia from '../img/astrologia.png';
+import { truncateDescription } from '../utils/descriptionUtils';
 
 function Astrologia() {
     const [articles, setArticles] = useState([]);
@@ -17,7 +15,10 @@ function Astrologia() {
         const fetchArticles = async () => {
             try {
                 const response = await axios.get('/articles?category=astrologia');
-                setArticles(response.data);
+                const sorted = response.data.sort(
+                    (a, b) => new Date(b.publicationDate) - new Date(a.publicationDate)
+                );
+                setArticles(sorted.slice(0, 4));
                 setLoading(false);
             } catch (error) {
                 console.error('Erro ao buscar artigos:', error);
@@ -28,75 +29,76 @@ function Astrologia() {
         fetchArticles();
     }, []);
 
-    const courses = [
-        {
-            image: courseImage1,
-            title: "Astrologia para Iniciantes",
-            description: "Entenda os signos, casas e planetas na astrologia natal.",
-            category: "#Astrologia",
-            duration: "🕒2h"
-        },
-        {
-            image: courseImage2,
-            title: "Trânsitos e Previsões",
-            description: "Aprenda a interpretar os trânsitos astrológicos e fazer previsões.",
-            category: "#Astrologia",
-            duration: "🕒3h"
-        }
-    ];
-
     return (
         <>
-            <HeroSection
-                image={astrologia}
-                title="🌌 Astrologia e o Cosmos"
-                description="Descubra como os astros influenciam sua jornada e seu destino."
-            />
+            <Container>
+                <div className="pageContentWithoutHero">
+                    <div className={styles.astrologiaIntroSection}>
+                        <h2 className={styles.sectionTitle}>Astrologia</h2>
 
-            <div className={styles.courseSection}>
-                <h2 className={styles.sectionTitle}>Cursos de Astrologia</h2>
-                <p className={styles.sectionDescription}>&#9733;Do mapa natal às previsões, domine os segredos do céu.&#9733;</p>
-                <div className={styles.cardContainerCourse}>
-                    {courses.map((course, index) => (
-                        <Card
-                            key={index}
-                            image={course.image}
-                            title={course.title}
-                            description={course.description}
-                            category={course.category}
-                            duration={course.duration}
-                            type="curso"
-                        />
-                    ))}
-                </div>
-            </div>
-
-            <div className={styles.articleSection}>
-                <h2 className={styles.sectionTitle}>Artigos de Astrologia</h2>
-                <p className={styles.sectionDescription}>&#9733;Aprofunde-se na sabedoria dos astros e do zodíaco.&#9733;</p>
-                {loading ? (
-                    <p>Carregando artigos...</p>
-                ) : articles.length === 0 ? (
-                    <div className={styles.emptyWrapper}>
-                        <p>Nenhum artigo encontrado. Volte mais tarde para mais conteúdos</p>
-                    </div>
-                ) : (
-                    <div className={styles.cardContainer}>
-                        {articles.map((article, index) => (
-                            <Card
-                                key={index}
-                                image={article.imageThumb || courseImage1}
-                                title={article.title}
-                                description={article.firstContent}
-                                id={article._id}
-                                link={`/articles/${article._id}`}
-                                category={article.category || "#Astrologia"}
-                                type="artigo"
+                        <div className={styles.introWithImage}>
+                            <img
+                                src={astrologia}
+                                alt="Símbolos astrológicos"
+                                className={styles.introImage}
                             />
-                        ))}
+                            <p className={styles.astrologiaDescription}>
+                                A Astrologia é o estudo simbólico dos astros e sua influência nos ciclos da vida humana, oferecendo uma visão profunda sobre personalidade, destino e sincronicidades.
+                            </p>
+                        </div>
+
+                        <div className={styles.astrologiaSubtopics}>
+                            <div className={styles.subtopic}>
+                                <h3>O que é Astrologia?</h3>
+                                <p>
+                                    Astrologia é uma prática milenar que interpreta a posição dos planetas e signos no momento do nascimento, revelando traços da personalidade e tendências de vida.
+                                </p>
+                            </div>
+
+                            <div className={styles.subtopic}>
+                                <h3>Mapa Astral</h3>
+                                <p>
+                                    O mapa astral é uma representação do céu no momento do nascimento e mostra aspectos como Sol, Lua, Ascendente e casas astrológicas.
+                                </p>
+                            </div>
+
+                            <div className={styles.subtopic}>
+                                <h3>Aplicações</h3>
+                                <p>
+                                    A Astrologia pode ser usada para autoconhecimento, relacionamento, carreira e momentos de tomada de decisão com mais consciência.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                )}
-            </div>
+
+                    <div className={styles.articleSection}>
+                        <h2 className={styles.sectionTitle}>Artigos de Astrologia</h2>
+                        <p className={styles.sectionDescription}>&#9733;Descubra os segredos dos astros com conteúdos exclusivos.&#9733;</p>
+                        {loading ? (
+                            <p>Carregando artigos...</p>
+                        ) : articles.length === 0 ? (
+                            <div className={styles.emptyWrapper}>
+                                <p>Nenhum artigo encontrado. Volte mais tarde para mais conteúdos</p>
+                            </div>
+                        ) : (
+                            <div className={styles.cardContainer}>
+                                {articles.map((article, index) => (
+                                    <Card
+                                        key={index}
+                                        image={article.imageThumb}
+                                        title={truncateDescription(article.title, 30)}
+                                        description={article.firstContent}
+                                        id={article._id}
+                                        link={`/articles/${article._id}`}
+                                        category={article.category || "#Astrologia"}
+                                        type="artigo"
+                                    />
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </Container>
             <br />
         </>
     );

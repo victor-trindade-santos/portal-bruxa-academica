@@ -1,5 +1,5 @@
 .container {
-    background-color: white;
+    background-color: var(--article-bar-bg);
     box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
     padding: 16px;
     margin-top: 5%;
@@ -9,9 +9,8 @@
 .title {
     font-family: 'Inter', sans-serif;
     font-weight: 800;
-    /* This means "extra-bold" */
     font-size: 20px;
-    color: #8C089C;
+    color: var(--article-bar-title-color);
     text-align: left;
 }
 
@@ -19,17 +18,16 @@
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     /* regular */
-    font-size: 19px;
-    color: #4F0B82;
+    font-size: 1rem;
+    color: var(--article-bar-option-color);
     margin-left: 8px;
     /* pequeno espaçamento à esquerda */
     text-align: left;
     text-decoration: none;
 }
 
-.option:hover{
-    color: #8C089C !important;
-
+.option:hover {
+    color: var(--article-bar-option-hover-color) !important;
 }
 
 .navLink {
@@ -40,11 +38,11 @@
 }
 
 .navLink:hover {
-    color: #8C089C !important;
+    color: var(--article-bar-navlink-hover-color) !important;
 }
 
-@media (max-width: 768px){
-  .title {
-    font-size: 1.5em;
-  }
+@media (max-width: 768px) {
+    .title {
+        font-size: 1.5em;
+    }
 }

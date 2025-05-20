@@ -1,5 +1,5 @@
 .footer {
-  background-color: #5B079B; /* Cor de fundo igual à do navbar */
+  background-color: var(--footer-bg);
   padding: 10px 0;  /* Linha fina de padding */
   width: 100%; /* Garante que ocupe toda a largura da tela */
   display: flex;
@@ -19,7 +19,7 @@
 }
 
 .socialIcon {
-  color: #fff;
+  color: var(--footer-icon-color);
   font-size: 1.5rem; /* Tamanho dos ícones */
   transition: transform 0.3s ease;
 }
@@ -29,7 +29,7 @@
 }
 
 .copyright {
-  color: #fff;
+  color: var(--footer-text-color);
   font-size: 0.8rem;
   font-weight: normal;
   margin-top: 30px;

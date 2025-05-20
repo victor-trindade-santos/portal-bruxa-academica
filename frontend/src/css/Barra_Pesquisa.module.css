@@ -1,41 +1,55 @@
 .searchContainer {
-  background-color: white;
+  background-color: var(--search-bg);
   box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
   padding: 16px;
   width: 100%;
-  position: relative; /* Fundamental para o posicionamento absoluto do dropdown */
+  position: relative;
   margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px; /* mantém um espaçamento entre input e lupa */
 }
 
 .inputWrapper {
-  display: flex;
-  align-items: center;
+  position: relative;
+  flex: 1;
   border: 1px solid #5B079B;
   border-radius: 20px;
   padding: 8px 12px;
+  width: 100%;
 }
 
-/* Ícone da lupa */
-.searchIcon {
-  width: 16px;
-  height: 16px;
-  margin-right: 8px;
-}
-
-/* Estilo do input */
 .searchInput {
-  flex: 1;
-  border: none !important;
+  width: 100%;
+  border: none;
+  outline: none;
   font-family: 'Inter', sans-serif;
   font-weight: 300;
   font-size: 15px;
-  color: #8C089C;
-  margin: 0;
-  padding:0;
+  background-color: transparent;
 }
 
+.searchButton {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+
+.searchIcon {
+  width: 16px;
+  height: 16px;
+}
+
+
 .searchInput::placeholder {
-  color: #8C089C;
+  color: var(--search-placeholder-color);
   font-family: 'Inter', sans-serif;
   font-weight: 300;
   font-size: 15px;
@@ -44,24 +58,13 @@
   box-shadow:none;
 }
 
-.searchButton {
-  background: none;
-  border: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 0px;
-}
 /* DROPDOWN */
 .suggestions {
   position: absolute;
   top: 100%;
   left: 0;
   width: 100%;
-  background-color: white;
+  background-color: var(--search-bg);
 
   border-top: none;
   z-index: 1000;
@@ -76,7 +79,7 @@
 .suggestionItem {
   padding: 8px 12px;
   cursor: pointer;
-  color: #8C089C;
+  color: var(--suggestion-text-color);
   font-family: 'Inter', sans-serif;
   font-weight: 300;
   font-size: 15px;
@@ -86,8 +89,76 @@
 }
 
 .suggestionItem:hover {
-  background-color: #f2f2f2;
+  background-color: var(--suggestion-hover-bg);
 }
+
+.searchInput:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.searchInput:focus::placeholder {
+  color: transparent;
+}
+
+/* Sem sugestões */
+.noSuggestions {
+  position: absolute;
+  top: 100%;      
+  left: 0;
+  width: 100%;
+  background-color: var(--search-bg);
+  color: var(--no-suggestions-text-color);
+  padding: 8px 12px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  border-top: none;
+  margin-top: 4px;  
+  border-radius: 0 0 8px 8px;
+}
+
+.noSuggestions p {
+  margin: 0;
+}
+
+.noSuggestions .viewMore {
+  color: var(--view-more-link-color);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.noSuggestions .viewMore:hover {
+  color: var(--view-more-link-hover-color);
+}
+
+/* Botão de limpar */
+.clearButton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--clear-button-color);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  z-index: 3;
+}
+
+.clearButton:hover {
+  color: var(--clear-button-hover-color);
+}
+
+/* Adicione isso ao .searchInput se ainda não estiver presente */
+.searchInput {
+  padding-right: 28px; /* espaço para o botão "X" */
+}
+
 
 @media (max-width: 768px){
   .searchInput {
