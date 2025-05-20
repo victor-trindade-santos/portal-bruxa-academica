@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import '../css/Navbar.css';
 import PerfilImg from '../img/perfil.png';
 import Container from './Container';
+import ThemeToggleButton from './ThemeToggleButton';
 
 function Navbar() {
   const { user } = useContext(AuthContext);

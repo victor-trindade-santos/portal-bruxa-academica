@@ -3,7 +3,7 @@
 .sectionDivider {
   width: 80px;
   height: 4px;
-  background-color: #500f69;
+  background-color: var(--home-section-divider-bg);
   margin: 60px auto;
   border-radius: 2px;
 }
@@ -27,7 +27,7 @@
 }
 
 .sectionTitle {
-  color: #2B089C;
+  color: var(--home-section-title-color);
   font-size: 2em;
   font-weight: bold;
 }
@@ -42,8 +42,8 @@
 .viewMoreLink {
   display: inline-block;
   padding: 12px 30px;
-  background-color: #2B089C; 
-  color: white;
+  background-color: var(--home-viewmore-bg);
+  color: var(--home-viewmore-color);
   font-size: 1rem;
   text-decoration: none;
 
@@ -60,13 +60,13 @@
   left: 3px; 
   right: 3px;
   bottom: 3px; 
-  border: 1px solid #FFEB3B; 
+  border: 1px solid var(--home-viewmore-border);
 
   pointer-events: none; 
 }
 
 .viewMoreLink:hover {
-  background-color: #4C1C8C; 
+  background-color: var(--home-viewmore-hover-bg);
 }
 
 .sectionDescription {
@@ -76,7 +76,7 @@
 }
 
 .viewMoreLink:focus {
-  outline: 2px solid #FFEB3B;
+  outline: 2px solid var(--home-viewmore-focus-outline);
   outline-offset: 2px;
 }
 
@@ -135,7 +135,7 @@
 
 .aboutSection {
   width: 100%; /* ocupa toda largura possível */
-  background-color: #f0e6f6;
+  background-color: var(--home-about-bg);
   padding: 40px 0; /* só vertical, pra manter espaço */
   margin-top: 40px;
 }
@@ -161,13 +161,13 @@
 .aboutName {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #2b089c;
+  color: var(--home-about-name-color);
   margin-bottom: 15px;
 }
 
 .aboutDescription {
   font-size: 1.1rem;
-  color: #555;
+  color: var(--home-about-description-color);
   line-height: 1.5;
   margin: 0;
   text-align: left;
@@ -178,7 +178,7 @@
   height: 230px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #000000;
+  border: 3px solid var(--home-about-photo-border);
   flex-shrink: 0; 
   margin: 25px;
 }
@@ -186,7 +186,7 @@
 .aboutLabel {
   font-size: 0.9rem;
   font-weight: 500;
-  color: #9c6de8;
+  color: var(--home-about-label-color);
   margin-bottom: 0.2rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;

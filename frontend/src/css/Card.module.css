@@ -196,7 +196,7 @@
   border: 1px solid #ccc; /* Borda para o contorno do card */
   border-radius: 10px; /* Bordas arredondadas */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para o card */
-  background-color: white;
+  background-color: var(--card-bg);
   overflow: hidden; /* Para garantir que a imagem não ultrapasse o limite do card */
 }
 
@@ -208,7 +208,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5f5f5;
 }
 
 .articleImageWrapper {
@@ -218,8 +217,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5f5f5;
   overflow: hidden;
+}
+
+.courseImageWrapper,
+.articleImageWrapper {
+  background-color: var(--card-image-wrapper-bg);
 }
 
 /* Regra geral da imagem */
@@ -242,8 +245,8 @@
   position: absolute;
   bottom: 1%; /* Ajuste a distância da base da imagem */
   left: 0;
-  background-color: #2B089C; /* Fundo roxo */
-  color: white;
+  background-color: var(--card-category-bg);
+  color: var(--card-category-color);
   padding: 5px 15px;
   border-radius: 50px; /* Bordas arredondadas */
   font-size: 1rem;
@@ -259,7 +262,7 @@
   transform: translate(-50%, -50%);
   width: calc(100% - 6px); /* Faz a borda ficar mais interna */
   height: calc(100% - 6px); /* Faz a borda ficar mais interna */
-  border: 1px solid #FFEB3B; /* Borda amarela */
+  border: 1px solid var(--card-category-border);
   border-radius: 50px; /* Bordas arredondadas */
   box-sizing: border-box;
   pointer-events: none; /* Impede que a borda interfira com interações */
@@ -275,7 +278,7 @@
 
 .artigoText {
   font-size: 1rem;
-  color: #333;
+  color: var(--card-text-color);
   margin-top: 10px;
   text-align: left;
 }
@@ -284,8 +287,8 @@
 .artigoBtn {
   position: relative; /* necessário para o ::before funcionar corretamente */
   display: inline-block;
-  background-color: #2B089C;
-  color: white;
+  background-color: var(--card-button-bg);
+  color: var(--card-button-color);
   padding: 8px 16px;
   border-radius: 0px;
   text-decoration: none;
@@ -302,7 +305,7 @@
   transform: translate(-50%, -50%);
   width: calc(100% - 6px);
   height: calc(100% - 6px);
-  border: 1px solid #FFEB3B;
+  border: 1px solid var(--card-button-border);
   border-radius: 0px;
   box-sizing: border-box;
   pointer-events: none;
@@ -310,7 +313,7 @@
 
 
 .artigoBtn:hover {
-  background-color: #4C1C8C;
+  background-color: var(--card-button-hover-bg);
 }
 
 @media (max-width: 1440px) {

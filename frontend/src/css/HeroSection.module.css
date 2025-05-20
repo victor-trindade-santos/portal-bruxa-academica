@@ -26,12 +26,12 @@
   width: 100%;
   padding: 0 1rem;
   text-align: center;
-  color: #fff;
+  color: var(--hero-text-color);
 }
 
 .title {
   font-size: 2rem; /* menor que 2.8rem */
-  color: #ffffff;
+  color: var(--hero-text-color);
   margin-bottom: 1rem;
   font-weight: 700;
 }
@@ -40,11 +40,12 @@
   font-size: 1.2rem;
   line-height: 1.6;
   margin-bottom: 2rem;
+  color: var(--hero-text-color);
 }
 
 .button {
-  background-color: #2B089C;
-  color: #ffffff;
+  background-color: var(--hero-button-bg);
+  color: var(--hero-button-color);
   padding: 0.8rem 2rem;
   font-weight: bold;
   border-radius: 8px;
@@ -53,8 +54,8 @@
 }
 
 .button:hover {
-  background-color: #684edb; /* roxo mais escuro */
-  color: #ffffff;
+  background-color: var(--hero-button-hover-bg);
+  color: var(--hero-button-hover-color);
 }
 
 @media (max-width: 768px) {

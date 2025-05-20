@@ -39,21 +39,21 @@
 
 .subtopic {
   flex: 1 1 280px;
-  background-color: #f0e6f6;
+  background-color: var(--subtopic-bg);
+  box-shadow: 0 0 8px var(--subtopic-shadow);
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 8px rgba(43, 8, 156, 0.1);
 }
 
 .subtopic h3 {
   font-size: 1.2rem;
   margin-bottom: 10px;
-  color: #500f69;
+  color: var(--subtopic-title-color);
 }
 
 .subtopic p {
   font-size: 1rem;
-  color: #444;
+  color: var(--subtopic-text-color);
   line-height: 1.4;
 }
 
@@ -73,7 +73,7 @@
 }
 
 .sectionTitle {
-  color: #2B089C;
+  color: var(--section-title-color);
   font-size: 2em !important;
   font-weight: bold;
   text-align: center !important;
