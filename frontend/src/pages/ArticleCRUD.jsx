@@ -7,6 +7,7 @@ import CreateArticleComponent from '../components/articleCRUDComponents/CreateAr
 import UpdateArticleComponent from '../components/articleCRUDComponents/UpdateArticleComponent.jsx';
 import CleanArticleComponent from '../components/articleCRUDComponents/CleanArticleComponent.jsx';
 import ViewArticleComponent from '../components/articleCRUDComponents/ViewArticleComponent.jsx';
+import Container from '../components/Container.jsx'
 
 
 function ArticleCRUD({ formDataArticle, setFormDataArticle }) {
@@ -22,6 +23,7 @@ function ArticleCRUD({ formDataArticle, setFormDataArticle }) {
 
   return (
     <>
+    <Container>
       <div className={`row ${styles.rowPrincipal}`}>
         <h1 className={styles.sectionTitle}>Criar Artigos</h1>
         <div className={styles.colInsideLeft}>
@@ -181,6 +183,7 @@ function ArticleCRUD({ formDataArticle, setFormDataArticle }) {
 
         </div>
       </div>
+      </Container>
     </>
   );
 }

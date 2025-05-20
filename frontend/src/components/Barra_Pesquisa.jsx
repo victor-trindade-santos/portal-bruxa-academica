@@ -83,48 +83,64 @@ function Barra_Pesquisa({ onSelectArticle, reloadTrigger, onSearch }) {
     };
 
     return (
-        <div className={styles.searchContainer}>
-            <div className={styles.inputWrapper}>
-                <input
-                    type="text"
-                    placeholder="Digite o nome do artigo"
-                    className={styles.searchInput}
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    onFocus={() => setShowDropdown(true)}
-                    onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
-                />
-            </div>
-            <button
-                className={styles.searchButton}
-                type="button"
-                onClick={handleSearch}
-            >
-                <img src={lupa} alt="Ícone de busca" className={styles.searchIcon} />
-            </button>
+<div className={styles.searchContainer}>
+  <div className={styles.inputWrapper}>
+    <input
+      type="text"
+      placeholder="Digite o nome do artigo"
+      className={styles.searchInput}
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+      onFocus={() => setShowDropdown(true)}
+      onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
+    />
+    
+    {query && (
+      <button
+        type="button"
+        onClick={() => setQuery("")}
+        className={styles.clearButton}
+        aria-label="Limpar campo"
+      >
+        &times;
+      </button>
+    )}
+  </div>
 
-            {/* Sugestões enquanto digita */}
-            {showDropdown && filteredArticles.length > 0 && (
-                <ul className={styles.suggestions}>
-                    {filteredArticles.map((article) => (
-                        <li
-                            key={article._id}
-                            onClick={() => handleSuggestionClick(article)}
-                            className={styles.suggestionItem}
-                        >
-                            {article.title}
-                        </li>
-                    ))}
-                </ul>
-            )}
+  <button
+    className={styles.searchButton}
+    type="button"
+    onClick={handleSearch}
+  >
+    <img src={lupa} alt="Ícone de busca" className={styles.searchIcon} />
+  </button>
 
-            {/* Nenhuma sugestão encontrada */}
-            {query.trim() && !filteredArticles.length && (
-                <div className={styles.noSuggestions}>
-                    <p>Nenhum artigo encontrado. <span onClick={handleSearch} className={styles.viewMore}>Ver mais resultados</span></p>
-                </div>
-            )}
-        </div>
+  {showDropdown && filteredArticles.length > 0 && (
+    <ul className={styles.suggestions}>
+      {filteredArticles.map((article) => (
+        <li
+          key={article._id}
+          onClick={() => handleSuggestionClick(article)}
+          className={styles.suggestionItem}
+        >
+          {article.title}
+        </li>
+      ))}
+    </ul>
+  )}
+
+  {query.trim() && !filteredArticles.length && (
+    <div className={styles.noSuggestions}>
+      <p>
+        Nenhum artigo encontrado.{" "}
+        <span onClick={handleSearch} className={styles.viewMore}>
+          Ver mais resultados
+        </span>
+      </p>
+    </div>
+  )}
+</div>
+
     );
 }
 

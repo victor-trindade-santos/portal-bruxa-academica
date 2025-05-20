@@ -1,6 +1,6 @@
 .container {
-    background-color: white;
-    box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
+    background-color: var(--about-bg);
+    box-shadow: var(--about-shadow);
     padding: 16px;
     margin-top: 5%;
     width: 100%;
@@ -12,7 +12,7 @@
     font-weight: 800;
     /* This means "extra-bold" */
     font-size: 20px;
-    color: #8C089C;
+    color: var(--about-title-color);
     text-align: left;
 }
 
@@ -21,7 +21,7 @@
     font-weight: 400;
     /* regular */
     font-size: 19px;
-    color: #4F0B82;
+    color: var(--about-name-color);
     margin-left: 8px;
     /* pequeno espaçamento à esquerda */
     text-align: center;
@@ -32,7 +32,7 @@
     font-weight: 400;
     /* regular */
     font-size: 19px;
-    color: #4F0B82;
+    color: var(--about-description-color);
     margin-left: 8px;
     /* pequeno espaçamento à esquerda */
     text-align: left;

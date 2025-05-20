@@ -1,5 +1,5 @@
 .navbar-custom {
-  background-color: #fff !important;
+  background-color: var(--navbar-bg) !important;
   border-bottom: 1px solid #ddd;
   position: fixed;
   top: 0;
@@ -9,14 +9,14 @@
 }
 
 .nav-link-custom {
-  color: #5a2a82;
+  color: var(--navbar-link-color);
   font-weight: 600;
   transition: color 0.3s ease;
 }
 
 .nav-link-custom:hover,
 .nav-link-custom:focus {
-  color: #7e44b8;
+  color: var(--navbar-link-hover-color);
   text-decoration: none;
 }
 
@@ -37,38 +37,38 @@
 
 /* Link ativo (a aba atual) */
 .active-link {
-  color: #9c6de8;
+  color: var(--navbar-active-color);
+  border-bottom: 2px solid var(--navbar-active-border);
   font-weight: 700;
-  border-bottom: 2px solid #9c6de8;
 }
 
 /* Dropdown menu customizado */
 .custom-dropdown-menu {
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: var(--navbar-dropdown-bg);
+  border: 1px solid var(--navbar-dropdown-border);
+  box-shadow: var(--navbar-dropdown-shadow);
   min-width: 180px;
   padding: 0.5rem 0;
-  box-shadow: 0 4px 8px rgba(90, 42, 130, 0.15);
   border-radius: 4px;
 }
 
 /* Dropdown itens */
 .custom-dropdown-menu .dropdown-item {
-  color: #5a2a82;
+  color: var(--navbar-dropdown-item-color);
   padding: 0.5rem 1rem;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .custom-dropdown-menu .dropdown-item:hover,
 .custom-dropdown-menu .dropdown-item:focus {
-  background-color: #7e44b8;
-  color: #fff;
+  background-color: var(--navbar-dropdown-item-hover-bg);
+  color: var(--navbar-dropdown-item-hover-color);
   text-decoration: none;
 }
 
 /* Botão hamburguer customizado */
 .navbar-toggler-custom {
-  border-color: #ffffff;
+  border-color: var(--navbar-toggler-border);
 }
 
 .navbar-toggler-icon {
@@ -133,7 +133,7 @@
   border-radius: 50%;
   width: 45px;
   height: 45px;
-  border: 1px solid #000000;
+  border: 1px solid var(--navbar-avatar-border);
   object-fit: cover;
   flex-shrink: 0;
 }

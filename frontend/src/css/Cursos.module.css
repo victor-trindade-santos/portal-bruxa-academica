@@ -1,0 +1,93 @@
+
+.cursesSection {
+  max-width: 900px;
+  margin: 100px auto 40px;
+  padding: 0 20px;
+  color: var(--cursos-text-color);
+}
+
+.noCoursesTitle {
+  color: var(--cursos-title-color);
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.paragrafo {
+  font-size: 1.3rem;
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.comingSoonCourse {
+  max-width: 600px;
+  margin: 30px auto 40px;
+  padding: 20px;
+  background-color: var(--cursos-bg-highlight);
+  color: var(--cursos-text-color);
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(43, 8, 156, 0.1);
+  text-align: center; /* centralizar tudo */
+  font-family: 'Arial', sans-serif; /* ou a fonte que você usa */
+}
+
+.comingSoonCourse h3 {
+  font-size: 1.6rem; /* título maior como no estilo antigo */
+  color: var(--cursos-heading-color);
+  margin-bottom: 10px;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.comingSoonCourse h3::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: var(--cursos-heading-line);
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+.comingSoonCourse p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 15px;
+  color: var(--cursos-text-color);
+}
+
+.note {
+  font-style: italic;
+  color: var(--cursos-note-color);
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+.noCoursesWrapper {
+    width: 100%;
+    background-color: var(--cursos-bg-wrapper);
+    padding: 60px 20px;
+}
+
+.noCoursesInner {
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+/* Responsividade básica */
+@media (max-width: 600px) {
+  .comingSoonCourse {
+    padding: 15px;
+    margin: 20px auto 30px;
+  }
+
+  .comingSoonCourse h3 {
+    font-size: 1.3rem;
+  }
+}

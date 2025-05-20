@@ -1,0 +1,25 @@
+.themeToggle {
+  background-color: var(--button-bg, #5a2a82);
+  color: var(--button-color, #fff);
+  border: none;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  box-shadow: 0 2px 6px rgba(90, 42, 130, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  position: absolute;
+}
+
+.themeToggle:hover {
+  background-color: var(--button-hover-bg, #7e44b8);
+}
+
+.themeToggle:focus {
+  outline: 2px solid var(--button-focus, #ffeb3b);
+  outline-offset: 2px;
+}
