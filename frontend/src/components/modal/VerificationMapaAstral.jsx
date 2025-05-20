@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "../../css/modal/Modal.module.css";
 import CitySearch from '../profilePages/CitySearch';
 import UpdateUserContent from "../userCRUDComponents/UpdateUserComponent";
-import axios from '../../services/api';
+import api from "../../services/api";
 
 const VerificationMapaAstral = ({ message, onCancel, userData, setUserData, requiredFields }) => {
   const [missingFields, setMissingFields] = useState([]);
@@ -44,12 +44,8 @@ const VerificationMapaAstral = ({ message, onCancel, userData, setUserData, requ
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.put('/auth/update', userData, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
+      console.log(token);
+      const response = await api.put('/auth/update', userData);
 
       console.log('✅ Resposta do servidor:', response.data);
       setSuccessMessage('Dados atualizados com sucesso!');

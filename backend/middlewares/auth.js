@@ -1,34 +1,31 @@
 const jwt = require('jsonwebtoken');
 
-// Middleware para verificar se o usuário está autenticado e autorizado
-const authMiddleware = (roleRequired) => {
+const authMiddleware = (roleRequired = null) => {
   return (req, res, next) => {
-    // Verificando se o token está presente no cabeçalho
-    const token = req.header('Authorization')?.replace('Bearer ', '');
+    const authHeader = req.header('Authorization');
 
-    // Se não for uma rota que exige autenticação, permite o acesso
-    if (!roleRequired && !token) {
-      return next();  // Libera para quem não precisa de autenticação
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      if (!roleRequired) return next(); // rota pública
+      return res.status(401).json({ message: 'Token não fornecido ou mal formatado' });
     }
 
-    // Se um token for necessário e não for fornecido
-    if (!token) {
-      return res.status(401).json({ message: 'Acesso negado. Nenhum token fornecido.' });
-    }
+    const token = authHeader.replace('Bearer ', '').trim();
 
     try {
-      // Verificando o token e extraindo as informações
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       req.user = decoded;
 
-      // Se o role necessário for passado, vamos verificar
-      if (roleRequired && req.user.role !== roleRequired) {
-        return res.status(403).json({ message: 'Acesso negado. Você não tem permissão.' });
+      if (
+        roleRequired &&
+        (!req.user.role || req.user.role.toLowerCase() !== roleRequired.toLowerCase())
+      ) {
+        return res.status(403).json({ message: 'Acesso negado. Permissão insuficiente.' });
       }
 
       next();
-    } catch (error) {
-      res.status(400).json({ message: 'Token inválido.' });
+    } catch (err) {
+      console.error('Erro ao verificar token:', err);
+      res.status(401).json({ message: 'Token inválido ou expirado' });
     }
   };
 };

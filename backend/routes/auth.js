@@ -87,7 +87,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.put('/update', authenticateToken, async (req, res) => {
+router.put('/update', authenticateToken(), async (req, res) => {
   const userId = req.user.userId; // Seguro, vem do JWT
 
   const {

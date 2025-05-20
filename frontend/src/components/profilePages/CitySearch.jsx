@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const CitySearch = (onSelect) => {
+const CitySearch = ({ onSelect }) => {
   const [cidades, setCidades] = useState([]); // array de objetos { nome, uf }
   const [filtro, setFiltro] = useState('');
   const [cidadesFiltradas, setCidadesFiltradas] = useState([]);
@@ -74,7 +74,7 @@ const CitySearch = (onSelect) => {
                   cursor: 'pointer',
                 }}
                 onClick={() => {
-                  const selected = { nome, uf };
+                  const selected = { name: nome, state: uf };
                   setFiltro(`${nome} - ${uf}`);
                   setCidadesFiltradas([]);
                   if (typeof onSelect === 'function') {
