@@ -9,6 +9,7 @@ function Register() {
     email: "",
     password: "",
     confirmPassword: "",
+    fullName: "",
   });
 
   const [error, setError] = useState('');
@@ -22,29 +23,29 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    // Verificação de idade
-    const today = new Date();
-    const birthDate = new Date(values.birthDate);
+    // // Verificação de idade
+    // const today = new Date();
+    // const birthDate = new Date(values.birthDate);
 
-    // Calcula a idade
-    const age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-    const dayDiff = today.getDate() - birthDate.getDate();
+    // // Calcula a idade
+    // const age = today.getFullYear() - birthDate.getFullYear();
+    // const monthDiff = today.getMonth() - birthDate.getMonth();
+    // const dayDiff = today.getDate() - birthDate.getDate();
 
-    const isBirthdayPassedThisYear = monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0);
-    const realAge = isBirthdayPassedThisYear ? age : age - 1;
+    // const isBirthdayPassedThisYear = monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0);
+    // const realAge = isBirthdayPassedThisYear ? age : age - 1;
 
-    if (birthDate > today) {
-      setError("A data de nascimento não pode ser no futuro.");
-      alert("Você precisa ter pelo menos 5 anos para se cadastrar.");
-      return;
-    }
+    // if (birthDate > today) {
+    //   setError("A data de nascimento não pode ser no futuro.");
+    //   alert("Você precisa ter pelo menos 5 anos para se cadastrar.");
+    //   return;
+    // }
 
-    if (realAge < 5) {
-      setError("Você precisa ter pelo menos 5 anos para se cadastrar.");
-      alert("Você precisa ter pelo menos 5 anos para se cadastrar.");
-      return;
-    }
+    // if (realAge < 5) {
+    //   setError("Você precisa ter pelo menos 5 anos para se cadastrar.");
+    //   alert("Você precisa ter pelo menos 5 anos para se cadastrar.");
+    //   return;
+    // }
 
     try {
       const response = await fetch('http://localhost:5000/auth/register', {
@@ -55,8 +56,6 @@ function Register() {
           email: values.email,
           password: values.password,
           fullName: values.fullName,
-          birthDate: values.birthDate,
-          birthTime: values.birthTime,
         }),
       });
 
@@ -127,24 +126,6 @@ function Register() {
       label: "Confirmar Senha",
       required: true,
     },
-    {
-      id: 5,
-      name: "birthDate",
-      type: "date",
-      placeholder: "Data de Nascimento",
-      errorMessage: "Data de nascimento é obrigatória.",
-      label: "Data de Nascimento",
-      required: true,
-    },
-    {
-      id: 6,
-      name: "birthTime",
-      type: "time",
-      placeholder: "Hora de Nascimento",
-      errorMessage: "Hora de nascimento é obrigatória.",
-      label: "Hora de Nascimento",
-      required: true,
-    }
   ];
 
   return (

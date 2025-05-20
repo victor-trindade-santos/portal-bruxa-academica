@@ -6,6 +6,7 @@ import styles from '../css/Perfil.module.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import userImagem from '../img/profile.png';
 import aquarius from '../img/aquarius.png'
+import MapaAstral from '../components/profilePages/MapaAstral';
 
 const Perfil = () => {
     const [menuSelecionado, setMenuSelecionado] = useState('signo'); // já começa com "Seu Signo" selecionado
@@ -113,7 +114,10 @@ const Perfil = () => {
                             </div>
                         </div>
                     )}
-
+                    {menuSelecionado === 'mapa' && (
+                        <MapaAstral
+                        />
+                    )}
                 </div>
             </div>
         </div>

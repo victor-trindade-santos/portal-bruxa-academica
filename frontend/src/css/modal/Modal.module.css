@@ -75,4 +75,22 @@
     background-color: #CCCCCC; /* Cinza claro */
     color: #000000; /* Preto */
   }
+
   
+.nome {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #67006C;
+}
+
+.nomeInfo{
+    color: #67006C;
+    font-size: 20px;
+}
+
+.info {
+    font-size: 18px;
+    color: #67006C;
+    margin: 4px 0;
+}

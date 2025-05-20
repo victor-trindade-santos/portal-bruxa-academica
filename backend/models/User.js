@@ -27,11 +27,15 @@ const UserSchema = new mongoose.Schema({
   },
   birthDate: {
     type: Date,
-    required: true,
+    required: false,
   },
   birthTime: {
     type: String, // Armazena no formato 'HH:mm'
-    required: true,
+    required: false,
+  },
+    birthCity: {
+    type: String, // Armazena no formato 'HH:mm'
+    required: false,
   },
 }, { collection: 'Users' });
 
