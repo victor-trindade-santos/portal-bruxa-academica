@@ -13,15 +13,17 @@
     font-size: 30px;
     color: #8C089C;
     text-align: left;
+    margin-left: 8px;
 
 }
 
 .textAuthor, 
 .textPublicationDate {
     font-family: 'Inter', sans-serif ;
+    font-style: italic;
     font-weight: 400; /* regular */
     font-size: 15px;
-    color: #4F0B82;
+    color: #6d6d6d;
     margin-left: 8px; /* pequeno espaçamento à esquerda */
     text-align: left;
     text-decoration: none;
