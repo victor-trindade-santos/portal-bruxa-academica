@@ -89,7 +89,7 @@ function Astrologia() {
                                         title={truncateDescription(article.title, 30)}
                                         description={article.firstContent}
                                         id={article._id}
-                                        link={`/articles/${article._id}`}
+                                        link={`/artigos/${article._id}`}
                                         category={article.category || "#Astrologia"}
                                         type="artigo"
                                     />
