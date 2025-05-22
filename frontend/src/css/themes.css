@@ -119,6 +119,12 @@
     --crud-btn-hover-text: #4F0B82;
     --crud-btn-hover-border: #4F0B82;
 
+    /* Article Template */
+    --article-template-bg: #ffffff;
+    --article-template-title-color: #4F0B82;
+    --article-template-text-author: #636363;
+    --article-template-text-authorX:#4F0B82;
+
     /* Sobre Mim */
     --about-bg: #ffffff;
     --about-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
@@ -247,6 +253,12 @@
     --crud-btn-hover-bg: #fff85a;
     --crud-btn-hover-text: #4F0B82;
     --crud-btn-hover-border: #bb86fc;
+
+    /* Article Template */
+    --article-template-bg: #1c1c1c;
+    --article-template-title-color: #7e44b8;
+    --article-template-text-author: #b3b3b3;
+    --article-template-text-authorX:#bb86fc;
 
     /* Sobre Mim */
     --about-bg: #1c1c1c;

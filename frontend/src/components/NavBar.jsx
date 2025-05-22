@@ -51,7 +51,7 @@ function Navbar() {
         </button>
 
         <Link to="/" className="navbar-brand navbar-brand-custom">
-          <img src="/Logo_Portal-Bruxa.svg" alt="Logo" className="navbar-brand-img" />
+          <img src="/logo_portal_bruxa.svg" alt="Logo" className="navbar-brand-img" />
         </Link>
 
         <div className={`collapse navbar-collapse ${isMenuOpen ? 'show' : ''}`} id="navbarSupportedContent">
