@@ -10,7 +10,7 @@ import HeroSection from '../components/HeroSection.jsx';
 import home from '../img/heroSection_home.png';
 import Container from '../components/Container.jsx';
 import { truncateDescription } from '../utils/descriptionUtils';
-import prof from '../img/professora.avif'
+import prof from '../img/foto_Marcia.jpg'
 
 function Home() {
     // Estado para os artigos

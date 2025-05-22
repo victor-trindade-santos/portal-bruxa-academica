@@ -51,7 +51,7 @@
     margin-top: 10px;
 }
 
-.nomeInfo{
+.nomeInfo {
     font-size: 20px;
 }
 
@@ -64,19 +64,19 @@
 .nome,
 .nomeInfo,
 .info {
-  color: var(--perfil-text-color);
+    color: var(--perfil-text-color);
 }
 
-    .editarBtn {
-        background-color: var(--editar-btn-bg);
-        color: var(--editar-btn-color);
-        padding: 8px 16px;
-        border-radius: 8px;
-        border: none;
-        margin-top: 10px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
+.editarBtn {
+    background-color: var(--editar-btn-bg);
+    color: var(--editar-btn-color);
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
 .sidebar {
     display: flex;
@@ -126,20 +126,20 @@
 }
 
 .resumoSigno {
-  background-color: #fff;
-  color: #000;
-  /* outros estilos que já tem */
+    background-color: #fff;
+    color: #000;
+    /* outros estilos que já tem */
 }
 
 [data-theme="dark"] .resumoSigno {
-  background-color: #222;
-  color: #eee;
+    background-color: #222;
+    color: #eee;
 }
 
 
 html[data-theme="dark"] .resumo,
 html[data-theme="dark"] .textoBotao {
-  color: white;
+    color: white;
 }
 
 /* RESPONSIVO: menu lateral vira uma barra horizontal com ícones apenas */
@@ -160,11 +160,13 @@ html[data-theme="dark"] .textoBotao {
         font-size: 0;
         border-bottom: none;
         border-left: 2px solid #ddd;
+        border-radius: 0%;
     }
 
     .menuItem i {
         font-size: 24px;
         margin: 0;
+        
     }
 
     .menuItem:last-child {
@@ -175,62 +177,67 @@ html[data-theme="dark"] .textoBotao {
         border-left: none;
     }
 
-    .selected {
-        background-color: #e7e7e7;
+    .menuItem:hover{
+        background-color: var(--menu-item-hover-bg);
     }
 
-    .textoBotao{
+    .selected {
+        background-color: var(--selected-bg);
+    }
+
+    .textoBotao {
         text-align: center;
+        
     }
 }
 
-.dado{
+.dado {
     font-size: 20px;
 }
 
-.textoBotao{
+.textoBotao {
     margin-bottom: 0;
     font-size: 20px;
 }
 
-.titResumo{
+.titResumo {
     font-size: 25px;
     text-align: left;
 }
 
 .dado,
 .titResumo {
-  color: var(--info-highlight-color);
+    color: var(--info-highlight-color);
 }
 
-.resumo{
+.resumo {
     text-align: justify;
     font-weight: 400;
     font-size: 18px;
 }
 
 .logoutBtn {
-  background-color: var(--logout-btn-bg);
-  color: var(--logout-btn-color);
-  border: none;
-  padding: 8px 16px;
-  margin-top: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
+    background-color: var(--logout-btn-bg);
+    color: var(--logout-btn-color);
+    border: none;
+    padding: 8px 16px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .logoutBtn:hover {
-  background-color: var(--logout-btn-hover-bg);
+    background-color: var(--logout-btn-hover-bg);
 }
 
 .avatarContainer {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 
 .themeButtonWrapper {
-  position: absolute;
-  top: 0;
-  right: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
 }

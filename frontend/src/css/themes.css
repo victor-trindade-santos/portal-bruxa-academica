@@ -98,6 +98,7 @@
     --view-more-link-hover-color: #8C089C;
     --clear-button-color: #8C089C;
     --clear-button-hover-color: #5B079B;
+    --search-input-color-font: #000000;
 
     /* Barra de Categorias */
     --article-bar-bg: #ffffff;
@@ -219,7 +220,7 @@
     --hero-button-hover-color: #ffffff;
 
     /* Footer */
-    --footer-bg: #3e0571;
+    --footer-bg: #2d0055;
     --footer-text-color: #ffffff;
     --footer-icon-color: #ffffff;
 
@@ -233,6 +234,7 @@
     --view-more-link-hover-color: #ce8add;
     --clear-button-color: #ce8add;
     --clear-button-hover-color: #d3a0ff;
+    --search-input-color-font: #ffffff;
 
     /* Barra de Categorias */
     --article-bar-bg: #1e1e1e;

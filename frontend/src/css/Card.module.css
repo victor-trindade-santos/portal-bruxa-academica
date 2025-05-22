@@ -1,4 +1,3 @@
-
 /* Estilos cursos */
 .cardCustom {
   position: relative;
@@ -8,7 +7,8 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin: 0;
   width: 100%;
-  max-width: 400px; /* se quiser limitar */
+  max-width: 400px;
+  /* se quiser limitar */
   height: auto;
   display: flex;
   flex-direction: column;
@@ -22,11 +22,13 @@
 }
 
 .courseImage {
-  height: 40%;  /* Altura da imagem do curso */
+  height: 40%;
+  /* Altura da imagem do curso */
 }
 
 .articleImage {
-  height: 30%;  /* Ajuste para o tamanho de imagem dos artigos */
+  height: 30%;
+  /* Ajuste para o tamanho de imagem dos artigos */
 }
 
 .cardContent {
@@ -34,7 +36,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 60%;  /* O restante da altura do card */
+  height: 60%;
+  /* O restante da altura do card */
 }
 
 /* Título */
@@ -57,8 +60,8 @@
   color: white;
   padding: 5px 10px;
   border-radius: 20px;
-  font-size: 1rem; 
-  text-align: center; 
+  font-size: 1rem;
+  text-align: center;
   display: inline-block;
   position: relative;
   z-index: 1;
@@ -97,11 +100,12 @@
   margin-top: 10px;
 }
 
-@media (max-width: 1366px){
-  .btnCard{
+@media (max-width: 1366px) {
+  .btnCard {
     margin-top: 5px;
   }
 }
+
 .cardInfoRow {
   display: flex;
   justify-content: space-between;
@@ -127,12 +131,14 @@
 @media (max-width: 767px) {
   .cardArtigo {
     width: 100%;
-    height: auto; /* Mantém o conteúdo fluido */
+    height: auto;
+    /* Mantém o conteúdo fluido */
     margin: 10px 0;
   }
 
   .articleImageWrapper {
-    height: 120px; /* Reduzido para manter a proporção menor da tela */
+    height: 120px;
+    /* Reduzido para manter a proporção menor da tela */
   }
 
   .articleImageWrapper .cardImg {
@@ -140,7 +146,8 @@
   }
 
   .articleCategory {
-    font-size: 0.7rem; /* Igual ao 1440px */
+    font-size: 0.7rem;
+    /* Igual ao 1440px */
     padding: 3px 10px;
     bottom: -8%;
   }
@@ -170,7 +177,8 @@
   }
 
   .cardContainer {
-    grid-template-columns: 1fr; /* Um card por linha */
+    grid-template-columns: 1fr;
+    /* Um card por linha */
     padding: 8px;
     gap: 10px;
   }
@@ -192,23 +200,29 @@
 
 /* Card Artigo */
 .cardArtigo {
-  width: 100%; /* Ajustando a largura para 4 artigos por linha */
+  width: 100%;
+  /* Ajustando a largura para 4 artigos por linha */
   height: auto;
   margin: 0px;
   display: flex;
   flex-direction: column;
   position: relative;
-  border: 1px solid #ccc; /* Borda para o contorno do card */
-  border-radius: 10px; /* Bordas arredondadas */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para o card */
+  border: 1px solid #ccc;
+  /* Borda para o contorno do card */
+  border-radius: 10px;
+  /* Bordas arredondadas */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  /* Sombra para o card */
   background-color: var(--card-bg);
-  overflow: hidden; /* Para garantir que a imagem não ultrapasse o limite do card */
+  overflow: hidden;
+  /* Para garantir que a imagem não ultrapasse o limite do card */
 }
 
 .courseImageWrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9; /* ou 4 / 3, ou o que quiser */
+  aspect-ratio: 16 / 9;
+  /* ou 4 / 3, ou o que quiser */
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -218,7 +232,8 @@
 .articleImageWrapper {
   position: relative;
   width: 100%;
-  height: 200px; /* altura fixa para artigos */
+  height: 200px;
+  /* altura fixa para artigos */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -248,15 +263,18 @@
 
 .articleCategory {
   position: absolute;
-  bottom: 1%; /* Ajuste a distância da base da imagem */
+  bottom: 1%;
+  /* Ajuste a distância da base da imagem */
   left: 0;
   background-color: var(--card-category-bg);
   color: var(--card-category-color);
   padding: 5px 15px;
-  border-radius: 50px; /* Bordas arredondadas */
+  border-radius: 50px;
+  /* Bordas arredondadas */
   font-size: 1rem;
   text-align: center;
-  z-index: 2; /* Para garantir que fique visível sobre a imagem */
+  z-index: 2;
+  /* Para garantir que fique visível sobre a imagem */
 }
 
 .articleCategory:before {
@@ -265,12 +283,16 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: calc(100% - 6px); /* Faz a borda ficar mais interna */
-  height: calc(100% - 6px); /* Faz a borda ficar mais interna */
+  width: calc(100% - 6px);
+  /* Faz a borda ficar mais interna */
+  height: calc(100% - 6px);
+  /* Faz a borda ficar mais interna */
   border: 1px solid var(--card-category-border);
-  border-radius: 50px; /* Bordas arredondadas */
+  border-radius: 50px;
+  /* Bordas arredondadas */
   box-sizing: border-box;
-  pointer-events: none; /* Impede que a borda interfira com interações */
+  pointer-events: none;
+  /* Impede que a borda interfira com interações */
 }
 
 
@@ -290,7 +312,8 @@
 
 /* Estilos para o botão "Saiba Mais" */
 .artigoBtn {
-  position: relative; /* necessário para o ::before funcionar corretamente */
+  position: relative;
+  /* necessário para o ::before funcionar corretamente */
   display: inline-block;
   background-color: var(--card-button-bg);
   color: var(--card-button-color);
@@ -300,6 +323,13 @@
   margin-top: 10px;
   width: auto;
   text-align: left;
+}
+
+html[data-theme=dark] {
+  .artigoBtn {
+    background-color: var(--card-button-bg);
+    color: var(--card-button-color);
+  }
 }
 
 .artigoBtn::before {
@@ -325,7 +355,8 @@
 
   /* Curso */
   .cardCustom {
-    height: auto; /* Deixa o conteúdo crescer naturalmente */
+    height: auto;
+    /* Deixa o conteúdo crescer naturalmente */
   }
 
   .courseImageWrapper {

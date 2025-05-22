@@ -1,5 +1,5 @@
 import styles from '../css/Sobre_Mim_Lateral.module.css'
-import perfil from '../img/profile.png'
+import perfil from '../img/foto_Marcia.jpg'
 
 
 function Sobre_Mim_Lateral() {

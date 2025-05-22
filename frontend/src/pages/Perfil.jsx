@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import styles from '../css/Perfil.module.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import userImagem from '../img/profile.png';
+import userImagem from '../img/perfil.png';
 import aquarius from '../img/aquarius.png'
 import MapaAstral from '../components/profilePages/MapaAstral';
 import ThemeToggleButton from '../components/ThemeToggleButton';
