@@ -8,6 +8,10 @@
   z-index: 1030;
 }
 
+.themeButton {
+  margin-bottom: 32px !important;
+}
+
 .nav-link-custom {
   color: var(--navbar-link-color);
   font-weight: 600;

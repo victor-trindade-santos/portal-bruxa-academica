@@ -122,6 +122,7 @@ function Navbar() {
                   >
                     CURSOS
                   </div>
+                  
                   <ul className="dropdown-menu custom-dropdown-menu">
                     <li>
                       <Link to="/cursos" className="dropdown-item" onClick={closeNavbar}>
@@ -155,6 +156,11 @@ function Navbar() {
                 >
                   LOGIN
                 </Link>
+              </li>
+            )}
+            {!user && (
+              <li className={`nav-item themeButton`}>
+                <ThemeToggleButton />
               </li>
             )}
           </ul>
