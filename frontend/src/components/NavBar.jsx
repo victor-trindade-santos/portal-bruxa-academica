@@ -6,6 +6,8 @@ import PerfilImg from '../img/perfil.png';
 import Container from './Container';
 import ThemeToggleButton from './ThemeToggleButton';
 
+import { saveProfileImage, getProfileImage } from '../utils/profileImage.js';
+
 function Navbar() {
   const { user } = useContext(AuthContext);
   const location = useLocation();
@@ -51,7 +53,7 @@ function Navbar() {
         </button>
 
         <Link to="/" className="navbar-brand navbar-brand-custom">
-          <img src="/Logo_Portal-Bruxa.svg" alt="Logo" className="navbar-brand-img" />
+          <img src="/logo_portal_bruxa.svg" alt="Logo" className="navbar-brand-img" />
         </Link>
 
         <div className={`collapse navbar-collapse ${isMenuOpen ? 'show' : ''}`} id="navbarSupportedContent">
@@ -173,7 +175,7 @@ function Navbar() {
                 onClick={closeNavbar}
               >
                 <div className="navbar-welcome-message">Bem-vindo(a), {user.username} !</div>
-                <img src={PerfilImg} alt="Perfil" className="navbar-user-avatar" />
+                <img src={getProfileImage() || PerfilImg} alt="Perfil" className="navbar-user-avatar" />
               </Link>
             )}
           </div>

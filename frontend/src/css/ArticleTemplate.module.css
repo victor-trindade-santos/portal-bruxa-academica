@@ -1,8 +1,18 @@
+h2{
+  font-size: 1.8rem;
+  color: var(--article-template-title-color);
+}
+
+h3{
+  font-size: 1.4rem;
+  color: #8C089C;
+}
+
 .sectionArticle {
-    background-color: white;
-    box-shadow: 0 5px 15px -6px rgba(0, 0, 0, 0.3);
-    padding: 16px;
-    width: 100%;
+  background-color: var(--article-template-bg);
+  box-shadow: 0 5px 15px -6px rgba(0, 0, 0, 0.3);
+  padding: 16px;
+  width: 100%;
 }
 
 .titleArticle {
@@ -101,13 +111,13 @@ iframe{
     margin-bottom: 0;
   }
 
-  .imageArticle{
-    width: 80%;
-    display: block;
-    margin: 0 auto;
-    height: 350px;
-    object-fit: cover;
-  }
+.imageArticle {
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+  height: 350px;
+  object-fit: cover;
+}
 
 
   .textArticle{
@@ -121,15 +131,15 @@ iframe{
     margin-left: 8px;
   }
 
-  .subtitleArticle{
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    /* This means "extra-bold" */
-    font-size: 24px;
-    color: #8C089C;
-    text-align: left;
-    margin-left: 8px;
-  }
+.subtitleArticle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  /* This means "extra-bold" */
+  font-size: 24px;
+  color: #747474;
+  text-align: left;
+  margin-left: 8px;
+}
 
   .dividerArticle{
     /* border: none; */

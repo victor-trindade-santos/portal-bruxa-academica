@@ -99,12 +99,14 @@ li {
 }
 
 .navbar-brand {
-  margin-right: 3rem;
+  margin-right: 5rem;
+  margin-left: 2rem;
 }
 
 .navbar-nav {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
 }
 
@@ -226,7 +228,7 @@ li {
     width: fit-content;
     max-width: 250px;
     /* ou qualquer largura desejada */
-    background-color: #fff;
+    background-color: var(--navbar-dropdown-bg);
     /* ou o mesmo background da navbar */
     padding: 1rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

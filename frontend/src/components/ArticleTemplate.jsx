@@ -14,7 +14,7 @@ const ArticleTemplate = ({ articleId, articleData }) => {
 
   useEffect(() => {
     console.log('articleData:', articleData, 'articleId:', effectiveId);
-  
+
     if (!articleData && effectiveId) {
       const fetchArticle = async () => {
         try {
@@ -27,16 +27,16 @@ const ArticleTemplate = ({ articleId, articleData }) => {
           setLoading(false);
         }
       };
-  
+
       fetchArticle();
     }
   }, [articleId, articleData]);
-  
+
   useEffect(() => {
     if (article) {
       console.log('Conteúdo atual no estado:', article.firstContent);
     }
-  }, [article]); 
+  }, [article]);
 
   return (
     <div className={styles.sectionArticle}>
@@ -46,14 +46,14 @@ const ArticleTemplate = ({ articleId, articleData }) => {
           <p className={styles.textResume}>{article.firstContent}</p>
           <p className={styles.textAuthor}>Por: {article.author}</p>
           <p className={styles.textPublicationDate}>Data de Publicação: {article.publicationDate}</p>
-<div className={`ql-editor ${styles.textArticle}`} dangerouslySetInnerHTML={{ __html: article.secondContent }} />
+          <div className={`ql-editor ${styles.textArticle}`} dangerouslySetInnerHTML={{ __html: article.secondContent }} />
         </>
       ) : (
         <div>Artigo não encontrado</div>
       )}
     </div>
   );
-  
+
 };
 
 export default ArticleTemplate;

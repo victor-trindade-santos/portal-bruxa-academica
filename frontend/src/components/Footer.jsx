@@ -5,7 +5,7 @@ import { faInstagram, faYoutube, faXTwitter } from '@fortawesome/free-brands-svg
 function Footer() {
   return (
     <footer className={styles.footer}>
-      <img src="../../Logo_Portal-Bruxa.svg" alt="Logo" className={styles.footerLogo} />
+      <img src="../../logo_portal_bruxa.svg" alt="Logo" className={styles.footerLogo} />
       <p className={styles.copyright}>&copy; 2025 Portal Bruxa Acadêmica.</p>
       <div className={styles.socialIcons}>
         <a href="#" className={styles.socialIcon}>
