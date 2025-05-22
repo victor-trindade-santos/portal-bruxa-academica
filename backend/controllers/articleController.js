@@ -5,11 +5,21 @@ const cloudinary = require('../config/cloudinary'); // Importando a configuraç�
 // Criar um novo artigo
 exports.createArticle = async (req, res) => {
   try {
-    // Extraindo os dados do corpo da requisição
-    const { title, author, publicationDate, firstContent, secondContent, category } = req.body;
-    console.log('Valores armazenados:', req.imageUrls);
+    const {
+      title,
+      author,
+      publicationDate,
+      firstContent,
+      secondContent,
+      category,
+    } = req.body;
 
-    // As URLs das imagens já foram processadas no middleware e estão em req.imageUrls
+    console.log('Dados do corpo da requisição:', req.body);
+    console.log('URLs das imagens processadas:', req.imageUrls);
+
+    // Verifica se imageThumb está definido, senão usa string vazia
+    const imageThumb = (req.imageUrls && req.imageUrls.imageThumb) || '';
+
     const newArticle = new Article({
       title,
       author,
@@ -17,17 +27,18 @@ exports.createArticle = async (req, res) => {
       firstContent,
       secondContent,
       category,
-      imageThumb: req.imageUrls.imageThumb || '',
+      imageThumb,
     });
 
-    // Salvar o novo artigo no banco de dados
     await newArticle.save();
+
     res.status(201).json({ message: 'Artigo criado com sucesso!', article: newArticle });
   } catch (error) {
     console.error('Erro ao salvar o artigo:', error);
     res.status(500).json({ message: 'Erro ao salvar o artigo', error: error.message });
   }
 };
+
 
 // Obter todos os artigos (ou filtrar por categoria)
 exports.getArticles = async (req, res) => {

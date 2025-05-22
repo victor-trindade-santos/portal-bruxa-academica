@@ -30,7 +30,9 @@ function Login() {
         // Chama o login com as informações recebidas
         login({
           username: data.username,
+          email: data.email,
           role: data.role,
+          birthDate: data.birthDate,
           token: data.token,
         });
   

@@ -58,6 +58,7 @@
 .info {
     font-size: 18px;
     margin: 4px 0;
+    text-align: center;
 }
 
 .nome,
@@ -66,16 +67,16 @@
   color: var(--perfil-text-color);
 }
 
-.editarBtn {
-    background-color: var(--editar-btn-bg);
-    color: var(--editar-btn-color);
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: none;
-    margin-top: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+    .editarBtn {
+        background-color: var(--editar-btn-bg);
+        color: var(--editar-btn-color);
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: none;
+        margin-top: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
 
 .sidebar {
     display: flex;
@@ -122,6 +123,23 @@
 
 .selected {
     background-color: var(--selected-bg);
+}
+
+.resumoSigno {
+  background-color: #fff;
+  color: #000;
+  /* outros estilos que já tem */
+}
+
+[data-theme="dark"] .resumoSigno {
+  background-color: #222;
+  color: #eee;
+}
+
+
+html[data-theme="dark"] .resumo,
+html[data-theme="dark"] .textoBotao {
+  color: white;
 }
 
 /* RESPONSIVO: menu lateral vira uma barra horizontal com ícones apenas */

@@ -97,6 +97,11 @@
   margin-top: 10px;
 }
 
+@media (max-width: 1366px){
+  .btnCard{
+    margin-top: 5px;
+  }
+}
 .cardInfoRow {
   display: flex;
   justify-content: space-between;

@@ -71,6 +71,7 @@
   /* opcional: ajustar viewBox se necessário */
 }
 
+
 .ql-align-left {
   text-align: left;
 }
@@ -87,13 +88,15 @@
   text-align: justify;
 }
 
+
+
 .ql-editor ul {
-  padding-left: 1.5em;
+  padding-left: 0 !important;
   list-style-type: disc;
 }
 
 .ql-editor ol {
-  padding-left: 1.5em;
+  padding-left: 0 !important;
   list-style-type: decimal;
 }
 

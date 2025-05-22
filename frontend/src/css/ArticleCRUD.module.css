@@ -136,6 +136,43 @@
   /* Garante que ::before fique dentro */
 }
 
+
+.fieldDescription {
+  font-family: 'Inter', sans-serif ;
+    font-weight: 400; /* regular */
+    font-size: 15px;
+    color: #000000;
+    margin-left: 8px; /* pequeno espaçamento à esquerda */
+    margin-bottom: auto;
+    margin-top:  2%;
+    text-align: left;
+    text-decoration: none;
+}
+
+.fileInput {
+  display: none; /* Esconde o input padrão */
+}
+
+.fileInputLabel {
+  display: inline-block;
+  color: #4F0B82;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px !important;
+  padding: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: background-color 0.2s ease;
+  text-align: center;
+}
+
+.fileInputLabel:hover {
+  background-color: #4F0B82;
+  color: #fff;
+}
+
 .updateButton::before {
   content: '';
   position: absolute;

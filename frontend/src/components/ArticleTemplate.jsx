@@ -43,7 +43,7 @@ const ArticleTemplate = ({ articleId, articleData }) => {
       {article ? (
         <>
           <h1 className={styles.titleArticle}>{article.title}</h1>
-          <p className={styles.textAuthor}>{article.firstContent}</p>
+          <p className={styles.textResume}>{article.firstContent}</p>
           <p className={styles.textAuthor}>Por: {article.author}</p>
           <p className={styles.textPublicationDate}>Data de Publicação: {article.publicationDate}</p>
 <div className={`ql-editor ${styles.textArticle}`} dangerouslySetInnerHTML={{ __html: article.secondContent }} />

@@ -115,6 +115,7 @@
     font-weight: 700;
     font-family: 'Poppins', sans-serif;
     color: #ffff00;
+    text-align: center;
   }
   
   .description {
@@ -122,6 +123,7 @@
     font-weight: 400;
     font-family: 'Poppins', sans-serif;
     color: #ffffff;
+    text-align: center;
   }
 
 .molduraImg {

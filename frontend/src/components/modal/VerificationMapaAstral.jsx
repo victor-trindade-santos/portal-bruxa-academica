@@ -71,7 +71,7 @@ const VerificationMapaAstral = ({ message, onCancel, userData, setUserData, requ
           <UpdateUserContent field="birthDate" userData={userData} setUserData={setUserData} />
         )}
 
-        {visibleFields.includes("birthTime") && (
+        {/* {visibleFields.includes("birthTime") && (
           <UpdateUserContent field="birthTime" userData={userData} setUserData={setUserData} />
         )}
 
@@ -89,7 +89,7 @@ const VerificationMapaAstral = ({ message, onCancel, userData, setUserData, requ
               />
             </div>
           </div>
-        )}
+        )} */}
 
         <div className={styles.buttonGroup}>
           <button onClick={handleConfirm} className={styles.confirmButton} disabled={loading}>

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useRef, useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import styles from '../css/Perfil.module.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
@@ -11,7 +10,8 @@ import ThemeToggleButton from '../components/ThemeToggleButton';
 
 const Perfil = () => {
     const [menuSelecionado, setMenuSelecionado] = useState('signo'); // já começa com "Seu Signo" selecionado
-
+      const { user } = useContext(AuthContext);
+      const location = useLocation();
     const { logout } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -37,12 +37,12 @@ const Perfil = () => {
                                 <ThemeToggleButton />
                             </div>
                         </div>
-                        <h5 className={styles.nome}>Nome de usuário</h5>
-                        <p className={styles.info}>Data de nascimento: 00/00/0000</p>
-                        <p className={styles.info}>emailusuario@gmail.com</p>
-                        <button className={styles.editarBtn}>Editar perfil</button>
+                        <h5 className={styles.nome}>{user.username}</h5>
+                        <p className={styles.info}>{user.birthDate}</p>
+                        <p className={styles.info}>{user.email}</p>
+                        {/* <button className={styles.editarBtn}>Editar perfil</button> */}
                         <button className={styles.logoutBtn} onClick={handleLogout}>
-                            Logout
+                            Sair da conta
                         </button>
                     </div>
 
@@ -90,7 +90,7 @@ const Perfil = () => {
 
                 {/* Conteúdo da direita */}
                 <div className="col-12 col-lg-8">
-                    {menuSelecionado === 'signo' && (
+                    {menuSelecionado === 'mapa' && (
                         <div className={`card p-4 ${styles.resumoSigno}`}>
                             <div className="mb-3 d-flex align-items-center">
                                 <i className={`bi bi-stars fs-4 me-2 mt-0 ${styles.nome}`}></i>
@@ -118,7 +118,7 @@ const Perfil = () => {
                             </div>
                         </div>
                     )}
-                    {menuSelecionado === 'mapa' && (
+                    {menuSelecionado === 'signo' && (
                         <MapaAstral
                         />
                     )}

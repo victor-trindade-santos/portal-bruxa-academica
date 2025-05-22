@@ -13,7 +13,7 @@ router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   // Logando o que está sendo recebido
-  console.log('Recebido no login:', { username, password });
+  console.log('Recebido no login:', { username, password});
 
   try {
     const user = await User.findOne({ username });
@@ -21,6 +21,12 @@ router.post('/login', async (req, res) => {
       console.log('Usuário não encontrado!');
       return res.status(400).json({ message: 'Usuário não encontrado' });
     }
+
+    console.log('Usuário encontrado:', {
+  username: user.username,
+  email: user.email,
+  birthDate: user.birthDate,
+});
 
     // Logando o hash da senha armazenada
     console.log('Senha armazenada no banco:', user.password);
@@ -50,6 +56,8 @@ router.post('/login', async (req, res) => {
       message: 'Login bem-sucedido!',
       token,
       username: user.username,
+      email: user.email,
+      birthDate: user.birthDate,
       role: user.role,  // Incluindo a role na resposta
     });
   } catch (error) {

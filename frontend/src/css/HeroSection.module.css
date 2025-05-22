@@ -41,6 +41,7 @@
   line-height: 1.6;
   margin-bottom: 2rem;
   color: var(--hero-text-color);
+  text-align: center;
 }
 
 .button {

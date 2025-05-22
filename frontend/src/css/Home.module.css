@@ -30,6 +30,7 @@
   color: var(--home-section-title-color);
   font-size: 2em;
   font-weight: bold;
+  text-align: center;
 }
 
 /* Estilo do botão "Ver Mais" */
@@ -91,7 +92,7 @@
   background-color: transparent;
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 1366px) {
   .cardContainer {
     grid-template-columns: repeat(4, 1fr);
   }
