@@ -6,6 +6,8 @@ import PerfilImg from '../img/perfil.png';
 import Container from './Container';
 import ThemeToggleButton from './ThemeToggleButton';
 
+import { saveProfileImage, getProfileImage } from '../utils/profileImage.js';
+
 function Navbar() {
   const { user } = useContext(AuthContext);
   const location = useLocation();
@@ -167,7 +169,7 @@ function Navbar() {
                 onClick={closeNavbar}
               >
                 <div className="navbar-welcome-message">Bem-vindo(a), {user.username} !</div>
-                <img src={PerfilImg} alt="Perfil" className="navbar-user-avatar" />
+                <img src={getProfileImage() || PerfilImg} alt="Perfil" className="navbar-user-avatar" />
               </Link>
             )}
           </div>

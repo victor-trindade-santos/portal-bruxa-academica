@@ -8,12 +8,17 @@ import aquarius from '../img/aquarius.png'
 import MapaAstral from '../components/profilePages/MapaAstral';
 import ThemeToggleButton from '../components/ThemeToggleButton';
 
+// GAMBIARRA
+import { saveProfileImage, getProfileImage } from '../utils/profileImage.js';
+
 const Perfil = () => {
     const [menuSelecionado, setMenuSelecionado] = useState('signo'); // já começa com "Seu Signo" selecionado
-      const { user } = useContext(AuthContext);
-      const location = useLocation();
+    const { user } = useContext(AuthContext);
+    const location = useLocation();
     const { logout } = useContext(AuthContext);
     const navigate = useNavigate();
+
+    const fileInputRef = useRef(null);
 
     const handleLogout = () => {
         logout();
@@ -25,13 +30,30 @@ const Perfil = () => {
         setMenuSelecionado(item);
     };
 
+    if (!user) return <div>Usuário não encontrado</div>
+
     return (
         <div className={`container text-center ${styles.margem}`}>
             <div className="row">
                 <div className="col-12 col-lg-4 mb-4">
                     <div className={styles.perfilCard}>
                         <div className={styles.avatarContainer}>
-                            <img src={userImagem} alt="Avatar" className={styles.avatar} />
+                            <img
+                                src={getProfileImage() || userImagem}
+                                alt="Avatar"
+                                className={styles.avatar}
+                                onClick={() => fileInputRef.current?.click()}
+                                style={{ cursor: 'pointer' }}
+                            />
+
+                            <input
+                                type="file"
+                                accept="image/*"
+                                ref={fileInputRef}
+                                onChange={(e) => saveProfileImage(e.target.files[0], () => window.location.reload())}
+                                style={{ display: 'none' }}
+                            />
+
                             <img src={aquarius} alt="Signo" className={styles.signIcon} />
                             <div className={styles.themeButtonWrapper}>
                                 <ThemeToggleButton />
