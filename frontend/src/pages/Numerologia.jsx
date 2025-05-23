@@ -4,7 +4,7 @@ import axios from '../services/api';
 import Card from '../components/Card';
 import styles from '../css/Numerologia.module.css'; 
 import Container from '../components/Container';
-import numerologia from '../img/numerologia.png';
+import numerologia from '../img/numerologia.jpeg';
 import { truncateDescription } from '../utils/descriptionUtils';
 
 function Numerologia() {

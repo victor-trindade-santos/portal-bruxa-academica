@@ -4,7 +4,7 @@ import axios from '../services/api';
 import Card from '../components/Card';
 import styles from '../css/Tarot.module.css'; 
 import Container from '../components/Container';
-import tarot from '../img/tarot.png';
+import tarot from '../img/tarot.jpeg';
 import { truncateDescription } from '../utils/descriptionUtils';
 
 function Tarot() {

@@ -4,7 +4,7 @@ import axios from '../services/api';
 import Card from '../components/Card';
 import styles from '../css/Astrologia.module.css';
 import Container from '../components/Container';
-import astrologia from '../img/astrologia.png';
+import astrologia from '../img/astrologia.jpg';
 import { truncateDescription } from '../utils/descriptionUtils';
 
 function Astrologia() {
