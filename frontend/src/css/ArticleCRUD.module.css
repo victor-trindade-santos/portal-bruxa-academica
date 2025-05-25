@@ -9,7 +9,7 @@
 
 .sectionTitle {
   color: var(--crud-section-title);
-  font-size: 3em;
+  font-size: 2rem;
   font-weight: bold;
   margin-left: 5%;
 }
@@ -38,7 +38,7 @@
   font-family: 'Inter', sans-serif;
   font-weight: 800;
   /* This means "extra-bold" */
-  font-size: 30px;
+  font-size: 1.5rem;
   color: var(--crud-title-article);
   text-align: left;
   border: 1px solid #ccc;

@@ -205,3 +205,22 @@ html[data-theme=dark] {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+
+.adminWelcome {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--admin-welcome-gradient);
+    color: var(--admin-welcome-text);
+    border-radius: 12px;
+    border: 2px solid var(--admin-welcome-border);
+}
+
+.adminWelcome h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.adminWelcome p {
+    font-size: 1.1rem;
+    text-align: center;
+}

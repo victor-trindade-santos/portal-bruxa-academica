@@ -1,7 +1,7 @@
 import styles from '../css/HeroSection.module.css';
 import { Link } from 'react-router-dom'; 
 
-function HeroSection({ image }) {
+function HeroSection({ image, isLogged }) {
   return (
     <div className={styles.hero} style={{ backgroundImage: `url(${image})` }}>
       <div className={styles.overlay}>
@@ -11,9 +11,15 @@ function HeroSection({ image }) {
             Descubra o que os astros revelam sobre você.<br />
             Seu mapa astral completo pode transformar sua visão de si mesmo e do mundo.
           </p>
-          <Link to="/register" className={styles.button}>
-            Cadastre-se agora
-          </Link>
+          {isLogged ? (
+            <Link to="/profile" className={styles.button}>
+              Ir
+            </Link>
+          ) : (
+            <Link to="/register" className={styles.button}>
+              Cadastre-se agora
+            </Link>
+          )}
         </div>
       </div>
     </div>
