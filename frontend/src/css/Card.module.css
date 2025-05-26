@@ -98,6 +98,100 @@
 /* Estilo do botão "Saiba Mais" para artigos */
 .btnCard {
   margin-top: 10px;
+}/* Estilo do botão "Saiba Mais" - Artigo */
+.artigoBtn {
+  position: relative;
+  display: inline-block;
+  background-color: var(--card-button-bg);
+  color: var(--card-button-color);
+  padding: 12px 24px; /* Aumentando o padding para maior altura e largura */
+  border-radius: 0px;
+  text-decoration: none;
+  width: auto;
+  text-align: left;
+  font-size: 1.2rem; /* Tamanho da fonte maior */
+}
+
+.artigoBtn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  border: 1px solid var(--card-button-border);
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.artigoBtn:hover {
+  background-color: var(--card-button-hover-bg);
+}
+
+/* Estilos para os botões de editar e excluir */
+.editButton, .deleteButton {
+  position: relative;
+  display: inline-flex;  /* Flex para centralizar o ícone dentro do botão */
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card-button-bg);
+  color: var(--card-button-color);
+  padding: 5px; /* Padding de 5px por 5px */
+  border-radius: 0px;
+  border: none;
+  text-decoration: none;
+  width: auto;
+  cursor: pointer;
+  text-align: center;
+  margin-left: auto;  /* Garante o alinhamento à direita */
+  overflow: hidden;
+}
+
+.editButton::before, .deleteButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 3px);
+  height: calc(100% - 3px);
+  border: 1px solid var(--card-button-border);
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.editButton:hover, .deleteButton:hover, .artigoBtn:hover {
+  background-color: var(--card-button-hover-bg);
+}
+
+/* Ícones nos botões de editar e excluir */
+.editButton i, .deleteButton i {
+  font-size: 0.7rem;  /* Igual ao texto do botão Saiba Mais */
+  margin-right: 0;  /* Remover espaço à direita do ícone */
+}
+
+
+/* Container dos botões (Saiba Mais, Editar e Excluir) */
+.btnCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  width: 100%;
+}
+
+/* Garantindo o alinhamento correto dentro do card */
+.btnCard .artigoBtn {
+  margin-right: auto; /* Alinha "Saiba Mais" à esquerda */
+}
+
+.editButton {
+  margin-left: auto; /* Alinha Editar e Excluir à direita */
+}
+
+.deleteButton {
+  margin-left: 6px; /* Reduzido o espaçamento entre os botões */
 }
 
 @media (max-width: 1366px) {
@@ -332,24 +426,7 @@ html[data-theme=dark] {
   }
 }
 
-.artigoBtn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc(100% - 6px);
-  height: calc(100% - 6px);
-  border: 1px solid var(--card-button-border);
-  border-radius: 0px;
-  box-sizing: border-box;
-  pointer-events: none;
-}
 
-
-.artigoBtn:hover {
-  background-color: var(--card-button-hover-bg);
-}
 
 @media (max-width: 1440px) {
 
