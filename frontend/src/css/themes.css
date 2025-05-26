@@ -132,6 +132,31 @@
     --about-title-color: #8C089C;
     --about-name-color: #4F0B82;
     --about-description-color: #4F0B82;
+
+    /* Login */
+    --login-bg: linear-gradient(135deg, #ffffff, #ffffff);
+    --login-card-bg: rgba(255, 255, 255, 0.08);
+    --login-border-color: #ffffff20;
+    --login-box-shadow: 0 0 15px rgba(44, 44, 44, 0.527);
+    
+    --login-label-color: #8C089C;
+    --login-input-bg: #5c5c5c10;
+    --login-input-text: #000000be;
+    --login-input-focus-bg: #e4000015;
+    --login-input-focus-shadow: inset 0 0 1px #c67efb;
+    
+    --login-button-bg: #8C089C;
+    --login-button-text: #fff000;
+    --login-button-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
+    --login-button-hover-bg: #934a9b;
+    
+    --login-error-color: #e63946;
+    --login-success-color: #2a9d8f;
+
+    /* Msg pro admin */
+    --admin-welcome-gradient: linear-gradient(135deg, #f0f0f5, #e2e2f5);
+    --admin-welcome-text: #4F0B82;
+    --admin-welcome-border: #ccc;
 }
 
 [data-theme="dark"] {
@@ -268,4 +293,29 @@
     --about-title-color: #e2a4f7;
     --about-name-color: #bb86fc;
     --about-description-color: #bb86fc;
+
+    /* Login */
+    --login-bg: linear-gradient(135deg, #121212, #121212);
+    --login-card-bg: rgba(255, 255, 255, 0.03);
+    --login-border-color: rgba(255, 255, 255, 0.2);
+    --login-box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+
+    --login-label-color: #8C089C;
+    --login-input-bg: rgba(255, 255, 255, 0.05);
+    --login-input-text: #f0f0f0;
+    --login-input-focus-bg: rgba(228, 0, 0, 0.1);
+    --login-input-focus-shadow: inset 0 0 1px #c67efb;
+
+    --login-button-bg: #8C089C;
+    --login-button-text: #fff000;
+    --login-button-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.7);
+    --login-button-hover-bg: #934a9b;
+
+    --login-error-color: #e63946;
+    --login-success-color: #2a9d8f;
+
+    /* Msg pro admin */
+    --admin-welcome-gradient: linear-gradient(135deg, #2B089C, #8A2BE2);
+    --admin-welcome-text: #ffffff;
+    --admin-welcome-border: #555;
 }
