@@ -4,7 +4,8 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #ffffff, #ffffff);
+  /* background: linear-gradient(135deg, #ffffff, #ffffff); */
+  background: var(--login-bg);
   padding: 2rem;
   margin: 0%;
 }
@@ -16,14 +17,14 @@
 }
 
 .formBox {
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid #ffffff20;
   padding: 2rem;
   width: 100%;
   max-width: 400px;
   backdrop-filter: blur(8px);
-  box-shadow: 0 0 15px rgba(44, 44, 44, 0.527);
-  color: #8C089C;
+  background-color: var(--login-card-bg);
+  border: 1px solid var(--login-border-color);
+  box-shadow: var(--login-box-shadow);
+  color: var(--login-label-color);
 }
 
 .title {
@@ -40,7 +41,7 @@
   font-size: 0.9rem !important;
   margin-bottom: 0.3rem;
   font-weight: bold;
-  color: #8C089C;
+  color: var(--login-label-color);
 }
 
 .p {
@@ -49,27 +50,27 @@
 
 .input {
   width: 100%;
-  padding: 0.6rem;
-  border: none;
   font-size: 0.8rem !important;
-  /* border-radius: 0.5rem; */
-  background-color: #5c5c5c10;
-  color: #000000be;
   margin-bottom: 0.5rem;
+  background-color: var(--login-input-bg);
+  color: var(--login-input-text);
+  border: 1px solid var(--login-border-color);
+  padding: 15px;
+  border: 1px solid e0b3ff;
+  border-radius: 5px;
 }
 
 .input:focus {
   outline: none;
   /* border: 1px solid #c67efb; */
-  background-color: #e4000015;
-  box-shadow: inset 0 0 1px #c67efb;
+  background-color: var(--login-input-focus-bg);
+  box-shadow: var(--login-input-focus-shadow);
 }
 
 .button {
   position: relative;
   /* Necessário para posicionar o ::before */
   font-family: 'Inter', sans-serif;
-  box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   /* Garante que ::before fique dentro */
   font-weight: 200;
@@ -80,16 +81,16 @@
   width: 80%;
   padding: 0.7rem;
   margin-top: 2rem;
-  background-color: #8C089C;
-  color: #fff000;
   border: none;
   /* border-radius: 0.5rem; */
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s;
-
+  background-color: var(--login-button-bg);
+  color: var(--login-button-text);
+  box-shadow: var(--login-button-shadow);
 }
 
 .button:hover {
-  background-color: #934a9b;
+  background-color: var(--login-button-hover-bg);
 }

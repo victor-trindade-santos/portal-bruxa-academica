@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import '../css/Navbar.css';
@@ -6,20 +6,21 @@ import PerfilImg from '../img/perfil.png';
 import Container from './Container';
 import ThemeToggleButton from './ThemeToggleButton';
 
+import { saveProfileImage, getProfileImage } from '../utils/profileImage.js';
+
 function Navbar() {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   const location = useLocation();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const isActive = (path) => location.pathname === path;
-
   const toggleNavbar = () => setIsMenuOpen(!isMenuOpen);
   const closeNavbar = () => setIsMenuOpen(false);
 
   const isAdmin = user?.role === 'admin';
 
   useEffect(() => {
-    // Fecha o menu ao navegar para outra rota
     closeNavbar();
   }, [location.pathname]);
 
@@ -29,16 +30,18 @@ function Navbar() {
         closeNavbar();
       }
     };
-
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [isMenuOpen]);
 
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-custom">
-
       <Container>
-
         <button
           className="navbar-toggler navbar-toggler-custom"
           type="button"
@@ -56,6 +59,7 @@ function Navbar() {
 
         <div className={`collapse navbar-collapse ${isMenuOpen ? 'show' : ''}`} id="navbarSupportedContent">
           <ul className="navbar-nav mb-2 mb-lg-0">
+
             {[
               { to: '/', label: 'HOME' },
               { to: '/magia', label: 'MAGIA' },
@@ -146,7 +150,8 @@ function Navbar() {
               )}
             </li>
 
-            {!user && (
+            {/* Login ou Logout */}
+            {!user ? (
               <li className="nav-item">
                 <Link
                   to="/login"
@@ -156,18 +161,35 @@ function Navbar() {
                   LOGIN
                 </Link>
               </li>
+            ) : isAdmin ? (
+              <li className="nav-item">
+                <button
+                  className="nav-link nav-link-custom logout-button"
+                  onClick={handleLogout}
+                >
+                  LOGOUT
+                </button>
+              </li>
+            ) : null}
+
+            {/* Botão de tema sempre visível */}
+            {(!user || isAdmin) && (
+              <li className="nav-item themeButton">
+                <ThemeToggleButton />
+              </li>
             )}
           </ul>
 
           <div className="push-right">
-            {user && (
+            {/* Mostrar perfil só se NÃO for admin */}
+            {user && !isAdmin && (
               <Link
                 to="/profile"
                 className={`nav-link-custom navbar-user-link ${isActive('/profile') ? 'active-link' : ''}`}
                 onClick={closeNavbar}
               >
-                <div className="navbar-welcome-message">Bem-vindo(a), {user.username} !</div>
-                <img src={PerfilImg} alt="Perfil" className="navbar-user-avatar" />
+                <div className="navbar-welcome-message">Bem-vindo(a), {user.username}!</div>
+                <img src={getProfileImage() || PerfilImg} alt="Perfil" className="navbar-user-avatar" />
               </Link>
             )}
           </div>

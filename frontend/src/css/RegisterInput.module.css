@@ -3,6 +3,9 @@
     margin: 8px;
     border: 1px solid e0b3ff;
     border-radius: 5px;
+    background-color: var(--login-input-bg);
+    color: var(--login-input-text);
+    border: 1px solid var(--login-border-color);
 }
 
 .formInput{

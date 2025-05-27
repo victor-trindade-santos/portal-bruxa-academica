@@ -1,5 +1,5 @@
 import styles from '../css/Sobre_Mim_Lateral.module.css'
-import perfil from '../img/foto_Marcia.jpg'
+import perfil from '../img/marcia_silva.jpeg'
 
 
 function Sobre_Mim_Lateral() {
@@ -9,6 +9,7 @@ function Sobre_Mim_Lateral() {
                 Sobre Mim
             </h1>
             <img src={perfil} className={styles.imageProfile} />
+            <p></p>
             <h1 className={styles.nameTitle}>
                 ✦ Márcia Silva ✦
             </h1>

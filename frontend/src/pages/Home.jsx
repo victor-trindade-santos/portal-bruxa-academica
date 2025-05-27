@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Card from '../components/Card';
 import Video from '../components/Video';
 import VideoAstrologia from '../video/video1.jsx';
@@ -10,7 +10,8 @@ import HeroSection from '../components/HeroSection.jsx';
 import home from '../img/heroSection_home.png';
 import Container from '../components/Container.jsx';
 import { truncateDescription } from '../utils/descriptionUtils';
-import prof from '../img/foto_Marcia.jpg'
+import prof from '../img/marcia_silva.jpeg'
+import { AuthContext } from '../context/AuthContext';
 
 function Home() {
     // Estado para os artigos
@@ -75,9 +76,23 @@ function Home() {
         }
     ];
 
+    const { user } = useContext(AuthContext);
+    const isAdmin = user?.role === 'admin';
+
     return (
         <>
-            <HeroSection image={home} />
+            {isAdmin ? (
+                <Container>
+                    <div className="pageContentWithoutHero">
+                        <div className={styles.adminWelcome}>
+                            <h1>Bem-vindo(a) ao painel administrativo, {user.username}!</h1>
+                            <p>Gerencie seus artigos, cursos e conteúdos com facilidade.</p>
+                        </div>
+                    </div>
+                </Container>
+            ) : (
+                <HeroSection image={home} isLogged={!!user} />
+            )}
 
             {/* Seção de Artigos */}
             <Container>

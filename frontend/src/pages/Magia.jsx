@@ -4,7 +4,7 @@ import axios from '../services/api';
 import Card from '../components/Card';
 import styles from '../css/Magia.module.css'; 
 import Container from '../components/Container';
-import magia from '../img/magia.png'
+import magia from '../img/magia.jpeg'
 import { truncateDescription } from '../utils/descriptionUtils';
 
 function Magia() {

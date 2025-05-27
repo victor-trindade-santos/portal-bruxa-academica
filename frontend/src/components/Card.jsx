@@ -1,9 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+// Card.jsx
+import React, {useContext} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from '../css/Card.module.css';
 import { truncateDescription } from '../utils/descriptionUtils';
+import { AuthContext } from '../context/AuthContext';
 
-function Card({ image, title, description, link, category, duration, type, className, id }) {
+// O Card deve receber o '_id' e a função 'onDeleteClick'
+function Card({ image, title, description, link, category, duration, type, className, _id, onDeleteClick }) { // ✅ Aqui está correto: recebendo '_id'
+  const { user, logout } = useContext(AuthContext);
+
+  const isAdmin = user?.role === 'admin';
+
+  const navigate = useNavigate();
 
   let truncatedDescription;
 
@@ -13,21 +21,32 @@ function Card({ image, title, description, link, category, duration, type, class
     truncatedDescription = truncateDescription("");
   }
 
-
   const isArtigo = type === 'artigo';
   const isCurso = type === 'curso';
 
+  // A função para lidar com o clique no botão de exclusão
+  const handleDeleteButtonClick = () => {
+    // ✅ Use '_id' aqui, pois é a prop que você está recebendo
+    console.log("Card: Botão de exclusão clicado para o ID:", _id);
+    onDeleteClick(_id);
+  };
+
+  // ✅ Nova função para lidar com o clique no botão de editar
+  const handleEditButtonClick = () => {
+    console.log("Card: Botão de editar clicado para o ID:", _id);
+    // Navega para a página ArticleCRUD e passa o _id como um parâmetro de estado
+    // Isso é mais seguro do que passar na URL se os dados forem grandes ou sensíveis.
+    navigate(`/create-articles-d42f4c`, { state: { articleId: _id } });
+  };
+
   return (
     <div className={`${isArtigo ? styles.cardArtigo : styles.cardCustom} ${className || ''}`}>
-      {/* Container da imagem */}
       <div className={isArtigo ? styles.articleImageWrapper : styles.courseImageWrapper}>
         <img
           src={image}
           alt="Imagem do Card"
           className={styles.cardImg}
         />
-
-        {/* Exibindo a categoria sobre a imagem, apenas para artigos */}
         {isArtigo && (
           <div className={styles.articleCategory}>{category}</div>
         )}
@@ -43,12 +62,24 @@ function Card({ image, title, description, link, category, duration, type, class
           </div>
         )}
 
-          <p className={isArtigo ? styles.artigoText : styles.cardText} dangerouslySetInnerHTML={{__html: truncatedDescription}} />
-
+        <p className={isArtigo ? styles.artigoText : styles.cardText} dangerouslySetInnerHTML={{ __html: truncatedDescription }} />
 
         {isArtigo && link && (
           <div className={styles.btnCard}>
             <a href={link} className={styles.artigoBtn}>Saiba Mais</a>
+
+            {isAdmin && (
+              <>
+                {/* ✅ O onClick agora chama handleEditButtonClick */}
+                <button className={styles.editButton} onClick={handleEditButtonClick}>
+                  <i className="bi bi-pencil"></i>
+                </button>
+                {/* O onClick agora chama handleDeleteButtonClick */}
+                <button className={styles.deleteButton} onClick={handleDeleteButtonClick}>
+                  <i className="bi bi-trash"></i>
+                </button>
+              </>
+            )}
           </div>
         )}
       </div>
