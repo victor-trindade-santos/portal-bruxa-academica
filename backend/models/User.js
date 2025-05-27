@@ -5,12 +5,12 @@ const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true, // Garante que o nome de usuário será único
+    unique: true,
   },
   email: {
     type: String,
     required: function () { return this.role === 'user'; }, // Email é requerido apenas para users
-    unique: true, // Garante que o email será único
+    unique: true,
   },
   password: {
     type: String,
@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ['user', 'admin'],
-    default: 'user', // Valor padrão para novos usuários
+    default: 'user',
   },
   fullName: {
     type: String,
@@ -33,16 +33,25 @@ const UserSchema = new mongoose.Schema({
     type: String, // Armazena no formato 'HH:mm'
     required: false,
   },
-    birthCity: {
+  birthCity: {
     type: String, // Armazena no formato 'HH:mm'
     required: false,
   },
+
+  // DADOS RELACIONANDOS COM O MAPA ASTRAL
+  sunSign: { type: String },
+  sunDescription: { type: String },
+  moonSign: { type: String },
+  moonDescription: { type: String },
+  ascendantSign: { type: String },
+  ascendantDescription: { type: String },
+  mapaCalculadoEm: { type: Date },
 }, { collection: 'Users' });
 
-// Encriptar a senha antes de salvar no banco
+
 UserSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
-    if (!this.password.startsWith('$2b$')) { // Evita re-hash se já for um hash do bcrypt
+    if (!this.password.startsWith('$2b$')) {
       const salt = await bcrypt.genSalt(10);
       this.password = await bcrypt.hash(this.password, salt);
     }

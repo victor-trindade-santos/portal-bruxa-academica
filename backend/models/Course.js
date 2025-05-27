@@ -9,7 +9,7 @@ const CourseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // outros campos do curso...
+  
 });
 
 module.exports = mongoose.model('Course', CourseSchema);
