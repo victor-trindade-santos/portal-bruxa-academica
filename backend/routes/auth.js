@@ -8,6 +8,21 @@ const router = express.Router();
 const authenticateToken = require('../middlewares/auth');
 const uploadProfileImage = require('../middlewares/uploadProfileImage');
 
+router.get('/me', authenticateToken(), async (req, res) => {
+  try {
+    const user = await User.findById(req.user.userId).select('-password');
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado' });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error('Erro ao buscar usuário:', error);
+    res.status(500).json({ message: 'Erro ao buscar dados do usuário', error: error.message });
+  }
+});
+
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
@@ -20,43 +35,42 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Usuário não encontrado' });
     }
 
+    console.log(user)
+
     console.log('Usuário encontrado:', {
       username: user.username,
       email: user.email,
       birthDate: user.birthDate,
     });
 
-    // Logando o hash da senha armazenada
     console.log('Senha armazenada no banco:', user.password);
 
-    // Comparando as senhas
-    console.log('Senha digitada:', password); // Texto puro
-    console.log('Hash armazenado no banco:', user.password); // Hash no banco
+    console.log('Senha digitada:', password);
+    console.log('Hash armazenado no banco:', user.password);
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log('Resultado da comparação:', isMatch); // true ou false    
+    console.log('Resultado da comparação:', isMatch);
     if (!isMatch) return res.status(400).json({ message: 'Senha incorreta' });
 
-    // Criando o payload do JWT (incluir a role)
     const payload = {
       userId: user._id,
-      role: user.role,  // Incluindo a role aqui
+      role: user.role,
       username: user.username,
       fullName: user.fullName,
       birthDate: user.birthDate,
       birthTime: user.birthTime,
+      profileImage: user.profileImage // ← Corrigido para usar o nome do campo do modelo
     };
 
-    // Gerando o token
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '5h' });
 
-    // Enviando a resposta incluindo a role
     res.status(200).json({
       message: 'Login bem-sucedido!',
       token,
       username: user.username,
       email: user.email,
       birthDate: user.birthDate,
-      role: user.role,  // Incluindo a role na resposta
+      role: user.role,
+      profileImgUrl: user.profileImgUrl
     });
   } catch (error) {
     console.error('Erro no login:', error);
@@ -196,7 +210,7 @@ router.post('/uploadProfileImg', authenticateToken(), uploadProfileImage, async 
 
     res.status(200).json({
       message: 'Imagem de perfil atualizada com sucesso!',
-      profileImageUrl: req.profileImgUrl,
+      profileImage: req.profileImgUrl,
     });
   } catch (error) {
     console.error('Erro ao salvar imagem de perfil no banco:', error);

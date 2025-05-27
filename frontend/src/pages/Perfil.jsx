@@ -7,30 +7,40 @@ import userImagem from '../img/perfil.png';
 import aquarius from '../img/aquarius.png'
 import MapaAstral from '../components/profilePages/MapaAstral';
 import ThemeToggleButton from '../components/ThemeToggleButton';
-
-// GAMBIARRA
-import { saveProfileImage, getProfileImage } from '../utils/profileImage.js';
+import { useProfileImageUpload } from '../hooks/uploadUserImg';
+import { getUser } from '../hooks/getUser';
 
 const Perfil = () => {
-    const [menuSelecionado, setMenuSelecionado] = useState('signo'); // já começa com "Seu Signo" selecionado
-    const { user } = useContext(AuthContext);
-    const location = useLocation();
-    const { logout } = useContext(AuthContext);
-    const navigate = useNavigate();
-
+    const [menuSelecionado, setMenuSelecionado] = useState('signo');
+    const [profileImage, setProfileImage] = useState(null);
+    const { user, logout } = useContext(AuthContext);
+    const { uploadImage, isUploading, error } = useProfileImageUpload();
+    const { user: userDetails, loading, refresh } = getUser();
     const fileInputRef = useRef(null);
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         logout();
         navigate('/login');
     };
 
-
     const handleMenuClick = (item) => {
         setMenuSelecionado(item);
     };
 
-    if (!user) return <div>Usuário não encontrado</div>
+    const handleImageUpload = async (file) => {
+        if (!file) return;
+
+        const newImageUrl = await uploadImage(file);
+        if (newImageUrl) {
+            setProfileImage(newImageUrl);
+            const updatedUser = { ...user, profileImage: newImageUrl };
+
+            window.location.reload();
+        }
+    };
+
+    if (!user) return <div>Usuário não encontrado</div>;
 
     return (
         <div className={`container text-center ${styles.margem}`}>
@@ -39,18 +49,17 @@ const Perfil = () => {
                     <div className={styles.perfilCard}>
                         <div className={styles.avatarContainer}>
                             <img
-                                src={getProfileImage() || userImagem}
+                                src={userDetails?.profileImage || userImagem}
                                 alt="Avatar"
                                 className={styles.avatar}
                                 onClick={() => fileInputRef.current?.click()}
                                 style={{ cursor: 'pointer' }}
                             />
-
                             <input
                                 type="file"
                                 accept="image/*"
                                 ref={fileInputRef}
-                                onChange={(e) => saveProfileImage(e.target.files[0], () => window.location.reload())}
+                                onChange={(e) => handleImageUpload(e.target.files[0])}
                                 style={{ display: 'none' }}
                             />
 
@@ -59,10 +68,9 @@ const Perfil = () => {
                                 <ThemeToggleButton />
                             </div>
                         </div>
-                        <h5 className={styles.nome}>{user.username}</h5>
-                        <p className={styles.info}>{user.birthDate}</p>
-                        <p className={styles.info}>{user.email}</p>
-                        {/* <button className={styles.editarBtn}>Editar perfil</button> */}
+                        <h5 className={styles.nome}>{userDetails?.username}</h5>
+                        <p className={styles.info}>{userDetails?.birthDate}</p>
+                        <p className={styles.info}>{userDetails?.email}</p>
                         <button className={styles.logoutBtn} onClick={handleLogout}>
                             Sair da conta
                         </button>

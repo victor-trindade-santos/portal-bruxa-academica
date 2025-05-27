@@ -1,32 +1,41 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null); // { username, role, token }
+  const [user, setUser] = useState(null);
+  const [userDetails, setUserDetails] = useState(null);
 
-  // Verifica o localStorage e atualiza o estado de usuário ao iniciar
   useEffect(() => {
     const storedUser = sessionStorage.getItem('user');
     if (storedUser) {
-      setUser(JSON.parse(storedUser));  // Atualiza o estado se existir no localStorage
+      setUser(JSON.parse(storedUser));
     }
   }, []);
 
-  // Função de login
   const login = (userData) => {
-    setUser(userData);  // Atualiza o estado de usuário
-    sessionStorage.setItem('user', JSON.stringify(userData));  // Armazena no localStorage
+    setUser(userData);
+    sessionStorage.setItem('user', JSON.stringify(userData));
   };
 
-  // Função de logout
+  const updateUserDetails = (details) => {
+    setUserDetails(details);
+  };
+
   const logout = () => {
-    setUser(null);  // Limpa o estado de usuário
-    sessionStorage.removeItem("user");  // Remove do localStorage
+    setUser(null);
+    setUserDetails(null);
+    sessionStorage.removeItem("user");
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{
+      user,
+      userDetails,
+      login,
+      logout,
+      updateUserDetails
+    }}>
       {children}
     </AuthContext.Provider>
   );

@@ -5,14 +5,15 @@ import '../css/Navbar.css';
 import PerfilImg from '../img/perfil.png';
 import Container from './Container';
 import ThemeToggleButton from './ThemeToggleButton';
-
-import { saveProfileImage, getProfileImage } from '../utils/profileImage.js';
+import { getUser } from '../hooks/getUser';
 
 function Navbar() {
   const { user, logout } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [profileImage, setProfileImage] = useState(null);
+  const { user: userDetails, loading, refresh } = getUser();
 
   const isActive = (path) => location.pathname === path;
   const toggleNavbar = () => setIsMenuOpen(!isMenuOpen);
@@ -189,7 +190,7 @@ function Navbar() {
                 onClick={closeNavbar}
               >
                 <div className="navbar-welcome-message">Bem-vindo(a), {user.username}!</div>
-                <img src={getProfileImage() || PerfilImg} alt="Perfil" className="navbar-user-avatar" />
+                <img src={userDetails?.profileImage  || PerfilImg} alt="Perfil" className="navbar-user-avatar" />
               </Link>
             )}
           </div>
