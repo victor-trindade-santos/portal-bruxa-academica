@@ -1,3 +1,7 @@
+import React, { useEffect } from 'react'; // ✅ Importe useEffect
+import { useLocation } from 'react-router-dom'; // ✅ Importe useLocation
+import axios from '../services/api'; // Certifique-se de ter seu axios configurado
+
 import styles from '../css/ArticleCRUD.module.css'
 import 'react-quill/dist/quill.snow.css';
 import ReactQuill from '../utils/quillEditor';
@@ -11,6 +15,7 @@ import Container from '../components/Container.jsx'
 
 
 function ArticleCRUD({ formDataArticle, setFormDataArticle }) {
+  const location = useLocation(); 
 
   //Para atualizar os dados do FormDataArticle
   const handleChange = (field, value) => {
@@ -20,6 +25,47 @@ function ArticleCRUD({ formDataArticle, setFormDataArticle }) {
     }));
   };
 
+  // ✅ Novo useEffect para carregar o artigo quando a página for acessada via edição
+  useEffect(() => {
+    // Verifica se há um articleId no estado da navegação
+    if (location.state && location.state.articleId) {
+      const articleId = location.state.articleId;
+      console.log("ArticleCRUD: ID do artigo recebido para edição:", articleId);
+
+      const fetchArticleToEdit = async () => {
+        try {
+          const response = await axios.get(`/articles/${articleId}`); // Ajuste sua rota de API se necessário
+          const articleData = response.data;
+          console.log("ArticleCRUD: Dados do artigo para edição:", articleData);
+
+          // Preenche o formDataArticle com os dados do artigo
+          setFormDataArticle({
+            _id: articleData._id,
+            title: articleData.title || '',
+            author: articleData.author || '',
+            publicationDate: articleData.publicationDate || '',
+            firstContent: articleData.firstContent || '',
+            category: articleData.category || '',
+            imageThumb: articleData.imageThumb || '', // Se a imagem for uma URL ou dado que React pode renderizar
+            secondContent: articleData.secondContent || '',
+            // Adicione aqui outros campos que possam existir no seu artigo
+            // Certifique-se de que o nome da propriedade corresponda ao que sua API retorna
+          });
+        } catch (error) {
+          console.error('ArticleCRUD: Erro ao buscar artigo para edição:', error);
+          // Opcional: Notifique o usuário sobre o erro
+        }
+      };
+
+      fetchArticleToEdit();
+
+      // Opcional: Limpar o estado de navegação após o uso para evitar recarregamento indesejado
+      // ou para que a próxima visita à página não traga o ID antigo.
+      // CUIDADO: Isso pode remover o ID antes que você o use em operações de update!
+      // Considere limpá-lo apenas após um save ou clean explícito.
+      // window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }, [location.state, setFormDataArticle]); // Dependências do useEffect
 
   return (
     <>
@@ -34,7 +80,7 @@ function ArticleCRUD({ formDataArticle, setFormDataArticle }) {
               <input
                 type="text"
                 placeholder="Digite o título do Artigo"
-                value={formDataArticle.title}
+                value={formDataArticle.title || ''}
                 onChange={(e) => handleChange('title', e.target.value)}
                 required
                 className={styles.titleArticle}
@@ -45,7 +91,7 @@ function ArticleCRUD({ formDataArticle, setFormDataArticle }) {
               <input
                 type="text"
                 placeholder="Digite o nome do autor(a)"
-                value={formDataArticle.author}
+                value={formDataArticle.author || ''}
                 onChange={(e) => handleChange('author', e.target.value)}
                 required
                 className={styles.textAuthor}
@@ -56,7 +102,7 @@ function ArticleCRUD({ formDataArticle, setFormDataArticle }) {
               <input
                 type="text"
                 placeholder="Data de publicação"
-                value={formDataArticle.publicationDate}
+                value={formDataArticle.publicationDate || ''}
                 readOnly
                 className={styles.textPublicationDate}
               />
@@ -66,7 +112,7 @@ function ArticleCRUD({ formDataArticle, setFormDataArticle }) {
               <input
                 type="text"
                 placeholder="Digite o resumo ou introdução do Artigo"
-                value={formDataArticle.firstContent}
+                value={formDataArticle.firstContent || ''}
                 onChange={(e) => handleChange('firstContent', e.target.value)}
                 required
                 className={styles.textResume}
@@ -75,7 +121,7 @@ function ArticleCRUD({ formDataArticle, setFormDataArticle }) {
               {/* CATEGORIA */}
               <p className={styles.fieldDescription}><strong>Categoria do artigo *</strong> — Escolha uma categoria que melhor descreva o tema do artigo.</p>
               <select
-                value={formDataArticle.category}
+                value={formDataArticle.category || ''}
                 onChange={(e) => handleChange('category', e.target.value)}
                 required
                 className={styles.selectCategory}
@@ -126,7 +172,7 @@ function ArticleCRUD({ formDataArticle, setFormDataArticle }) {
               <p className={styles.fieldDescription}><strong>Conteúdo principal</strong> — Digite o conteúdo principal do artigo usando o editor abaixo.</p>
               <ReactQuill
                 theme="snow"
-                value={formDataArticle.secondContent}
+                value={formDataArticle.secondContent || ''}
                 onChange={(value) => handleChange('secondContent', value)}
               />
 

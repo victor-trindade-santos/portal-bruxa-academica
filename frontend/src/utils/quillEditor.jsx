@@ -57,6 +57,7 @@ const QuillEditor = ({ value, onChange, placeholder = "Digite algo...", readOnly
     const formats = [
         'header',            // títulos H1, H2, etc.
         'bold', 'italic', 'underline', 'strike',
+        'blockquote',
         'list', 'bullet',
         'link', 'image', 'customVideo', // precisa incluir 'video' se está usando botão de vídeo
         'align',                  // ESSENCIAL para <select className="ql-align">
@@ -134,15 +135,18 @@ const QuillEditor = ({ value, onChange, placeholder = "Digite algo...", readOnly
                 </select>
 
                 <select className="ql-header" defaultValue="">
-                    <option value="1">Título 1</option>
-                    <option value="2">Título 2</option>
-                    <option value="">Normal</option>
+                    <option value="2">Subtítulo</option>
+                    <option value="3">Subseção</option>
+                    <option value="">Parágrafo</option>
                 </select>
 
                 <button className="ql-bold" />
                 <button className="ql-italic" />
                 <button className="ql-underline" />
                 <button className="ql-strike" />
+
+                <button className="ql-blockquote" /> 
+
                 <button className="ql-list" value="ordered" />
                 <button className="ql-list" value="bullet" />
                 <button className="ql-link" />

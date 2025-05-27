@@ -1,23 +1,38 @@
-import React, { useState, useImperativeHandle, forwardRef } from 'react'; // Importe useImperativeHandle e forwardRef
-import { cleanFormDataArticle } from '../../utils/formUtils.js'; // ajuste o caminho conforme necessário
+import React, { useState, useImperativeHandle, forwardRef } from 'react';
+import { cleanFormDataArticle } from '../../utils/formUtils.js'; // Ajuste o caminho conforme necessário
 import DeleteModal from "../modal/ArticleModal.jsx";
 import styles from "../../css/articleCRUDComponents/ArticleCRUDComponent.module.css";
 
-// Use forwardRef para que o componente pai possa acessar funções internas
+// Usamos forwardRef para permitir que o componente pai (Artigos.jsx)
+// acesse métodos internos (como abrir o modal) através de uma ref.
 const DeleteArticleComponent = forwardRef(({ formDataArticle, setFormDataArticle, onArticleDeleted }, ref) => {
+    // isModalDeleteOpen AGORA É O ESTADO PRINCIPAL PARA AMBAS AS FUNCIONALIDADES.
+    // Se o componente for usado com a ref (pelo Card/Artigos),
+    // a função exposta via useImperativeHandle o alterará.
+    // Se for usado sem a ref (pelo ArticleCRUD),
+    // o botão interno (se descomentado) o alterará.
     const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
 
-    // Expose handleOpenModal to the parent component via ref
+    // useImperativeHandle expõe métodos internos para o componente pai que o referencia.
+    // Isso é usado especificamente pela página Artigos.jsx para abrir o modal via ref do Card.
     useImperativeHandle(ref, () => ({
         handleOpenModal: () => {
-            console.log("Abrindo o modal de exclusão (via ref)...");
+            console.log("DeleteArticleComponent (via ref): Abrindo o modal de exclusão...");
             setIsModalDeleteOpen(true);
         }
     }));
 
-    // Função para fechar o modal
+    // Função para abrir o modal quando o botão interno for clicado.
+    // Esta função é para o caso de ArticleCRUD.jsx usar o botão diretamente.
+    const handleOpenModalInternal = () => {
+        console.log("DeleteArticleComponent (interno): Abrindo o modal de exclusão...");
+        setIsModalDeleteOpen(true);
+    };
+
+    // Função para fechar o modal.
+    // Usada tanto pelo modal de confirmação quanto pela lógica interna.
     const handleCloseModal = () => {
-        console.log("Fechando o modal de exclusão...");
+        console.log("DeleteArticleComponent: Fechando o modal de exclusão...");
         setIsModalDeleteOpen(false);
         cleanFormDataArticle(setFormDataArticle); // Limpa o formDataArticle
     };
@@ -26,11 +41,12 @@ const DeleteArticleComponent = forwardRef(({ formDataArticle, setFormDataArticle
         const articleId = formDataArticle._id;
 
         if (!articleId) {
-            console.log("Não foi possível excluir. ID do artigo não encontrado.");
+            console.log("DeleteArticleComponent: Não foi possível excluir. ID do artigo não encontrado.");
+            alert("Erro: ID do artigo não encontrado para exclusão.");
             return;
         }
 
-        console.log(`Iniciando a exclusão do artigo com ID: ${articleId}`);
+        console.log(`DeleteArticleComponent: Iniciando a exclusão do artigo com ID: ${articleId}`);
 
         try {
             const response = await fetch(`http://localhost:5000/articles/${articleId}`, {
@@ -41,36 +57,40 @@ const DeleteArticleComponent = forwardRef(({ formDataArticle, setFormDataArticle
                 },
             });
 
-            console.log("Resposta da API:", response);
+            console.log("DeleteArticleComponent: Resposta da API:", response);
 
             if (response.ok) {
-                console.log(`Artigo com ID ${articleId} excluído com sucesso!`);
+                console.log(`DeleteArticleComponent: Artigo com ID ${articleId} excluído com sucesso!`);
                 alert('❌ Artigo excluído com sucesso');
                 setIsModalDeleteOpen(false); // Fecha o modal de exclusão
                 cleanFormDataArticle(setFormDataArticle); // Limpa o formDataArticle
 
-                // Notifica o componente pai que um artigo foi excluído
+                // Notifica o componente pai (Artigos.jsx) que um artigo foi excluído.
+                // Esta prop só será passada por Artigos.jsx.
                 if (onArticleDeleted) {
                     onArticleDeleted();
                 }
 
             } else {
-                console.log("Erro ao excluir o artigo. Status:", response.status);
+                const errorData = await response.json().catch(() => ({ message: 'Erro desconhecido.' }));
+                console.error("DeleteArticleComponent: Erro ao excluir o artigo. Status:", response.status, "Detalhes:", errorData);
+                alert(`Erro ao excluir o artigo: ${errorData.message || response.statusText}`);
             }
         } catch (error) {
-            console.log("Erro ao tentar excluir o artigo:", error);
+            console.error("DeleteArticleComponent: Erro ao tentar excluir o artigo:", error);
+            alert("Ocorreu um erro ao tentar excluir o artigo.");
         }
     };
 
     return (
         <>
-            {/* O botão "Excluir Artigo" original pode ser mantido se este componente for usado isoladamente,
-                mas para a integração com o Card, ele não será acionado diretamente por aqui. */}
-            {/* <button onClick={handleOpenModal} className={styles.componentButton}>
+            {/* ESTE BOTÃO SERÁ USADO PELA PÁGINA 'ARTICLECRUD.JSX'
+                Se você o descomentar, ele permitirá a funcionalidade original. */}
+            <button onClick={handleOpenModalInternal} className={styles.componentButton}>
                 Excluir Artigo
-            </button> */}
+            </button>
 
-            {isModalDeleteOpen && (
+            {isModalDeleteOpen && ( // O modal é renderizado quando isModalDeleteOpen é true
                 <DeleteModal
                     message="Tem certeza que deseja excluir este artigo?"
                     onConfirm={handleDelete}

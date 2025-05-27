@@ -9,6 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 2;
   }
   
   /* Conteúdo principal do modal */
@@ -20,6 +21,7 @@
     width: 400px; /* Ajustando a largura para um tamanho maior */
     max-width: 90%;
     text-align: center;
+    z-index: 3;
   }  
   
   /* Campo de entrada da senha, controlado pelo estado "password" */

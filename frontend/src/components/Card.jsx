@@ -1,11 +1,17 @@
 // Card.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useContext} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from '../css/Card.module.css';
 import { truncateDescription } from '../utils/descriptionUtils';
+import { AuthContext } from '../context/AuthContext';
 
-// O Card deve receber apenas o 'id' e a função 'onDeleteClick'
-function Card({ image, title, description, link, category, duration, type, className, id, onDeleteClick }) {
+// O Card deve receber o '_id' e a função 'onDeleteClick'
+function Card({ image, title, description, link, category, duration, type, className, _id, onDeleteClick }) { // ✅ Aqui está correto: recebendo '_id'
+  const { user, logout } = useContext(AuthContext);
+
+  const isAdmin = user?.role === 'admin';
+
+  const navigate = useNavigate();
 
   let truncatedDescription;
 
@@ -20,10 +26,17 @@ function Card({ image, title, description, link, category, duration, type, class
 
   // A função para lidar com o clique no botão de exclusão
   const handleDeleteButtonClick = () => {
-    // Agora, Card apenas chama onDeleteClick passando o ID do artigo.
-    // O componente pai (Artigos.jsx) será responsável por usar este ID para
-    // preencher o formDataArticle e abrir o modal.
-    onDeleteClick(id);
+    // ✅ Use '_id' aqui, pois é a prop que você está recebendo
+    console.log("Card: Botão de exclusão clicado para o ID:", _id);
+    onDeleteClick(_id);
+  };
+
+  // ✅ Nova função para lidar com o clique no botão de editar
+  const handleEditButtonClick = () => {
+    console.log("Card: Botão de editar clicado para o ID:", _id);
+    // Navega para a página ArticleCRUD e passa o _id como um parâmetro de estado
+    // Isso é mais seguro do que passar na URL se os dados forem grandes ou sensíveis.
+    navigate(`/create-articles-d42f4c`, { state: { articleId: _id } });
   };
 
   return (
@@ -55,20 +68,23 @@ function Card({ image, title, description, link, category, duration, type, class
           <div className={styles.btnCard}>
             <a href={link} className={styles.artigoBtn}>Saiba Mais</a>
 
-            <button className={styles.editButton}>
-              <i className="bi bi-pencil"></i>
-            </button>
-            {/* O onClick agora chama handleDeleteButtonClick */}
-            <button className={styles.deleteButton} onClick={handleDeleteButtonClick}>
-              <i className="bi bi-trash"></i>
-            </button>
+            {isAdmin && (
+              <>
+                {/* ✅ O onClick agora chama handleEditButtonClick */}
+                <button className={styles.editButton} onClick={handleEditButtonClick}>
+                  <i className="bi bi-pencil"></i>
+                </button>
+                {/* O onClick agora chama handleDeleteButtonClick */}
+                <button className={styles.deleteButton} onClick={handleDeleteButtonClick}>
+                  <i className="bi bi-trash"></i>
+                </button>
+              </>
+            )}
           </div>
-
         )}
       </div>
     </div>
   );
-
 }
 
 export default Card;
