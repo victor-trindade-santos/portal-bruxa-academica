@@ -38,6 +38,11 @@ const UserSchema = new mongoose.Schema({
     required: false,
   },
 
+  profileImgUrl: {
+    type: String, 
+    required: false,
+  },
+
   // DADOS RELACIONANDOS COM O MAPA ASTRAL
   sunSign: { type: String },
   sunDescription: { type: String },

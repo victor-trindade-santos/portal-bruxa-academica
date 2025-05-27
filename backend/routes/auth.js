@@ -1,19 +1,17 @@
-require('dotenv').config();  // Adicionando o dotenv no início do arquivo
+require('dotenv').config();
 
 const express = require('express');
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
-const authenticateToken = require('../middlewares/auth'); // ajuste o caminho se necessário
+const authenticateToken = require('../middlewares/auth');
+const uploadProfileImage = require('../middlewares/uploadProfileImage');
 
-
-// Rota de login
 router.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
-  // Logando o que está sendo recebido
-  console.log('Recebido no login:', { username, password});
+  console.log('Recebido no login:', { username, password });
 
   try {
     const user = await User.findOne({ username });
@@ -23,10 +21,10 @@ router.post('/login', async (req, res) => {
     }
 
     console.log('Usuário encontrado:', {
-  username: user.username,
-  email: user.email,
-  birthDate: user.birthDate,
-});
+      username: user.username,
+      email: user.email,
+      birthDate: user.birthDate,
+    });
 
     // Logando o hash da senha armazenada
     console.log('Senha armazenada no banco:', user.password);
@@ -66,9 +64,8 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Rota de registro
 router.post('/register', async (req, res) => {
-  const { username, email, password, fullName} = req.body;
+  const { username, email, password, fullName } = req.body;
 
   try {
     // Verifica se já existe usuário com esse username
@@ -96,7 +93,7 @@ router.post('/register', async (req, res) => {
 });
 
 router.put('/update', authenticateToken(), async (req, res) => {
-  const userId = req.user.userId;  
+  const userId = req.user.userId;
 
   const {
     username,
@@ -153,14 +150,6 @@ router.put('/update', authenticateToken(), async (req, res) => {
   }
 });
 
-/**
- * Rota para validar a senha do usuário.
- * Esta rota espera receber uma requisição POST com o corpo:
- *   { password: "senha digitada" }
- *
- * Se a senha estiver correta, retorna { success: true }.
- * Caso contrário, retorna um erro apropriado.
- */
 router.post('/validate-password', async (req, res) => {
   console.log('[validate-password] Requisição recebida para validar a senha.');
   const { username, password } = req.body;
@@ -193,6 +182,25 @@ router.post('/validate-password', async (req, res) => {
   } catch (error) {
     console.error('[validate-password] Erro ao validar a senha:', error);
     return res.status(500).json({ message: 'Erro ao validar senha', error });
+  }
+});
+
+router.post('/uploadProfileImg', authenticateToken(), uploadProfileImage, async (req, res) => {
+  try {
+    const userId = req.user.userId;
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: 'Usuário não encontrado' });
+
+    user.profileImage = req.profileImgUrl;
+    await user.save();
+
+    res.status(200).json({
+      message: 'Imagem de perfil atualizada com sucesso!',
+      profileImageUrl: req.profileImgUrl,
+    });
+  } catch (error) {
+    console.error('Erro ao salvar imagem de perfil no banco:', error);
+    res.status(500).json({ message: 'Erro interno ao atualizar imagem', error: error.message });
   }
 });
 
