@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'; // ✅ correto
-import axios from '../services/api'; // ✅ este é o axios configurado
+import { useParams } from 'react-router-dom';
+import axios from '../services/api';
 import styles from "../css/ArticleTemplate.module.css";
 import 'react-quill/dist/quill.snow.css';
 
 const ArticleTemplate = ({ articleId, articleData }) => {
-  const { articleId: routeId } = useParams(); // renomeia o parâmetro da rota
-
-  const effectiveId = articleId || routeId; // prioridade para o prop
+  const { articleId: routeId } = useParams();
+  const effectiveId = articleId || routeId;
 
   const [article, setArticle] = useState(articleData || null);
   const [loading, setLoading] = useState(!articleData && !!effectiveId);
+  const [fontSize, setFontSize] = useState(16); // Estado para controlar o tamanho da fonte inicial
+
+  const minFontSize = 14; // Tamanho mínimo da fonte
+  const maxFontSize = 24; // Tamanho máximo da fonte
+  const step = 2; // Incremento/decremento do tamanho da fonte
 
   useEffect(() => {
     console.log('articleData:', articleData, 'articleId:', effectiveId);
@@ -30,7 +34,7 @@ const ArticleTemplate = ({ articleId, articleData }) => {
 
       fetchArticle();
     }
-  }, [articleId, articleData]);
+  }, [articleId, articleData, effectiveId]);
 
   useEffect(() => {
     if (article) {
@@ -38,22 +42,40 @@ const ArticleTemplate = ({ articleId, articleData }) => {
     }
   }, [article]);
 
+  // Funções para aumentar e diminuir a fonte
+  const increaseFontSize = () => {
+    setFontSize((prevSize) => Math.min(prevSize + step, maxFontSize));
+  };
+
+  const decreaseFontSize = () => {
+    // CORREÇÃO AQUI: Usamos Math.max para garantir que não vá abaixo do mínimo
+    setFontSize((prevSize) => Math.max(prevSize - step, minFontSize));
+  };
+
   return (
     <div className={styles.sectionArticle}>
+      <div className={styles.fontSizeControls}>
+        <button onClick={decreaseFontSize} disabled={fontSize === minFontSize}>A-</button>
+        <button onClick={increaseFontSize} disabled={fontSize === maxFontSize}>A+</button>
+      </div>
+
       {article ? (
         <>
-          <h1 className={styles.titleArticle}>{article.title}</h1>
-          <p className={styles.textResume}>{article.firstContent}</p>
-          <p className={styles.textAuthor}>Por: {article.author}</p>
-          <p className={styles.textPublicationDate}>Data de Publicação: {article.publicationDate}</p>
-          <div className={`ql-editor ${styles.textArticle}`} dangerouslySetInnerHTML={{ __html: article.secondContent }} />
+          <h1 className={styles.titleArticle} style={{ fontSize: `${fontSize * 1.5}px` }}>{article.title}</h1>
+          <p className={styles.textResume} style={{ fontSize: `${fontSize}px` }}>{article.firstContent}</p>
+          <p className={styles.textAuthor} style={{ fontSize: `${fontSize * 0.9}px` }}>Por: {article.author}</p>
+          <p className={styles.textPublicationDate} style={{ fontSize: `${fontSize * 0.9}px` }}>Data de Publicação: {article.publicationDate}</p>
+          <div
+            className={`ql-editor ${styles.textArticle}`}
+            dangerouslySetInnerHTML={{ __html: article.secondContent }}
+            style={{ fontSize: `${fontSize}px` }}
+          />
         </>
       ) : (
         <div>Artigo não encontrado</div>
       )}
     </div>
   );
-
 };
 
 export default ArticleTemplate;

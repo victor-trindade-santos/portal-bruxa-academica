@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'MisterySilent';
+  src: url('../Fontes/Mistery Silent.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 .navbar-custom {
   background-color: var(--navbar-bg) !important;
   border-bottom: 1px solid #ddd;
@@ -146,10 +154,7 @@ li {
 
 /* Texto */
 .navbar-welcome-message {
-  color: inherit;
-  font-family: inherit;
-  font-weight: inherit;
-  font-size: inherit;
+  font-family:'MisterySilent', sans-serif !important;
   white-space: nowrap;
   line-height: 1.2;
   user-select: none;
