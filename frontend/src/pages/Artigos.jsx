@@ -1,6 +1,6 @@
 // Artigos.jsx
 import { useParams, useLocation } from 'react-router-dom';
-import React, { useState, useEffect, useRef } from 'react'; // Importe useRef
+import React, { useState, useEffect, useRef } from 'react'; // ✅ Importe useRef aqui!
 import axios from '../services/api';
 import Card from '../components/Card';
 
@@ -11,7 +11,7 @@ import Sobre_Mim_Lateral from '../components/Sobre_MIm_Lateral';
 import Container from '../components/Container'
 import { truncateDescription } from '../utils/descriptionUtils';
 import { cleanFormDataArticle } from '../utils/formUtils.js';
-import DeleteArticleComponent from '../components/articleCRUDComponents/DeleteArticleComponent'; // Importe o componente de exclusão
+import DeleteArticleComponent from '../components/articleCRUDComponents/DeleteArticleComponent';
 
 function Artigos() {
     const [articles, setArticles] = useState([]);
@@ -21,13 +21,11 @@ function Artigos() {
     const categoria = queryParams.get('categoria');
     const termoBusca = queryParams.get('busca');
 
-    // Estado para o artigo a ser deletado (compartilhado com DeleteArticleComponent)
+    // ✅ DECLARE O useRef AQUI, NO INÍCIO DO COMPONENTE
     const [formDataArticle, setFormDataArticle] = useState({ _id: '', title: '', description: '', category: '', image: '' });
+    const deleteArticleRef = useRef(null); // ✅ Esta linha precisa estar aqui!
 
-    // **RE-ADICIONANDO ESTADO PARA O MODAL NO COMPONENTE PAI**
-    const [isModalDeleteOpen, setIsModalDeleteOpen] = useState(false);
 
-    // Função para recarregar os artigos (movida para fora do useEffect para ser reutilizável)
     const fetchArticles = async () => {
         try {
             const response = await axios.get('/articles');
@@ -64,23 +62,25 @@ function Artigos() {
     }, [categoria, termoBusca]);
 
     // Função que o Card chamará para iniciar o processo de exclusão
-    // Esta função agora abre o modal diretamente no Artigos.jsx
     const handleInitiateDelete = (articleId) => {
-        setFormDataArticle({ ...formDataArticle, _id: articleId }); // Preenche o ID do artigo a ser deletado
-        setIsModalDeleteOpen(true); // Abre o modal no componente Artigos
+        console.log("Artigos: handleInitiateDelete chamado com ID:", articleId);
+        setFormDataArticle(prev => ({
+            ...prev,
+            _id: articleId
+        }));
+        // ✅ O USO do deleteArticleRef.current precisa vir DEPOIS da sua declaração
+        if (deleteArticleRef.current) {
+            deleteArticleRef.current.handleOpenModal();
+        } else {
+            console.warn("Artigos: deleteArticleRef.current ainda é null. O componente DeleteArticleComponent pode não ter sido montado ainda.");
+        }
     };
 
     // Função a ser chamada pelo DeleteArticleComponent após a exclusão bem-sucedida
     const onArticleDeletedSuccess = () => {
+        console.log("Artigos: onArticleDeletedSuccess chamado. Recarregando artigos...");
         fetchArticles(); // Recarrega a lista de artigos
         cleanFormDataArticle(setFormDataArticle); // Limpa o estado do formDataArticle
-        setIsModalDeleteOpen(false); // Fecha o modal após a exclusão bem-sucedida
-    };
-
-    // Função para fechar o modal (chamada pelo DeleteArticleComponent se o usuário cancelar)
-    const handleCloseDeleteModal = () => {
-        setIsModalDeleteOpen(false);
-        cleanFormDataArticle(setFormDataArticle);
     };
 
     return (
@@ -99,7 +99,7 @@ function Artigos() {
                                     articles.map((article) => (
                                         <Card
                                             key={article._id}
-                                            id={article._id}
+                                            _id={article._id}
                                             image={article.imageThumb}
                                             title={truncateDescription(article.title, 30)}
                                             description={truncateDescription(article.firstContent, 50)}
@@ -107,7 +107,7 @@ function Artigos() {
                                             link={`/artigos/${article._id}`}
                                             category={article.category}
                                             type="artigo"
-                                            onDeleteClick={handleInitiateDelete} // Passa a função para iniciar a exclusão
+                                            onDeleteClick={handleInitiateDelete}
                                         />
                                     ))
                                 )}
@@ -128,15 +128,13 @@ function Artigos() {
             </Container>
             <br />
 
-            {/* Renderiza o DeleteArticleComponent condicionalmente com o estado do pai */}
-            {isModalDeleteOpen && (
-                <DeleteArticleComponent
-                    formDataArticle={formDataArticle}
-                    setFormDataArticle={setFormDataArticle}
-                    setIsModalDeleteOpen={setIsModalDeleteOpen} // Passa a função para fechar o modal
-                    onArticleDeleted={onArticleDeletedSuccess} // Passa a função de callback para recarregar artigos
-                />
-            )}
+            {/* Renderiza o DeleteArticleComponent UMA ÚNICA VEZ e passe a ref e o callback */}
+            <DeleteArticleComponent
+                ref={deleteArticleRef} // ✅ Atribuindo a ref aqui
+                formDataArticle={formDataArticle}
+                setFormDataArticle={setFormDataArticle}
+                onArticleDeleted={onArticleDeletedSuccess}
+            />
         </>
     );
 }
