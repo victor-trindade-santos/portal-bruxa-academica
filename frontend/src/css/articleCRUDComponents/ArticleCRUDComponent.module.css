@@ -1,42 +1,119 @@
+/* VARIÁVEIS - Idealmente, estas estariam em um arquivo global (ex: variables.css) */
+/* Se este arquivo for independente, inclua as variáveis necessárias aqui */
+:root {
+  --button-purple-dark: #4F0B82;
+  --button-purple-dark-hover: #7c13cc;
+  --button-white: #FFFFFF;
+  --button-red: #c82333;
+  /* Sua cor para o deleteButton */
+  --button-red-hover: #f13a4c;
+  /* Sua cor de hover para vermelho */
 
+}
+
+.componentButton {
+  position: relative;
+  /* Necessário para posicionar o ::before */
+  background-color: var(--button-purple-dark);
+  /* Fundo roxo escuro */
+  color: var(--button-white);
+  /* Texto branco */
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  width: 100%;
+  /* ou ajuste conforme o uso, ex: auto, fit-content */
+  padding: 8px 12px;
+  cursor: pointer;
+  border: none;
+  border-radius: 0%;
+  /* Sem arredondamento */
+  box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  /* Garante que ::before fique dentro */
+  display: flex;
+  /* Para alinhar ícone e texto */
+  align-items: center;
+  justify-content: center;
+  /* Centraliza todo o conteúdo */
+  gap: 8px;
+  /* Espaçamento entre o ícone e o texto */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  margin-bottom: 8px;
+}
+
+.componentButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 6px);
+  /* Borda interna de 3px de cada lado */
+  height: calc(100% - 6px);
+  border: 1px solid var(--button-white);
+  /* Borda interna branca */
+  border-radius: 0%;
+  /* Sem arredondamento */
+  box-sizing: border-box;
+  pointer-events: none;
+  /* Garante que o clique passe para o botão */
+  transition: border-color 0.3s ease;
+  /* Transição para a cor da borda no hover */
+}
+
+.componentButton:hover {
+  background-color: var(--button-purple-dark-hover);
+  /* Fundo roxo mais claro no hover */
+  color: var(--button-white);
+  /* Mantém o texto branco no hover */
+}
+
+.componentButton:hover::before {
+  border-color: var(--button-purple-dark-hover);
+  /* Borda interna roxa mais clara no hover */
+  border: 1px solid var(--button-white);
+  /* Borda interna branca */
+
+}
+
+/* Estilo para ícones dentro do .componentButton */
+.componentButton .buttonIcon {
+  font-size: 1em;
+  /* Tamanho do ícone em relação ao texto do botão */
+  line-height: 1;
+  /* Garante que o ícone não afete a altura da linha */
+}
+
+.deleteButton {
+  background-color: var(--button-red);
+  /* Aplica a cor definida */
+  color: var(--button-white);
+  /* Garante que o texto e ícone sejam brancos */
+}
+
+.deleteButton:hover {
+  background-color: var(--button-red-hover);
+  /* Aplica a cor de hover */
+  
+}
+
+.deleteButton:hover::before {
+  border-color: var(--button-red-hover);
+  /* Se você tem borda interna, mude a cor dela no hover */
+    border: 1px solid var(--button-white);
+
+}
+
+/* Media Query de exemplo para responsividade, se necessário para este botão genérico */
+@media (max-width: 768px) {
   .componentButton {
-    position: relative; /* Necessário para posicionar o ::before */
-    background-color: #4F0B82;
-    color: #fff000;
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 15px;
-    width: 100%;
-    padding: 8px 12px;
-    cursor: pointer;
-    border: none;
-    border-radius: 0%;
-    box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
-    overflow: hidden; /* Garante que ::before fique dentro */
+    font-size: 0.9em;
+    padding: 7px 10px;
   }
-  
+
   .componentButton::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: calc(100% - 6px);
-    height: calc(100% - 6px);
-    border: 1px solid #FFEB3B;
-    border-radius: 0%; /* igual ao botão */
-    box-sizing: border-box;
-    pointer-events: none;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
   }
-  
-  
-  .componentButton:hover {
-    background-color: #FFEB3B;
-    color: #4F0B82;
-  }
-  
-  .componentButton:hover::before {
-    border-color: #4F0B82; /* Muda a borda para roxo no hover */
-  }
-  
-  
+}

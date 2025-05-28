@@ -112,7 +112,7 @@ function Barra_Pesquisa({ onSelectArticle, reloadTrigger, onSearch }) {
     type="button"
     onClick={handleSearch}
   >
-    <img src={lupa} alt="Ícone de busca" className={styles.searchIcon} />
+  <i className={`bi bi-search ${styles.searchIcon}`}></i>
   </button>
 
   {showDropdown && filteredArticles.length > 0 && (

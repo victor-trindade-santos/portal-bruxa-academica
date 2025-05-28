@@ -1,6 +1,6 @@
 // Artigos.jsx
 import { useParams, useLocation } from 'react-router-dom';
-import React, { useState, useEffect, useRef } from 'react'; // ✅ Importe useRef aqui!
+import React, { useState, useEffect, useRef } from 'react';
 import axios from '../services/api';
 import Card from '../components/Card';
 
@@ -11,6 +11,7 @@ import Sobre_Mim_Lateral from '../components/Sobre_MIm_Lateral';
 import Container from '../components/Container'
 import { truncateDescription } from '../utils/descriptionUtils';
 import { cleanFormDataArticle } from '../utils/formUtils.js';
+// Importe o DeleteArticleComponent
 import DeleteArticleComponent from '../components/articleCRUDComponents/DeleteArticleComponent';
 
 function Artigos() {
@@ -21,10 +22,13 @@ function Artigos() {
     const categoria = queryParams.get('categoria');
     const termoBusca = queryParams.get('busca');
 
-    // ✅ DECLARE O useRef AQUI, NO INÍCIO DO COMPONENTE
-    const [formDataArticle, setFormDataArticle] = useState({ _id: '', title: '', description: '', category: '', image: '' });
-    const deleteArticleRef = useRef(null); // ✅ Esta linha precisa estar aqui!
+    // Estado para controlar a visibilidade do modal de exclusão
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    // Estado para armazenar o ID do artigo a ser deletado
+    const [articleToDeleteId, setArticleToDeleteId] = useState(null);
 
+    // O formDataArticle agora será atualizado apenas para passar o ID para o modal
+    const [formDataArticle, setFormDataArticle] = useState({ _id: '', title: '', description: '', category: '', image: '' });
 
     const fetchArticles = async () => {
         try {
@@ -60,27 +64,47 @@ function Artigos() {
     useEffect(() => {
         fetchArticles();
     }, [categoria, termoBusca]);
+  // Declare a ref para o DeleteArticleComponent
+    const deleteArticleModalRef = useRef(null); 
 
     // Função que o Card chamará para iniciar o processo de exclusão
     const handleInitiateDelete = (articleId) => {
         console.log("Artigos: handleInitiateDelete chamado com ID:", articleId);
+        // Atualize o formDataArticle no pai para que o modal tenha o ID correto
         setFormDataArticle(prev => ({
             ...prev,
-            _id: articleId
+            _id: articleId // Define o _id do artigo a ser deletado no estado
         }));
-        // ✅ O USO do deleteArticleRef.current precisa vir DEPOIS da sua declaração
-        if (deleteArticleRef.current) {
-            deleteArticleRef.current.handleOpenModal();
+        
+        // Chame o método exposto pelo DeleteArticleComponent via ref
+        if (deleteArticleModalRef.current) {
+            deleteArticleModalRef.current.handleOpenModal();
         } else {
-            console.warn("Artigos: deleteArticleRef.current ainda é null. O componente DeleteArticleComponent pode não ter sido montado ainda.");
+            console.warn("Artigos: deleteArticleModalRef.current é null.");
         }
     };
 
-    // Função a ser chamada pelo DeleteArticleComponent após a exclusão bem-sucedida
-    const onArticleDeletedSuccess = () => {
-        console.log("Artigos: onArticleDeletedSuccess chamado. Recarregando artigos...");
-        fetchArticles(); // Recarrega a lista de artigos
-        cleanFormDataArticle(setFormDataArticle); // Limpa o estado do formDataArticle
+    // Função para confirmar a exclusão (será passada para o DeleteArticleComponent)
+    const handleConfirmDelete = async () => {
+        if (!articleToDeleteId) return;
+
+        try {
+            await axios.delete(`/articles/${articleToDeleteId}`);
+            console.log(`Artigo com ID ${articleToDeleteId} deletado com sucesso!`);
+            fetchArticles(); // Recarrega a lista de artigos após a exclusão
+            setShowDeleteModal(false); // Fecha o modal
+            setArticleToDeleteId(null); // Limpa o ID
+            // cleanFormDataArticle(setFormDataArticle); // Opcional, se você quiser limpar o formDataArticle
+        } catch (error) {
+            console.error("Erro ao deletar artigo:", error);
+            // Tratar o erro, talvez mostrar uma mensagem para o usuário
+        }
+    };
+
+    // Função para cancelar a exclusão (será passada para o DeleteArticleComponent)
+    const handleCancelDelete = () => {
+        setShowDeleteModal(false); // Fecha o modal
+        setArticleToDeleteId(null); // Limpa o ID
     };
 
     return (
@@ -107,7 +131,7 @@ function Artigos() {
                                             link={`/artigos/${article._id}`}
                                             category={article.category}
                                             type="artigo"
-                                            onDeleteClick={handleInitiateDelete}
+                                            onDeleteClick={handleInitiateDelete} // Passa a função para o Card
                                         />
                                     ))
                                 )}
@@ -126,15 +150,17 @@ function Artigos() {
                     </div>
                 </div>
             </Container>
-            <br />
 
-            {/* Renderiza o DeleteArticleComponent UMA ÚNICA VEZ e passe a ref e o callback */}
-            <DeleteArticleComponent
-                ref={deleteArticleRef} // ✅ Atribuindo a ref aqui
-                formDataArticle={formDataArticle}
-                setFormDataArticle={setFormDataArticle}
-                onArticleDeleted={onArticleDeletedSuccess}
+            {/* O DeleteArticleComponent é renderizado aqui */}
+           <DeleteArticleComponent
+                ref={deleteArticleModalRef} // A ref é passada aqui
+                formDataArticle={formDataArticle} // Passe o formDataArticle para que o modal pegue o _id
+                setFormDataArticle={setFormDataArticle} // Passe o setFormDataArticle para limpar após deletar
+                onArticleDeleted={fetchArticles} // Callback para recarregar artigos
+                hideButton={true} // <-- ESSA É A CHAVE! O botão interno não será renderizado
             />
+
+            <br />
         </>
     );
 }

@@ -1,0 +1,217 @@
+/* src/css/articleCRUDComponents/ListDraftsComponent.module.css */
+
+/* VARIÁVEIS (Adicione se não tiver em um arquivo global de variáveis, como colors.css) */
+:root {
+    --search-bg: #FFFFFF; /* Fundo branco ou claro para a caixa */
+    --search-input-font-color: #5a2a82; /* Cor do texto principal */
+    --search-placeholder-color: #A0A0A0; /* Cor para texto de placeholder ou cinza mais claro */
+    --suggestion-text-color: #333333; /* Cor do texto dos itens da lista */
+    --suggestion-hover-bg: #F0F0F0; /* Cor de fundo ao passar o mouse */
+    --view-more-link-color: #007bff; /* Azul para links */
+    --view-more-link-hover-color: #0056b3;
+    --clear-button-color: #888;
+    --clear-button-hover-color: #555;
+    /* Variáveis para as cores dos botões */
+    --button-purple-dark: #4F0B82;
+    --button-purple-dark-hover: #7c13cc; /* Sua cor de hover para roxo */
+    --button-white: #FFFFFF;
+    --button-red: #c82333; /* Sua cor para o deleteButton */
+    --button-red-hover: #f13a4c; /* Sua cor de hover para vermelho */
+}
+
+
+/* Estilo da caixa principal do componente de rascunhos */
+.listDraftsContainer {
+    background-color: var(--search-bg);
+    box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
+    padding: 16px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.sectionTitle {
+    color: var(--search-input-font-color);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.loadingMessage,
+.errorMessage,
+.noDraftsMessage {
+    text-align: center;
+    padding: 15px;
+    color: var(--search-placeholder-color);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    font-style: italic;
+}
+
+.errorMessage {
+    color: #d9534f;
+    font-weight: bold;
+}
+
+.draftsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.draftItem {
+    background-color: transparent;
+    border: 1px solid #eee;
+    padding: 12px;
+    margin-bottom: 10px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.draftItem:hover {
+    background-color: var(--suggestion-hover-bg);
+}
+
+.draftTitle {
+    font-size: 1.1rem;
+    color: var(--suggestion-text-color);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.draftDate {
+    font-size: 0.85rem;
+    color: #777;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    margin-bottom: 0%;
+}
+
+.draftActions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+
+/* Base para os botões "Continuar Editando" e "Excluir Rascunho" */
+.editButton,
+.deleteButton {
+    position: relative; /* Necessário para posicionar o ::before */
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    padding: 8px 12px;
+    justify-content: center; /* Opcional, centraliza todo o conteúdo */
+    gap: 8px;
+    cursor: pointer;
+    border: none;
+    border-radius: 0%; /* Sem arredondamento */
+    box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
+    overflow: hidden; /* Garante que ::before fique dentro */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Pseudo-elemento ::before para os botões */
+.editButton::before,
+.deleteButton::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 6px); /* 3px de borda de cada lado */
+    height: calc(100% - 6px);
+    border-radius: 0%; /* Sem arredondamento */
+    justify-content: center; /* Opcional, centraliza todo o conteúdo */
+    gap: 8px;
+    box-sizing: border-box;
+    pointer-events: none; /* Garante que o clique passe para o botão */
+    transition: border-color 0.3s ease; /* Transição para a cor da borda no hover */
+}
+
+/* Estilos específicos para o botão "Continuar Editando" */
+.editButton {
+    background-color: var(--button-purple-dark); /* Fundo roxo escuro */
+    color: var(--button-white); /* Texto branco */
+}
+
+.editButton::before {
+    border: 1px solid var(--button-white); /* Borda branca */
+}
+
+.editButton:hover {
+    background-color: var(--button-purple-dark-hover); /* Fundo roxo mais claro no hover */
+    color: var(--button-white); /* Mantém o texto branco */
+
+}
+
+.editButton:hover::before {
+    border-color: var(--button-purple-dark-hover); /* Borda roxa mais clara no hover */
+    border: 1px solid var(--button-white); /* Borda branca */
+}
+
+/* Estilos específicos para o botão "Excluir Rascunho" */
+.deleteButton {
+    background-color: var(--button-red); /* Fundo vermelho */
+    color: var(--button-white); /* Texto branco */
+}
+
+.deleteButton::before {
+    border: 1px solid var(--button-white); /* Borda branca */
+}
+
+.deleteButton:hover {
+    background-color: var(--button-red-hover); /* Fundo vermelho mais claro no hover */
+    color: var(--button-white); /* Mantém o texto branco */
+}
+
+.deleteButton:hover::before {
+    border-color: var(--button-red-hover); /* Borda vermelha mais clara no hover */
+    border: 1px solid var(--button-white); /* Borda branca */
+}
+
+.buttonIcon {
+    font-size: 1em;
+    line-height: 1;
+    margin-right: 8px; /* Adiciona um espaço à direita do ícone */
+}
+
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    .listDraftsContainer {
+        padding: 12px;
+    }
+
+    .sectionTitle {
+        font-size: 1.3rem;
+    }
+
+    .draftTitle {
+        font-size: 1rem;
+    }
+
+    .draftDate {
+        font-size: 0.8rem;
+    }
+
+    .editButton,
+    .deleteButton {
+        padding: 7px 12px;
+        font-size: 0.85rem;
+    }
+
+    /* Ajuste para o ::before em telas menores se necessário */
+    .editButton::before,
+    .deleteButton::before {
+        width: calc(100% - 4px); /* Talvez um pouco menos de borda */
+        height: calc(100% - 4px);
+    }
+}

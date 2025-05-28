@@ -160,7 +160,9 @@
   box-sizing: border-box;
   pointer-events: none;
 }
-
+.icon{
+  padding: 1px 1px;
+}
 .editButton:hover, .deleteButton:hover, .artigoBtn:hover {
   background-color: var(--card-button-hover-bg);
 }

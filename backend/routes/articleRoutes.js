@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { upload, uploadToCloudinary } = require('../middlewares/upload');
-const { createArticle, getArticles, getArticleById, updateArticle, deleteArticle, deleteArticleById} = require('../controllers/articleController');
+const { createArticle, getArticles, getArticleById, updateArticle, deleteArticleById, getDraftArticles} = require('../controllers/articleController');
 
 
 router.post('/', upload, uploadToCloudinary, createArticle);
@@ -13,6 +13,8 @@ router.put(
   updateArticle  // A função updateArticle já vai receber as imagens processadas
 );
 
+router.get('/drafts', getDraftArticles);
+
 // Buscar todos os artigos (GET /articles)
 router.get('/', getArticles);
 
@@ -21,5 +23,9 @@ router.get('/:id', getArticleById);
 
 // Rota para excluir artigo (rota DELETE)
 router.delete('/:id', deleteArticleById);
+
+
+
+
 
 module.exports = router;

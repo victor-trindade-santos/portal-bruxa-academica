@@ -1,4 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+// src/pages/Home.jsx
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importe useNavigate
+import axios from '../services/api'; // Importe axios para as chamadas de API
+
 import Card from '../components/Card';
 import Video from '../components/Video';
 import VideoAstrologia from '../video/video1.jsx';
@@ -10,8 +14,11 @@ import HeroSection from '../components/HeroSection.jsx';
 import home from '../img/heroSection_home.png';
 import Container from '../components/Container.jsx';
 import { truncateDescription } from '../utils/descriptionUtils';
-import prof from '../img/marcia_silva.jpeg'
+import prof from '../img/marcia_silva.jpeg';
 import { AuthContext } from '../context/AuthContext';
+
+// Importe o DeleteArticleComponent
+import DeleteArticleComponent from '../components/articleCRUDComponents/DeleteArticleComponent';
 
 function Home() {
     // Estado para os artigos
@@ -19,29 +26,83 @@ function Home() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    // Estados para o modal de exclusão
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [articleToDeleteId, setArticleToDeleteId] = useState(null);
+    // Este formDataArticle será usado apenas para passar o _id para o DeleteArticleComponent
+    const [formDataArticle, setFormDataArticle] = useState({ _id: '' });
+
+    const { user } = useContext(AuthContext);
+    const isAdmin = user?.role === 'admin';
+    const navigate = useNavigate();
+
+    // Ref para o DeleteArticleComponent (para chamar handleOpenModal)
+    const deleteArticleModalRef = useRef(null);
+
+    // Função para buscar os artigos
+    const fetchArticles = async () => {
+        try {
+            const response = await axios.get('/articles');
+            const todosArtigos = response.data;
+
+            const categorias = ['Astrologia', 'Tarot', 'Numerologia', 'Magia'];
+            // Para cada categoria, pega o primeiro artigo que bate com ela
+            const artigosFiltrados = categorias
+                .map(cat => todosArtigos.find(article => article.category === cat))
+                .filter(Boolean); // remove undefined caso não encontre artigo da categoria
+
+            setArticles(artigosFiltrados);
+            setLoading(false);
+        } catch (err) {
+            setError(err.message);
+            setLoading(false);
+        }
+    };
+
     // Busca os artigos da API ao carregar o componente
     useEffect(() => {
-        fetch('http://localhost:5000/articles')  // sua rota real da API
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao buscar artigos');
-                }
-                return response.json();
-            })
-            .then(data => {
-                const categorias = ['Astrologia', 'Tarot', 'Numerologia', 'Magia'];
-                // Para cada categoria, pega o primeiro artigo que bate com ela
-                const artigosFiltrados = categorias
-                    .map(cat => data.find(article => article.category === cat))
-                    .filter(Boolean); // remove undefined caso não encontre artigo da categoria
-                setArticles(artigosFiltrados);
-                setLoading(false);
-            })
-            .catch(err => {
-                setError(err.message);
-                setLoading(false);
-            });
+        fetchArticles();
     }, []);
+
+    // --- Funções para Gerenciamento de Artigos (Editar/Deletar) ---
+
+    // Função para iniciar a edição
+    const handleEditArticle = (articleId) => {
+        console.log("Home: Botão de editar clicado para o ID:", articleId);
+        navigate(`/create-articles-d42f4c`, { state: { articleId: articleId } });
+    };
+
+    // Função para iniciar o processo de exclusão (chamada pelo Card)
+    const handleInitiateDelete = (articleId) => {
+        console.log("Home: handleInitiateDelete chamado com ID:", articleId);
+        setArticleToDeleteId(articleId); // Armazena o ID do artigo a ser deletado
+        setFormDataArticle(prev => ({ // Atualiza formDataArticle para o modal
+            ...prev,
+            _id: articleId
+        }));
+
+        // Abre o modal de exclusão via ref
+        if (deleteArticleModalRef.current) {
+            deleteArticleModalRef.current.handleOpenModal();
+        } else {
+            console.warn("Home: deleteArticleModalRef.current ainda é null. O componente DeleteArticleComponent pode não ter sido montado ainda.");
+        }
+    };
+
+    // Função para confirmar a exclusão (passada para o DeleteArticleComponent)
+    const handleConfirmDelete = async () => {
+        // A lógica de deleção será tratada pelo DeleteArticleComponent internamente
+        // após a confirmação. O que importa é que o DeleteArticleComponent chamará
+        // onArticleDeleted (que será fetchArticles) quando a exclusão for bem-sucedida.
+        setShowDeleteModal(false); // Fecha o modal (após a lógica no DeleteArticleComponent)
+        setArticleToDeleteId(null); // Limpa o ID
+    };
+
+    // Função para cancelar a exclusão (passada para o DeleteArticleComponent)
+    const handleCancelDelete = () => {
+        setShowDeleteModal(false); // Fecha o modal
+        setArticleToDeleteId(null); // Limpa o ID
+    };
 
     // Dados estáticos dos vídeos (mantidos iguais)
     const card_video1 = [
@@ -76,9 +137,6 @@ function Home() {
         }
     ];
 
-    const { user } = useContext(AuthContext);
-    const isAdmin = user?.role === 'admin';
-
     return (
         <>
             {isAdmin ? (
@@ -99,7 +157,7 @@ function Home() {
                 <div className={styles.articleSection}>
                     <h2 className={styles.sectionTitle}>Artigos e Ensinamentos</h2>
                     <p className={styles.sectionDescription}>
-                        &#9733; Aprofunde-se no seu autoconhecimento e descubra novos caminhos &#9733;
+                        ★ Aprofunde-se no seu autoconhecimento e descubra novos caminhos ★
                     </p>
 
                     {loading ? (
@@ -112,15 +170,19 @@ function Home() {
                         </div>
                     ) : (
                         <div className={styles.cardContainer}>
-                            {articles.map((article, index) => (
+                            {articles.map((article) => (
                                 <Card
-                                    key={index}
+                                    key={article._id} // Use _id como key, pois é único
+                                    _id={article._id} // Passe o _id para o Card
                                     image={article.imageThumb}
                                     title={truncateDescription(article.title, 30)}
                                     description={article.firstContent}
                                     link={`/artigos/${article._id}`}
                                     category={`#${article.category}`}
                                     type="artigo"
+                                    // Passe as funções de callback para o Card
+                                    onEditClick={handleEditArticle}
+                                    onDeleteClick={handleInitiateDelete}
                                 />
                             ))}
                         </div>
@@ -130,7 +192,6 @@ function Home() {
                         <a href="/artigos" className={styles.viewMoreLink}>Ver Mais Artigos</a>
                     </div>
                 </div>
-
             </Container>
 
             {/* Professora */}
@@ -149,11 +210,10 @@ function Home() {
                 </div>
             </Container>
 
-
             {/* Vídeos */}
             <Container>
                 <h2 className={styles.sectionTitle}>Círculo Místico: Vídeos e Ensinamentos</h2>
-                <p className={styles.sectionDescription}>&#9733; Aprenda, conecte-se e floresça no seu caminho mágico &#9733;</p>
+                <p className={styles.sectionDescription}>★ Aprenda, conecte-se e floresça no seu caminho mágico ★</p>
 
                 {card_video1.map((videoCard, index) => (
                     <div key={index}>
@@ -201,6 +261,15 @@ function Home() {
 
             <br />
             <br />
+
+            {/* Renderiza o DeleteArticleComponent aqui, mas com hideButton=true */}
+            <DeleteArticleComponent
+                ref={deleteArticleModalRef} // A ref é passada aqui
+                formDataArticle={formDataArticle} // Passe o formDataArticle para que o modal pegue o _id
+                // setFormDataArticle={setFormDataArticle} // Não é necessário aqui se você só passa o _id
+                onArticleDeleted={fetchArticles} // Callback para recarregar artigos após a exclusão
+                hideButton={true} // O botão interno do DeleteArticleComponent não será renderizado
+            />
         </>
     );
 }
