@@ -4,12 +4,17 @@ import CitySearch from '../profilePages/CitySearch';
 import UpdateUserContent from "../userCRUDComponents/UpdateUserComponent";
 import axios from '../../services/api';
 
+import { useCalcularMapaAstral } from "../../hooks/useCalcularMapaAstralNatal";
+
+
 const VerificationMapaAstral = ({ message, onCancel, userData, setUserData, requiredFields }) => {
   const [missingFields, setMissingFields] = useState([]);
   const [visibleFields, setVisibleFields] = useState([]); // controla os campos mostrados
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const { calcularMapa, loading: calculandoMapa, erro, resposta } = useCalcularMapaAstral();
 
   // Executa só na montagem
   useEffect(() => {
@@ -35,7 +40,7 @@ const VerificationMapaAstral = ({ message, onCancel, userData, setUserData, requ
     if (fieldsStillMissing.length > 0) {
       console.warn('⛔ Ainda faltam campos:', fieldsStillMissing);
       setMissingFields(fieldsStillMissing);
-      setVisibleFields(fieldsStillMissing); // <-- atualiza para mostrar só os ainda faltando
+      setVisibleFields(fieldsStillMissing);
       setLoading(false);
       return;
     }
@@ -53,6 +58,15 @@ const VerificationMapaAstral = ({ message, onCancel, userData, setUserData, requ
 
       console.log('✅ Resposta do servidor:', response.data);
       setSuccessMessage('Dados atualizados com sucesso!');
+
+      await calcularMapa({
+        birthDate: userData.birthDate,
+        birthTime: userData.birthTime,
+        birthCity: userData.birthCity
+      });
+
+      window.location.reload()
+
     } catch (error) {
       console.error('❌ Erro ao atualizar usuário:', error.response?.data || error.message);
       setErrorMessage(error.response?.data?.message || 'Erro ao atualizar usuário');
@@ -67,29 +81,38 @@ const VerificationMapaAstral = ({ message, onCancel, userData, setUserData, requ
       <div className={styles.modalContent}>
         <p>{message}</p>
 
-        {visibleFields.includes("birthDate") && (
-          <UpdateUserContent field="birthDate" userData={userData} setUserData={setUserData} />
+        {requiredFields.includes("birthDate") && (
+          <UpdateUserContent
+            field="birthDate"
+            userData={userData}
+            setUserData={setUserData}
+          />
         )}
 
-        {/* {visibleFields.includes("birthTime") && (
-          <UpdateUserContent field="birthTime" userData={userData} setUserData={setUserData} />
+        {requiredFields.includes("birthTime") && (
+          <UpdateUserContent
+            field="birthTime"
+            userData={userData}
+            setUserData={setUserData}
+          />
         )}
 
-        {visibleFields.includes("birthCity") && (
+        {requiredFields.includes("birthCity") && (
           <div className="mb-3 d-flex align-items-center">
             <i className={`bi bi-globe-americas fs-4 me-2 mt-0 ${styles.nomeInfo}`}></i>
             <p className={`mb-0 mt-0 fw-bold ${styles.nomeInfo}`}>Cidade de Nascimento:</p>
             <div className={`ms-2 ${styles.citySearchWrapper}`}>
               <CitySearch
+                selectedValue={userData.birthCity}
                 onSelect={(selectedCity) => {
                   console.log("📍 Cidade selecionada:", selectedCity);
-                  const formatted = `${selectedCity.name} - ${selectedCity.state}`;
+                  const formatted = `${selectedCity.nome} - ${selectedCity.uf}`;
                   setUserData((prev) => ({ ...prev, birthCity: formatted }));
                 }}
               />
             </div>
           </div>
-        )} */}
+        )}
 
         <div className={styles.buttonGroup}>
           <button onClick={handleConfirm} className={styles.confirmButton} disabled={loading}>

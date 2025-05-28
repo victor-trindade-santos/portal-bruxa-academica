@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const CitySearch = (onSelect) => {
-  const [cidades, setCidades] = useState([]); // array de objetos { nome, uf }
+const CitySearch = ({ onSelect, selectedValue = '' }) => {
+  const [cidades, setCidades] = useState([]);
   const [filtro, setFiltro] = useState('');
   const [cidadesFiltradas, setCidadesFiltradas] = useState([]);
 
@@ -9,24 +9,38 @@ const CitySearch = (onSelect) => {
     fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados/SP/municipios')
       .then((res) => res.json())
       .then((data) => {
-        // Mapear só nome e UF (SP fixo aqui)
         const lista = data.map((cidade) => ({
           nome: cidade.nome,
-          uf: 'SP', // como filtramos SP, pode fixar aqui
+          uf: 'SP',
         }));
         setCidades(lista);
         setCidadesFiltradas(lista);
       });
   }, []);
 
+  useEffect(() => {
+    if (selectedValue) {
+      setFiltro(selectedValue);
+    }
+  }, [selectedValue]);
+
   const handleFiltro = (e) => {
-    const valor = e.target.value.toLowerCase();
+    const valor = e.target.value;
     setFiltro(valor);
 
     const filtradas = cidades.filter((cidade) =>
-      cidade.nome.toLowerCase().includes(valor)
+      cidade.nome.toLowerCase().includes(valor.toLowerCase())
     );
     setCidadesFiltradas(filtradas);
+  };
+
+  const handleSelect = (cidade) => {
+    const nomeFormatado = `${cidade.nome} - ${cidade.uf}`;
+    setFiltro(nomeFormatado);
+    setCidadesFiltradas([]);
+    if (typeof onSelect === 'function') {
+      onSelect(cidade);
+    }
   };
 
   return (
@@ -45,7 +59,7 @@ const CitySearch = (onSelect) => {
           }}
         />
 
-        {filtro.length > 0 && (
+        {filtro.length > 0 && cidadesFiltradas.length > 0 && (
           <ul
             style={{
               position: 'absolute',
@@ -65,24 +79,17 @@ const CitySearch = (onSelect) => {
               boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
             }}
           >
-            {cidadesFiltradas.map(({ nome, uf }) => (
+            {cidadesFiltradas.map((cidade) => (
               <li
-                key={nome}
+                key={cidade.nome}
                 style={{
                   padding: '8px 0',
                   borderBottom: '1px solid #eee',
                   cursor: 'pointer',
                 }}
-                onClick={() => {
-                  const selected = { nome, uf };
-                  setFiltro(`${nome} - ${uf}`);
-                  setCidadesFiltradas([]);
-                  if (typeof onSelect === 'function') {
-                    onSelect(selected);
-                  }
-                }}
+                onClick={() => handleSelect(cidade)}
               >
-                {nome} - {uf}
+                {cidade.nome} - {cidade.uf}
               </li>
             ))}
           </ul>

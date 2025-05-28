@@ -5,10 +5,13 @@ import styles from '../css/Perfil.module.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import userImagem from '../img/perfil.png';
 import aquarius from '../img/aquarius.png'
-import MapaAstral from '../components/profilePages/MapaAstral';
+import MapaAstral from '../components/profilePages/MapaAstralForm';
 import ThemeToggleButton from '../components/ThemeToggleButton';
 import { useProfileImageUpload } from '../hooks/uploadUserImg';
 import { getUser } from '../hooks/getUser';
+import MapaAstralPreenchido from '../components/profilePages/MapaAstralPreenchido';
+
+import { possuiDadosDeMapaAstral } from '../utils/possuiDadosDeMapaAstral';
 
 const Perfil = () => {
     const [menuSelecionado, setMenuSelecionado] = useState('signo');
@@ -26,6 +29,7 @@ const Perfil = () => {
 
     const handleMenuClick = (item) => {
         setMenuSelecionado(item);
+        console.log(userDetails)
     };
 
     const handleImageUpload = async (file) => {
@@ -149,9 +153,21 @@ const Perfil = () => {
                         </div>
                     )}
                     {menuSelecionado === 'signo' && (
-                        <MapaAstral
-                        />
+                        possuiDadosDeMapaAstral(userDetails) ? (
+                            <MapaAstralPreenchido
+                                sunSign={userDetails.sunSign}
+                                sunDescription={userDetails.sunDescription}
+                                moonSign={userDetails.moonSign}
+                                moonDescription={userDetails.moonDescription}
+                                ascendantSign={userDetails.ascendantSign}
+                                ascendantDescription={userDetails.ascendantDescription}
+                                mapaCalculadoEm={userDetails.mapaCalculadoEm}
+                            />
+                        ) : (
+                            <MapaAstral />
+                        )
                     )}
+
                 </div>
             </div>
         </div>

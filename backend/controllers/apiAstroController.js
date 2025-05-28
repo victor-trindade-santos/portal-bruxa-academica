@@ -8,7 +8,7 @@ require("dotenv").config();
 const calcularMapaAstralNatal = async (req, res) => {
     try {
         const { birthDate, birthTime, birthCity } = req.body;
-        const userId = req.user?._id;  
+        const userId = req.user.userId;
 
         const cityEncoded = encodeURIComponent(birthCity);
         const nominatimUrl = `https://nominatim.openstreetmap.org/search?city=${cityEncoded}&country=Brazil&format=json`;

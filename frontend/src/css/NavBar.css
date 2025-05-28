@@ -99,8 +99,10 @@ li {
 }
 
 .navbar-brand {
+  /* Fixing the logo disaparing problem
   margin-right: 5rem;
   margin-left: 2rem;
+  */
 }
 
 .navbar-nav {
@@ -112,6 +114,12 @@ li {
 
 .nav-link {
   white-space: nowrap;
+}
+
+.profile-nav-bar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .navbar-brand-img {
@@ -165,10 +173,6 @@ li {
   gap: 0.5rem;
   text-decoration: none;
   color: inherit;
-}
-
-.push-right {
-  margin-left: auto;
 }
 
 /* Notebook */
