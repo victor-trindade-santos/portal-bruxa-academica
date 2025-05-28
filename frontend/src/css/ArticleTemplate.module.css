@@ -1,3 +1,24 @@
+.fontSizeControls {
+  margin-bottom: 20px;
+  text-align: right; /* Alinha os botões à direita */
+}
+
+.fontSizeControls button {
+  background-color: #8C089C;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.fontSizeControls button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
 h2{
   font-size: 1.8rem;
   color: var(--article-template-title-color);
