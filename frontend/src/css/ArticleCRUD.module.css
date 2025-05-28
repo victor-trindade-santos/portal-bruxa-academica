@@ -1,3 +1,9 @@
+:root{
+    --button-white: #FFFFFF;
+    --button-red: #c82333; /* Sua cor para o deleteButton */
+    --button-red-hover: #f13a4c; /* Sua cor de hover para vermelho */
+}
+
 .rowPrincipal {
   display: flex;
   padding: 0;
@@ -9,9 +15,10 @@
 
 .sectionTitle {
   color: var(--crud-section-title);
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: bold;
-  margin-left: 5%;
+  margin: 0;
+  padding:0 !important;
 }
 
 .sectionArticle {
@@ -19,12 +26,14 @@
   box-shadow: var(--crud-box-shadow);
   padding: 16px;
   width: 100%;
+  margin-top: 10px;
 }
 
 .colInsideLeft {
   width: 66.7%;
   margin-left: 3.5%;
   /* background-color: green; */
+
 }
 
 .colInsideRight {
@@ -33,90 +42,129 @@
   margin-left: 0.5%;
   /* background-color: blue; */
 }
-
-.titleArticle {
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
-  /* This means "extra-bold" */
-  font-size: 1.5rem;
-  color: var(--crud-title-article);
-  text-align: left;
-  border: 1px solid #ccc;
-  /* Borda cor púrpura */
-  padding: 5px;
-  /* Adicionando um pequeno padding para deixar a borda mais visível */
-  border-radius: 1px;
-  /* Borda arredondada, caso queira */
+.formInput {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400; /* Regular */
+    font-size: 15px; /* Tamanho da fonte padrão */
+    color: var(--crud-text-secondary); /* Cor do texto dentro do input */
+    border: 1px solid #ccc; /* Borda padrão */
+    padding: 8px 10px; /* Padding interno para todos os campos */
+    
+    /* AQUI ESTÁ A MUDANÇA: */
+    width: calc(100% - 16px); /* 100% da largura do pai MENOS 8px de margin-left e 8px de margin-right */
+    
+    box-sizing: border-box; /* Garante que padding e border não aumentem a largura total */
+    margin-top: 5px;
+    margin-bottom: 15px;
+    margin-left: 8px; /* Mantém sua margem à esquerda */
+    margin-right: 8px; /* Mantém sua margem à direita */
+    display: block;
+}
+/* Estilo específico para campos menores */
+.formInputSmall {
+    width: calc(28% - 16px); /* Exemplo: 50% da largura do pai, menos as margens. Ajuste conforme necessário */
+    /* Você pode ajustar o 50% para um valor fixo em pixels (ex: 300px) se preferir um tamanho absoluto */
+    /* width: 250px; */
+}
+/* Você pode adicionar estilos específicos para diferentes estados, se desejar */
+.formInput:focus {
+    outline: none;
+    border-color: #4F0B82; /* Cor da borda ao focar */
 }
 
-.textAuthor,
-.textPublicationDate {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  /* regular */
-  font-size: 15px;
-  color: var(--crud-text-secondary);
-  margin-left: 8px;
-  /* pequeno espaçamento à esquerda */
-  text-align: left;
-  text-decoration: none;
-  border: 1px solid #ccc;
-  /* Borda cor púrpura */
-  padding: 5px;
-  /* Adicionando um pequeno padding para deixar a borda mais visível */
-  border-radius: 1px;
-  /* Borda arredondada, caso queira */
+/* Estilo específico para o campo de data de publicação se for somente leitura */
+.formInput[readOnly] {
+    background-color: #f0f0f0; /* Um fundo cinza para indicar que é somente leitura */
+    cursor: not-allowed; /* Altera o cursor */
 }
 
+.titleDivider {
+    border: none;
+    border-top: 1px solid #adadad; /* Um cinza muito claro */
+    width: 100%;
+}
 .textPublicationDate {
   margin-bottom: 2%;
 }
 
-.textAuthor {
-  margin-top: 3%;
-  margin-bottom: 1%;
+.imagePreviewContainer {
+    position: relative; /* FUNDAMENTAL: Define o contexto para o posicionamento absoluto do botão */
+    width: 80%; /* Mesma largura da imagem para que o botão se posicione corretamente */
+    margin: 0 auto; /* Centraliza o contêiner */
+    margin-top: 15px; /* Espaço acima da imagem */
+    margin-bottom: 25px; /* Espaço abaixo da imagem/botão */
+    display: block; /* Garante que ocupe sua própria linha */
 }
 
 .imageArticle {
-  width: 80%;
-  display: block;
-  margin: 0 auto;
-  border: 1px solid #ccc;
-  /* Borda cor púrpura */
-  padding: 5px;
-  /* Adicionando um pequeno padding para deixar a borda mais visível */
-  border-radius: 1px;
-  /* Borda arredondada, caso queira */
+    width: 100%; /* Agora a imagem preenche 100% do seu *novo* contêiner */
+    height: auto; /* Mantém a proporção */
+    display: block;
+    /* Remover o margin: 0 auto; e padding: 5px; border: 1px solid #ccc; do .imageArticle */
+    /* Mova-os para o .imagePreviewContainer se quiser que afetem o contêiner inteiro */
+    border: 1px solid #ccc; /* Borda cor púrpura */
+    padding: 5px; /* Adicionando um pequeno padding para deixar a borda mais visível */
+    border-radius: 1px; /* Borda arredondada, caso queira */
+    box-sizing: border-box; /* Garante que padding e border sejam incluídos na largura/altura */
 }
 
-.textArticle {
-  margin-left: 8px;
-  text-decoration: none;
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  /* regular */
-  font-size: 18px;
-  text-align: left !important;
-  margin-top: 3%;
-  width: 100%;
-
+.deleteIcon{
+  font-size: 1.2em;
+}
+.deleteButton {
+    position: absolute; /* Posicionamento absoluto em relação ao .imagePreviewWrapper */
+    top: 5px; /* Ajuste a distância do topo */
+    right: 5px; /* Ajuste a distância da direita */
+    z-index: 10; /* Garante que o botão fique acima da imagem */
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    padding: 1px 6px;
+    justify-content: center; /* Opcional, centraliza todo o conteúdo */
+    cursor: pointer;
+    border: none;
+    border-radius: 0%; /* Sem arredondamento */
+    box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
+    overflow: hidden; /* Garante que ::before fique dentro */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.subtitleArticle {
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  /* This means "extra-bold" */
-  font-size: 24px;
-  color: var(--crud-subtitle);
-  text-align: left;
-  margin-left: 8px;
-  border: 1px solid #ccc;
-  /* Borda cor púrpura */
-  padding: 5px;
-  /* Adicionando um pequeno padding para deixar a borda mais visível */
-  border-radius: 1px;
-  /* Borda arredondada, caso queira */
+/* Pseudo-elemento ::before para os botões */
+.deleteButton::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% - 6px); /* 3px de borda de cada lado */
+    height: calc(100% - 6px);
+    border-radius: 0%; /* Sem arredondamento */
+    justify-content: center; /* Opcional, centraliza todo o conteúdo */
+    box-sizing: border-box;
+    pointer-events: none; /* Garante que o clique passe para o botão */
+    transition: border-color 0.3s ease; /* Transição para a cor da borda no hover */
 }
+
+/* Estilos específicos para o botão "Excluir Rascunho" */
+.deleteButton {
+    background-color: var(--button-red); /* Fundo vermelho */
+    color: var(--button-white); /* Texto branco */
+}
+
+.deleteButton::before {
+    border: 1px solid var(--button-white); /* Borda branca */
+}
+
+.deleteButton:hover {
+    background-color: var(--button-red-hover); /* Fundo vermelho mais claro no hover */
+    color: var(--button-white); /* Mantém o texto branco */
+}
+
+.deleteButton:hover::before {
+    border-color: var(--button-red-hover); /* Borda vermelha mais clara no hover */
+    border: 1px solid var(--button-white); /* Borda branca */
+}
+
+
 
 .updateButton {
   position: relative;
@@ -154,18 +202,22 @@
 }
 
 .fileInputLabel {
-  display: inline-block;
-  color: #4F0B82;
-  font-family: 'Inter', sans-serif;
-  font-size: 13px !important;
-  padding: 5px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #ccc;
-  cursor: pointer;
-  margin-left: 8px;
-  transition: background-color 0.2s ease;
-  text-align: center;
+ font-family: 'Inter', sans-serif;
+    font-weight: 400; /* Regular */
+    font-size: 15px; /* Tamanho da fonte padrão */
+    color: var(--crud-text-secondary); /* Cor do texto dentro do input */
+    border: 1px solid #ccc; /* Borda padrão */
+    padding: 8px 10px; /* Padding interno para todos os campos */
+    
+    /* AQUI ESTÁ A MUDANÇA: */
+    width: calc(33% - 16px); /* 100% da largura do pai MENOS 8px de margin-left e 8px de margin-right */
+    
+    box-sizing: border-box; /* Garante que padding e border não aumentem a largura total */
+    margin-top: 5px;
+    margin-bottom: 15px;
+    margin-left: 8px; /* Mantém sua margem à esquerda */
+    margin-right: 8px; /* Mantém sua margem à direita */
+    display: block;
 }
 
 .fileInputLabel:hover {

@@ -65,7 +65,7 @@ function Article_Pages() {
 
   return (
     <>
-    <Container>
+      <Container>
         <div className={`row ${styles.rowPrincipal}`}>
           <div className={styles.colInsideLeft}>
             {/* Exibe o breadcrumb com base na categoria e no título do artigo */}
@@ -96,7 +96,7 @@ function Article_Pages() {
             <Sobre_Mim_Lateral />
           </div>
         </div>
-        </Container>
+      </Container>
       <br />
     </>
   );

@@ -3,7 +3,7 @@ import CleanModal from '../modal/ArticleModal';
 import { cleanFormDataArticle } from '../../utils/formUtils.js'; // Ajuste o caminho se necessário
 import styles from '../../css/articleCRUDComponents/ArticleCRUDComponent.module.css'
 
-const CleanArticleComponent = ({ setFormDataArticle }) => {
+const CleanArticleComponent = ({ setFormDataArticle, buttonText, buttonIcon, buttonClass }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleOpenModal = () => {
@@ -24,8 +24,12 @@ const CleanArticleComponent = ({ setFormDataArticle }) => {
 
   return (
     <>
-      <button onClick={handleOpenModal} className={styles.componentButton}>
-        Limpar Formulário
+      <button
+        onClick={handleOpenModal}
+        className={`${styles.componentButton} ${buttonClass}`}
+      >
+        {buttonIcon} {/* Ícone passado via props */}
+        {buttonText} {/* Texto passado via props */}
       </button>
 
       {showModal && (

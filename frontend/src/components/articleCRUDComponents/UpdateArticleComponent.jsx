@@ -5,18 +5,18 @@ import UpdateModal from "../modal/ArticleModal";
 import styles from "../../css/articleCRUDComponents/ArticleCRUDComponent.module.css";
 
 
-const UpdateArticleComponent = ({ formDataArticle, setFormDataArticle }) => {
+const UpdateArticleComponent = ({ formDataArticle, setFormDataArticle, buttonText, buttonIcon, buttonClass }) => {
   const [showModal, setShowModal] = useState(false);
 
   //Renomeando os campos do artigo para ficar mais fácil do usuário identificar quais campos não estão devidamente preenchidos
   const fieldLabels = {
-        title: 'Título',
-        author: 'Autor',
-        publicationDate: 'Data de Publicação',
-        firstContent: 'Resumo',
-        secondContent: 'Conteúdo do Artigo',
-        category: 'Categoria',
-        imageThumb: 'Imagem do Card/Thumbnail'
+    title: 'Título',
+    author: 'Autor',
+    publicationDate: 'Data de Publicação',
+    firstContent: 'Resumo',
+    secondContent: 'Conteúdo do Artigo',
+    category: 'Categoria',
+    imageThumb: 'Imagem do Card/Thumbnail'
   };
 
   const handleUpdate = async () => {
@@ -114,8 +114,12 @@ const UpdateArticleComponent = ({ formDataArticle, setFormDataArticle }) => {
 
   return (
     <div>
-      <button onClick={handleOpenModal} className={styles.componentButton}>
-        Atualizar Artigo
+      <button
+        onClick={handleOpenModal}
+        className={`${styles.componentButton} ${buttonClass}`}
+      >
+        {buttonIcon} {/* Ícone passado via props */}
+        {buttonText} {/* Texto passado via props */}
       </button>
       {showModal && (
         <UpdateModal

@@ -72,11 +72,11 @@ function Card({ image, title, description, link, category, duration, type, class
               <>
                 {/* ✅ O onClick agora chama handleEditButtonClick */}
                 <button className={styles.editButton} onClick={handleEditButtonClick}>
-                  <i className="bi bi-pencil"></i>
+                  <i className={`bi bi-feather ${styles.icon}`}></i>
                 </button>
                 {/* O onClick agora chama handleDeleteButtonClick */}
                 <button className={styles.deleteButton} onClick={handleDeleteButtonClick}>
-                  <i className="bi bi-trash"></i>
+                  <i className={`bi bi-trash3 ${styles.icon}`}></i>
                 </button>
               </>
             )}
