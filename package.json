@@ -1,0 +1,12 @@
+{
+  "name": "Portal-Bruxa-Academica",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "npm --prefix backend run start",
+    "client": "npm --prefix frontend run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  }
+}
