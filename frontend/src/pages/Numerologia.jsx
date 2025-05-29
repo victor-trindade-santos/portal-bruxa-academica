@@ -155,8 +155,8 @@ function Numerologia() {
                                         key={article._id} // Use _id como key
                                         _id={article._id} // Passe o _id para o Card
                                         image={article.imageThumb}
-                                        title={truncateDescription(article.title, 30)}
-                                        description={article.firstContent}
+                                        title={truncateDescription(article.title, 20)}
+                                        description={truncateDescription(article.firstContent, 65)}
                                         link={`/artigos/${article._id}`}
                                         category={article.category || "#Numerologia"}
                                         type="artigo"

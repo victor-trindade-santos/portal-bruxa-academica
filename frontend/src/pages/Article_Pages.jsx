@@ -7,25 +7,24 @@ import Sobre_Mim_Lateral from '../components/Sobre_MIm_Lateral';
 import ArticleTemplate from '../components/ArticleTemplate';
 import BreadCrumb from '../components/BreadCrumb';
 import Container from '../components/Container';
+import Card from '../components/Card'; 
+import { truncateDescription } from '../utils/descriptionUtils';
 
 function Article_Pages() {
-  const { id } = useParams(); // captura o ID do artigo
-
-  const location = useLocation(); // Captura a localização atual da URL
+  const { id } = useParams();
+  const location = useLocation();
   const previewDataFromLocation = location.state?.articleData;
 
   const queryParams = new URLSearchParams(location.search);
-  const rawCategory = queryParams.get('categoria'); // Obtém o valor da categoria da URL
+  const rawCategory = queryParams.get('categoria');
 
-  // Formata a categoria com a primeira letra maiúscula
   const formatCategory = (category) => {
-    if (!category) return ''; // Caso não exista categoria
+    if (!category) return '';
     return category.charAt(0).toUpperCase() + category.slice(1).toLowerCase();
   };
 
-  const category = formatCategory(rawCategory); // Aqui formatamos a categoria
+  const category = formatCategory(rawCategory);
 
-  //serve para buscar os dados do FormDataArticle através do ViewArticleComponent
   const previewMode = localStorage.getItem("previewMode") === "true";
   const previewDataFromLocalStorage = previewMode
     ? JSON.parse(localStorage.getItem("articlePreview"))
@@ -34,10 +33,7 @@ function Article_Pages() {
   const articleTemporaryData = previewDataFromLocation || previewDataFromLocalStorage;
 
   const [articleData, setArticleData] = useState(null);
-
-  console.log("🔹 Dados da pré-visualização:", articleTemporaryData);
-  console.log("ID sendo passado para ArticleTemplate:", id);
-  console.log("Categoria capturada da URL:", category); // Verifique se a categoria está sendo capturada corretamente
+  const [relatedArticles, setRelatedArticles] = useState([]);
 
   useEffect(() => {
     if (previewMode) {
@@ -45,7 +41,6 @@ function Article_Pages() {
       localStorage.removeItem("articlePreview");
     }
   }, []);
-
 
   useEffect(() => {
     if (!previewMode && id) {
@@ -58,6 +53,18 @@ function Article_Pages() {
         })
         .then(data => {
           setArticleData(data);
+
+          // Depois que pegar o artigo, busca relacionados pela categoria do artigo
+          if (data.category) {
+            fetch(`http://localhost:5000/articles?category=${data.category}`)
+              .then(res => res.json())
+              .then(related => {
+                // Filtra para não mostrar o artigo atual
+                const filtered = related.filter(a => a._id !== id);
+                setRelatedArticles(filtered);
+              })
+              .catch(err => console.error('Erro ao buscar artigos relacionados:', err));
+          }
         })
         .catch(err => console.error("Erro ao buscar artigo:", err));
     }
@@ -68,7 +75,6 @@ function Article_Pages() {
       <Container>
         <div className={`row ${styles.rowPrincipal}`}>
           <div className={styles.colInsideLeft}>
-            {/* Exibe o breadcrumb com base na categoria e no título do artigo */}
             <BreadCrumb
               articleTitle={
                 articleTemporaryData?.title ||
@@ -81,7 +87,6 @@ function Article_Pages() {
                 category || "Categoria"
               }
             />
-            {/* Envia articleTemporaryData se existir, senão envia o ID */}
             <ArticleTemplate
               {...(articleTemporaryData
                 ? { articleData: articleTemporaryData }
@@ -89,7 +94,28 @@ function Article_Pages() {
                   ? { articleData }
                   : { articleId: id })}
             />
+
+            {/* Seção de Artigos Relacionados */}
+            {relatedArticles.length > 0 && (
+              <section className={styles.relatedSection}>
+                <h2>Artigos Relacionados</h2>
+                <div className={styles.relatedContainer}>
+                  {relatedArticles.map(article => (
+                    <Card
+                      key={article._id}
+                      image={article.imageThumb}
+                      title={truncateDescription(article.title, 15)}
+                      description={truncateDescription(article.firstContent, 40)}
+                      link={`/artigos/${article._id}`}
+                      category={`#${article.category}`}
+                      type="artigo"
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
           </div>
+
           <div className={styles.colInsideRight}>
             <Barra_Pesquisa />
             <Barra_Categoria />
