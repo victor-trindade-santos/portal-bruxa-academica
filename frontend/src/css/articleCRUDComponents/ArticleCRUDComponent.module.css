@@ -1,8 +1,8 @@
 /* VARIÁVEIS - Idealmente, estas estariam em um arquivo global (ex: variables.css) */
 /* Se este arquivo for independente, inclua as variáveis necessárias aqui */
 :root {
-  --button-purple-dark: #4F0B82;
-  --button-purple-dark-hover: #7c13cc;
+  --color-button: #4f0b82;
+  --color-button-hover: #7e44b8; 
   --button-white: #FFFFFF;
   --button-red: #c82333;
   /* Sua cor para o deleteButton */
@@ -10,11 +10,95 @@
   /* Sua cor de hover para vermelho */
 
 }
+.input {
+  /* Alinhamento */
+  text-align: left;
+
+  /* Bordas */
+  border: 1px solid #ccc; /* Corrigindo todas as bordas */
+  /* Ou, se precisar ser mais explícito:
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-left: 1px solid #ccc !important; /* Pode usar !important se necessário, mas evite se possível */
+  border-right: 1px solid #ccc !important; /* Pode usar !important se necessário, mas evite se possível */
+
+
+  /* Outras propriedades úteis */
+  padding: 5px; /* Adiciona um pouco de espaço interno */
+  box-sizing: border-box; /* Garante que padding e border não aumentem o tamanho total */
+}
+
+/* Se você quiser estilizar o container flex pai (opcional, mas pode ser útil) */
+.flex-container { /* Você pode adicionar esta classe à sua div pai ou usar a existente */
+  display: flex;
+  align-items: center;
+  width: 100%; /* Garante que o container ocupe toda a largura disponível */
+}
+
+/* Estilo para o seu input e para o componente CitySearch */
+.input,
+.city-search-container input, /* Assumindo que CitySearch renderiza um input */
+.city-search-container > div /* Ou se CitySearch for uma div container */ {
+  margin-left: auto; /* Esta é a mágica! Empurra o elemento para a direita */
+  /* Mantenha seus outros estilos do input aqui */
+  /* Exemplo: */
+  /* border: 1px solid #ccc; */
+  /* padding: 8px; */
+  /* text-align: left; */ /* Como discutido anteriormente */
+}
+
+/* Opcional: Para garantir que o ícone e o label fiquem juntos e não quebrem linha desnecessariamente */
+.label-group {
+  display: flex; /* Torna o ícone e o parágrafo flex items */
+  align-items: center; /* Alinha verticalmente o ícone e o texto do label */
+  margin-right: 10px; /* Adiciona um pequeno espaço entre o label e o input (opcional) */
+}
+
+/* Se você usar a classe .label-group no HTML, seu styles.label pode não precisar de muito */
+.label {
+   font-weight: bold; 
+   margin-bottom: 0; 
+}
+
+/* Estilo para o input de busca */
+.input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+}
+
+/* Estilo da lista de cidades */
+.cityList {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  width: 100%; /* limita a largura */
+  max-height: 200px;
+  overflow-y: scroll; /* mostra a barra sempre */
+  z-index: 10;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Cada item da lista */
+.cityList li {
+  padding: 8px;
+  cursor: pointer;
+  white-space: nowrap;        /* evita quebra de linha */
+  overflow: hidden;           /* esconde overflow */
+  text-overflow: ellipsis;    /* adiciona "..." se o texto for grande */
+}
+
+.cityList li:hover {
+  background-color: #f0f0f0;
+}
 
 .componentButton {
   position: relative;
   /* Necessário para posicionar o ::before */
-  background-color: var(--button-purple-dark);
+  background-color: var(--color-button);
   /* Fundo roxo escuro */
   color: var(--button-white);
   /* Texto branco */
@@ -63,14 +147,14 @@
 }
 
 .componentButton:hover {
-  background-color: var(--button-purple-dark-hover);
+  background-color: var(--color-button-hover);
   /* Fundo roxo mais claro no hover */
   color: var(--button-white);
   /* Mantém o texto branco no hover */
 }
 
 .componentButton:hover::before {
-  border-color: var(--button-purple-dark-hover);
+  border-color: var(--color-button-hover);
   /* Borda interna roxa mais clara no hover */
   border: 1px solid var(--button-white);
   /* Borda interna branca */

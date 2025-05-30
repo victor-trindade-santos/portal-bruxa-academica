@@ -114,7 +114,7 @@
     font-size: clamp(20px, 4vw, 30px);
     font-weight: 700;
     font-family: 'Poppins', sans-serif;
-    color: #ffff00;
+    color: #ffffff;
     text-align: center;
   }
   
@@ -140,32 +140,31 @@
 }
 
 .btnCustom {
-    font-family: 'Poppins', sans-serif; /* Fonte Poppins */
-    color: #FFFF00; /* Cor da fonte amarela */
-    background-color: #67006C; /* Cor de fundo roxa */
-    padding: 10px 20px; /* Espaçamento interno */
-    font-size: 14px; /* Tamanho da fonte */
+    color: #ffffff; /* Cor da fonte amarela */
+    background-color: var(--card-button-bg); /* Cor de fundo roxa */
+    padding: 0px; /* Espaçamento interno */
+    font-size: 0.8em; /* Tamanho da fonte */
     cursor: pointer; /* Indicador de que é um botão clicável */
     width: 100%;
-    max-width: 120px; /* Largura máxima de 136px */
+    height: 23px;
+    max-width: 110px; /* Largura máxima de 136px */
     min-width: 80px; /* Largura mínima de 100px */
     border: none; /* Sem borda */
     border-radius: 0; /* Sem borda arredondada */
     text-align: center; /* Alinhamento do texto */
     margin: 0 auto; /* Centraliza o botão na tela */
     transition: transform 0.3s ease; /* Suaviza o efeito de hover */
-    box-shadow: 0 0 0 5px #67006C,
-    inset 0 0 0 1px #ffff00;
+    box-shadow: 0 0 0 5px var(--card-button-bg),
+    inset 0 0 0 1px var(--card-button-border);
     position: relative; /* Define o posicionamento para usar o z-index */
     z-index: 2; /* Coloca o botão "para frente" */
   }
 
   .btnCustom:hover {
-    background-color: #67006C !important; /* Corrige o clareamento no hover */
+    background-color: var(--card-button-hover-bg); /* Corrige o clareamento no hover */
     box-shadow: 
-    0 0 0 5px #67006C,     /* Moldura externa roxa */
-    inset 0 0 0 1px #ffff00, /* Borda interna amarela */
-    0 0 20px rgba(255, 255, 0, 0.4); /* Sombra amarela sutil no hover */
+    0 0 0 5px var(--card-button-bg),     /* Moldura externa roxa */
+    inset 0 0 0 1px var(--card-button-border); /* Sombra amarela sutil no hover */
     
   }
 

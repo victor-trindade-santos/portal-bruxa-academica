@@ -73,11 +73,17 @@ const Perfil = () => {
                             </div>
                         </div>
                         <h5 className={styles.nome}>{userDetails?.username}</h5>
-                        <p className={styles.info}>{userDetails?.birthDate}</p>
+                      <p className={styles.info}>
+  {userDetails?.birthDate &&
+    new Date(userDetails.birthDate).toLocaleDateString('pt-BR')}
+</p>
+
                         <p className={styles.info}>{userDetails?.email}</p>
-                        <button className={styles.logoutBtn} onClick={handleLogout}>
+                        <center>
+                        <button className={styles.componentButton} onClick={handleLogout}>
                             Sair da conta
                         </button>
+                        </center>
                     </div>
 
 

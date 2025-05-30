@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import styles from '../../css/articleCRUDComponents/ArticleCRUDComponent.module.css';
 
 const CitySearch = ({ onSelect, selectedValue = '' }) => {
   const [cidades, setCidades] = useState([]);
@@ -43,58 +44,34 @@ const CitySearch = ({ onSelect, selectedValue = '' }) => {
     }
   };
 
-  return (
-    <div style={{ maxWidth: '400px', margin: 'auto', padding: '20px' }}>
-      <div style={{ position: 'relative' }}>
-        <input
-          type="text"
-          value={filtro}
-          onChange={handleFiltro}
-          placeholder="Buscar cidade..."
-          style={{
-            width: '100%',
-            padding: '10px',
-            borderRadius: '8px',
-            border: '1px solid #ccc',
-          }}
-        />
 
-        {filtro.length > 0 && cidadesFiltradas.length > 0 && (
-          <ul
-            style={{
-              position: 'absolute',
-              top: '100%',
-              left: 0,
-              right: 0,
-              maxHeight: '200px',
-              overflowY: 'auto',
-              backgroundColor: 'white',
-              border: '1px solid #ccc',
-              borderRadius: '0 0 8px 8px',
-              margin: 0,
-              paddingLeft: '10px',
-              paddingRight: '10px',
-              zIndex: 1000,
-              listStyle: 'none',
-              boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-            }}
-          >
-            {cidadesFiltradas.map((cidade) => (
-              <li
-                key={cidade.nome}
-                style={{
-                  padding: '8px 0',
-                  borderBottom: '1px solid #eee',
-                  cursor: 'pointer',
-                }}
-                onClick={() => handleSelect(cidade)}
-              >
-                {cidade.nome} - {cidade.uf}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+ return (
+    // A div mais externa do CitySearch. Se o CitySearch *inteiro* precisar ser empurrado
+    // para a direita no layout flex, a classe com margin-left: auto seria aplicada aqui
+    // (ou em um wrapper em volta de <CitySearch />).
+    <div > {/* Estilos do container do CitySearch */}
+<div style={{ position: 'relative' }}>
+  <input
+    type="text"
+    value={filtro}
+    onChange={handleFiltro}
+    placeholder="Buscar cidade..."
+    className={styles.input}
+  />
+  {filtro.length > 0 && cidadesFiltradas.length > 0 && (
+    <ul className={styles.cityList}>
+      {cidadesFiltradas.map((cidade) => (
+        <li
+          key={cidade.nome}
+          onClick={() => handleSelect(cidade)}
+        >
+          {cidade.nome} - {cidade.uf}
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
+
     </div>
   );
 };

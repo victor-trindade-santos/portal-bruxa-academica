@@ -27,10 +27,11 @@ const MapaAstralForm = () => {
           </p>
         </div>
         <hr />
-        <button onClick={handleOpenModal}>
+        <center>
+        <button className={styles.componentButton} onClick={handleOpenModal}>
           Gerar Mapa Astral
         </button>
-
+        </center>
 
       </div>
 

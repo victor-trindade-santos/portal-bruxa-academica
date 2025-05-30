@@ -69,7 +69,7 @@
 /* Você pode adicionar estilos específicos para diferentes estados, se desejar */
 .formInput:focus {
     outline: none;
-    border-color: #4F0B82; /* Cor da borda ao focar */
+    border-color: #5a2a82; /* Cor da borda ao focar */
 }
 
 /* Estilo específico para o campo de data de publicação se for somente leitura */
@@ -221,7 +221,7 @@
 }
 
 .fileInputLabel:hover {
-  background-color: #4F0B82;
+  background-color: #5a2a82;
   color: #fff;
 }
 

@@ -70,42 +70,42 @@ const handleChange = (key, value) => {
 
 
     return (
-        <div className="mb-3 d-flex align-items-center">
-            {field === 'birthDate' && (
-                <>
-                    <i className="bi bi-stars fs-4 me-2 mt-0"></i>
-                    <p className={`mb-0 fw-bold mt-0 ${styles.label}`}>Data de Nascimento:</p>
-                    <input
-                        type="date"
-                        className={styles.input}
-                        value={userData.birthDate || ''}
-                        onChange={(e) => handleChange('birthDate', e.target.value)}
-                    />
-                </>
-            )}
+<div className="mb-3 d-flex align-items-center" style={{ justifyContent: 'space-between' }}>
+  {/* Grupo da Legenda */}
+  <div className="d-flex align-items-center"> {/* Ou sua classe .label-group */}
+    {field === 'birthDate' && <i className="bi bi-stars fs-4 me-2 mt-0"></i>}
+    {field === 'birthTime' && <i className="bi bi-wind fs-4 me-2 mt-0"></i>}
+    {field === 'birthCity' && <i className="bi bi-globe-americas fs-4 me-2 mt-0"></i>}
 
-            {field === 'birthTime' && (
-                <>
-                    <i className="bi bi-wind fs-4 me-2 mt-0"></i>
-                    <p className={`mb-0 fw-bold mt-0 ${styles.label}`}>Horário de Nascimento:</p>
-                    <input
-                        type="time"
-                        className={styles.input}
-                        value={userData.birthTime || ''}
-                        onChange={(e) => handleChange('birthTime', e.target.value)}
-                    />
-                </>
-            )}
+    {field === 'birthDate' && <p className={`mb-0 fw-bold mt-0 ${styles.label}`}>Data de Nascimento:</p>}
+    {field === 'birthTime' && <p className={`mb-0 fw-bold mt-0 ${styles.label}`}>Horário de Nascimento:</p>}
+    {field === 'birthCity' && <p className={`mb-0 fw-bold mt-0 ${styles.label}`}>Cidade de Nascimento:</p>}
+  </div>
 
-            {field === 'birthCity' && (
-                <>
-                    <i className="bi bi-globe-americas fs-4 me-2 mt-0"></i>
-                    <p className={`mb-0 fw-bold mt-0 ${styles.label}`}>Cidade de Nascimento:</p>
-                    <CitySearch
-                        onSelectCity={(cidade) => handleChange('birthCity', cidade)}
-                    />
-                </>
-            )}
+  {/* Input/Componente */}
+  <div> {/* Este wrapper é opcional se o input/CitySearch já se comporta bem */}
+    {field === 'birthDate' && (
+      <input
+        type="date"
+        className={styles.input} // Não precisa mais de margin-left: auto aqui
+        value={userData.birthDate || ''}
+        onChange={(e) => handleChange('birthDate', e.target.value)}
+      />
+    )}
+    {field === 'birthTime' && (
+      <input
+        type="time"
+        className={styles.input} // Não precisa mais de margin-left: auto aqui
+        value={userData.birthTime || ''}
+        onChange={(e) => handleChange('birthTime', e.target.value)}
+      />
+    )}
+    {field === 'birthCity' && (
+      <CitySearch
+        onSelectCity={(cidade) => handleChange('birthCity', cidade)}
+      />
+    )}
+  </div>
 
             {field === 'email' && (
                 <>
@@ -158,11 +158,6 @@ const handleChange = (key, value) => {
                     />
                 </>
             )}
-
-            {/* Botão para abrir modal ou confirmar direto */}
-            <button onClick={handleConfirm} className="btn btn-primary ms-3">
-                Salvar
-            </button>
 
             {loading && <span className="ms-2">Salvando...</span>}
             {successMessage && <span className="ms-2 text-success">{successMessage}</span>}

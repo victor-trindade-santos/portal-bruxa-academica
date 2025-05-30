@@ -47,11 +47,11 @@ const MapaAstralPreenchido = ({
                     <p className={`mb-0 ms-1 ${styles.dado}`}>{ascendantSign || 'N/A'}</p>
                 </div>
                 <p className={`ms-4 mb-3 ${styles.dado}`}>{ascendantDescription || 'Sem descrição.'}</p>
-
-                <button className={styles.logoutBtn} onClick={toggleModal}>
+                <center>
+                <button className={styles.componentButton} onClick={toggleModal}>
                     Editar
                 </button>
-
+                </center>
                 {mapaCalculadoEm && (
                     <p className={`text-muted mt-3 ${styles.dado}`} style={{ fontSize: '0.9em' }}>
                         Mapa calculado em: {new Date(mapaCalculadoEm).toLocaleString()}

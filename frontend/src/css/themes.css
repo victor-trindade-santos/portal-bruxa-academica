@@ -1,7 +1,7 @@
 :root {
     /* Navbar */
     --navbar-bg: #ffffff;
-    --navbar-link-color: #5a2a82;
+    --navbar-link-color: #4f0b82;
     --navbar-link-hover-color: #7e44b8;
     --navbar-active-color: #9c6de8;
     --navbar-active-border: #9c6de8;
@@ -17,68 +17,68 @@
     /* Card */
     --card-bg: #ffffff;
     --card-image-wrapper-bg: #f5f5f5;
-    --card-category-bg: #2B089C;
+    --card-category-bg: #4f0b82;
     --card-category-color: #ffffff;
-    --card-category-border: #FFEB3B;
+    --card-category-border: #ffffff;
     --card-text-color: #333333;
-    --card-button-bg: #2B089C;
+    --card-button-bg: #4f0b82;
     --card-button-color: #ffffff;
-    --card-button-border: #FFEB3B;
-    --card-button-hover-bg: #4C1C8C;
+    --card-button-border: #ffffff;
+    --card-button-hover-bg: #7e44b8;
 
     /* Perfil */
     --perfil-card-bg: #ffffff;
-    --avatar-border: #5900ff;
+    --avatar-border: #4f0b82;
     --sign-icon-bg: #ffffff;
-    --sign-icon-border: #5900ff;
+    --sign-icon-border: #4f0b82;
     --perfil-text-color: #67006C;
-    --editar-btn-bg: #6f42c1;
+    --editar-btn-bg: #4f0b82;
     --editar-btn-color: #ffffff;
     --sidebar-bg: #ffffff;
     --sidebar-shadow: rgba(0, 0, 0, 0.24);
     --menu-item-bg: transparent;
-    --menu-item-text-color: #67006C;
+    --menu-item-text-color: #4f0b82;
     --menu-item-border-color: #dddddd;
     --menu-item-hover-bg: #8400ff46;
     --selected-bg: #f1f1f1;
-    --info-highlight-color: #2B089C;
-    --logout-btn-bg: #6f00ff;
+    --info-highlight-color: #4f0b82;
+    --logout-btn-bg: #4f0b82;
     --logout-btn-color: #ffffff;
-    --logout-btn-hover-bg: #420097;
+    --logout-btn-hover-bg: #4f0b82;
 
     /* Páginas */
     --subtopic-bg: #f0e6f6;
     --subtopic-shadow: rgba(43, 8, 156, 0.1);
     --subtopic-title-color: #500f69;
     --subtopic-text-color: #444444;
-    --section-title-color: #2B089C;
+    --section-title-color: #4f0b82;
 
     /* Cursos page */
     --cursos-text-color: #444;
-    --cursos-title-color: #2B089C;
+    --cursos-title-color: #4f0b82;
     --cursos-bg-highlight: #f0e6f6;
     --cursos-heading-color: #500f69;
-    --cursos-heading-line: #2B089C;
+    --cursos-heading-line: #4f0b82;
     --cursos-note-color: #500f69;
     --cursos-bg-wrapper: #fafafa;
 
     /* Home */
     --home-section-divider-bg: #500f69;
-    --home-section-title-color: #2B089C;
-    --home-viewmore-bg: #2B089C;
+    --home-section-title-color: #4f0b82;
+    --home-viewmore-bg: #4f0b82;
     --home-viewmore-color: #fff;
-    --home-viewmore-border: #FFEB3B;
+    --home-viewmore-border: #ffffff;
     --home-viewmore-hover-bg: #4C1C8C;
-    --home-viewmore-focus-outline: #FFEB3B;
+    --home-viewmore-focus-outline: #ffffff;
     --home-about-bg: #f0e6f6;
-    --home-about-name-color: #2b089c;
+    --home-about-name-color: #4f0b82;
     --home-about-description-color: #555;
     --home-about-photo-border: #000000;
     --home-about-label-color: #9c6de8;
 
     /* HeroSection */
     --hero-text-color: #ffffff;
-    --hero-button-bg: #2B089C;
+    --hero-button-bg: #4f0b82;
     --hero-button-color: #ffffff;
     --hero-button-hover-bg: #684edb;
     --hero-button-hover-color: #ffffff;
@@ -108,17 +108,17 @@
     --article-bar-navlink-hover-color: #8C089C;
 
     /* Articles CRUD */
-    --crud-section-title: #67006C;
+    --crud-section-title: #4f0b82;
     --crud-article-bg: #ffffff;
     --crud-box-shadow: 0 5px 15px -6px rgba(0, 0, 0, 0.3);
-    --crud-title-article: #8C089C;
-    --crud-text-secondary: #4F0B82;
+    --crud-title-article: #7e44b8;
+    --crud-text-secondary: #4f0b82;
     --crud-subtitle: #8C089C;
-    --crud-btn-bg: #4F0B82;
+    --crud-btn-bg: #4f0b82;
     --crud-btn-text: #fff000;
     --crud-btn-hover-bg: #FFEB3B;
-    --crud-btn-hover-text: #4F0B82;
-    --crud-btn-hover-border: #4F0B82;
+    --crud-btn-hover-text: #4f0b82;
+    --crud-btn-hover-border: #4f0b82;
 
     /* Article Template */
     --article-template-bg: #ffffff;
@@ -129,9 +129,9 @@
     /* Sobre Mim */
     --about-bg: #ffffff;
     --about-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
-    --about-title-color: #8C089C;
-    --about-name-color: #4F0B82;
-    --about-description-color: #4F0B82;
+    --about-title-color: #7e44b8;
+    --about-name-color: #5a2a82;
+    --about-description-color: #5a2a82;
 
     /* Login */
     --login-bg: linear-gradient(135deg, #ffffff, #ffffff);
@@ -178,13 +178,13 @@
     /* Card */
     --card-bg: #1e1e1e;
     --card-image-wrapper-bg: #2a2a2a;
-    --card-category-bg: #5f3dc4;
+    --card-category-bg: #5a2a82;
     --card-category-color: #ffffff;
-    --card-category-border: #ffe92e;
+    --card-category-border: #ffffff;
     --card-text-color: #e0e0e0;
-    --card-button-bg: #5f3dc4;
+    --card-button-bg: #5a2a82;
     --card-button-color: #ffffff;
-    --card-button-border: #ffe92e;
+    --card-button-border: #ffffff;
     --card-button-hover-bg: #7e5ce4;
 
     /* Perfil */
