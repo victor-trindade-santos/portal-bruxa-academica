@@ -11,6 +11,7 @@ function HeroSection({ image, isLogged }) {
             Descubra o que os astros revelam sobre você.<br />
             Seu mapa astral completo pode transformar sua visão de si mesmo e do mundo.
           </p>
+
           {isLogged ? (
             <Link to="/profile" className={styles.button}>
               Ir

@@ -1,9 +1,23 @@
+
 .colCustom {
-    padding: 1rem 3rem;
-    margin: 0;
-    border: 0;
-    text-align: center;
+  padding: 1rem 3rem;
+  margin: 0;
+  border: 0;
+  text-align: center;
+  display: flex;             /* Adicionado */
+  flex-wrap: wrap;           /* Para responsividade */
+  justify-content: center;
+  align-items: stretch;      /* Garante altura igual entre as colunas */
 }
+
+.colLeft,
+.colRight {
+  display: flex;             /* Adicionado */
+  flex-direction: column;    /* Para conteúdo empilhado */
+  justify-content: center;   /* Centraliza verticalmente */
+}
+
+
 
 .colLeft,
 .colRight {
@@ -50,6 +64,7 @@
 }
 
 .colRight {
+  margin-top: 3px;
     background-color: #ccc;
 
 }
@@ -94,14 +109,6 @@
     /* Zera qualquer margem extra */
 }
 
-.colLeft,
-.colRight {
-
-    margin: 0 !important;
-    /* Zera qualquer margem extra */
-    width: 100%;
-}
-
 
 .subtitle {
     font-size: clamp(12px, 2vw, 16px);
@@ -130,7 +137,8 @@
     position: absolute;
     left: 2px;
     right: 2px;
-    top: 2px;
+    top: 0px;
+    padding-bottom: 10px;
     bottom: 2px;
     width: calc(100% - 4px);
     height: calc(100% - 4px);
@@ -146,13 +154,13 @@
     font-size: 0.8em; /* Tamanho da fonte */
     cursor: pointer; /* Indicador de que é um botão clicável */
     width: 100%;
+    margin-top: 5px !important;
     height: 23px;
     max-width: 110px; /* Largura máxima de 136px */
     min-width: 80px; /* Largura mínima de 100px */
     border: none; /* Sem borda */
     border-radius: 0; /* Sem borda arredondada */
     text-align: center; /* Alinhamento do texto */
-    margin: 0 auto; /* Centraliza o botão na tela */
     transition: transform 0.3s ease; /* Suaviza o efeito de hover */
     box-shadow: 0 0 0 5px var(--card-button-bg),
     inset 0 0 0 1px var(--card-button-border);

@@ -30,6 +30,41 @@
 }
 
 .container {
+  display: flex;
+  flex-direction: column; /* Coloca os elementos em coluna */
+  align-items: center;    /* Centraliza horizontalmente */
+  justify-content: center; /* Centraliza verticalmente */
+  text-align: center;
+  height: 100%;
+  padding: 2rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1.2rem;
+  margin-bottom: 2rem; /* Importante: espaço abaixo do texto para o botão */
+}
+
+.button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #5a00b0;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #7d1fd3;
+}
+
+.container {
   max-width: 1200px;
   width: 100%;
   padding: 0 1rem;
