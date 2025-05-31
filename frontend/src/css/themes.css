@@ -164,7 +164,7 @@
     --navbar-bg: #1e1e1e;
     --navbar-link-color: #c9aaff;
     --navbar-link-hover-color: #e0b3ff;
-    --navbar-active-color: #e0b3ff;
+    --navbar-active-color: #e0b3ff !important;
     --navbar-active-border: #e0b3ff;
     --navbar-dropdown-bg: #2c2c2c;
     --navbar-dropdown-border: #444444;

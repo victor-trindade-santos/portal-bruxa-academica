@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from '../../services/api';
 import { cleanFormDataArticle } from '../../utils/formUtils';
 import UpdateModal from "../modal/ArticleModal";
+import LoadingModal from '../modal/LoadingModal';
+import AlertModal from '../modal/AlertModal';
 import styles from "../../css/articleCRUDComponents/ArticleCRUDComponent.module.css";
-
 
 const UpdateArticleComponent = ({ formDataArticle, setFormDataArticle, buttonText, buttonIcon, buttonClass }) => {
   const [showModal, setShowModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState('');
+  const [alertMessage, setAlertMessage] = useState('');
+  const [showAlertModal, setShowAlertModal] = useState(false);
 
-  //Renomeando os campos do artigo para ficar mais fácil do usuário identificar quais campos não estão devidamente preenchidos
   const fieldLabels = {
     title: 'Título',
     author: 'Autor',
@@ -20,20 +24,8 @@ const UpdateArticleComponent = ({ formDataArticle, setFormDataArticle, buttonTex
   };
 
   const handleUpdate = async () => {
-    console.log('🔍 ID atual no formDataArticle:', formDataArticle._id);
     const updatedArticle = formDataArticle;
-
-    console.log('🟡 Iniciando validação dos campos...');
-
-    const requiredFields = [
-      '_id',
-      'title',
-      'author',
-      'publicationDate',
-      'firstContent',
-      'secondContent',
-      'category'
-    ];
+    const requiredFields = ['_id', 'title', 'author', 'publicationDate', 'firstContent', 'secondContent', 'category'];
 
     const missingFields = requiredFields.filter(
       field => !formDataArticle[field]?.toString().trim()
@@ -48,25 +40,16 @@ const UpdateArticleComponent = ({ formDataArticle, setFormDataArticle, buttonTex
 
     if (missingFields.length > 0) {
       const readableFields = missingFields.map(field => `- ${fieldLabels[field] || field}`);
-      alert(`❌ Os seguintes campos são obrigatórios e não foram preenchidos corretamente:\n${readableFields.join('\n')}`);
-      console.warn(`⚠️ Campos ausentes: ${readableFields.join(', ')}`);
+      setAlertMessage(`❌ Os seguintes campos são obrigatórios e não foram preenchidos corretamente:\n${readableFields.join('\n')}`);
       return;
     }
 
     const formData = new FormData();
-
     for (const key in updatedArticle) {
       const value = updatedArticle[key];
-
       if (key === 'imageThumb') {
-        if (value instanceof File) {
-          console.log(`📁 ${key} é um arquivo válido, anexando...`);
+        if (value instanceof File || typeof value === 'string') {
           formData.append(key, value);
-        } else if (typeof value === 'string') {
-          console.log(`🌐 ${key} é uma URL já existente, anexando...`);
-          formData.append(key, value);
-        } else {
-          console.warn(`⚠️ ${key} não está definido corretamente.`);
         }
       } else if (value !== null && value !== undefined) {
         formData.append(key, value);
@@ -74,42 +57,53 @@ const UpdateArticleComponent = ({ formDataArticle, setFormDataArticle, buttonTex
     }
 
     try {
-      console.log('📤 Enviando dados para o backend (update)...');
-      for (let pair of formData.entries()) {
-        console.log(`🔎 Campo: ${pair[0]} → Valor:`, pair[1],
-          pair[1] instanceof File ? `(arquivo: ${pair[1].name})` : '');
-      }
+      setIsLoading(true);
+      setLoadingMessage('🔄 Atualizando artigo...');
 
       const token = localStorage.getItem('token');
-      const response = await axios.put(`/articles/${updatedArticle._id}`, formData, {
+      await axios.put(`/articles/${updatedArticle._id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`,
         }
       });
 
-      console.log('✅ Artigo atualizado com sucesso:', response.data);
-      alert('✅ Artigo atualizado com sucesso:')
-      cleanFormDataArticle(setFormDataArticle);
+      const articleTitle = updatedArticle.title || 'Sem Título';
+      setAlertMessage(`✅ O artigo "${articleTitle}" foi atualizado com sucesso!`);
+
+      setTimeout(() => {
+        cleanFormDataArticle(setFormDataArticle);
+      }, 100);
+
     } catch (error) {
       console.error('❌ Erro ao atualizar artigo:', error);
-      alert('Erro ao atualizar artigo. Verifique o console para mais detalhes.');
+      setAlertMessage('❌ Erro ao atualizar artigo. Verifique o console para mais detalhes.');
+    } finally {
+      setIsLoading(false);
+      setLoadingMessage('');
     }
   };
 
-  const handleOpenModal = () => {
-    console.log('🟡 Abrindo modal de confirmação para atualização...');
-    setShowModal(true);
-  };
+  useEffect(() => {
+    if (!isLoading && alertMessage) {
+      setShowAlertModal(true);
+    }
+  }, [isLoading, alertMessage]);
 
+  const handleOpenModal = () => setShowModal(true);
   const handleConfirmUpdate = () => {
     setShowModal(false);
     handleUpdate();
   };
+  const handleCancelUpdate = () => setShowModal(false);
 
-  const handleCancelUpdate = () => {
-    console.log('🔴 Atualização cancelada pelo usuário.');
-    setShowModal(false);
+  const renderAlertMessage = (message) => {
+    return message.split('\n').map((line, index) => (
+      <span key={index}>
+        {line}
+        <br />
+      </span>
+    ));
   };
 
   return (
@@ -118,14 +112,27 @@ const UpdateArticleComponent = ({ formDataArticle, setFormDataArticle, buttonTex
         onClick={handleOpenModal}
         className={`${styles.componentButton} ${buttonClass}`}
       >
-        {buttonIcon} {/* Ícone passado via props */}
-        {buttonText} {/* Texto passado via props */}
+        {buttonIcon}
+        {buttonText}
       </button>
+
       {showModal && (
         <UpdateModal
           message="Tem certeza que deseja atualizar este artigo?"
           onConfirm={handleConfirmUpdate}
           onCancel={handleCancelUpdate}
+        />
+      )}
+
+      {isLoading && <LoadingModal message={loadingMessage} />}
+
+      {showAlertModal && (
+        <AlertModal
+          message={renderAlertMessage(alertMessage)}
+          onClose={() => {
+            setShowAlertModal(false);
+            setAlertMessage('');
+          }}
         />
       )}
     </div>

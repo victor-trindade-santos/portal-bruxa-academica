@@ -1,17 +1,19 @@
-// src/components/articleCRUDComponents/ListDraftsComponent.jsx
-
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from '../../services/api';
 import styles from "../../css/articleCRUDComponents/ListDraftsComponent.module.css";
 import ArticleModal from "../modal/ArticleModal";
+import AlertModal from "../modal/AlertModal"; // ✅ Novo
 
-// Adicione editingArticleId como uma prop
 const ListDraftsComponent = ({ setFormDataArticle, editingArticleId }) => {
     const [drafts, setDrafts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [draftToDelete, setDraftToDelete] = useState(null);
+
+    // ✅ Novos estados para o modal de alerta
+    const [alertMessage, setAlertMessage] = useState('');
+    const [showAlertModal, setShowAlertModal] = useState(false);
 
     const fetchDrafts = useCallback(async () => {
         setLoading(true);
@@ -24,8 +26,6 @@ const ListDraftsComponent = ({ setFormDataArticle, editingArticleId }) => {
                 },
             });
 
-            // FILTRA O RASCUNHO QUE ESTÁ SENDO EDITADO ATUALMENTE
-            // Se editingArticleId existe, filtra o rascunho com esse ID da lista.
             const filteredDrafts = editingArticleId
                 ? response.data.filter(draft => draft._id !== editingArticleId)
                 : response.data;
@@ -38,11 +38,17 @@ const ListDraftsComponent = ({ setFormDataArticle, editingArticleId }) => {
         } finally {
             setLoading(false);
         }
-    }, [editingArticleId]); // Adicione editingArticleId como dependência
+    }, [editingArticleId]);
 
     useEffect(() => {
         fetchDrafts();
     }, [fetchDrafts]);
+
+    useEffect(() => {
+        if (alertMessage) {
+            setShowAlertModal(true);
+        }
+    }, [alertMessage]);
 
     const handleContinueEditing = (draft) => {
         console.log('✏️ Continuando edição do rascunho:', draft.title);
@@ -76,11 +82,12 @@ const ListDraftsComponent = ({ setFormDataArticle, editingArticleId }) => {
                     'Authorization': `Bearer ${token}`,
                 },
             });
-            alert(`✅ Rascunho "${draftToDelete.title}" excluído com sucesso!`);
-            fetchDrafts(); // Atualiza a lista de rascunhos após a exclusão
+
+            setAlertMessage(`✅ Rascunho "${draftToDelete.title || 'Sem Título'}" excluído com sucesso!`);
+            fetchDrafts(); // Atualiza a lista
         } catch (err) {
             console.error('❌ Erro ao excluir rascunho:', err);
-            alert('Erro ao excluir rascunho. Verifique o console para mais detalhes.');
+            setAlertMessage('❌ Erro ao excluir rascunho. Verifique o console para mais detalhes.');
         } finally {
             setShowDeleteModal(false);
             setDraftToDelete(null);
@@ -105,7 +112,6 @@ const ListDraftsComponent = ({ setFormDataArticle, editingArticleId }) => {
         <div className={styles.listDraftsContainer}>
             <h3 className={styles.sectionTitle}>Continue Editando</h3>
             {drafts.length === 0 ? (
-                // Mensagem personalizada quando não há rascunhos OU nenhum outro rascunho
                 <p className={styles.noDraftsMessage}>
                     {editingArticleId ? 'Nenhum outro rascunho encontrado.' : 'Nenhum rascunho encontrado.'}
                 </p>
@@ -149,6 +155,16 @@ const ListDraftsComponent = ({ setFormDataArticle, editingArticleId }) => {
                     message={`Tem certeza que deseja excluir o rascunho "${draftToDelete?.title || 'Sem Título'}"?`}
                     onConfirm={handleConfirmDelete}
                     onCancel={handleCancelDelete}
+                />
+            )}
+
+            {showAlertModal && (
+                <AlertModal
+                    message={alertMessage}
+                    onClose={() => {
+                        setShowAlertModal(false);
+                        setAlertMessage('');
+                    }}
                 />
             )}
         </div>

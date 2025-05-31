@@ -1,3 +1,14 @@
+:root {
+  --color-button: #4f0b82;
+  --color-button-hover: #7e44b8; 
+  --button-white: #FFFFFF;
+  --button-red: #c82333;
+  /* Sua cor para o deleteButton */
+  --button-red-hover: #f13a4c;
+  /* Sua cor de hover para vermelho */
+
+}
+
 .loginContainer {
   display: flex;
   flex-direction: column;
@@ -93,4 +104,100 @@
 
 .button:hover {
   background-color: var(--login-button-hover-bg);
+}
+
+
+
+.componentButton {
+  position: relative;
+  /* Necessário para posicionar o ::before */
+  background-color: var(--color-button);
+  /* Fundo roxo escuro */
+  color: var(--button-white);
+  /* Texto branco */
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  width: 80%;
+  /* ou ajuste conforme o uso, ex: auto, fit-content */
+  padding: 8px 12px;
+  cursor: pointer;
+  border: none;
+  border-radius: 0%;
+  /* Sem arredondamento */
+  box-shadow: 0 5px 15px -3px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  /* Garante que ::before fique dentro */
+  display: flex;
+  /* Para alinhar ícone e texto */
+  align-items: center;
+  justify-content: center;
+  /* Centraliza todo o conteúdo */
+  gap: 8px;
+  /* Espaçamento entre o ícone e o texto */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  margin-bottom: 8px;
+}
+
+.componentButton::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 6px);
+  /* Borda interna de 3px de cada lado */
+  height: calc(100% - 6px);
+  border: 1px solid var(--button-white);
+  /* Borda interna branca */
+  border-radius: 0%;
+  /* Sem arredondamento */
+  box-sizing: border-box;
+  pointer-events: none;
+  /* Garante que o clique passe para o botão */
+  transition: border-color 0.3s ease;
+  /* Transição para a cor da borda no hover */
+}
+
+.componentButton:hover {
+  background-color: var(--color-button-hover);
+  /* Fundo roxo mais claro no hover */
+  color: var(--button-white);
+  /* Mantém o texto branco no hover */
+}
+
+.componentButton:hover::before {
+  border-color: var(--color-button-hover);
+  /* Borda interna roxa mais clara no hover */
+  border: 1px solid var(--button-white);
+  /* Borda interna branca */
+
+}
+
+/* Estilo para ícones dentro do .componentButton */
+.componentButton .buttonIcon {
+  font-size: 1em;
+  /* Tamanho do ícone em relação ao texto do botão */
+  line-height: 1;
+  /* Garante que o ícone não afete a altura da linha */
+}
+
+.componentButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; /* 🔥 Isso centraliza horizontalmente */
+}
+
+/* Media Query de exemplo para responsividade, se necessário para este botão genérico */
+@media (max-width: 768px) {
+  .componentButton {
+    font-size: 0.9em;
+    padding: 7px 10px;
+  }
+
+  .componentButton::before {
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+  }
 }

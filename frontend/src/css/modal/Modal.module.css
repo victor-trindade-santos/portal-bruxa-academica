@@ -78,7 +78,21 @@
     color: #000000; /* Preto */
   }
 
-  
+  .buttonGroupSolo {
+  display: flex;
+  justify-content: center; /* centraliza horizontalmente os filhos */
+}
+  .alertButton{
+    background-color: #000000; /* Preto */
+    color: #FFFFFF; /* Branco */
+        padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+        margin-top: 15px;
+    display: flex;
+  }
 .nome {
     font-size: 25px;
     font-weight: bold;
@@ -91,4 +105,14 @@
     font-size: 18px;
     color: #67006C;
     margin: 4px 0;
+}
+
+.label {
+  color: #000000 !important;
+}
+
+.labelAlert {
+   color: #000000 !important;
+  text-align: left; /* ⬅️ alinhamento à esquerda */
+  white-space: pre-wrap; /* ⬅️ garante quebra de linha com \n */
 }

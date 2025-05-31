@@ -30,36 +30,33 @@ function Artigos() {
     // O formDataArticle agora será atualizado apenas para passar o ID para o modal
     const [formDataArticle, setFormDataArticle] = useState({ _id: '', title: '', description: '', category: '', image: '' });
 
-    const fetchArticles = async () => {
-        try {
-            const response = await axios.get('/articles');
-            const todosArtigos = response.data;
+const fetchArticles = async () => {
+    try {
+        const response = await axios.get('/articles');
+        const todosArtigos = response.data;
 
-            let filtrados = categoria
-                ? todosArtigos.filter(article => article.category?.toLowerCase() === categoria.toLowerCase())
-                : todosArtigos;
+        let filtrados = todosArtigos
+            .filter(article => article.isDraft !== true) // ✅ Remove rascunhos
+            .filter(article =>
+                !categoria || article.category?.toLowerCase() === categoria.toLowerCase()
+            );
 
-            if (termoBusca) {
-                const termo = termoBusca.toLowerCase();
-                filtrados = filtrados.filter(article => article.title?.toLowerCase().includes(termo));
-            }
-
-            filtrados.sort((a, b) => {
-                const parseDate = (str) => {
-                    if (!str) return new Date(0);
-                    const [dia, mes, ano] = str.split('/');
-                    return new Date(`${ano}-${mes}-${dia}`);
-                };
-                return parseDate(b.publicationDate) - parseDate(a.publicationDate);
-            });
-
-            setArticles(filtrados);
-            setLoading(false);
-        } catch (error) {
-            console.error('Erro ao buscar artigos:', error);
-            setLoading(false);
+        if (termoBusca) {
+            const termo = termoBusca.toLowerCase();
+            filtrados = filtrados.filter(article => article.title?.toLowerCase().includes(termo));
         }
-    };
+
+        // ✅ Ordena por data mais recente
+        filtrados.sort((a, b) => new Date(b.publicationDate) - new Date(a.publicationDate));
+
+        setArticles(filtrados);
+        setLoading(false);
+    } catch (error) {
+        console.error('Erro ao buscar artigos:', error);
+        setLoading(false);
+    }
+};
+
 
     useEffect(() => {
         fetchArticles();
@@ -68,21 +65,23 @@ function Artigos() {
     const deleteArticleModalRef = useRef(null); 
 
     // Função que o Card chamará para iniciar o processo de exclusão
-    const handleInitiateDelete = (articleId) => {
-        console.log("Artigos: handleInitiateDelete chamado com ID:", articleId);
-        // Atualize o formDataArticle no pai para que o modal tenha o ID correto
-        setFormDataArticle(prev => ({
-            ...prev,
-            _id: articleId // Define o _id do artigo a ser deletado no estado
-        }));
-        
-        // Chame o método exposto pelo DeleteArticleComponent via ref
-        if (deleteArticleModalRef.current) {
-            deleteArticleModalRef.current.handleOpenModal();
-        } else {
-            console.warn("Artigos: deleteArticleModalRef.current é null.");
-        }
-    };
+  const handleInitiateDelete = (articleId) => {
+  const article = articles.find(a => a._id === articleId);
+  if (!article) return;
+
+  setFormDataArticle({
+    _id: article._id,
+    title: article.title,
+    description: article.description,
+    category: article.category,
+    image: article.image,
+  });
+
+  if (deleteArticleModalRef.current) {
+    deleteArticleModalRef.current.handleOpenModal();
+  }
+};
+
 
     // Função para confirmar a exclusão (será passada para o DeleteArticleComponent)
     const handleConfirmDelete = async () => {

@@ -92,8 +92,9 @@
     margin-bottom: 20px;
 }
 
-.p {
+p {
     text-decoration: none;
+    margin: 0px !important;
 }
 
 .perfilCard {

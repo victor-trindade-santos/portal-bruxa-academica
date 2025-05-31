@@ -107,30 +107,35 @@ function ArticleCRUD({ formDataArticle, setFormDataArticle }) {
                 <input
                   type="text"
                   placeholder="Ainda não publicado"
-                  value={formDataArticle.publicationDate
-                    ? new Date(formDataArticle.publicationDate).toLocaleString('pt-BR', {
-                      year: 'numeric',
-                      month: '2-digit',
-                      day: '2-digit',
-                      hour: '2-digit',
-                      minute: '2-digit',
-                      second: '2-digit',
-                      hour12: false
-                    })
-                    : 'Ainda não publicado'
+                  value={
+                    formDataArticle.publicationDate && !isNaN(new Date(formDataArticle.publicationDate))
+                      ? new Date(formDataArticle.publicationDate).toLocaleString('pt-BR', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: false,
+                      })
+                      : 'Ainda não publicado'
                   }
                   readOnly
                   className={`${styles.formInput} ${styles.formInputSmall}`}
                 />
 
-                <p className={styles.fieldDescription}><strong>Resumo ou introdução *</strong> — Digite um pequeno resumo ou introdução para o artigo.</p>
-                <input
-                  type="text"
+                <textarea
                   placeholder="Digite o resumo ou introdução do Artigo"
                   value={formDataArticle.firstContent || ''}
-                  onChange={(e) => handleChange('firstContent', e.target.value)}
+                  onChange={(e) => {
+                    handleChange('firstContent', e.target.value);
+
+                    // Ajusta a altura automaticamente
+                    e.target.style.height = 'auto';
+                    e.target.style.height = `${e.target.scrollHeight}px`;
+                  }}
                   required
-                  className={styles.formInput} // <-- CLASSE PADRONIZADA AQUI
+                  className={styles.formInput}
                 />
 
                 <p className={styles.fieldDescription}><strong>Categoria do artigo *</strong> — Escolha uma categoria que melhor descreva o tema do artigo.</p>
@@ -151,46 +156,46 @@ function ArticleCRUD({ formDataArticle, setFormDataArticle }) {
 
 
                 <p className={styles.fieldDescription}><strong>Imagem da capa / Thumbnail</strong> — Selecione uma imagem para ilustrar o artigo.</p>
-                        <label htmlFor="imageUpload" className={styles.fileInputLabel}>
-                            Selecionar imagem da capa
-                        </label>
-                        <input
-                            id="imageUpload"
-                            type="file"
-                            accept="image/*"
-                            className={styles.fileInput}
-                            onChange={(e) => {
-                                const file = e.target.files[0];
-                                if (file) {
-                                    setFormDataArticle(prev => ({
-                                        ...prev,
-                                        imageThumb: file
-                                    }));
-                                }
-                            }}
-                        />
+                <label htmlFor="imageUpload" className={styles.fileInputLabel}>
+                  Selecionar imagem da capa
+                </label>
+                <input
+                  id="imageUpload"
+                  type="file"
+                  accept="image/*"
+                  className={styles.fileInput}
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      setFormDataArticle(prev => ({
+                        ...prev,
+                        imageThumb: file
+                      }));
+                    }
+                  }}
+                />
 
-                        {/* Contêiner para imagem e botão */}
-                        {formDataArticle.imageThumb && (
-                            <div className={styles.imagePreviewContainer}>
-                                <img
-                                    src={
-                                        formDataArticle.imageThumb instanceof File
-                                            ? URL.createObjectURL(formDataArticle.imageThumb)
-                                            : formDataArticle.imageThumb
-                                    }
-                                    alt="Prévia da imagem"
-                                    className={styles.imageArticle}
-                                />
-                                {/* CONDIÇÃO DO BOTÃO ALTERADA AQUI: */}
-                                <button // O typeof é removido, basta verificar se imageThumb existe
-                                    onClick={() => handleChange('imageThumb', '')}
-                                    className={styles.deleteButton}
-                                >
-                                    <i className={`bi bi-x ${styles.deleteIcon}`}></i>
-                                </button>
-                            </div>
-                        )}
+                {/* Contêiner para imagem e botão */}
+                {formDataArticle.imageThumb && (
+                  <div className={styles.imagePreviewContainer}>
+                    <img
+                      src={
+                        formDataArticle.imageThumb instanceof File
+                          ? URL.createObjectURL(formDataArticle.imageThumb)
+                          : formDataArticle.imageThumb
+                      }
+                      alt="Prévia da imagem"
+                      className={styles.imageArticle}
+                    />
+                    {/* CONDIÇÃO DO BOTÃO ALTERADA AQUI: */}
+                    <button // O typeof é removido, basta verificar se imageThumb existe
+                      onClick={() => handleChange('imageThumb', '')}
+                      className={styles.deleteButton}
+                    >
+                      <i className={`bi bi-x ${styles.deleteIcon}`}></i>
+                    </button>
+                  </div>
+                )}
 
                 <p className={styles.fieldDescription}><strong>Conteúdo principal</strong> — Digite o conteúdo principal do artigo usando o editor abaixo.</p>
                 <p></p>

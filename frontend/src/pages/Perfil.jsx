@@ -73,16 +73,22 @@ const Perfil = () => {
                             </div>
                         </div>
                         <h5 className={styles.nome}>{userDetails?.username}</h5>
-                      <p className={styles.info}>
+                        <p className={styles.info}>
   {userDetails?.birthDate &&
-    new Date(userDetails.birthDate).toLocaleDateString('pt-BR')}
+    new Intl.DateTimeFormat('pt-BR', {
+      timeZone: 'UTC',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).format(new Date(userDetails.birthDate))}
 </p>
+
 
                         <p className={styles.info}>{userDetails?.email}</p>
                         <center>
-                        <button className={styles.componentButton} onClick={handleLogout}>
-                            Sair da conta
-                        </button>
+                            <button className={styles.componentButton} onClick={handleLogout}>
+                                Sair da conta
+                            </button>
                         </center>
                     </div>
 
@@ -95,10 +101,10 @@ const Perfil = () => {
                             className={`${styles.menuItem} ${menuSelecionado === 'signo' ? styles.selected : ''}`}
                         >
                             <i className={`bi bi-stars ${styles.icon}`}></i>
-                            <p className={styles.textoBotao}>Seu Signo</p>
+                            <p className={styles.textoBotao}>Mapa Astral</p>
                         </button>
 
-                        <button
+                        {/* <button
                             onClick={() => handleMenuClick('mapa')}
                             className={`${styles.menuItem} ${menuSelecionado === 'mapa' ? styles.selected : ''}`}
                         >
@@ -120,7 +126,7 @@ const Perfil = () => {
                         >
                             <i className={`bi bi-journal-bookmark ${styles.icon}`}></i>
                             <p className={styles.textoBotao}>Histórico de Tiragem</p>
-                        </button>
+                        </button> */}
 
                     </div>
 

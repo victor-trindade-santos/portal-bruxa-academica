@@ -43,8 +43,6 @@ const MapaAstralForm = () => {
           setUserData={setUserData}
           requiredFields={["birthDate", "birthCity", "birthTime"]}
         />
-
-
       )}
     </>
   );

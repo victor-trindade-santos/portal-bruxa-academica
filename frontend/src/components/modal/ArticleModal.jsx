@@ -7,7 +7,7 @@ const ArticleModal = ({ message, onConfirm, onCancel }) => {
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
-        <p>{message}</p>
+        <p className={styles.label} >{message}</p>
         <div className={styles.buttonGroup}>
           <button onClick={onConfirm} className={styles.confirmButton}>Confirmar</button>
           <button onClick={onCancel} className={styles.cancelButton}>Cancelar</button>

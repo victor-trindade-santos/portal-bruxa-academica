@@ -62,7 +62,7 @@
 }
 /* Estilo específico para campos menores */
 .formInputSmall {
-    width: calc(28% - 16px); /* Exemplo: 50% da largura do pai, menos as margens. Ajuste conforme necessário */
+    width: calc(35% - 16px); /* Exemplo: 50% da largura do pai, menos as margens. Ajuste conforme necessário */
     /* Você pode ajustar o 50% para um valor fixo em pixels (ex: 300px) se preferir um tamanho absoluto */
     /* width: 250px; */
 }

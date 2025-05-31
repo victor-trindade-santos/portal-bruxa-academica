@@ -4,7 +4,7 @@
 }
 
 .fontSizeControls button {
-  background-color: #8C089C;
+  background-color: #4f0b82;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -26,7 +26,7 @@ h2{
 
 h3{
   font-size: 1.4rem;
-  color: #8C089C;
+  color: #4f0b82;
 }
 
 .sectionArticle {
@@ -42,7 +42,7 @@ h3{
     font-weight: 800;
     /* This means "extra-bold" */
     font-size: 2rem;
-    color: #8C089C;
+    color: #4f0b82;
     text-align: left;
     margin-left: 8px;
     margin-bottom: 1rem;
@@ -64,22 +64,24 @@ h3{
   h2{
     font-weight: 700;
     font-size: 1.5rem;
-    color: #8C089C;
+    color: #4f0b82;
     text-align: left;
     padding-bottom: 1rem !important;
-    
+      margin-bottom: 0.5rem !important;
+  margin-top: 1rem !important;
   }
   h3{
     font-family: 'Inter', sans-serif ;
     font-weight: 700; /* regular */
     font-size: 1rem;
-    color: #8C089C;
+    color: #4f0b82;
     margin-left: 8px; /* pequeno espaçamento à esquerda */
     text-align: left;
     text-decoration: none;
     counter-reset: none !important;
     counter-increment: none !important;
-    margin-bottom: 0.5rem !important;
+      margin-bottom: 0.5rem !important;
+  margin-top: 0.5rem !important;
   }
 p{
     font-family: 'Inter', sans-serif ;
@@ -89,6 +91,8 @@ p{
     margin-left: 8px; /* pequeno espaçamento à esquerda */
     text-align: left;
     text-decoration: none;
+      margin-bottom: 0.5rem !important;
+  margin-top: 0.5rem !important;
 }
 
 li{
@@ -110,15 +114,29 @@ strong{
 }
 
 a{
-  color: #8C089C;
+  color: #4f0b82;
 }
 
 img{
   max-width: 100%;
+    margin-bottom: 0.5rem !important;
+  margin-top: 0.5rem !important;
 }
 
 iframe{
   max-width: 100%;
+    margin-bottom: 0.5rem !important;
+  margin-top: 0.5rem !important;
+}
+
+blockquote {
+  border-left: 4px solid #4f0b82; /* a barrinha à esquerda */
+  padding-left: 1em !important;           /* espaço entre a borda e o texto */
+  margin-left: 0;
+  color: #3a3a3a;                 /* cor do texto opcional */
+  font-style: italic;          /* estilo de citação opcional */
+  margin-bottom: 0.5rem !important;
+  margin-top: 0.5rem !important;
 }
   .textResume{
     font-style: italic;
@@ -178,6 +196,7 @@ html[data-theme="dark"] .textAuthor,
 html[data-theme="dark"] .textPublicationDate,
 html[data-theme="dark"] .textResume,
 html[data-theme="dark"] p,
+html[data-theme="dark"] blockquote,
 html[data-theme="dark"] li,
 html[data-theme="dark"] .textArticle {
   color: #ffffff;

@@ -64,7 +64,11 @@ const ArticleTemplate = ({ articleId, articleData }) => {
           <h1 className={styles.titleArticle} style={{ fontSize: `${fontSize * 1.5}px` }}>{article.title}</h1>
           <p className={styles.textResume} style={{ fontSize: `${fontSize}px` }}>{article.firstContent}</p>
           <p className={styles.textAuthor} style={{ fontSize: `${fontSize * 0.9}px` }}>Por: {article.author}</p>
-          <p className={styles.textPublicationDate} style={{ fontSize: `${fontSize * 0.9}px` }}>Data de Publicação: {article.publicationDate}</p>
+<p className={styles.textPublicationDate} style={{ fontSize: `${fontSize * 0.9}px` }}>
+  Data de Publicação:{' '}
+  {article.publicationDate &&
+    new Date(article.publicationDate).toLocaleDateString('pt-BR')}
+</p>
           <div
             className={`ql-editor ${styles.textArticle}`}
             dangerouslySetInnerHTML={{ __html: article.secondContent }}

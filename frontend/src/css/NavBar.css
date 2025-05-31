@@ -49,7 +49,7 @@
 
 /* Link ativo (a aba atual) */
 .active-link {
-  color: var(--navbar-active-color);
+  color: var(--navbar-active-color) !important;
   border-bottom: 2px solid var(--navbar-active-border);
   font-weight: 700;
 }
