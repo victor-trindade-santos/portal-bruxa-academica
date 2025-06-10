@@ -7,6 +7,7 @@ const articleRoutes = require('./routes/articleRoutes');
 const courseRoutes = require('./routes/courseRoutes');
 const authRoutes = require('./routes/auth');
 const mapaAstralRoutes = require("./routes/apiRouter");
+const graficoRouter = require('./routes/graficoRouter')
 const app = express();
 
 connectDB();
@@ -20,6 +21,8 @@ app.use('/auth', authRoutes);
 app.use('/courses', courseRoutes);
 
 app.use("/mapaAstral", mapaAstralRoutes)
+
+app.use('/grafico', graficoRouter);
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));

@@ -1,6 +1,6 @@
 // src/pages/Home.jsx
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importe useNavigate
+import { useNavigate, Link } from 'react-router-dom'; // Importe useNavigate
 import axios from '../services/api'; // Importe axios para as chamadas de API
 
 import Card from '../components/Card';
@@ -145,7 +145,14 @@ function Home() {
                         <div className={styles.adminWelcome}>
                             <h1>Bem-vindo(a) ao painel administrativo, {user.username}!</h1>
                             <p>Gerencie seus artigos, cursos e conteúdos com facilidade.</p>
+                            <Link to="/grafico-usuarios">
+                                <button type="button" className={styles.btnGrafico}>
+                                    Ver Gráficos e Relatórios
+                                </button>
+                            </Link>
                         </div>
+
+
                     </div>
                 </Container>
             ) : (

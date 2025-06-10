@@ -51,7 +51,10 @@ const UserSchema = new mongoose.Schema({
   ascendantSign: { type: String },
   ascendantDescription: { type: String },
   mapaCalculadoEm: { type: Date },
-}, { collection: 'Users' });
+}, { 
+  collection: 'Users',
+  timestamps: true
+});
 
 
 UserSchema.pre('save', async function (next) {

@@ -1,0 +1,41 @@
+.btnRelatorio {
+    position: relative;
+    display: flex;
+    background-color: var(--home-viewmore-bg);
+    color: var(--home-viewmore-color);
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin-top: 1.5rem;
+
+}
+
+.btnRelatorio::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    right: 3px;
+    bottom: 3px;
+    border: 1px solid white;
+    border-radius: 7px;
+    pointer-events: none;
+}
+
+.btnRelatorio:hover {
+    background-color: #7d62ff;
+    transform: translateY(-2px);
+}
+
+.headerGrafico {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* opcional para responsividade */
+  margin-bottom: 1rem;
+}

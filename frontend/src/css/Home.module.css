@@ -40,6 +40,39 @@
   margin-top: 20px;
 }
 
+.btnGrafico {
+  position: relative;
+  display: inline-block;
+  background-color: var(--home-viewmore-bg); /* roxo */
+  color: var(--home-viewmore-color);
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+.btnGrafico::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  border: 1px solid white;
+  border-radius: 7px; /* menor que o border-radius externo */
+  pointer-events: none;
+}
+
+.btnGrafico:hover {
+  background-color: #7d62ff; /* roxo mais claro */
+  transform: translateY(-2px);
+}
+
 .viewMoreLink {
   display: inline-block;
   padding: 12px 30px;
@@ -208,7 +241,7 @@ html[data-theme=dark] {
 
 .adminWelcome {
     text-align: center;
-    padding: 60px 20px;
+    padding: 35px 20px;
     background: var(--admin-welcome-gradient);
     color: var(--admin-welcome-text);
     border-radius: 12px;
