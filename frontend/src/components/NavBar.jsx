@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import '../css/Navbar.css';
+import '../css/NavBar.css';
 import PerfilImg from '../img/perfil.png';
 import Container from './Container';
 import ThemeToggleButton from './ThemeToggleButton';
