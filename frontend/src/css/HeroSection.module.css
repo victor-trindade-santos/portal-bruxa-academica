@@ -91,7 +91,8 @@
 .button {
   background-color: var(--hero-button-bg);
   color: var(--hero-button-color);
-  padding: 0.8rem 2rem;
+  padding: 0.8rem 2rem !important;
+  margin-top: 25px;
   font-weight: bold;
   border-radius: 8px;
   text-decoration: none;
