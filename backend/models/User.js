@@ -29,6 +29,10 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     required: false,
   },
+  lifePathNumber: {
+    type: Number,
+    required: false,
+  },
   birthTime: {
     type: String, // Armazena no formato 'HH:mm'
     required: false,
@@ -39,7 +43,7 @@ const UserSchema = new mongoose.Schema({
   },
 
   profileImage: {
-    type: String, 
+    type: String,
     required: false,
   },
 
@@ -51,7 +55,7 @@ const UserSchema = new mongoose.Schema({
   ascendantSign: { type: String },
   ascendantDescription: { type: String },
   mapaCalculadoEm: { type: Date },
-}, { 
+}, {
   collection: 'Users',
   timestamps: true
 });

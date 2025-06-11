@@ -7,7 +7,8 @@ const articleRoutes = require('./routes/articleRoutes');
 const courseRoutes = require('./routes/courseRoutes');
 const authRoutes = require('./routes/auth');
 const mapaAstralRoutes = require("./routes/apiRouter");
-const graficoRouter = require('./routes/graficoRouter')
+const graficoRouter = require('./routes/graficoRouter');
+const numerologiaRouter = require('./routes/numerologiaRouter');
 const app = express();
 
 
@@ -65,7 +66,8 @@ app.use('/articles', articleRoutes);
 app.use('/auth', authRoutes);
 app.use('/courses', courseRoutes);
 
-app.use("/mapaAstral", mapaAstralRoutes)
+app.use("/mapaAstral", mapaAstralRoutes);
+app.use("/numerologia", numerologiaRouter)
 
 app.use('/grafico', graficoRouter);
 
