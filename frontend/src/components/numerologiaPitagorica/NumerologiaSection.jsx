@@ -1,5 +1,5 @@
-import { NumerologiaLoggedIn } from "./numerologiaLoggedIn";
-import { NumerologiaNotLoggedIn } from "./numerologiaNotLoggedIn";
+import { NumerologiaLoggedIn } from "./NumerologiaLoggedIn";
+import { NumerologiaNotLoggedIn } from "./NumerologiaNotLoggedIn";
 import { getUser } from "../../hooks/getUser";
 
 export const NumerologiaSection = () => {
