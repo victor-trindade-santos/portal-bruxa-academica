@@ -58,12 +58,12 @@ const App = () => {
                 <Route path="/tarot" element={<Tarot />} />
                 <Route path="/numerologia" element={<Numerologia />} />
                 <Route path="/astrologia" element={<Astrologia />} />
-                <Route path="/artigos" element={<Artigos />} />
+                <Route path="/articles" element={<Artigos />} />
                 <Route path="/cursos" element={<Cursos />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 {/* Adicionando a rota para a página do artigo */}
-                <Route path="/artigos/:id" element={<Article_Pages />} />
+                <Route path="/articles/:id" element={<Article_Pages />} />
                 <Route path="/preview-article" element={<Article_Pages />} />
                 <Route path="/profile" element={<Perfil />} />
                 <Route path="/grafico-usuarios" element={<Graficos />} />
