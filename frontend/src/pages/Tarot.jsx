@@ -3,6 +3,8 @@ import React, { useState, useEffect, useContext, useRef } from 'react'; // Impor
 import { useNavigate } from 'react-router-dom'; // Importe useNavigate
 import axios from '../services/api';
 
+import Tiragem from '../components/tarotTest/TarotTest';
+import ResultTiragem from '../components/tarotTest/ResultTarotTest';
 import Card from '../components/Card';
 import styles from '../css/Tarot.module.css';
 import Container from '../components/Container';
@@ -138,6 +140,9 @@ function Tarot() {
                             </div>
                         </div>
                     </div>
+                    {user && (
+                         <Tiragem />
+                    )}
 
                     <div className={styles.articleSection}>
                         <h2 className={styles.sectionTitle}>Artigos de Tarô</h2>
