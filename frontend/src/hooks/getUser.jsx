@@ -36,6 +36,8 @@ export const getUser = () => {
     useEffect(() => {
         if (user) {
             fetchUserData();
+        } else {
+            setLoading(false);
         }
     }, [user]);
 

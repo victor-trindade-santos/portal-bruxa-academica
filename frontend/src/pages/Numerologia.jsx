@@ -10,6 +10,8 @@ import numerologia from '../img/numerologia.jpeg';
 import { truncateDescription } from '../utils/descriptionUtils';
 import { AuthContext } from '../context/AuthContext'; // Importe o AuthContext
 
+import NumerologiaSection from '../components/numerologiaPitagorica/numerologiaSection';
+
 // Importe o DeleteArticleComponent
 import DeleteArticleComponent from '../components/articleCRUDComponents/DeleteArticleComponent';
 
@@ -138,6 +140,8 @@ function Numerologia() {
                             </div>
                         </div>
                     </div>
+
+                    <NumerologiaSection />
 
                     <div className={styles.articleSection}>
                         <h2 className={styles.sectionTitle}>Artigos de Numerologia</h2>
