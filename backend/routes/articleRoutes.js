@@ -15,11 +15,11 @@ router.put(
 
 router.get('/drafts', getDraftArticles);
 
-// Buscar todos os artigos (GET /articles)
-router.get('/', getArticles);
-
 // Buscar artigo por ID (GET /articles/:id)
 router.get('/:id', getArticleById);
+
+// Buscar todos os artigos (GET /articles)
+router.get('/', getArticles);
 
 // Rota para excluir artigo (rota DELETE)
 router.delete('/:id', deleteArticleById);
