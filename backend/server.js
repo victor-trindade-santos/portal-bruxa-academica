@@ -17,7 +17,8 @@ connectDB();
 const allowedOrigins = [
     'http://localhost:3000', // Para o dev local do seu frontend React
     'http://localhost:5173', // Outra porta comum do Vite para dev local
-    /^https:\/\/.*\.vercel\.app$/ // Permite qualquer URL do Vercel (incluindo previews e branches)
+    /^https:\/\/.*\.vercel\.app$/, // Permite qualquer URL do Vercel (incluindo previews e branches)
+    'https://portal-bruxa-academica-a84a.vercel.app/'
 ];
 
 app.use(cors({
