@@ -14,7 +14,7 @@ function Login() {
     e.preventDefault();
   
     try {
-      const response = await fetch('https://portal-bruxa-academica-x11x.onrender.com/auth/login', {
+      const response = await fetch('https://portal-bruxa-academica.onrender.com/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password }),

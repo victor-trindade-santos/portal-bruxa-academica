@@ -15,8 +15,8 @@ const app = express();
 connectDB();
 
 app.use(cors({
-    origin: true, // Permite qualquer origem
-    credentials: true, // Permite cookies/autenticação
+    origin: true,  
+    credentials: true,  
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS'
 }));
 
