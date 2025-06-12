@@ -10,7 +10,7 @@ import numerologia from '../img/numerologia.jpeg';
 import { truncateDescription } from '../utils/descriptionUtils';
 import { AuthContext } from '../context/AuthContext'; // Importe o AuthContext
 
-import NumerologiaSection from '../components/numerologiaPitagorica/numerologiaSection';
+import NumerologiaSection from '../components/numerologiaPitagorica/NumerologiaSection';
 
 // Importe o DeleteArticleComponent
 import DeleteArticleComponent from '../components/articleCRUDComponents/DeleteArticleComponent';
