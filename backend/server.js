@@ -15,20 +15,15 @@ const app = express();
 connectDB();
 
 const allowedOrigins = [
-    'http://localhost:3000', // Para o dev local do seu frontend React
-    'http://localhost:5173', // Outra porta comum do Vite para dev local
-    /^https:\/\/.*\.vercel\.app$/, // Permite qualquer URL do Vercel (incluindo previews e branches)
-    'https://portal-bruxa-academica-x11x.onrender.com/'
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'https://portal-bruxa-academica.vercel.app',
+    'https://portal-bruxa-academica-x11x.onrender.com'
 ];
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin || allowedOrigins.some(pattern => {
-            if (typeof pattern === 'string') return pattern === origin;
-            // Para padrões como 'https://*.vercel.app'
-            const regex = new RegExp(pattern.replace(/\./g, '\\.').replace(/\*/g, '.*'));
-            return regex.test(origin);
-        })) {
+        if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
             console.log(`CORS blocked request from origin: ${origin}`);
@@ -38,6 +33,7 @@ app.use(cors({
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true
 }));
+
 
 app.use(express.json()); // Para parsear o corpo das requisições JSON
 
