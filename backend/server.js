@@ -14,23 +14,39 @@ const app = express();
 
 connectDB();
 
-const allowedOrigins = [
-    'http://localhost:3000',
-    'http://localhost:5173',
-    'https://portal-bruxa-academica.vercel.app',
-    'https://portal-bruxa-academica-x11x.onrender.com'
-];
+const isOriginAllowed = (origin) => {
+    if (!origin) return true; // Permite requisições sem origin (ex: Postman)
+    const allowedOrigins = [
+        'http://localhost:3000',
+        'http://localhost:5173',
+        'https://portal-bruxa-academica-x11x.onrender.com',
+    ];
+    const vercelRegex = /^https:\/\/.*\.vercel\.app$/;
+    return allowedOrigins.includes(origin) || vercelRegex.test(origin);
+};
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
+        if (isOriginAllowed(origin)) {
             callback(null, true);
         } else {
-            console.log(`CORS blocked request from origin: ${origin}`);
+            console.log(`Blocked by CORS: ${origin}`);
             callback(new Error('Not allowed by CORS'));
         }
     },
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true
+}));
+
+// Garante resposta para OPTIONS
+app.options('*', cors({
+    origin: function (origin, callback) {
+        if (isOriginAllowed(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true
 }));
 
