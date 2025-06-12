@@ -1,17 +1,8 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from '../services/api';
 import styles from "../css/ArticleTemplate.module.css";
 import 'react-quill/dist/quill.snow.css';
-
-export const fetchArticles = async () => {
-  const response = await fetch(`${API_BASE_URL}/api/articles`);
-  if (!response.ok) {
-    throw new Error('Erro ao buscar artigos');
-  }
-  return response.json();
-};
 
 const ArticleTemplate = ({ articleId, articleData }) => {
   const { articleId: routeId } = useParams();
