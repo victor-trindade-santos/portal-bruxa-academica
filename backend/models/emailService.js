@@ -2,17 +2,16 @@ const nodemailer = require('nodemailer');
 
 // Simples (para testes use SMTP do Gmail ou serviço próprio)
 var transporter = nodemailer.createTransport({
-  host: "sandbox.smtp.mailtrap.io",
-  port: 2525,
+    service: 'gmail',
   auth: {
-    user: "8a7eb9d2cb1ad6",
-    pass: "62bb94a6deb0ff"
+    user: "astrologia868@gmail.com",
+    pass: "srip bxjd ypwn iquk"
   }
 });
 
 async function sendPasswordResetEmail(to, token) {
   await transporter.sendMail({
-    from: '"Astrologia Site" <8a7eb9d2cb1ad6>',
+    from: '"Astrologia Site" <astrologia868@gmail.com>',
     to,
     subject: 'Recuperação de senha',
     html: `
