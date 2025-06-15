@@ -73,7 +73,11 @@ function Login() {
           />
 
           {error && <p style={{ color: 'red', marginTop: '0.5rem' }}>{error}</p>}
-          <p></p>
+
+          <p style={{ marginTop: '0.3rem', textAlign: 'left', marginBottom: '1rem' }}>
+            <Link to="/forgot-password" style={{ color: '#5B079B' }}>Esqueceu sua senha?</Link>
+          </p>
+
           <button type="submit" className={styles.componentButton}>Entrar</button>
           <p style={{ marginTop: '1rem', textAlign: 'center' }}>
             Não tem conta? <Link to="/register" style={{ color: '#5B079B' }}>Cadastre-se</Link>

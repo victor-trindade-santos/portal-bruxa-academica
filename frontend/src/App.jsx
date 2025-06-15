@@ -16,6 +16,8 @@ import Register from './pages/Register';
 import Article_Pages from './pages/Article_Pages';
 import Perfil from './pages/Perfil';
 import Graficos from './pages/Graficos';
+import ForgotPassword from './components/forgotPassword';
+import ResetPassword from './components/ResetPassword';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider } from './context/ThemeContext';
@@ -67,6 +69,8 @@ const App = () => {
                 <Route path="/preview-article" element={<Article_Pages />} />
                 <Route path="/profile" element={<Perfil />} />
                 <Route path="/grafico-usuarios" element={<Graficos />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
               </Routes>
             </main>
             <Footer />
