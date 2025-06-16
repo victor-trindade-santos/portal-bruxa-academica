@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
-import { useCalculoPitagorico } from "../../hooks/useCalculoPitagorico";
-
 import { NumerologiaFirstTest } from "./NumerologiaFirstTest";
 import { NumerologiaData } from "./NumerologiaData";
 
 export const NumerologiaLoggedIn = ({ userData }) => {
+    const [user, setUser] = useState(userData);
 
-
-    useEffect(() => {
-
-        console.log(userData)
-
-    }, [userData])
+    const atualizarUserData = (novosDados) => {
+        setUser(prev => ({ ...prev, ...novosDados }));
+    };
 
     return (
         <>
-            {!userData.lifePathNumber ? <NumerologiaFirstTest userData={userData} /> : <NumerologiaData userData={userData} />}
-
+            {!user.lifePathNumber 
+              ? <NumerologiaFirstTest userData={user} atualizarUserData={atualizarUserData} /> 
+              : <NumerologiaData userData={user} atualizarUserData={atualizarUserData} />}
         </>
     );
 };

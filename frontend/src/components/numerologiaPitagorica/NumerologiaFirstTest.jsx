@@ -4,7 +4,7 @@ import styles from '../../css/Numerologia.module.css';
 import '../../css/TarotCards.css'
 
 
-export const NumerologiaFirstTest = ({userData}) => {
+export const NumerologiaFirstTest = ({ userData, atualizarUserData }) => {
 
     const [showModal, setShowModal] = useState(false);
 
@@ -30,7 +30,11 @@ export const NumerologiaFirstTest = ({userData}) => {
             </div>
 
             {showModal && (
-                <NumerologiaModal onCancel={toggleModal} userData={userData} />
+                <NumerologiaModal
+                    onCancel={toggleModal}
+                    userData={userData}
+                    atualizarUserData={atualizarUserData}
+                />
             )}
         </>
     )

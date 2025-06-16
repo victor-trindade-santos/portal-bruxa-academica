@@ -2,13 +2,22 @@ import { useState } from "react";
 import { useCalculoPitagorico } from "../../hooks/useCalculoPitagorico";
 import styles from "../../css/modal/Modal.module.css";
 
-export const NumerologiaModal = ({ onCancel, userData }) => {
+export const NumerologiaModal = ({ onCancel, userData, atualizarUserData }) => {
     const [birthDate, setBirthDate] = useState(userData?.birthDate || '');
     const { resultado, loading, error, calcular } = useCalculoPitagorico();
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (birthDate) {
-            calcular(birthDate);
+            const numeroCalculado = await calcular(birthDate);
+
+            if (numeroCalculado) {
+                console.log("teste");
+                atualizarUserData({
+                    birthDate: birthDate,
+                    lifePathNumber: numeroCalculado
+                });
+                onCancel();
+            }
         }
     };
 

@@ -4,7 +4,7 @@ import numerologiaData from '../../data/numerologiaData';
 
 import { NumerologiaModal } from './NumerologiaModal';
 
-export const NumerologiaData = ({ userData }) => {
+export const NumerologiaData = ({ userData, atualizarUserData }) => {
     const [showModal, setShowModal] = useState(false);
 
     function toggleModal() {
@@ -36,14 +36,14 @@ export const NumerologiaData = ({ userData }) => {
 
                 <div className="mt-3">
                     <p className={`fw-bold ${styles.nomeInfo}`}>Afinidades:</p>
-<ul className={styles.dado} style={{ listStyleType: 'disc', paddingLeft: '1rem' }}>
-  {numerologia.afinidades.map((item, index) => (
-    <li key={index} style={{ color: '#333' }}>
-<span style={{ color: '#4f0b82', fontSize: '25px' }}>• </span>
-{item}
-    </li>
-  ))}
-</ul>
+                    <ul className={styles.dado} style={{ listStyleType: 'disc', paddingLeft: '1rem' }}>
+                        {numerologia.afinidades.map((item, index) => (
+                            <li key={index} style={{ color: '#333' }}>
+                                <span style={{ color: '#4f0b82', fontSize: '25px' }}>• </span>
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
 
                 </div>
 
@@ -60,7 +60,11 @@ export const NumerologiaData = ({ userData }) => {
             </div>
 
             {showModal && (
-                <NumerologiaModal onCancel={toggleModal} userData={userData} />
+                 <NumerologiaModal 
+                    onCancel={toggleModal} 
+                    userData={userData}
+                    atualizarUserData={atualizarUserData}
+                />
             )}
         </>
     );

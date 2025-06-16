@@ -19,16 +19,14 @@ export const useCalculoPitagorico = () => {
                 birthDate
             });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.erro || 'Erro ao calcular número');
-            }
-
-            const data = await response.json();
+            const data = response.data;
             setResultado(data.numero);
-            window.location.reload();
+
+            return data.numero;
+
         } catch (err) {
             setError(err.message);
+            return null;
         } finally {
             setLoading(false);
         }
