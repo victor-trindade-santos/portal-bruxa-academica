@@ -18,7 +18,7 @@ export const useCalculoPitagorico = () => {
             const response = await axios.post('/numerologia/calculoPitagorico', {
                 birthDate
             });
-            
+
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.erro || 'Erro ao calcular número');
@@ -26,11 +26,11 @@ export const useCalculoPitagorico = () => {
 
             const data = await response.json();
             setResultado(data.numero);
+            window.location.reload();
         } catch (err) {
             setError(err.message);
         } finally {
             setLoading(false);
-            window.location.reload();
         }
     }, []);
 
