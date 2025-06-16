@@ -22,6 +22,7 @@ import card18 from '../../img/testTarot/18.jpg';
 import card19 from '../../img/testTarot/19.jpg';
 import card20 from '../../img/testTarot/20.jpg';
 import card21 from '../../img/testTarot/21.jpg';
+import '../../css/TarotCards.css'
 
 function ResultTarotTest({ selectedCard, onGoBack }) {
   const navigate = useNavigate();
@@ -210,57 +211,31 @@ function ResultTarotTest({ selectedCard, onGoBack }) {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '40px' }}>
- <h1 style={{ color: '#4f0b82', fontSize: '28px', textAlign: 'center' }}>
+ <h2 style={{ color: '#4f0b82', fontSize: '28px', textAlign: 'center' }}>
   Resultado do Tarot
-</h1>
-
-<div
-  style={{
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    gap: '30px',
-    padding: '20px',
-    border: '2px solid #4f0b82',
-    borderRadius: '10px',
-    backgroundColor: '#f0e6ff',
-    marginTop: '10px',
-    textAlign: 'left',
-    maxWidth: '800px',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-  }}
->
+</h2>
+<div className="card-container">
   <img
     src={data?.image}
     alt={data?.title}
-    style={{ width: '200px', borderRadius: '8px' }}
+    className="card-image"
   />
 
-  <div>
-    <h2 style={{ color: '#4f0b82' }}>{data?.title || 'Carta não encontrada'}</h2>
+  <div className="card-content">
+    <h2>{data?.title || 'Carta não encontrada'}</h2>
     {data?.description?.map((para, idx) => (
-      <p key={idx} style={{ marginBottom: '12px' }}>{para}</p>
+      <p key={idx}>{para}</p>
     ))}
   </div>
 </div>
-
-
-      <br /><br />
+      <br />
 
       <button
         onClick={onGoBack}
-        style={{
-          padding: '10px 20px',
-          backgroundColor: '#8a2be2',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '8px',
-          cursor: 'pointer',
-        }}
-      >
+className={"componentButton"}      >
         Voltar
       </button>
+
     </div>
   );
 }

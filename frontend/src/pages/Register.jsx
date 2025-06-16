@@ -79,21 +79,12 @@ function Register() {
 
   const inputs = [
     {
-      id: 0,
-      name: "fullName",
-      type: "text",
-      placeholder: "Nome Completo",
-      errorMessage: "Nome completo é obrigatório.",
-      label: "Nome Completo",
-      required: true,
-    },
-    {
       id: 1,
       name: "username",
       type: "text",
-      placeholder: "Username",
-      errorMessage: "Username deve ter entre 3 e 16 caracteres e não deve haver nenhum caracter especial!",
-      label: "Username",
+      placeholder: "Nome de Usuário",
+      errorMessage: "Nome de Usuário deve ter entre 3 e 16 caracteres e não deve haver nenhum caracter especial!",
+      label: "Nome de Usuário",
       pattern: "^[A-Za-z0-9]{3,16}$",
       required: true,
     },

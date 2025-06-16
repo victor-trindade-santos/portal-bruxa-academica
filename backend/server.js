@@ -9,6 +9,7 @@ const authRoutes = require('./routes/auth');
 const mapaAstralRoutes = require("./routes/apiRouter");
 const graficoRouter = require('./routes/graficoRouter');
 const numerologiaRouter = require('./routes/numerologiaRouter');
+const passwordResetRoutes = require('./routes/passwordResetRoutes');
 const app = express();
 
 app.use((req, res, next) => {
@@ -78,6 +79,8 @@ app.use("/mapaAstral", mapaAstralRoutes);
 app.use("/numerologia", numerologiaRouter)
 
 app.use('/grafico', graficoRouter);
+
+app.use(passwordResetRoutes);
 
 const PORT = process.env.PORT || 5000; // Use 5000 como fallback para desenvolvimento local
 app.listen(PORT, () => {

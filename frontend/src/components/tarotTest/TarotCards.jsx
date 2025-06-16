@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../css/TarotCards.css';
 import verso from '../../img/testTarot/verso.png';
+import Container from '../Container';
 
 const cards = Array.from({ length: 22 }, (_, i) => ({
   id: i,
@@ -29,7 +30,8 @@ function TarotCards({ onCardSelect }) {
   };
 
   return (
-    <div>
+
+    <Container>
       <div className="starot-cards-container">
         {shuffledCards.map((card) => (
           <div
@@ -43,7 +45,7 @@ function TarotCards({ onCardSelect }) {
           </div>
         ))}
       </div>
-    </div>
+    </Container>
   );
 }
 

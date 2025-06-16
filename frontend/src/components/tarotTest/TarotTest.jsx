@@ -3,6 +3,8 @@ import ConfirmationModal from './ConfirmationModal';
 import TarotCards from './TarotCards';
 import ResultTarotTest from './ResultTarotTest';
 import LoadingModal from './LoadingModal';
+import Container from '../Container';
+import '../../css/TarotCards.css'
 
 function TarotTest() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,19 +14,19 @@ function TarotTest() {
 
     const openModal = () => setIsModalOpen(true);
 
-      const handleConfirm = () => {
-    // fecha modal de confirmação
-    setIsModalOpen(false);
+    const handleConfirm = () => {
+        // fecha modal de confirmação
+        setIsModalOpen(false);
 
-    // mostra loading
-    setIsLoading(true);
+        // mostra loading
+        setIsLoading(true);
 
-    // depois de 2 segundos, mostra resultado
-    setTimeout(() => {
-      setIsLoading(false);
-      setShowResult(true);
-    }, 1500);
-  };
+        // depois de 2 segundos, mostra resultado
+        setTimeout(() => {
+            setIsLoading(false);
+            setShowResult(true);
+        }, 1000);
+    };
 
     const handleCancel = () => {
         console.log('Ação cancelada.');
@@ -45,47 +47,44 @@ function TarotTest() {
         return <ResultTarotTest selectedCard={selectedCard} onGoBack={handleGoBack} />;
     }
     return (
-        <div>
-          <h1 style={{
-  color: '#8a2be2',
-  fontSize: '28px',
-  textAlign: 'center',
-  marginBottom: '20px'
-}}>
-  Teste de Tiragem
-</h1>
+        <Container>
+            <div>
+                <h2 style={{
+                    color: '#4f0b82',
+                    fontSize: '28px',
+                    textAlign: 'center',
+                    marginBottom: '20px'
+                }}>
+                    Teste de Tiragem
+                </h2>
 
 
-            <TarotCards onCardSelect={handleCardSelect} />
-            <center>
-            {/* Botão de confirmar (desabilitado até selecionar carta) */}
-            <button
-                onClick={openModal}
-                disabled={!selectedCard}
-                style={{
-                    marginTop: '20px',
-                    padding: '10px 20px',
-                    backgroundColor: selectedCard ? '#8a2be2' : '#ccc',
-                    color: '#fff',
-                    border: 'none',
-                    cursor: selectedCard ? 'pointer' : 'not-allowed',
-                }}
-            >
-                Selecionar carta
-            </button>
-            </center>
+                <TarotCards onCardSelect={handleCardSelect} />
+                <br /><br />
+                <center>
+                    {/* Botão de confirmar (desabilitado até selecionar carta) */}
+<button
+  onClick={openModal}
+  disabled={!selectedCard}
+  className={`componentButton ${!selectedCard ? 'disabled' : ''}`}
+>
+  Selecionar carta
+</button>
 
-            {/* Modal */}
-            {isModalOpen && (
-                <ConfirmationModal
-                    onConfirm={handleConfirm}
-                    onCancel={handleCancel}
-                />
-            )}
+                </center>
 
-            {isLoading && <LoadingModal message="🔮 Revelando sua carta..." />}
+                {/* Modal */}
+                {isModalOpen && (
+                    <ConfirmationModal
+                        onConfirm={handleConfirm}
+                        onCancel={handleCancel}
+                    />
+                )}
 
-        </div>
+                {isLoading && <LoadingModal message="🔮 Revelando sua carta..." />}
+
+            </div>
+        </Container>
     );
 }
 
