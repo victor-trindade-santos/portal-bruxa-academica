@@ -196,7 +196,9 @@ function Home() {
                     )}
 
                     <div className={styles.viewMoreButton}>
-                        <a href="/artigos" className={styles.viewMoreLink}>Ver Mais Artigos</a>
+                        <Link to={"/artigos"} className={styles.viewMoreLink}>
+                            Ver Mais Artigos
+                        </Link>
                     </div>
                 </div>
             </Container>
