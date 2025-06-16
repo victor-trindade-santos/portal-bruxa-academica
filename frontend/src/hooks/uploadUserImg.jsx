@@ -1,10 +1,9 @@
 import { useState } from 'react';
- 
+import axios from '../services/api';
 
 export const useProfileImageUpload = () => {
     const [isUploading, setIsUploading] = useState(false);
     const [error, setError] = useState(null);
- 
 
     const uploadImage = async (file) => {
         if (!file) {
@@ -19,25 +18,17 @@ export const useProfileImageUpload = () => {
             const formData = new FormData();
             formData.append('profileImg', file);
 
-            const response = await fetch('http://localhost:5000/auth/uploadProfileImg', {
-                method: 'POST',
+            const response = await axios.post('/auth/uploadProfileImg', formData, {
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                },
-                body: formData
+                    'Content-Type': 'multipart/form-data'
+                }
             });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Erro no upload da imagem');
-            }
-
-            const data = await response.json();
             setIsUploading(false);
-            return data.profileImage;
+            return response.data.profileImage;
         } catch (err) {
             console.error('Erro no upload:', err);
-            setError(err.message);
+            setError(err.response?.data?.message || err.message || 'Erro no upload da imagem');
             setIsUploading(false);
             return false;
         }

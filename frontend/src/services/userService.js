@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import axios from '../services/api';
 
-const userService = ({ userId, field }) => {
+const UserService = ({ userId, field }) => {
   const [dado, setDado] = useState(null);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState(null);
@@ -8,18 +9,16 @@ const userService = ({ userId, field }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/auth/${userId}`);
-        if (!res.ok) throw new Error('Erro ao buscar usuário');
-        const usuario = await res.json();
-
+        const response = await axios.get(`/auth/${userId}`);
+        
         // Busca o campo requisitado dinamicamente
-        if (field in usuario) {
-          setDado(usuario[field]);
+        if (field in response.data) {
+          setDado(response.data[field]);
         } else {
           setErro(`Campo "${field}" não encontrado`);
         }
       } catch (err) {
-        setErro(err.message);
+        setErro(err.response?.data?.message || err.message || 'Erro ao buscar usuário');
       } finally {
         setLoading(false);
       }
@@ -35,4 +34,4 @@ const userService = ({ userId, field }) => {
   return <span>{dado}</span>;
 };
 
-export default userService;
+export default UserService;

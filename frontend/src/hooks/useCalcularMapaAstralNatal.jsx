@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from '../services/api';
 
 export function useCalcularMapaAstral() {
     const [loading, setLoading] = useState(false);
@@ -10,33 +11,18 @@ export function useCalcularMapaAstral() {
         setErro(null);
         setResposta(null);
 
-
         try {
-            const response = await fetch('http://localhost:5000/mapaAstral/calcularMapaAstralNatal', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                },
-                body: JSON.stringify({
-                    birthDate,
-                    birthTime,
-                    birthCity: birthCity.split('-')[0].trim()
-                }),
+            const response = await axios.post('/mapaAstral/calcularMapaAstralNatal', {
+                birthDate,
+                birthTime,
+                birthCity: birthCity.split('-')[0].trim()
             });
 
-            console.log(birthDate + birthTime + birthCity.split('-')[0].trim())
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data?.error || 'Erro ao calcular mapa astral');
-            }
-
-            setResposta(data);
+            console.log(birthDate + birthTime + birthCity.split('-')[0].trim());
+            setResposta(response.data);
         } catch (err) {
             console.error('Erro no hook useCalcularMapaAstral:', err);
-            setErro(err.message || 'Erro desconhecido');
+            setErro(err.response?.data?.error || err.message || 'Erro desconhecido');
         } finally {
             setLoading(false);
         }

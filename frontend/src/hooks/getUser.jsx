@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import axios from '../services/api';
 
 export const getUser = () => {
     const [userData, setUserData] = useState(null);
@@ -10,20 +11,10 @@ export const getUser = () => {
     const fetchUserData = async () => {
         try {
             setLoading(true);
-            const response = await fetch('http://localhost:5000/auth/me', {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
-
-            if (!response.ok) {
-                throw new Error('Erro ao carregar dados do usuário');
-            }
-
-            const data = await response.json();
-            setUserData(data);
+            const response = await axios.get('/auth/me');
+            setUserData(response.data);
         } catch (err) {
-            setError(err.message);
+            setError(err.response?.data?.message || err.message || 'Erro ao carregar dados do usuário');
         } finally {
             setLoading(false);
         }

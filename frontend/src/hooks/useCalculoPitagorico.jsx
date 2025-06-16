@@ -1,4 +1,6 @@
 import { useState, useCallback } from 'react';
+import axios from '../services/api';
+
 
 export const useCalculoPitagorico = () => {
     const [resultado, setResultado] = useState(null);
@@ -13,15 +15,10 @@ export const useCalculoPitagorico = () => {
             const token = localStorage.getItem('token');
             if (!token) throw new Error('Usuário não autenticado');
 
-            const response = await fetch('http://localhost:5000/numerologia/calculoPitagorico', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ birthDate }),
+            const response = await axios.post('/numerologia/calculoPitagorico', {
+                birthDate
             });
-
+            
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.erro || 'Erro ao calcular número');

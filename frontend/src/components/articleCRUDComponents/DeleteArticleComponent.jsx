@@ -4,13 +4,14 @@ import DeleteModal from "../modal/ArticleModal.jsx";
 import LoadingModal from "../modal/LoadingModal.jsx";
 import AlertModal from "../modal/AlertModal.jsx";
 import styles from "../../css/articleCRUDComponents/ArticleCRUDComponent.module.css";
+import axios from '../../services/api';
 
 const DeleteArticleComponent = forwardRef((
   {
     formDataArticle,
     setFormDataArticle,
     onArticleDeleted,
-    onAlert, // Novo: função para disparar alert externo
+    onAlert,
     buttonText,
     buttonClass,
     hideButton = false
@@ -47,9 +48,9 @@ const DeleteArticleComponent = forwardRef((
 
   const handleAlert = (message) => {
     if (onAlert) {
-      onAlert(message); // Usar modal externo
+      onAlert(message);
     } else {
-      setAlertMessage(message); // Fallback para modal interno
+      setAlertMessage(message);
       setShowAlertModal(true);
     }
   };
@@ -68,24 +69,15 @@ const DeleteArticleComponent = forwardRef((
     setLoadingMessage("🗑️ Excluindo artigo... Aguarde.");
 
     try {
-      const response = await fetch(`http://localhost:5000/articles/${articleId}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        handleAlert(`✅ Artigo ou Rascunho "${articleTitle}" excluído com sucesso!`);
-        if (setFormDataArticle) cleanFormDataArticle(setFormDataArticle);
-        if (onArticleDeleted) onArticleDeleted();
-      } else {
-        const errorData = await response.json().catch(() => ({ message: 'Erro desconhecido.' }));
-        handleAlert(`Erro ao excluir o artigo: ${errorData.message || response.statusText}`);
-      }
+      await axios.delete(`/articles/${articleId}`);
+      
+      handleAlert(`✅ Artigo ou Rascunho "${articleTitle}" excluído com sucesso!`);
+      if (setFormDataArticle) cleanFormDataArticle(setFormDataArticle);
+      if (onArticleDeleted) onArticleDeleted();
     } catch (error) {
-      handleAlert("Ocorreu um erro ao tentar excluir o artigo.");
+      handleAlert(
+        `Erro ao excluir o artigo: ${error.response?.data?.message || error.message || 'Erro desconhecido'}`
+      );
     } finally {
       setIsLoading(false);
       setLoadingMessage("");

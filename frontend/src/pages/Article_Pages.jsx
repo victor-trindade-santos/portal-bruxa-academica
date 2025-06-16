@@ -9,6 +9,7 @@ import BreadCrumb from '../components/BreadCrumb';
 import Container from '../components/Container';
 import Card from '../components/Card'; 
 import { truncateDescription } from '../utils/descriptionUtils';
+import axios from '../services/api';
 
 function Article_Pages() {
   const { id } = useParams();
@@ -44,23 +45,19 @@ function Article_Pages() {
 
   useEffect(() => {
     if (!previewMode && id) {
-      fetch(`http://localhost:5000/articles/${id}`)
-        .then(res => {
-          if (!res.ok) {
-            throw new Error('Erro na requisição: ' + res.statusText);
-          }
-          return res.json();
-        })
-        .then(data => {
-          setArticleData(data);
+      // Busca o artigo principal
+      axios.get(`/articles/${id}`)
+        .then(response => {
+          setArticleData(response.data);
 
-          // Depois que pegar o artigo, busca relacionados pela categoria do artigo
-          if (data.category) {
-            fetch(`http://localhost:5000/articles?category=${data.category}`)
-              .then(res => res.json())
-              .then(related => {
+          // Busca artigos relacionados pela categoria
+          if (response.data.category) {
+            axios.get(`/articles`, {
+              params: { category: response.data.category }
+            })
+              .then(relatedResponse => {
                 // Filtra para não mostrar o artigo atual
-                const filtered = related.filter(a => a._id !== id);
+                const filtered = relatedResponse.data.filter(a => a._id !== id);
                 setRelatedArticles(filtered);
               })
               .catch(err => console.error('Erro ao buscar artigos relacionados:', err));

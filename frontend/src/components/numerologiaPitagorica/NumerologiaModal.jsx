@@ -27,8 +27,6 @@ export const NumerologiaModal = ({ onCancel, userData }) => {
                         onChange={(e) => setBirthDate(e.target.value)}
                     />
                 </div>
-                
-                {error && <p className="mt-2 text-danger">Erro: {error}</p>}
 
                 <div className={styles.buttonGroup}>
                     <button onClick={onCancel} className={styles.cancelButton}>
