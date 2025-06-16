@@ -25,7 +25,7 @@ export const NumerologiaData = ({ userData }) => {
     return (
         <>
             <div className={`card p-4 ${styles.resumoSigno}`}>
-                <h3 className={`fw-bold mb-3 ${styles.nome}`}>Número: {lifePathNumber}</h3>
+                <center><h3 className={`fw-bold mb-3 ${styles.nomeNumero}`}>Número: {lifePathNumber}</h3></center>
                 <h4 className={`fw-semibold ${styles.nomeInfo}`}>{numerologia.titulo}</h4>
                 <p className={styles.dado}>{numerologia.descricao}</p>
 
@@ -36,11 +36,15 @@ export const NumerologiaData = ({ userData }) => {
 
                 <div className="mt-3">
                     <p className={`fw-bold ${styles.nomeInfo}`}>Afinidades:</p>
-                    <ul className={`${styles.dado}`}>
-                        {numerologia.afinidades.map((item, index) => (
-                            <li key={index}>{item}</li>
-                        ))}
-                    </ul>
+<ul className={styles.dado} style={{ listStyleType: 'disc', paddingLeft: '1rem' }}>
+  {numerologia.afinidades.map((item, index) => (
+    <li key={index} style={{ color: '#333' }}>
+<span style={{ color: '#4f0b82', fontSize: '25px' }}>• </span>
+{item}
+    </li>
+  ))}
+</ul>
+
                 </div>
 
                 <div className="mt-3">

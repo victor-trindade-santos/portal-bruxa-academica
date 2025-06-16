@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom'; 
 import { AuthContext } from '../context/AuthContext';
+import axios from '../services/api.js';
 import styles from '../css/Login.module.css'; 
 
 function Login() {
@@ -10,43 +11,41 @@ function Login() {
   const navigate = useNavigate(); 
   const [error, setError] = useState('');
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
   
-    try {
-      const response = await fetch('https://portal-bruxa-academica.onrender.com/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+   const handleLogin = async (e) => {
+  e.preventDefault();
+
+  try { 
+    const response = await axios.post('/auth/login', { username, password });
+
+    const data = response.data;
+    console.log('Resposta do login:', data);
+
+    if (response.status === 200) {
+      localStorage.setItem('token', data.token);
+
+      login({
+        username: data.username,
+        email: data.email,
+        role: data.role,
+        birthDate: data.birthDate,
+        token: data.token,
       });
-  
-      const data = await response.json();
-      console.log('Resposta do login:', data); // Verifique o que está retornando
-  
-      if (response.status === 200) {
-        // Salva o token no localStorage
-        localStorage.setItem('token', data.token);  // Salva o token
-  
-        // Chama o login com as informações recebidas
-        login({
-          username: data.username,
-          email: data.email,
-          role: data.role,
-          birthDate: data.birthDate,
-          token: data.token,
-        });
-  
-        // Redireciona após o login bem-sucedido
-        navigate('/');
-      } else {
-        console.error('Erro no login:', data.message);
-        setError(data.message || 'Erro no login.');
-      }
-    } catch (error) {
-      setError('Erro ao conectar com o servidor.');
-      console.error('Erro ao conectar com o servidor:', error);
+
+      navigate('/');
+    } else {
+      setError(data.message || 'Erro no login.');
     }
-  };
+  } catch (error) {
+    console.error('Erro ao conectar com o servidor:', error);
+    if (error.response) {
+      // If server responded with an error message
+      setError(error.response.data.message || 'Erro no login.');
+    } else {
+      setError('Erro ao conectar com o servidor.');
+    }
+  }
+};
 
   return (
     <div className={styles.loginContainer}>

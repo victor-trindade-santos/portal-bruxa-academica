@@ -134,6 +134,13 @@
   flex-direction: row;
 }
 
+html[data-theme="dark"] .card-container,
+html[data-theme="dark"] h2 {
+  background-color: #121212;
+  color: #BB86FC !important;
+}
+
+
 .card-image {
   width: 200px;
   border-radius: 8px;
@@ -148,6 +155,7 @@
   .componentButton {
     font-size: 0.9em;
     padding: 7px 10px;
+    width: 50%;
   }
 
   .componentButton::before {

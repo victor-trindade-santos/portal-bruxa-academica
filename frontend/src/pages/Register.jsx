@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import styles from '../css/Login.module.css';
 import RegisterInput from '../components/RegisterInput'
-
+import api from '../services/api.js'
 function Register() {
   const [values, setValues] = useState({
     username: "",
@@ -23,58 +23,35 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    // // Verificação de idade
-    // const today = new Date();
-    // const birthDate = new Date(values.birthDate);
-
-    // // Calcula a idade
-    // const age = today.getFullYear() - birthDate.getFullYear();
-    // const monthDiff = today.getMonth() - birthDate.getMonth();
-    // const dayDiff = today.getDate() - birthDate.getDate();
-
-    // const isBirthdayPassedThisYear = monthDiff > 0 || (monthDiff === 0 && dayDiff >= 0);
-    // const realAge = isBirthdayPassedThisYear ? age : age - 1;
-
-    // if (birthDate > today) {
-    //   setError("A data de nascimento não pode ser no futuro.");
-    //   alert("Você precisa ter pelo menos 5 anos para se cadastrar.");
-    //   return;
-    // }
-
-    // if (realAge < 5) {
-    //   setError("Você precisa ter pelo menos 5 anos para se cadastrar.");
-    //   alert("Você precisa ter pelo menos 5 anos para se cadastrar.");
-    //   return;
-    // }
-
     try {
-      const response = await fetch('http://localhost:5000/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      const response = await api.post('/auth/register', {
           username: values.username,
           email: values.email,
           password: values.password,
           fullName: values.fullName,
-        }),
       });
 
-      const data = await response.json();
-      if (response.status === 201) {
-        setSuccess('Cadastro realizado com sucesso! Redirecionando...');
-        setError('');
+ const data = response.data;
+ 
+     if (response.status === 201) {
+      setSuccess('Cadastro realizado com sucesso! Redirecionando...');
+      setError('');
 
-        setTimeout(() => {
-          navigate('/login');
-        }, 2000);
-      }
-      else {
-        setError(data.message || 'Erro no cadastro.');
-      }
-    } catch (err) {
-      setError('Erro ao conectar com o servidor.');
-      console.error(err);
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+    } else {
+      setError(data.message || 'Erro no cadastro.');
     }
+
+    } catch (err) {
+    if (err.response) {
+      setError(err.response.data.message || 'Erro no cadastro.');
+    } else {
+      setError('Erro ao conectar com o servidor.');
+    }
+    console.error(err);
+  }
   };
 
   const inputs = [

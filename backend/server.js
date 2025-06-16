@@ -11,41 +11,29 @@ const graficoRouter = require('./routes/graficoRouter');
 const numerologiaRouter = require('./routes/numerologiaRouter');
 const passwordResetRoutes = require('./routes/passwordResetRoutes');
 const app = express();
-
-app.use((req, res, next) => {
-    // Permite qualquer origem
-    res.header('Access-Control-Allow-Origin', '*');
-    // Permite quaisquer headers comuns e Authorization
-    res.header(
-        'Access-Control-Allow-Headers',
-        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
-    );
-    // Se for preflight (OPTIONS), autoriza todos os métodos e encerra com 200
-    if (req.method === 'OPTIONS') {
-        res.header(
-            'Access-Control-Allow-Methods',
-            'GET,POST,PUT,PATCH,DELETE,OPTIONS'
-        );
-        return res.status(200).end();
-    }
-    next();
-});
-
+const allowedOrigins = [
+  'http://localhost:5173', // for local dev
+  'https://portal-bruxa-academica.vercel.app' // production frontend domain
+];
 
 connectDB();
 
-/*
-app.use(cors({
-    origin: true,  
-    credentials: true,  
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS'
-}));
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
 
-app.options('*', cors({
-    origin: true,
-    credentials: true
-}));
-*/
+app.use(cors(corsOptions));
+
+
 
 app.use(express.json()); // Para parsear o corpo das requisições JSON
 

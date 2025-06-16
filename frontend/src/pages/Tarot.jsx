@@ -140,9 +140,11 @@ function Tarot() {
                         </div>
                     </div>
                     <Container>
+                        <div className={styles.tarotCardSection}>
                         {user && (
                             <Tiragem />
                         )}
+                        </div>
                     </Container>
                     <div className={styles.articleSection}>
                         <h2 className={styles.sectionTitle}>Artigos de Tarô</h2>

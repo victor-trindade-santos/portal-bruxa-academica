@@ -140,6 +140,12 @@
     font-weight: bold;
     margin-top: 10px;
 }
+.nomeNumero {
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center; /* Alinha o texto ao centro */
+}
 
 .nomeInfo {
     font-size: 20px;
@@ -228,8 +234,9 @@
 
 
 html[data-theme="dark"] .resumo,
-html[data-theme="dark"] .textoBotao {
-    color: white;
+html[data-theme="dark"] .textoBotao,
+html[data-theme="dark"] .dado li{
+    color: white !important;
 }
 
 /* RESPONSIVO: menu lateral vira uma barra horizontal com ícones apenas */
@@ -282,6 +289,10 @@ html[data-theme="dark"] .textoBotao {
 }
 
 .dado {
+    font-size: 20px;
+}
+
+.dado li {
     font-size: 20px;
 }
 

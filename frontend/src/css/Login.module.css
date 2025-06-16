@@ -1,13 +1,4 @@
-:root {
-  --color-button: #4f0b82;
-  --color-button-hover: #7e44b8; 
-  --button-white: #FFFFFF;
-  --button-red: #c82333;
-  /* Sua cor para o deleteButton */
-  --button-red-hover: #f13a4c;
-  /* Sua cor de hover para vermelho */
 
-}
 
 .loginContainer {
   display: flex;
@@ -187,6 +178,8 @@
   align-items: center;
   margin: 0 auto; /* 🔥 Isso centraliza horizontalmente */
 }
+
+
 
 /* Media Query de exemplo para responsividade, se necessário para este botão genérico */
 @media (max-width: 768px) {

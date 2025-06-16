@@ -140,9 +140,11 @@ function Numerologia() {
                             </div>
                         </div>
                     </div>
-
-                    <NumerologiaSection />
-
+                    <Container>
+                        <div className={styles.numerologiaIntroSection}>
+                            <NumerologiaSection />
+                        </div>
+                    </Container>
                     <div className={styles.articleSection}>
                         <h2 className={styles.sectionTitle}>Artigos de Numerologia</h2>
                         <p className={styles.sectionDescription}>&#9733;Explore o poder dos números através de nossos conteúdos.&#9733;</p>
