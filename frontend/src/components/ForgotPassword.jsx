@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../services/api.js';
 import { useNavigate } from 'react-router-dom';
 import styles from '../css/Login.module.css';
 
@@ -14,31 +14,30 @@ function ForgotPassword() {
     const navigate = useNavigate();
 
     const handleSendCode = async (e) => {
-        e.preventDefault();
-        setMessage('');
-        setLoading(true);
+    e.preventDefault();
+    setMessage('');
+    setLoading(true);
 
-        try {
-            const res = await axios.post('http://localhost:5000/api/forgot-password', { email });
-            console.log('Resposta backend:', res.data.message);
+    try {
+        const res = await api.post('/api/forgot-password', { email }); // <- usa a instância com baseURL
+        console.log('Resposta backend:', res.data.message);
 
-            // Ajuste aqui
-            if (res.data.message.toLowerCase().includes('código enviado')) {
-                setCodeSent(true);
-                setMessage('Código enviado! Verifique seu email.');
-            } else {
-                setMessage(res.data.message);
-            }
-        } catch (err) {
-            if (err.response && err.response.status === 404) {
-                setMessage('Nenhum usuário cadastrado com este email.');
-            } else {
-                setMessage('Erro ao solicitar recuperação.');
-            }
-        } finally {
-            setLoading(false);
+        if (res.data.message.toLowerCase().includes('código enviado')) {
+            setCodeSent(true);
+            setMessage('Código enviado! Verifique seu email.');
+        } else {
+            setMessage(res.data.message);
         }
-    };
+    } catch (err) {
+        if (err.response && err.response.status === 404) {
+            setMessage('Nenhum usuário cadastrado com este email.');
+        } else {
+            setMessage('Erro ao solicitar recuperação.');
+        }
+    } finally {
+        setLoading(false);
+    }
+};
 
     const handleValidateCode = async (e) => {
         e.preventDefault();

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../services/api'; // substitui o axios direto
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from '../css/Login.module.css';
 
@@ -38,7 +38,7 @@ function ResetPassword() {
 
         setLoading(true);
         try {
-            const res = await axios.post('http://localhost:5000/api/reset-password', {
+            const res = await api.post('/api/reset-password', {
                 email,
                 token,
                 newPassword,
@@ -63,7 +63,6 @@ function ResetPassword() {
                 <div className={styles.title}>Redefinir Senha</div>
 
                 <form onSubmit={handleSubmit}>
-
                     <label className={styles.label}>Nova Senha</label>
                     <input
                         type="password"
