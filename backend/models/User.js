@@ -21,10 +21,6 @@ const UserSchema = new mongoose.Schema({
     enum: ['user', 'admin'],
     default: 'user',
   },
-  fullName: {
-    type: String,
-    required: true,
-  },
   birthDate: {
     type: Date,
     required: false,
@@ -37,7 +33,12 @@ const UserSchema = new mongoose.Schema({
     type: String, // Armazena no formato 'HH:mm'
     required: false,
   },
-
+  resetToken: { 
+    type: String
+  },
+  resetTokenExpiration: {
+    type: Date
+  },
   profileImage: {
     type: String, 
     required: false,
