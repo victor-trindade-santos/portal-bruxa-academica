@@ -16,7 +16,7 @@ import Register from './pages/Register';
 import Article_Pages from './pages/Article_Pages';
 import Perfil from './pages/Perfil';
 import Graficos from './pages/Graficos';
-import ForgotPassword from './components/forgotPassword';
+import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
