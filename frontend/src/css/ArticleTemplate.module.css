@@ -30,6 +30,77 @@ h3 {
   color: #4f0b82;
 }
 
+/* Estilos para tamanhos dinâmicos */
+.font-size-14, .font-size-16, .font-size-18, .font-size-20, .font-size-22, .font-size-24 {
+  /* Garante que todos os elementos internos respeitem o tamanho */
+}
+
+.font-size-14 .ql-editor,
+.font-size-14 .ql-editor p,
+.font-size-14 .ql-editor li,
+.font-size-14 .ql-editor h2,
+.font-size-14 .ql-editor h3,
+.font-size-14 .ql-size-small,
+.font-size-14 .ql-size-normal,
+.font-size-14 .ql-size-large {
+  font-size: 14px !important;
+}
+
+.font-size-14 .ql-editor,
+.font-size-14 .ql-editor p,
+.font-size-14 .ql-editor li,
+.font-size-14 .ql-editor h2,
+.font-size-14 .ql-editor h3,
+.font-size-14 .ql-size-small,
+.font-size-14 .ql-size-normal,
+.font-size-14 .ql-size-large {
+  font-size: 16px !important;
+}
+
+.font-size-14 .ql-editor,
+.font-size-14 .ql-editor p,
+.font-size-14 .ql-editor li,
+.font-size-14 .ql-editor h2,
+.font-size-14 .ql-editor h3,
+.font-size-14 .ql-size-small,
+.font-size-14 .ql-size-normal,
+.font-size-14 .ql-size-large {
+  font-size: 18px !important;
+}
+
+.font-size-14 .ql-editor,
+.font-size-14 .ql-editor p,
+.font-size-14 .ql-editor li,
+.font-size-14 .ql-editor h2,
+.font-size-14 .ql-editor h3,
+.font-size-14 .ql-size-small,
+.font-size-14 .ql-size-normal,
+.font-size-14 .ql-size-large {
+  font-size: 20px !important;
+}
+
+.font-size-14 .ql-editor,
+.font-size-14 .ql-editor p,
+.font-size-14 .ql-editor li,
+.font-size-14 .ql-editor h2,
+.font-size-14 .ql-editor h3,
+.font-size-14 .ql-size-small,
+.font-size-14 .ql-size-normal,
+.font-size-14 .ql-size-large {
+  font-size: 22px !important;
+}
+.font-size-14 .ql-editor,
+.font-size-14 .ql-editor p,
+.font-size-14 .ql-editor li,
+.font-size-14 .ql-editor h2,
+.font-size-14 .ql-editor h3,
+.font-size-14 .ql-size-small,
+.font-size-14 .ql-size-normal,
+.font-size-14 .ql-size-large {
+  font-size: 24px !important;
+}
+
+
 .sectionArticle {
   background-color: var(--article-template-bg);
   box-shadow: 0 5px 15px -6px rgba(0, 0, 0, 0.3);

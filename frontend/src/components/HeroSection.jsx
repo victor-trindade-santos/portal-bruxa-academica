@@ -14,7 +14,7 @@ function HeroSection({ image, isLogged }) {
 
           {isLogged ? (
             <Link to="/profile" className={styles.button}>
-              Ir
+              <p className={styles.link}>Realizar Mapa Astral</p>
             </Link>
           ) : (
             <Link to="/register" className={styles.button}>

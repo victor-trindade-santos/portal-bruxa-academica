@@ -59,6 +59,11 @@
    font-weight: bold; 
    margin-bottom: 0; 
 }
+html[data-theme="dark"] {
+  background-color: #121212;
+  color: #eee;
+}
+
 
 /* Estilo para o input de busca */
 .input {

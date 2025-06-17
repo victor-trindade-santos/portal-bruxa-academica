@@ -1,4 +1,6 @@
 :root {
+    --label-black-override:black;
+
     /* Navbar */
     --navbar-bg: #ffffff;
     --navbar-link-color: #4f0b82;

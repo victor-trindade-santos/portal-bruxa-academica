@@ -72,15 +72,18 @@ const handleChange = (key, value) => {
     return (
 <div className="mb-3 d-flex align-items-center" style={{ justifyContent: 'space-between' }}>
   {/* Grupo da Legenda */}
-  <div className="d-flex align-items-center"> {/* Ou sua classe .label-group */}
-    {field === 'birthDate' && <i className="bi bi-stars fs-4 me-2 mt-0"></i>}
-    {field === 'birthTime' && <i className="bi bi-wind fs-4 me-2 mt-0"></i>}
-    {field === 'birthCity' && <i className="bi bi-globe-americas fs-4 me-2 mt-0"></i>}
+<div className="d-flex align-items-center label-group">
+  {field === 'birthDate' && <i className="bi bi-stars fs-4 me-2 mt-0"></i>}
+  {field === 'birthTime' && <i className="bi bi-wind fs-4 me-2 mt-0"></i>}
+  {field === 'birthCity' && <i className="bi bi-globe-americas fs-4 me-2 mt-0"></i>}
 
-    {field === 'birthDate' && <p className={`mb-0 fw-bold mt-0 ${styles.label}`}>Data de Nascimento:</p>}
-    {field === 'birthTime' && <p className={`mb-0 fw-bold mt-0 ${styles.label}`}>Horário de Nascimento:</p>}
-    {field === 'birthCity' && <p className={`mb-0 fw-bold mt-0 ${styles.label}`}>Cidade de Nascimento:</p>}
-  </div>
+  {field === 'birthDate' && <p className={`mb-0 fw-bold mt-0 ${styles.label}`}>Data de Nascimento:</p>}
+  {field === 'birthTime' && <p className={`mb-0 fw-bold mt-0 ${styles.label}`}>Horário de Nascimento:</p>}
+  {field === 'birthCity' && <p className={`mb-0 fw-bold mt-0 ${styles.label}`}>Cidade de Nascimento:</p>
+
+}
+</div>
+
 
   {/* Input/Componente */}
   <div> {/* Este wrapper é opcional se o input/CitySearch já se comporta bem */}
