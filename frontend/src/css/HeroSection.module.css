@@ -89,21 +89,26 @@
 }
 
 .button {
-  background-color: var(--hero-button-bg);
-  color: var(--hero-button-color);
-  padding: 0.8rem 2rem !important;
-  margin-top: 25px;
+  background-color: var(--home-viewmore-bg);
+  color: var(--home-viewmore-color);
   font-weight: bold;
-  border-radius: 8px;
   text-decoration: none;
   transition: background-color 0.3s ease;
+  padding: 5px;
 }
 
 html[data-theme=dark] {
   .button {
-    background-color: var(--hero-button-bg);
-    color: var(--hero-button-color);
+    background-color: var(--home-viewmore-bg);
+    color: var(--home-viewmore-color);
   }
+}
+
+.link{
+  margin-bottom: 0;
+  border: 1px solid var(--home-viewmore-border);
+  padding: 8px;
+  margin: 0;
 }
 
 .button:hover {
@@ -114,9 +119,10 @@ html[data-theme=dark] {
 @media (max-width: 768px) {
   .title {
     font-size: 2rem;
+    margin-top: 25px;
   }
 
   .description {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 }

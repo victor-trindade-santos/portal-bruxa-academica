@@ -11,7 +11,7 @@ var transporter = nodemailer.createTransport({
 
 async function sendPasswordResetEmail(to, token) {
   await transporter.sendMail({
-    from: '"Astrologia Site" <astrologia868@gmail.com>',
+    from: '"Portal Bruxa Acadêmica" <astrologia868@gmail.com>',
     to,
     subject: 'Recuperação de senha',
     html: `

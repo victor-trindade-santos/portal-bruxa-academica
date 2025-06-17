@@ -18,7 +18,7 @@ function HeroSection({ image, isLogged }) {
             </Link>
           ) : (
             <Link to="/register" className={styles.button}>
-              Cadastre-se agora
+              <p className={styles.link}>Cadastre-se agora</p>
             </Link>
           )}
         </div>

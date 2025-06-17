@@ -87,7 +87,7 @@
   }
 
   .title {
-    font-size: clamp(18px, 5vw, 24px);
+    font-size: 15px !important;
     /* Fontes menores no mobile */
   }
 
@@ -97,7 +97,7 @@
   }
 
   .btnCustom {
-    margin-top: 1rem;
+    margin: 0 !important;
     /* Espaço entre texto e botão */
   }
 
@@ -108,6 +108,14 @@
     font-family: 'Poppins', sans-serif;
     color: #ffffff;
     display: block;
+  }
+
+  .colLeft{
+    height: 220px;
+  }
+
+  .colRight{
+    height: 290px;
   }
 
 }
@@ -170,7 +178,7 @@
   cursor: pointer;
   /* Indicador de que é um botão clicável */
   width: 100%;
-  margin-top: 30px !important;
+  margin-top: 30px;
   height: 23px;
   max-width: 110px;
   /* Largura máxima de 136px */

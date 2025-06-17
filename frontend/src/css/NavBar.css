@@ -220,6 +220,14 @@ li {
     background-color: #fff !important;
   }
 
+  .navbar-brand-img{
+    height: 40px;
+    margin: 0 !important;
+  }
+  .navbar-expand-lg{
+    padding: 0;
+  }
+
   .navbar-collapse {
     max-width: 30%;
     /* Limita a largura máxima */

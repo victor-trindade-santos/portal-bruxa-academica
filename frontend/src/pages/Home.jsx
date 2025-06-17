@@ -212,7 +212,10 @@ function Home() {
                             <p className={styles.aboutLabel}>Sobre mim</p>
                             <h3 className={styles.aboutName}>Márcia Silva</h3>
                             <p className={styles.aboutDescription}>
-                                Professora dedicada e apaixonada pelo ensino, ela encontra na astrologia um hobby inspirador. Sempre em busca de conhecimento, investe em cursos e pesquisa artigos para aprofundar sua conexão com os mistérios do cosmos, trazendo essa sabedoria para o seu dia a dia e compartilhando com seus alunos e leitores.
+                                Professora dedicada e apaixonada pelo ensino, ela encontra na astrologia um hobby inspirador. 
+                                Sempre em busca de conhecimento, investe em cursos e pesquisa artigos para aprofundar sua conexão 
+                                com os mistérios do cosmos, trazendo essa sabedoria para o seu dia a dia e compartilhando com seus 
+                                alunos e leitores.
                             </p>
                         </div>
                     </div>
